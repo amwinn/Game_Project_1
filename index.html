@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Muddle-Headed Magus</title> -->
+     <title>Game Project One</title>
+    <style>
+        #gameCanvas {
+
+            background-color:darkolivegreen;
+            /* background-image: url("Images/Forest/practice_grass5.png"); */
+            /*background-color: bisque;*/
+            /* background-color: darkslateblue; */
+            /* position: absolute;           */
+        }
+
+        body{
+            overflow:hidden; /* removes vertical and horizontal scroll bars*/
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            display:block; /*not sure if needed look into more */
+            /* this allows the canvas to resize for different screen sizes while removing the scrollbars */
+        }
+        
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+</body>
+<script src="src/Main.js" type="module"></script>
+</html>

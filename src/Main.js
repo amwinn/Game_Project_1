@@ -1,0 +1,176 @@
+import Player from "./Player.js"; //gives error if i use capital P????
+import Projectile from "./Projectile.js";
+import Entity, { meleeEnemyCharter, rangedEnemyCharter } from "./Entity.js";
+import Camera from "./Camera.js";
+import RenderLogic from "./RenderLogic.js";
+import { deadTreeObjectCharter, gateObjectCharter, rockObjectCharter, treeObjectCharter, bushObjectCharter} from "./GameObject.js";
+import Portal from "./Portal.js";
+import { portalArray } from "./Portal.js";
+import { Position, Size, Sprite } from "./Utility.js";
+import MapData from "./MapDB.js";
+import GameLogic, { objectSpawnTracker } from "./GameLogic/GameLogic.js";
+import InputLogic from "./InputLogic.js";
+
+import { weapon_data } from "../data/item_data/weapon_data.js";
+
+import { generateUID } from "./Utility.js";
+
+//******************************************************************************INITIAL GUIDANCE******************************************************************************
+//firstly, ctrl and - will zoom out on code and side bars, ctrl and + will zome in, we are one increment zoomed in, so to go default hit ctrl and -
+//to add curor to multiple lines, ctrl alt up/down, alt click to selectively do so
+//to rename classes and class instances, select, right click, and rename symbol (f2)
+//gameMap is canvas size
+//screenSize is monitor size
+//this. is the class, so this.x, would be a template in the class, for its instance's x position. this. for Player player would be player.x, etc.
+//****************************************************************************************************************************************************************************
+
+// immediate to do:
+// look into moving mapWidth/mapHeight to mapDB.js, place  in the tilemap object perhaps? can also create new object mapSize {w: whatever * whatever, h: whatever * whatever}
+
+document.body.style.cursor = "crosshair";
+
+//Sets canvas and context
+const gameMap = document.getElementById("gameCanvas");
+const renderer = gameMap.getContext("2d");
+
+//Sets screenSize
+export const screenSize = {width: window.innerWidth, height: window.innerHeight};
+
+//Sets total canvas size
+gameMap.width = 8000//3328;  //canvas size
+gameMap.height = 4000//1792; //canvas size
+
+
+
+//DEPENDENCIES
+let mapData = new MapData();
+let camera = new Camera(0,0, new Size(screenSize.width,screenSize.height));
+
+export const test_item_array = [];
+export const gameObjectMasterArray = [
+    rockObjectCharter,
+    bushObjectCharter,
+    treeObjectCharter,
+    gateObjectCharter,
+    deadTreeObjectCharter,
+    portalArray
+];
+
+
+export const testItemMap = new Map(weapon_data.map(item => [item.id, item]));
+
+//below is not yet used, would need to implement another forEach layer into the projectileEntity function at GameLogic.js
+export const enemyMasterArray = [
+    meleeEnemyCharter,
+    rangedEnemyCharter
+];
+
+let playerPosition = new Position(screenSize.width/2, screenSize.height/2);
+let playerSize = new Size(mapData.tileMap.tsize/1.5, mapData.tileMap.tsize/1.5); //both were /1.5
+let player = new Player(playerPosition, playerSize, 2);
+
+//DEPENDENTS
+const renderLogic = new RenderLogic(mapData, camera, player); //originally objectMap, changed to map, easier to type and more concise
+const gameLogic = new GameLogic(mapData, camera, player);//need to run main method in main loop
+const inputLogic = new InputLogic(gameLogic, camera, player);
+
+
+export const projectilesArray = [];
+export const enemyProjectilesArray = [];
+
+
+
+let meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //both were map.player.size.dw/dh /2
+let rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //was map.player.size.dw/3, map.player.size.dh/2
+
+
+
+
+//Temporary position, most likely moving to gamelogic.js
+function spawnEnemy(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown) {
+    if(array.length < maxEnemyCount) {
+        array.push(new Entity(enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown));
+    }
+}
+
+
+//Temporary object to interface enemy spell casting until spell and ability logic are properly added and structured
+const projectileHandler = new Projectile();
+
+function renderLoot(renderer) {
+    test_item_array.forEach((item, i) => {
+       renderer.drawImage(item.sprite.image, item.x-camera.x, item.y-camera.x, 64, 64);
+       
+    });
+}
+
+function gameLoop(){
+   // console.log(test_item_array);
+    renderLoot(renderer);
+    //console.log(test);
+    requestAnimationFrame(gameLoop);
+    renderer.clearRect(0,0, gameMap.width, gameMap.height);
+//console.log(player.velocity)
+    gameLogic.mapHandler();
+    gameLogic.movementLogicUpdate();
+    renderLogic.renderHandler(renderer);
+    inputLogic.executeInput();
+
+    portalArray.forEach((portal, portalIndex) => {
+        if(portal.spawnTimer <= 0) {
+            const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y
+            const magePosition  = new Position(portal.position.x, portal.position.y) //same
+            spawnEnemy(meleeEnemyCharter, 10, 'forest_sprite', Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 500, 700); //had to have both velocity values or else it wouldnt have worked
+            spawnEnemy(rangedEnemyCharter, 5, 'greater_forest_sprite', Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 500, 700); //maybe change cooldown number to random number, between 400-500?   
+            portal.spawnTimer = portal.spawnTime;      
+        }
+        portal.spawnTimer --;
+        
+    })
+
+
+    meleeEnemyCharter.forEach((enemy, index) => {  
+        enemy.updateMeleeEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
+        enemy.enemyBounds(enemy, renderLogic.camera, renderLogic.mapWidth, renderLogic.mapHeight);
+    })
+
+
+    rangedEnemyCharter.forEach((enemy, index) => {
+        enemy.updateRangedEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
+        enemy.enemyBounds(enemy, renderLogic.camera, renderLogic.mapWidth, renderLogic.mapHeight);
+        if(enemy.cooldownTimer <= 0) {
+            projectileHandler.castEnemyProjectile(enemyProjectilesArray, enemy, renderLogic.player);
+            enemy.cooldownTimer = enemy.cooldown
+        }
+        enemy.cooldownTimer --;
+    })
+
+
+
+    projectilesArray.forEach((projectile, projectileIndex) => {
+        projectile.updateProjectile(renderer, renderLogic.camera);
+        projectile.projectileBounds(projectile, renderLogic.mapWidth, renderLogic.mapHeight, projectileIndex, projectilesArray);
+    })   
+
+    enemyProjectilesArray.forEach((enemyProjectile, enemyProjectileIndex) => {
+        enemyProjectile.updateProjectile(renderer, renderLogic.camera);
+        enemyProjectile.projectileBounds(enemyProjectile, renderLogic.mapWidth, renderLogic.mapHeight, enemyProjectileIndex, enemyProjectilesArray);
+    })
+
+
+}
+
+//Simple prototype for testing projectiles
+//Temporary position until spell spell and ability logic are properly added and structured
+//keeping incase need to revert from the new implementation within ProjectileAction and InputLogic
+// gameMap.addEventListener("click", (e) => {
+//     const angle = Math.atan2((e.clientY -20) - (renderLogic.player.position.y +50 - camera.y), (e.clientX-20) - (renderLogic.player.position.x +32 - camera.x));
+//     const velocity = {x: Math.cos(angle)*3, y: Math.sin(angle)*3};
+//     const size = new Size(30,30);
+//     const position = new Position(renderLogic.player.position.x + 32 , renderLogic.player.position.y + 50);// the +32 and +50 offsets may need adjusted
+//     projectilesArray.push(new Projectile(Projectile.playerProjectile, position, size, velocity)); 
+// })
+
+
+gameLoop();
+
