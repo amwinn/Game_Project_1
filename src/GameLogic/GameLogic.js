@@ -82,6 +82,10 @@ adjustDiagonalVelocity(player){
 playerSpriteManager(player) {
     let player_sprite_animation_counter = 0;
     player_sprite_animation_counter++;
+
+    //pseudo brainstorm
+    //player.spriteSet could just be equal to spriteData_Player[player.direction]? not sure will have to test
+    //would also have to change format of player_SpriteData.js from stance1.right/left/default to right.stance1/2/3 left.stance1/2/3 etc.
     // if(player.direction ==="left") {
     //     player.spriteSet = [];
     // } else if (player.direction === "right") {
@@ -89,6 +93,12 @@ playerSpriteManager(player) {
     // } else {
      
     // }
+
+    //pseudo brainstorm (dont like this one)
+    // if counter === (x number), player.sprite.image.src = spriteData_player["stance_1"][player.direction] 
+    // if counter === (x+x number), player.sprite.image.src = spriteData_player["stance_2"][player.direction] 
+    // if counter === (x+x+x number), player.sprite.image.src = spriteData_player["stance_3"][player.direction] counter === 0
+    // outside if blocks counter ++ perhaps?
 
 
 
