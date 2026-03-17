@@ -31,6 +31,7 @@ export default class MovementAction extends Action {
 
         character.position.x -= character.velocity;
         character.direction = "left";
+        character.animationDirection = "left";
         //console.log(" is moving left");
 
     }
@@ -38,6 +39,8 @@ export default class MovementAction extends Action {
     moveRight(character) {
         character.position.x += character.velocity;
         character.direction = "right";
+        character.animationDirection = "right";
+
         //console.log(" is moving right");
     }
 
