@@ -14,9 +14,14 @@ export default class Player{
         this.diagonalVelocity = velocity*.7; //could instead do Math.SQRT2 but there are too many decimal positions involved
         this.previousPosition = {x: position.x, y: position.y};
         this.direction = "right"; //default value, could set to null but might mess with default rendered sprite?
+        this.animationDirection = "right"
+        this.animationTimer = 0;
+        this.animationIndex = 0;
+        this.sprite = new Sprite(); //tentatively replaces "COMMENT#id" line
         
         //maybe use dot notation for default? not sure, either works.
-        this.sprite = new Sprite(spriteData_player["stance_1"]["default"], this.size.dw, this.size.dh);
+        //this.sprite = new Sprite(spriteData_player.walk[this.direction[this.animationIndex]]);
+        //COMMENT#id1 this.sprite = new Sprite(spriteData_player["stance_1"]["default"], this.size.dw, this.size.dh);
 
         //document.addEventListener("keydown", this.keyDownCodes);
         //document.addEventListener("keyup", this.keyUpCodes);
