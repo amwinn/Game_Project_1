@@ -82,25 +82,8 @@ adjustDiagonalVelocity(player){
 
 playerSpriteManager(player) {
     let animationDuration = 40;
-    // let idleDirection = player.animationDirection;
-    //player.sprite.image.src = spriteData_player.idle["left"]
     let selectedSpriteSet = spriteData_player.walk[player.animationDirection];
-    // if (player.direction === "left") {
-    //     selectedSpriteSet = spriteData_player.walk[player.direction];
-    //     idleDirection = player.direction;
-    // }
-    // if (player.direction === "right") {
-    //     selectedSpriteSet = spriteData_player.walk[player.direction];
-    //     idleDirection = player.direction;
-    // }
-    
-    
-    // if (player.direction === "left") {
-    //     selectedSpriteSet = spriteData_player.walk[player.direction]
-    // }
-    // if (player.direction === 'right') {
-    //     selectedSpriteSet = spriteData_player.walk[player.direction]
-    // }
+
     if (activeMovementKeys.size > 0) {
         player.animationTimer++;
     }
@@ -108,6 +91,7 @@ playerSpriteManager(player) {
         player.animationIndex = 0;
         player.sprite.image.src = selectedSpriteSet[player.animationIndex];
     }
+
     if (player.animationTimer >= animationDuration) {
         player.animationIndex++;
         player.animationTimer = 0;
@@ -115,53 +99,12 @@ playerSpriteManager(player) {
     if (player.animationIndex >= selectedSpriteSet.length) {
         player.animationIndex = 0;
     }
-    // console.log(player.animationDirection)
-    // console.log(idleDirection)
-    // console.log(player.animationTimer)
-    // console.log(selectedSpriteSet[player.animationIndex])
+
     player.sprite.image.src = selectedSpriteSet[player.animationIndex];
 
 
-    //psuedo brainstorm
-    // let sprite_duration = 100; //so sprite doesnt cycle to fast; 
-    // player_sprite_counter++;
-    // need: animationDuration = 100, 
-    // player_sprite_counter = 0
-    // player_sprite_counter ++
-    // selectedSpriteSet = spriteData_player.walk[player.direction]
-    // if(frameCounter >= frameDuration) {sprite_index ++; frameCounter = 0;}
-    // if(sprite_index >= selectedSpriteSet.length) {sprite_index = 0}
-    // player.sprite.image.src = selectedSpriteSet[sprite_index];
-    //      
-
-
-
-
-
-    // sprite_index =
-    //player.sprite.image.src = spriteData_player[walk[player.direction[current_sprite]]];
-    //console.log(spriteData_player.walk[player.direction[sprite_index]]);
-
-    //pseudo brainstorm
-    //player.spriteSet could just be equal to spriteData_Player[player.direction]? not sure will have to test
-    //would also have to change format of player_SpriteData.js from stance1.right/left/default to right.stance1/2/3 left.stance1/2/3 etc.
-    // if(player.direction ==="left") {
-    //     player.spriteSet = [];
-    // } else if (player.direction === "right") {
-    //     player.spriteSet = [];
-    // } else {
-     
-    // }
-
-    //pseudo brainstorm (dont like this one)
-    // if counter === (x number), player.sprite.image.src = spriteData_player["stance_1"][player.direction] 
-    // if counter === (x+x number), player.sprite.image.src = spriteData_player["stance_2"][player.direction] 
-    // if counter === (x+x+x number), player.sprite.image.src = spriteData_player["stance_3"][player.direction] counter === 0
-    // outside if blocks counter ++ perhaps?
-
-
-
-    //discard below once new player sprite added in
+   
+    // original rough draft implementation; discard below once new player sprite added in
     // if(player.direction === "left") {
     //     player.sprite.image.src = spriteData_player["stance_1"]["left"];
     // } else if (player.direction === "right") {
