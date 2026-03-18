@@ -83,73 +83,22 @@ export default class Entity {
         }
     }
 
-    
-    // enemyCollision(array, array2) { 
-    //     array.forEach((value, index) => {
-    //         array2.forEach((value2, index2) => {
-    //             if(array2[index2] != array[index]) { 
-    //                 this.enemyCollisionCheck(array[index], array2[index2])
-    //                 }
-    //             })
-    //         })
-    //     }
-
-//DEPRECATED, remove soon
-//     enemyCollisionCheck(entity1, entity2) {
-//     if(entity1.position.x === entity2.position.x) {
-//         enemySelfCollision = true;
-//         entity1.position.x += 1/3;
-//         entity2.position.x -= 1/3;
-//     }
-//     if(
-//        entity1.position.x + entity1.size.dw > entity2.position.x  &&
-//        entity1.position.x  < entity2.position.x + entity2.size.dw &&
-//        entity1.position.y + entity1.size.dw > entity2.position.y &&
-//        entity1.position.y  < entity2.position.y + entity2.size.dh
-//     ) {
-//         enemySelfCollision = true //while this helps spread enemies it can also make things look a bit rubberbandesque if only a few enemies and player standing still; looks great with 400
-//         // below code didnt work because there were too many collisions, so they would freeze and stay put
-//         // entity1.position.x = entity1.previousPosition.x;
-//         // entity1.position.y = entity1.previousPosition.y;
-//         // entity2.position.x = entity2.previousPosition.x;
-//         // entity2.position.y = entity2.previousPosition.y;
-//         //----------------------------------------------------
-//         if(entity1.position.x >= entity2.position.x) {
-//             entity1.position.x += 1/3;
-//             entity2.position.x -= 1/3;
-//         }
-//         if(entity2.position.x >= entity1.position.x) {
-//             entity1.position.x -= 1/3;
-//             entity2.position.x += 1/3;
-//         }
-
-//         if(entity1.position.y >= entity2.position.y) {
-//             entity1.position.y += 1/3;
-//             entity2.position.y -= 1/3;
-//         }
-//         if(entity2.position.y >= entity1.position.y) {
-//             entity1.position.y -= 1/3;
-//             entity2.position.y += 1/3;
-//         }
-//     } else enemySelfCollision = false;
-
-// }
 
 
     //if the enemy tries going out of bounds it will snap back
-    enemyBounds(enemy, camera, mapWidth, mapHeight) {
+    enemyBounds(enemy, mapWidth, mapHeight) {
 
         if(enemy.position.x + enemy.size.dw >= mapWidth) {
-            enemy.position.x -= 5;
+            enemy.position.x -= 2;
         }
         if(enemy.position.x <= mapWidth-mapWidth) {
-            enemy.position.x += 5;
+            enemy.position.x += 2;
         }
         if(enemy.position.y + enemy.size.dh >= mapHeight) {
-            enemy.position.y -= 5;
+            enemy.position.y -= 2;
         }
         if(enemy.position.y <= mapHeight - mapHeight) {
-            enemy.position.y += 5;
+            enemy.position.y += 2;
         }
 
 
