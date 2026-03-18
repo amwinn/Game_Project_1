@@ -131,13 +131,13 @@ function gameLoop(){
 
     meleeEnemyCharter.forEach((enemy, index) => {  
         enemy.updateMeleeEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
-        enemy.enemyBounds(enemy, renderLogic.camera, renderLogic.mapWidth, renderLogic.mapHeight);
+        enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
     })
 
 
     rangedEnemyCharter.forEach((enemy, index) => {
         enemy.updateRangedEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
-        enemy.enemyBounds(enemy, renderLogic.camera, renderLogic.mapWidth, renderLogic.mapHeight);
+        enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
         if(enemy.cooldownTimer <= 0) {
             projectileHandler.castEnemyProjectile(enemyProjectilesArray, enemy, renderLogic.player);
             enemy.cooldownTimer = enemy.cooldown
