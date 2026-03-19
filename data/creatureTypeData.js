@@ -1,3 +1,7 @@
+
+
+//NEEDS BIG CHANGES, NO SPRITE STUFF IN HERE ONLY TYPE-RELATED
+
 export const entityType = {
     forestSprite: {
         sprite_left: null,//creature_sprite_data.forestsprite.sprite.left,
