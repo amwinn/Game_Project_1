@@ -33,14 +33,14 @@ export default class Projectile {
         renderer.drawImage(this.sprite.image, this.position.x - camera.x, this.position.y - camera.y, this.size.dw, this.size.dh);
     }
 
-    renderPlayerProjectile(renderer) {
-        renderer.drawImage(this.sprite.image, this.position.x, this.position.y, this.size.dw, this.size.dh);
-    }
-    updatePlayerProjectile(renderer) {
-        this.renderPlayerProjectile(renderer);
-        this.position.x = this.position.x += this.velocity.x;
-        this.position.y = this.position.y += this.velocity.y;
-    }
+    // renderPlayerProjectile(renderer) {
+    //     renderer.drawImage(this.sprite.image, this.position.x, this.position.y, this.size.dw, this.size.dh);
+    // }
+    // updatePlayerProjectile(renderer) {
+    //     this.renderPlayerProjectile(renderer);
+    //     this.position.x = this.position.x += this.velocity.x;
+    //     this.position.y = this.position.y += this.velocity.y;
+    // }
 
     updateProjectile(renderer, camera){
         this.renderProjectile(renderer, camera);
