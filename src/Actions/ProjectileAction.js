@@ -12,6 +12,7 @@ export default class ProjectileAction extends Action {
 
 //important note regarding the role of the camera: 
 //w/o the camera the player is shooting the projectiles at the monitor's position (the starting viewport at 0,0), while the player is technically far off the screen by this point
+//not 100% happy with this yet, due to camera coupling, harcodinged numbers for clientx/y + number, nad for positionx/y + number
     process(source, destination, camera) {
         const x = (destination.clientX-20) - (source.position.x + 32);
         const y = (destination.clientY-20) - (source.position.y + 50);
