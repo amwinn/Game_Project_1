@@ -207,6 +207,12 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
                     if(this.behaviorAttributes[object.type].destructible && projectileArray != enemyProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
                         objectArray.splice(objectIndex, 1);
                     }
+                    if(objectArray === portalArray) {
+                    //START TEST CODE
+                    test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("../Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), object.position.x, object.position.y));
+                    console.log(test_item_array)
+                    //END TEST CODE
+                }
                     projectileArray.splice(projectileIndex, 1);
                 };
             });
@@ -253,7 +259,7 @@ playerObjectCollision(player, gameObjectMasterArray) {
                 //     player.position.x = player.previousPosition.x;
                 //     player.position.y = player.previousPosition.y;
                 // }
-                if(objectArray == gateObjectCharter) {
+                if(objectArray === gateObjectCharter) {
                     //teleports player to next map/level
                     nextMap = true;
                     //changeNextMap(true); //function to change nextMap value as its read-only once imported
@@ -304,10 +310,9 @@ projectileEntityCollision(entityArray, projectileArray) {
                 //&& projectile.type !== "enemyProjectile" was added while testing item spawning, can be removed or refactored once item is implemented for real (eventually, i swear)
                 if(this.behaviorAttributes[entity.type].destructible && projectile.type !== "enemyProjectile") { //"&& entity.type === Enemy.melee" was 2nd part of if statement but i changed it
                     //START TEST CODE
-                    test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("../Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), entity.position.x, entity.position.y));
-                    entityArray.splice(entityIndex, 1);
-                    console.log(test_item_array)
+                    //test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("../Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), entity.position.x, entity.position.y));
                     //END TEST CODE
+                    entityArray.splice(entityIndex, 1);
 
                 }
                 projectileArray.splice(projectileIndex, 1);//possibly change to bounce? changing velocity to opposite should mimic diagonal reflection
