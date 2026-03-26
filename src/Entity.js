@@ -101,20 +101,7 @@ export default class Entity {
             enemy.position.y += 2;
         }
 
-
-
-    // if(
-    //     enemy.position.x + enemy.size.dw  >= mapWidth ||
-    //     enemy.position.x <= mapWidth - mapWidth) {
-    //         enemy.position.x += 100; 
-    //     }
-    // if(
-    //     enemy.position.y + enemy.size.dh >= mapHeight ||
-    //     enemy.position.y <= mapHeight - mapHeight
-    // ) {
-    //     enemy.position.y +
-    // }
-}
+    }
 
 
 }
