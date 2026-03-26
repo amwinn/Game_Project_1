@@ -24,7 +24,7 @@ export const spriteData_player = {
         ]
     },
     
-    
+    //original direction code with old sprite, remove soon, keeping in case of testing necessity
     // stance_1: {
     //     left: "../Images/Entities/Entity_player/simple_wizard1_transparent_left.png",
     //     right: "../Images/Entities/Entity_player/simple_wizard1_transparent.png",
