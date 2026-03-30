@@ -1,3 +1,4 @@
+import AbilityAction from "../Actions/abilityAction.js"
 import MovementAction from "../Actions/MovementAction.js"
 import ProjectileAction from "../Actions/ProjectileAction.js"
 
@@ -9,4 +10,5 @@ export const defaultKeyBindings = {
     "KeyW": new MovementAction(MovementAction.up),
     "KeyD": new MovementAction(MovementAction.right),
     "click": new ProjectileAction(),
+    "KeyR": new AbilityAction()
 }
