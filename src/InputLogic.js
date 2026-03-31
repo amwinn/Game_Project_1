@@ -1,6 +1,8 @@
 import { defaultKeyBindings } from "./Configs/KeybindingsConfig.js";
+import { projectilesArray } from "./Main.js";
 import MovementAction from "./Actions/MovementAction.js";
 import ProjectileAction from "./Actions/ProjectileAction.js";
+import AbilityAction from "./Actions/abilityAction.js";
 
 export const activeMovementKeys = new Set(); //perhaps move to a more centralized area?
 
@@ -43,6 +45,10 @@ export default class InputLogic {
             activeMovementKeys.add(key);
             defaultKeyBindings[key].process(this.gameLogic, this.player);
             //console.log(key)
+        }
+        if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
+            console.log(key)
+            //defaultKeyBindings[key].process(this.player, e, {this.camera, projectilesArray})
         }
 
     }
