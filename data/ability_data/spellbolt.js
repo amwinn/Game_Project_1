@@ -2,7 +2,7 @@
 //id may be redundant
 //need the array [] for required and effect because ill be feeding into a forEach (unless?), form will mostly all be type, speed, scale - could even add cooldown into there?
 
-const spellbolt = {
+export const spellbolt = {
     id:"spellbolt",
     cooldown: 300,
     required: {
