@@ -5,9 +5,9 @@
 export const spellbolt = {
     id:"spellbolt",
     cooldown: 300,
-    required: {
-        type: "mana", amount: 10
-    },
+    required: [
+        {type: "mana", cost: 10}
+    ],
     form: {
         type: "projectile",
         speed: 5,
@@ -18,18 +18,20 @@ export const spellbolt = {
 
 }
 
-const firebolt = {
-    id:"firebolt",
+export const spellnova = {
+    id:"spellnova",
     cooldown: 600,
     required: {
         type: "mana", amount: 20
     },
     form: {
-        type: "projectile",
+        type: "radial",
         speed: 5,
         scale: 1
     },
-    effect: {
-        type: "damage", amount: 50
-    }
+    effect: [
+        {type: "damage", amount: 50}
+    ]
 }
+
+//maybe switch form, instead of speed and scale, have dataset. as such: form: {type: "projectile", dataset: {speed: 1, scale: 1}} {type: "radial", dataset: {duration: 100, radius: 100, scale: 1}}
