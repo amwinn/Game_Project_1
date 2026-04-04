@@ -1,16 +1,17 @@
 import Action from "./Action.js";
-import { spellbolt } from "../../data/ability_data/spellbolt.js";
+import { ability_repository } from "../../data/ability_data/ability_repository.js";
 import { castAbility } from "../AbilityLogic/AbilityLogic.js";
 export default class AbilityAction extends Action {
-    constructor(ability) {
+    constructor(abilityID) {
         super();
-        this.ability = ability;
+        this.abilityID = abilityID;
     }
 
 
 
     process(source, input, parameterSet ) {
-        
+        const ability = ability_repository[this.abilityID];
+        castAbility(ability);
     }
 
 

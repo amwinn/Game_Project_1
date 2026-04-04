@@ -4,5 +4,8 @@ export function castAbility(ability, source, input, context){
         case "projectile":
             console.log(ability)
             break;
+        case "radial":
+            console.log(ability)
+            break;
     }
 }

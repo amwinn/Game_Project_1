@@ -47,7 +47,7 @@ export default class InputLogic {
             //console.log(key)
         }
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
-            console.log(key)
+            defaultKeyBindings[key].process(this.player)
             //defaultKeyBindings[key].process(this.player, e, {this.camera, projectilesArray})
         }
 
