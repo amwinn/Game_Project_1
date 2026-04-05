@@ -2,6 +2,7 @@ import Action from "./Action.js";
 import { Position, Size } from "../Utility.js";
 import { projectilesArray } from "../Main.js";
 import Projectile from "../Projectile.js";
+import { inputState } from "../Input/InputState.js";
 
 
 export default class ProjectileAction extends Action {
@@ -14,8 +15,8 @@ export default class ProjectileAction extends Action {
 //w/o the camera the player is shooting the projectiles at the monitor's position (the starting viewport at 0,0), while the player is technically far off the screen by this point
 //not 100% happy with this yet, due to camera coupling, harcodinged numbers for clientx/y + number, nad for positionx/y + number
     process(source, target, camera) {
-        const x = ((target.clientX+camera.x)-20) - (source.position.x + 32);
-        const y = ((target.clientY+camera.y)-20) - (source.position.y + 50);
+        const x = (inputState.cursor.world.x-5) - (source.position.x + source.size.dw /2); //was originally target. source.position.x + +32, and both cursor.y and .x were -20 instead of -5, still havent fixed that portion
+        const y = (inputState.cursor.world.y-5) - (source.position.y + source.size.dh /2); //was originally source.position.y +50
         const angle = Math.atan2(y, x); // removed (y + camera.y, x + camera.x) and moved to const x and y values above; revert if any bug appears
         const velocity = {x: Math.cos(angle)*5, y: Math.sin(angle)*5};
         const size = new Size(30,30);
@@ -24,7 +25,7 @@ export default class ProjectileAction extends Action {
 
 
     }
-
+//need to refactor function to work with projectiles on key presses not just mouse
 /*
 ..................................................................................................................................
 

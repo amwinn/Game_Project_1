@@ -7,7 +7,7 @@ import { Size, Position, Sprite } from "../Utility.js";
 import { enemyProjectilesArray, gameObjectMasterArray } from "../Main.js";
 import { projectilesArray } from "../Main.js";
 import { screenSize } from "../Main.js";
-import { activeMovementKeys } from "../InputLogic.js";
+import { activeMovementKeys } from "../Input/InputLogic.js";
 import Projectile from "../Projectile.js";
 import { spriteData } from "../../data/creature_spriteData.js";
 import { spriteData_player } from "../../data/player_spriteData.js";

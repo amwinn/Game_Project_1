@@ -1,8 +1,9 @@
-import { defaultKeyBindings } from "./Configs/KeybindingsConfig.js";
-import { projectilesArray } from "./Main.js";
-import MovementAction from "./Actions/MovementAction.js";
-import ProjectileAction from "./Actions/ProjectileAction.js";
-import AbilityAction from "./Actions/abilityAction.js";
+import { defaultKeyBindings } from "../Configs/KeybindingsConfig.js";
+import { projectilesArray } from "../Main.js";
+import MovementAction from "../Actions/MovementAction.js";
+import ProjectileAction from "../Actions/ProjectileAction.js";
+import AbilityAction from "../Actions/abilityAction.js";
+import { inputState } from "./InputState.js";
 
 export const activeMovementKeys = new Set(); //perhaps move to a more centralized area?
 
@@ -11,6 +12,7 @@ export default class InputLogic {
         this.gameLogic = gameLogic;
         this.camera = camera;
         this.player = player;
+        document.addEventListener("mousemove", this.executeMouseMove)
         document.addEventListener("keydown", this.executeKeyDown);
         document.addEventListener("keyup", this.executeKeyUp);
         document.addEventListener("mousedown", this.executeMouseDown);
@@ -37,7 +39,13 @@ export default class InputLogic {
     
     */
 
-
+    executeMouseMove = (e) => {
+        inputState.cursor.screen.x = e.clientX;
+        inputState.cursor.screen.y = e.clientY;
+        inputState.cursor.world.x = e.clientX + this.camera.x;
+        inputState.cursor.world.y = e.clientY + this.camera.y;
+        
+    }
     executeKeyDown = (e) => {
         const key = e.code;//.toUpperCase();
         

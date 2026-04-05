@@ -9,7 +9,7 @@ import { portalArray } from "./Portal.js";
 import { Position, Size, Sprite } from "./Utility.js";
 import MapData from "./MapDB.js";
 import GameLogic, { objectSpawnTracker } from "./GameLogic/GameLogic.js";
-import InputLogic from "./InputLogic.js";
+import InputLogic from "./Input/InputLogic.js";
 
 import { weapon_data } from "../data/item_data/weapon_data.js";
 
