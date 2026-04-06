@@ -11,7 +11,7 @@ export default class AbilityAction extends Action {
 
     process(source, input, parameterSet ) {
         const ability = ability_repository[this.abilityID];
-        castAbility(ability);
+        castAbility(ability, source, input, parameterSet.array);
     }
 
 
