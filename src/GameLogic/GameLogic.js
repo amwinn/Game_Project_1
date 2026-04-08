@@ -207,7 +207,8 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
                     if(this.behaviorAttributes[object.type].destructible && projectileArray != enemyProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
                         objectArray.splice(objectIndex, 1);
                     }
-                    if(objectArray === portalArray) {
+                    //recently added && projectile.type !== Projectile.enemyProjectile to the below if statement because the enemies were spawning items but not destroying portal
+                    if(objectArray === portalArray && projectile.type !== Projectile.enemyProjectile) { 
                     //START TEST CODE
                     test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("../Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), object.position.x, object.position.y));
                     console.log(test_item_array)
