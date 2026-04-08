@@ -55,16 +55,26 @@ export default class InputLogic {
             //console.log(key)
         }
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
-            defaultKeyBindings[key].process(this.player, inputState, {array:projectilesArray})
+            defaultKeyBindings[key].process(this.player, {
+                projectilesArray:projectilesArray,
+                cursorData: inputState
+            })
             //defaultKeyBindings[key].process(this.player, e, {this.camera, projectilesArray})
         }
 
     }
 
     executeMouseDown = (e) => {
+        //projectile action is being slowly phased out of all code
         const key = "click";
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof ProjectileAction) {
             defaultKeyBindings[key].process(this.player, e, this.camera)
+        }
+        if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
+            defaultKeyBindings[key].process(this.player, {
+                projectilesArray:projectilesArray,
+                cursorData: inputState
+            })
         }
         //maybe dont need
     }

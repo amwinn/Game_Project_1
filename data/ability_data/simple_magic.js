@@ -8,10 +8,15 @@ export const spellbolt = {
     required: [
         {type: "mana", cost: 10}
     ],
+    
     form: {
         type: "projectile",
-        speed: 5,
-        scale: 1 //might need this to allow dynamic spell size? remove if it doesnt work out
+        data_set: {
+            size: {dw: 30, dh: 30},
+            speed: 5,
+            scale: 1 //not sure if i really need, just incase for dynamic size or something, remove if doesnt come to fruition
+    },
+
     },
     effect:[{type: "damage", amount: 20}
     ]
@@ -26,8 +31,12 @@ export const spellnova = {
     },
     form: {
         type: "radial",
-        speed: 5,
-        scale: 1
+        data_set: {
+            size: {dw: 100, dh: 100}, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
+            speed: 5,
+            scale: 1
+        }
+
     },
     effect: [
         {type: "damage", amount: 50}
