@@ -8,10 +8,11 @@ export const spellbolt = {
     required: [
         {type: "mana", cost: 10}
     ],
-    
+
     form: {
         type: "projectile",
-        data_set: {
+        data_config: {
+            sprite: "../images/magic_bolt1.png",
             size: {dw: 30, dh: 30},
             speed: 5,
             scale: 1 //not sure if i really need, just incase for dynamic size or something, remove if doesnt come to fruition
@@ -31,7 +32,8 @@ export const spellnova = {
     },
     form: {
         type: "radial",
-        data_set: {
+        data_config: {
+            sprite: "../images/magic_bolt1.png",
             size: {dw: 100, dh: 100}, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
             speed: 5,
             scale: 1
@@ -43,4 +45,4 @@ export const spellnova = {
     ]
 }
 
-//maybe switch form, instead of speed and scale, have dataset. as such: form: {type: "projectile", dataset: {speed: 1, scale: 1}} {type: "radial", dataset: {duration: 100, radius: 100, scale: 1}}
+//maybe add spritePath?
