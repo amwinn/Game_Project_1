@@ -5,7 +5,14 @@ export function castAbility(ability, source, dataSet){
     let form = ability.form.type;
     switch(form) {
         case "projectile":
-            castProjectile(ability, source, dataSet);
+            //START PROTO
+            //console.log(ability.required[0])
+            if(source.mana >= ability.required[0].cost) {
+                castProjectile(ability, source, dataSet);
+            } else {console.log("out of mana")}
+            //END PROTO
+            //uncomment below when done prototyping the above; also remove "source.mana -= 10" from castProjectile function (its the last line)
+            //castProjectile(ability, source, dataSet);
             break;
         case "radial":
             console.log(ability)
@@ -24,6 +31,7 @@ function castProjectile(ability, source, dataSet) {
     const velocity = {x: Math.cos(angle)*5, y: Math.sin(angle)*5};
     const position = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2); //was +32, +50
     dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, position, size, velocity, new Sprite(ability.form.data_config.sprite, ability.form.data_config.size.dw, ability.form.data_config.size.dh) ));
+    source.mana -=10;
 }
 
 
