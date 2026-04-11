@@ -323,23 +323,23 @@ projectileEntityCollision(entityArray, projectileArray) {
         })
 }
 
-playerEnemyCollision(player, enemyArray) {
-    enemyArray.forEach((enemy, enemyIndex) => {
-        if(this.collisionCheck(player, enemy)) {
+playerEntityCollision(player, enemyArray) {
+    enemyArray.forEach((entity, entityIndex) => {
+        if(this.collisionCheck(player, entity)) {
             {
                 //console.log("Collision between " + (enemy?.type || "unknown enemy type") + " and " + (player?.type || "unknown player type"));
                 //enemy position changes were originally 1/3 instead of just 1, for all of the below; leads to less dramatic collision adjustment
-                if(enemy.position.x >= player.position.x) {
-                    enemy.position.x += 1;                   
+                if(entity.position.x >= player.position.x) {
+                    entity.position.x += 1;                   
                 }
-                if(player.position.x >= enemy.position.x) {
-                    enemy.position.x -= 1;  
+                if(player.position.x >= entity.position.x) {
+                    entity.position.x -= 1;  
                 }
-                if(enemy.position.y >= player.position.y) {
-                    enemy.position.y += 1;  
+                if(entity.position.y >= player.position.y) {
+                    entity.position.y += 1;  
                 }
-                if(player.position.y >= enemy.position.y) {
-                    enemy.position.y -= 1;
+                if(player.position.y >= entity.position.y) {
+                    entity.position.y -= 1;
                 }
             }
         }
@@ -355,14 +355,14 @@ enemyCollisionCheck(array1, array2) {
                     this.collisionCheck(array1[index1], array2[index2]) 
                 ) 
                     {
-                    this.enemyCollisionResolution(array1[index1], array2[index2]);
+                    this.entityCollisionResolution(array1[index1], array2[index2]);
                 }
                 }
             })
         })
     }
 
-enemyCollisionResolution(entity1, entity2) {
+entityCollisionResolution(entity1, entity2) {
     if(entity1.position.x === entity2.position.x) {
         entity1.position.x += 1/3;
         entity2.position.x -= 1/3;
@@ -527,8 +527,8 @@ enemyCollisionResolution(entity1, entity2) {
         this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
         this.projectileEntityCollision(meleeEnemyCharter, enemyProjectilesArray);
         this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
-        this.playerEnemyCollision(this.player, meleeEnemyCharter);
-        this.playerEnemyCollision(this.player, rangedEnemyCharter);
+        this.playerEntityCollision(this.player, meleeEnemyCharter);
+        this.playerEntityCollision(this.player, rangedEnemyCharter);
         playerSpawned = true;
         //changePlayerSpawnState(true);
         //console.log(playerSpawned);
