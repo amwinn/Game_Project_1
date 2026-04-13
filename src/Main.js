@@ -105,18 +105,18 @@ function renderLoot(renderer) {
 }
 let lastTime = 0;
 function gameLoop(){
-    let currentTime = Temporal.Now.instant().epochMilliseconds; //was going to use Date.now but when i looked on mdn docs it looked to be deprecated as Temporal now replaces
+    //requestAnimationFrame automatically fills its callback function, so requestAnimationFrame(callback), with a timestamp, which is performance.now();
+    //i could technically just give gameLoop a parameter, and then parameterName - lastTime /1000, but performance.now() feels like the better approach for now so im not putting too much on RAF
+    //so deltaTime is just the measure of time that has elapsed between the current time and the last time. /1000 converts the milliseconds to seconds
+    let currentTime = performance.now();
     let deltaTime = (currentTime - lastTime) /1000;
     lastTime = currentTime;
     console.log(deltaTime)
-   // console.log(test_item_array);
-    renderLoot(renderer);
-    //console.log(test);
-    requestAnimationFrame(gameLoop);
+    //requestAnimationFrame(gameLoop); //moving to end of function
     renderer.clearRect(0,0, gameMap.width, gameMap.height);
-//console.log(player.velocity)
     gameLogic.mapHandler();
     gameLogic.movementLogicUpdate();
+    renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
     renderLogic.renderHandler(renderer);
     inputLogic.executeInput();
 
@@ -160,6 +160,7 @@ function gameLoop(){
         enemyProjectile.updateProjectile(renderer, renderLogic.camera);
         enemyProjectile.projectileBounds(enemyProjectile, renderLogic.mapWidth, renderLogic.mapHeight, enemyProjectileIndex, enemyProjectilesArray);
     })
+    requestAnimationFrame(gameLoop);
 
 
 }
