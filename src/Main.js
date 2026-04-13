@@ -104,9 +104,8 @@ function renderLoot(renderer) {
     });
 }
 let lastTime = 0;
-
 function gameLoop(){
-    let currentTime = Temporal.Now.instant().epochMilliseconds;
+    let currentTime = Temporal.Now.instant().epochMilliseconds; //was going to use Date.now but when i looked on mdn docs it looked to be deprecated as Temporal now replaces
     let deltaTime = (currentTime - lastTime) /1000;
     lastTime = currentTime;
     console.log(deltaTime)
