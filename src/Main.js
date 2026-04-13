@@ -103,8 +103,13 @@ function renderLoot(renderer) {
        
     });
 }
+let lastTime = 0;
 
 function gameLoop(){
+    let currentTime = Temporal.Now.instant().epochMilliseconds;
+    let deltaTime = (currentTime - lastTime) /1000;
+    lastTime = currentTime;
+    console.log(deltaTime)
    // console.log(test_item_array);
     renderLoot(renderer);
     //console.log(test);
