@@ -1,6 +1,14 @@
 
 //just initial foundations, need to test around how this will actually look/manifest
-export function validationCheck(condition) {
+export function validationCheck(source, conditions) {
+    conditions.forEach((condition) => {
+        switch (condition){
+            case "mana":
+                if (source.mana > condition.cost) {
+                    return false;
+                }
+        }
+    });
 //will need to cycle through all requirement types
 //mana
 //level
