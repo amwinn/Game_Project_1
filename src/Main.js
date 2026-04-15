@@ -111,7 +111,7 @@ function gameLoop(){
     let currentTime = performance.now();
     let deltaTime = (currentTime - lastTime) /1000;
     lastTime = currentTime;
-    console.log(deltaTime)
+    //console.log(deltaTime)
     //requestAnimationFrame(gameLoop); //moving to end of function
     renderer.clearRect(0,0, gameMap.width, gameMap.height);
     gameLogic.mapHandler();
