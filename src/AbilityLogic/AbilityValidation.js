@@ -4,7 +4,7 @@ export function validationCheck(source, conditions) {
     return conditions.every((condition) => {
         switch (condition.type){
             case "mana":
-                return source.mana > condition.cost;
+                return source.mana >= condition.cost;
         }
     });
 //will need to cycle through all requirement types

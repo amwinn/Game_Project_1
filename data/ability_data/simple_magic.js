@@ -5,6 +5,9 @@
 export const spellbolt = {
     id:"spellbolt",
     cooldown: 300,
+    resource: [
+        {type: "mana", cost: 10}
+    ],
     required: [
         {type: "mana", cost: 10}
     ],

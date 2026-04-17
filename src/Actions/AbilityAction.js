@@ -17,6 +17,7 @@ export default class AbilityAction extends Action {
            castAbility(ability, source, dataSet);
            console.log(validationCheck(source, ability.required))
         }
+        console.log(source[ability.resource[0].type]) //testing to prove "mana" string from data can be used with player.mana
     }
 
 
