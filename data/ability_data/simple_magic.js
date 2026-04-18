@@ -5,11 +5,13 @@
 export const spellbolt = {
     id:"spellbolt",
     cooldown: 300,
+    //not really sure if i need redundancy below with resource and required, but it is an important distinction
+    //incase there is a spell that REQUIRES 10 health, but doesnt COST/CONSUME 10 health
     resource: [
-        {type: "mana", cost: 10}
+        {type: "mana", amount: 10}
     ],
     required: [
-        {type: "mana", cost: 10}
+        {type: "mana", amount: 10}
     ],
 
     form: {

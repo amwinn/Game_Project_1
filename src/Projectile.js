@@ -3,8 +3,9 @@ import { Position, Size, Sprite } from "./Utility.js";
 export default class Projectile {
     static playerProjectile = "playerProjectile";
     static enemyProjectile = "enemyProjectile";
-    constructor(type, position, size, velocity, sprite) {
+    constructor(type, ability, position, size, velocity, sprite) {
         this.type = type;
+        this.ability = ability;
         this.position = position;
         this.size = size;
         this.velocity = velocity;
@@ -51,14 +52,14 @@ export default class Projectile {
         this.position.y = this.position.y + this.velocity.y;
     }
 
-    castEnemyProjectile(array, enemy, target) {
+    castEnemyProjectile(array, enemy, target, ability) {
         const angle = Math.atan2(((target.position.y + target.size.dh/5) - enemy.position.y), ((target.position.x + target.size.dw/5) - enemy.position.x)); //dw/5 and dh/5 can be adjusted as needed
         const size = new Size(30,30);
         const position = new Position(enemy.position.x, enemy.position.y);
         const sprite = new Sprite("../images/magic_bolt1.png", size.dw, size.dh)
         //this.velocity.y = Math.sin(angle);
         //this.velocity.x = Math.cos(angle);
-        array.push(new Projectile(Projectile.enemyProjectile, position, size, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
+        array.push(new Projectile(Projectile.enemyProjectile, ability, position, size, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
         
     }
 

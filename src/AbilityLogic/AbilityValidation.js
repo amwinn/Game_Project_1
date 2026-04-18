@@ -1,10 +1,10 @@
 
 //just initial foundations, need to test around how this will actually look/manifest
-export function validationCheck(source, conditions) {
+export function requiredCheck(source, conditions) {
     return conditions.every((condition) => {
         switch (condition.type){
             case "mana":
-                return source.mana >= condition.cost;
+                return source.mana >= condition.amount;
         }
     });
 //will need to cycle through all requirement types
@@ -18,6 +18,17 @@ export function validationCheck(source, conditions) {
 
 
 //return true/false?
+}
+
+export function resourceCheck(source, resources) { 
+    return resources.every((resource) => {
+        switch (resource.type) {
+            case "mana":
+                return (source.mana >= resource.amount)
+        }
+
+    })
+
 }
 
 //will import this function at AbilityAction.js?

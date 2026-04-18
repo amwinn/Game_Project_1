@@ -16,6 +16,8 @@ import { test_item_array } from "../Main.js";
 import Item from "../Item.js";
 import { testItemMap } from "../Main.js";
 
+import { applyEffects } from "../AbilityLogic/AbilityEffect.js";
+
 let nextMap = false;
 let playerSpawned = false;
 export const objectSpawnTracker = new Set();
@@ -298,6 +300,7 @@ projectileEntityCollision(entityArray, projectileArray) {
                 projectile.position.y > entity.position.y  &&
                 projectile.position.y < entity.position.y  + entity.size.dh
             ) {
+                applyEffects(projectile.ability.effect, entity);
                 // the below code was commented out, its is causing 2 enemies to be deleted because of the other if statement also firing after this one, so it deletes the next man up
                 // doesnt seem to have any purpose compared to the next function below it, but keeping as im unsure of my original intentions, possibly related to objects being plugged in to this function
                 // created before i took a brief break
@@ -309,7 +312,7 @@ projectileEntityCollision(entityArray, projectileArray) {
 
                 //below if statement determines if the enemy is a melee enemy being hit, comment out if disabling friendly fire
                 //&& projectile.type !== "enemyProjectile" was added while testing item spawning, can be removed or refactored once item is implemented for real (eventually, i swear)
-                if(this.behaviorAttributes[entity.type].destructible && projectile.type !== "enemyProjectile") { //"&& entity.type === Enemy.melee" was 2nd part of if statement but i changed it
+                if(this.behaviorAttributes[entity.type].destructible && projectile.type !== "enemyProjectile" && entity.health <=0) { //"&& entity.type === Enemy.melee" was 2nd part of if statement but i changed it
                     //START TEST CODE
                     //test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("../Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), entity.position.x, entity.position.y));
                     //END TEST CODE

@@ -30,7 +30,7 @@ function castProjectile(ability, source, dataSet) {
     const angle = Math.atan2(y, x); // removed (y + camera.y, x + camera.x) and moved to const x and y values above; revert if any bug appears
     const velocity = {x: Math.cos(angle)*5, y: Math.sin(angle)*5};
     const position = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2); //was +32, +50
-    dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, position, size, velocity, new Sprite(ability.form.data_config.sprite, ability.form.data_config.size.dw, ability.form.data_config.size.dh) ));
+    dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, position, size, velocity, new Sprite(ability.form.data_config.sprite, ability.form.data_config.size.dw, ability.form.data_config.size.dh) ));
     source.mana -=10;
 }
 

@@ -23,6 +23,7 @@ export default class Entity {
         this.cooldownTimer = cooldownTimer;
         this.cooldown = cooldown;
         this.sprite = this.determineSprite();
+        this.health = 30;
         
     }
 
