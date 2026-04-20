@@ -24,6 +24,7 @@ export default class Entity {
         this.cooldown = cooldown;
         this.sprite = this.determineSprite();
         this.health = 30;
+        this.mana = 100;
         
     }
 
@@ -40,7 +41,7 @@ export default class Entity {
 
    
     updateMeleeEnemy(renderer, enemy, target, camera) { 
-        inRange = this.enemyRangeCheck(enemy, target, 20 )
+        inRange = this.entityRangeCheck(enemy, target, 20 )
         if(inRange != true) { 
             const angle = Math.atan2(((target.position.y + target.size.dh/5) - this.position.y), ((target.position.x + target.size.dw/5) - this.position.x))  //the /5 for size x and size y are to make center of player sprite the target, not top left
             this.velocity.y = Math.sin(angle)/1.5;
@@ -57,8 +58,8 @@ export default class Entity {
         
     }
 
-    updateRangedEnemy(renderer, enemy, target, camera) {
-        inRange = this.enemyRangeCheck(enemy, target, 300);
+    updateRangedEnemy(renderer, entity, target, camera) {
+        inRange = this.entityRangeCheck(entity, target, 300);
         if (inRange === true && enemySelfCollision != true) {
             this.velocity.x = 0;
             this.velocity.y = 0;
@@ -73,12 +74,12 @@ export default class Entity {
     }
 
 
-    enemyRangeCheck(enemy, target, range) {
+    entityRangeCheck(entity, target, range) {
         if(
-            enemy.position.x + enemy.size.dw + range > target.position.x &&
-            enemy.position.x < target.position.x + target.size.dw + range &&
-            enemy.position.y + enemy.size.dh + range > target.position.y &&
-            enemy.position.y < target.position.y + target.size.dh + range
+            entity.position.x + entity.size.dw + range > target.position.x &&
+            entity.position.x < target.position.x + target.size.dw + range &&
+            entity.position.y + entity.size.dh + range > target.position.y &&
+            entity.position.y < target.position.y + target.size.dh + range
         ) {
             return true;
         }
