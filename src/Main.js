@@ -11,6 +11,7 @@ import MapData from "./MapDB.js";
 import GameLogic, { objectSpawnTracker } from "./GameLogic/GameLogic.js";
 import InputLogic from "./Input/InputLogic.js";
 import { ability_repository } from "../data/ability_data/ability_repository.js";
+import { castAbility } from "./AbilityLogic/AbilityLogic.js";
 
 import { weapon_data } from "../data/item_data/weapon_data.js";
 
@@ -145,8 +146,9 @@ function gameLoop(){
         enemy.updateRangedEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
         enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
         if(enemy.cooldownTimer <= 0) {
-            projectileHandler.castEnemyProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
+            projectileHandler.castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
             enemy.cooldownTimer = enemy.cooldown
+            enemy.mana -= 10;
         }
         enemy.cooldownTimer --;
     })
