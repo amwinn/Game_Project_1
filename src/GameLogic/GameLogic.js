@@ -295,9 +295,9 @@ projectileEntityCollision(entityArray, projectileArray) {
     entityArray.forEach((entity, entityIndex) => { 
         projectileArray.forEach((projectile, projectileIndex) => {
             if(
-                projectile.position.x > entity.position.x  &&  
+                projectile.position.x + projectile.size.dw> entity.position.x  &&  
                 projectile.position.x < entity.position.x + entity.size.dw &&
-                projectile.position.y > entity.position.y  &&
+                projectile.position.y + projectile.size.dh > entity.position.y  &&
                 projectile.position.y < entity.position.y  + entity.size.dh
             ) {
                 applyEffects(projectile.ability.effect, entity);
