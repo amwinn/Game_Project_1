@@ -5,17 +5,11 @@ export function castAbility(ability, source, dataSet){
     let form = ability.form.type;
     switch(form) {
         case "projectile":
-            //START PROTO
-            //console.log(ability.required[0])
-            // if(source.mana >= ability.required[0].cost) {
-            //     castProjectile(ability, source, dataSet);
-            // } else {console.log("out of mana")}
-            //END PROTO
-            //uncomment below when done prototyping the above; also remove "source.mana -= 10" from castProjectile function (its the last line)
             castProjectile(ability, source, dataSet);
             break;
         case "radial":
             console.log(ability)
+            castRadial(ability, source, dataSet)
             break;
     }
 }
@@ -32,6 +26,13 @@ function castProjectile(ability, source, dataSet) {
     const position = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2); //was +32, +50
     dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, position, size, velocity, new Sprite(ability.form.data_config.sprite, ability.form.data_config.size.dw, ability.form.data_config.size.dh) ));
     source.mana -=10;
+}
+
+function castRadial(ability, source, dataSet) {
+    const size = new Size(ability.form.data_config.size.dw, ability.form.data_config.size.dh);
+    const casterPosition = new Position(source.position.x, source.position.y)//trying to spawn position at middle of caster
+    const radialPosition = new Position();//might need to redo above and current lines
+    dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, casterPosition, size, {x:0, y:0}, new Sprite(ability.form.data_config.sprite, ability.form.data_config.size.dw, ability.form.data_config.size.dh)))
 }
 
 

@@ -32,14 +32,17 @@ export const spellbolt = {
 export const spellnova = {
     id:"spellnova",
     cooldown: 600,
-    required: {
-        type: "mana", amount: 20
-    },
+    resource: [
+        {type: "mana", amount: 0}
+    ],
+    required: [
+        {type: "mana", amount: 0}
+    ],
     form: {
         type: "radial",
         data_config: {
             sprite: "../images/magic_bolt1.png",
-            size: {dw: 100, dh: 100}, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
+            size: {dw: 120, dh: 120}, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
             speed: 5,
             scale: 1
         }

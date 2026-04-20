@@ -10,7 +10,7 @@ export default class AbilityAction extends Action {
 
 
 
-    process(source, dataSet ) {
+    process(source, dataSet) {
         const ability = ability_repository[this.abilityID];
         // castAbility(ability, source, dataSet);
         if(resourceCheck(source, ability.resource)) {
