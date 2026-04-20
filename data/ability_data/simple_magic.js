@@ -44,7 +44,7 @@ export const spellnova = {
             sprite: "../images/magic_bolt1.png",
             size: {dw: 120, dh: 120}, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
             speed: 5,
-            scale: 1
+            scale: 1 //in the update function for radials, can have the size = size *= ability.form.data_config.scale, then every x seconds, scale +=.25 if scale < scaleMax?
         }
 
     },
