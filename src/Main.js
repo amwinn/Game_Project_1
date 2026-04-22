@@ -11,7 +11,7 @@ import MapData from "./MapDB.js";
 import GameLogic, { objectSpawnTracker } from "./GameLogic/GameLogic.js";
 import InputLogic from "./Input/InputLogic.js";
 import { ability_repository } from "../data/ability_data/ability_repository.js";
-import { castAbility } from "./AbilityLogic/AbilityLogic.js";
+import { castEntityProjectile } from "./AbilityLogic/AbilityLogic.js";
 
 import { weapon_data } from "../data/item_data/weapon_data.js";
 
@@ -98,7 +98,7 @@ function spawnEnemy(array, maxEnemyCount, enemyType, enemyRole, position, size, 
 
 
 //Temporary object to interface enemy spell casting until spell and ability logic are properly added and structured
-const projectileHandler = new Projectile();
+//const projectileHandler = new Projectile();
 
 function renderLoot(renderer) {
     test_item_array.forEach((item, i) => {
@@ -146,7 +146,8 @@ function gameLoop(){
         enemy.updateRangedEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
         enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
         if(enemy.cooldownTimer <= 0) {
-            projectileHandler.castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
+            //projectileHandler.castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
+            castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
             enemy.cooldownTimer = enemy.cooldown
             enemy.mana -= 10;
         }
