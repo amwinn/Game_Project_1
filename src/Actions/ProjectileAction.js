@@ -1,7 +1,7 @@
 import Action from "./Action.js";
 import { Position, Size } from "../Utility.js";
 import { projectilesArray } from "../Main.js";
-import Projectile from "../Projectile.js";
+import Projectile from "../AbilityEntity/Projectile.js";
 import { inputState } from "../Input/InputState.js";
 
 

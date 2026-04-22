@@ -1,5 +1,5 @@
 import Player from "./Player.js"; //gives error if i use capital P????
-import Projectile from "./Projectile.js";
+import Projectile from "./AbilityEntity/Projectile.js";
 import Entity, { meleeEnemyCharter, rangedEnemyCharter } from "./Entity.js";
 import Camera from "./Camera.js";
 import RenderLogic from "./RenderLogic.js";

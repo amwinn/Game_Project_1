@@ -8,7 +8,7 @@ import { enemyProjectilesArray, gameObjectMasterArray } from "../Main.js";
 import { projectilesArray } from "../Main.js";
 import { screenSize } from "../Main.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
-import Projectile from "../Projectile.js";
+import Projectile from "../AbilityEntity/Projectile.js";
 import { spriteData } from "../../data/creature_spriteData.js";
 import { spriteData_player } from "../../data/player_spriteData.js";
 
@@ -319,7 +319,8 @@ projectileEntityCollision(entityArray, projectileArray) {
                     entityArray.splice(entityIndex, 1);
 
                 }
-                projectileArray.splice(projectileIndex, 1);//possibly change to bounce? changing velocity to opposite should mimic diagonal reflection
+                projectile.setToSplice=true;
+                //projectileArray.splice(projectileIndex, 1);//possibly change to bounce? changing velocity to opposite should mimic diagonal reflection
                 }
         })
 
@@ -530,6 +531,11 @@ entityCollisionResolution(entity1, entity2) {
         this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
         this.projectileEntityCollision(meleeEnemyCharter, enemyProjectilesArray);
         this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
+        projectilesArray.forEach((projectile, index) => {
+            if(projectile.setToSplice === true) {
+                projectilesArray.splice(index, 1);
+            }
+        })
         this.playerEntityCollision(this.player, meleeEnemyCharter);
         this.playerEntityCollision(this.player, rangedEnemyCharter);
         playerSpawned = true;

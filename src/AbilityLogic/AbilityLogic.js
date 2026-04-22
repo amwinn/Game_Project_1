@@ -1,6 +1,6 @@
 import { inputState } from "../Input/InputState.js";
 import { Position, Size, Sprite } from "../Utility.js";
-import Projectile from "../Projectile.js";
+import Projectile from "../AbilityEntity/Projectile.js";
 export function castAbility(ability, source, dataSet){
     let form = ability.form.type;
     switch(form) {

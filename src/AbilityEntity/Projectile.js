@@ -1,4 +1,4 @@
-import { Position, Size, Sprite } from "./Utility.js";
+import { Position, Size, Sprite } from "../Utility.js";
 
 export default class Projectile {
     static playerProjectile = "playerProjectile";
