@@ -18,14 +18,16 @@ export function castAbility(ability, source, dataSet){
 
 //is this better or worse than just putting the code inside the switch? tentative on it, can always switch back easily
 function castProjectile(ability, source, dataSet) {
-    const size = new Size(ability.form.data_config.size.dw, ability.form.data_config.size.dh); //change to not be hardcoded, will need to refactor tilemap to be outside of mapdb class
+    const size = new Size(ability.form.data_config.radius*2, ability.form.data_config.radius*2); //change to not be hardcoded, will need to refactor tilemap to be outside of mapdb class
     const x = (dataSet.cursorData.cursor.world.x-size.dw/2) - (source.position.x + source.size.dw /2); //was originally target. source.position.x + +32, and both cursor.y and .x were -20 instead of -5, still havent fixed that portion
     const y = (dataSet.cursorData.cursor.world.y-size.dh/2) - (source.position.y + source.size.dh /2); //was originally source.position.y +50
     const angle = Math.atan2(y, x); // removed (y + camera.y, x + camera.x) and moved to const x and y values above; revert if any bug appears
     const velocity = {x: Math.cos(angle)*5, y: Math.sin(angle)*5};
     const position = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2); //was +32, +50
-    dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, position, size, velocity, new Sprite(ability.form.data_config.sprite, ability.form.data_config.size.dw, ability.form.data_config.size.dh) ));
-    source.mana -=10;
+    dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, position, size, velocity, new Sprite(ability.form.data_config.sprite, size.dw, size.dh) ));
+    ability.resource.forEach((resource,index) => {
+        source[resource.type] -= resource.amount;
+    });
 }
 
 //not yet ready, need to remove enemyProjectile, just have projectilesArray, conform the castEntityProjectile parameters to the castProjectile
@@ -34,14 +36,14 @@ export function castEntityProjectile(array, enemy, target, ability) {
     const angle = Math.atan2(((target.position.y + target.size.dh/5) - enemy.position.y), ((target.position.x + target.size.dw/5) - enemy.position.x)); //dw/5 and dh/5 can be adjusted as needed
     const position = new Position(enemy.position.x, enemy.position.y);
     const sprite = new Sprite("../images/magic_bolt1.png", size.dw, size.dh)
-    array.push(new Projectile(Projectile.enemyProjectile, ability, position, size, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
+    array.push(new Projectile(Projectile.entityProjectile, ability, position, size, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
 }
 
 function castRadial(ability, source, dataSet) {
-    const size = new Size(ability.form.data_config.size.dw, ability.form.data_config.size.dh);
-    const casterPosition = new Position(source.position.x, source.position.y)//trying to spawn position at middle of caster
-    const radialPosition = new Position();//might need to redo above and current lines
-    dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, casterPosition, size, {x:0, y:0}, new Sprite(ability.form.data_config.sprite, ability.form.data_config.size.dw, ability.form.data_config.size.dh)))
+    const size = new Size(ability.form.data_config.radius *2, ability.form.data_config.radius *2);
+    //const casterPosition = new Position(source.position.x, source.position.y)//trying to spawn position at middle of caster
+    const radialPosition = new Position(source.position.x - source.size.dw/2, source.position.y - source.size.dh/2);//might need to redo above and current lines
+    dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, radialPosition, size, {x:0, y:0}, new Sprite(ability.form.data_config.sprite, size.dw, size.dh)))
 }
 
 

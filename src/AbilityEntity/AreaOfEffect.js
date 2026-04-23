@@ -9,6 +9,7 @@ export default class Area {
         this.size = size;
         this.velocity = velocity;
         this.sprite = new Sprite();
+        this.radius = ability.form.radius;
     }
 
     //IMPORTANT, DETERMINE IF I NEED SIZE AND RADIUS, OR ONE OR THE OTHER

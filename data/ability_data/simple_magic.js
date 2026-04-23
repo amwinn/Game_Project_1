@@ -8,19 +8,20 @@ export const spellbolt = {
     //not really sure if i need redundancy below with resource and required, but it is an important distinction
     //incase there is a spell that REQUIRES 10 health, but doesnt COST/CONSUME 10 health
     resource: [
-        {type: "mana", amount: 10}
+        {type: "mana", amount: 0}
     ],
     required: [
-        {type: "mana", amount: 10}
+        {type: "mana", amount: 0}
     ],
 
     form: {
         type: "projectile",
         data_config: {
             sprite: "../images/magic_bolt1.png",
-            size: {dw: 30, dh: 30},
+            radius: 15,
+            //size: {dw: radius * 2, dh: radius * 2},
             speed: 5,
-            scale: 1 //not sure if i really need, just incase for dynamic size or something, remove if doesnt come to fruition
+            scale: 1.25 //not sure if i really need, just incase for dynamic size or something, remove if doesnt come to fruition
     },
 
     },
@@ -42,9 +43,9 @@ export const spellnova = {
         type: "radial",
         data_config: {
             sprite: "../images/magic_bolt1.png",
-            size: {dw: 220, dh: 220}, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
-            speed: 5,
-            scale: 1 //in the update function for radials, can have the size = size *= ability.form.data_config.scale, then every x seconds, scale +=.25 if scale < scaleMax?
+            radius: 100, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
+            scale: 1, //in the update function for radials, can have the size = size *= ability.form.data_config.scale, then every x seconds, scale +=.25 if scale < scaleMax?
+            scale_multiplier: 0.25
         }
 
     },

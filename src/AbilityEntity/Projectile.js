@@ -2,30 +2,31 @@ import { Position, Size, Sprite } from "../Utility.js";
 
 export default class Projectile {
     static playerProjectile = "playerProjectile";
-    static enemyProjectile = "enemyProjectile";
-    constructor(type, ability, position, size, velocity, sprite) {
+    static entityProjectile = "entityProjectile";
+    constructor(type, ability, position, size, velocity) {
+        //const abilityData = ability.form.data_config maybe? then wont have to list out long pathing
         this.type = type;
         this.ability = ability;
         this.position = position;
         this.size = size;
         this.velocity = velocity;
-        this.sprite = sprite;
+        this.sprite = new Sprite(ability.form.data_config.sprite, size.dw, size.dh);
         //this.sprite = this.determineSprite();        
 
     }
 
     //not yet utilized
-    determineSprite(){
-        if(this.type === "playerProjectile") {
-            return new Sprite("../images/magic_bolt1.png", this.dw, this.dh);
-        }
-        if(this.type === "enemyProjectile") {
-            return new Sprite("../images/magic_bolt1.png", this.dw, this.dh);
-        } else {
-            return new Sprite("../images/magic_bolt1.png", this.dw, this.dh)
-        }
+    // determineSprite(){
+    //     if(this.type === "playerProjectile") {
+    //         return new Sprite("../images/magic_bolt1.png", this.dw, this.dh);
+    //     }
+    //     if(this.type === "enemyProjectile") {
+    //         return new Sprite("../images/magic_bolt1.png", this.dw, this.dh);
+    //     } else {
+    //         return new Sprite("../images/magic_bolt1.png", this.dw, this.dh)
+    //     }
 
-    }
+    // }
 
 
 
