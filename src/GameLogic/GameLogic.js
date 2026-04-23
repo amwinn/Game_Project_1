@@ -4,7 +4,7 @@ import Entity, { meleeEnemyCharter, rangedEnemyCharter } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
 //import { nextMap, changeNextMap } from "./Grid.js";
 //import { playerSpawned, changePlayerSpawnState } from "./Grid.js";
-import { enemyProjectilesArray, gameObjectMasterArray } from "../Main.js";
+import { entityProjectilesArray, gameObjectMasterArray } from "../Main.js";
 import { projectilesArray } from "../Main.js";
 import { screenSize } from "../Main.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
@@ -42,7 +42,7 @@ export default class GameLogic {
         ['forest_sprite']: {destructible: true},
         ['greater_forest_sprite']: {destructible: true},
         [Projectile.playerProjectile]: {destructible: true},
-        [Projectile.enemyProjectile]: {destructible: true},
+        [Projectile.entityProjectile]: {destructible: true},
     };
 /*
 ..................................................................................................................................
@@ -206,11 +206,11 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
             objectArray.forEach((object, objectIndex) => {
                 if(this.collisionCheck(projectile, object)){
                     console.log("collision between " + (projectile?.type || "unknown") + " and " + (object?.type || "unknown"));
-                    if(this.behaviorAttributes[object.type].destructible && projectileArray != enemyProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
+                    if(this.behaviorAttributes[object.type].destructible && projectileArray != entityProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
                         objectArray.splice(objectIndex, 1);
                     }
                     //recently added && projectile.type !== Projectile.enemyProjectile to the below if statement because the enemies were spawning items but not destroying portal
-                    if(objectArray === portalArray && projectile.type !== Projectile.enemyProjectile) { 
+                    if(objectArray === portalArray && projectile.type !== Projectile.entityProjectile) { 
                     //START TEST CODE
                     test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("../Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), object.position.x, object.position.y));
                     console.log(test_item_array)
@@ -221,6 +221,20 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
             });
         });
     });
+}
+
+projectileCollisionCheck(array1, array2) {
+    array1.forEach((value,index1) => {
+        array2.forEach((value2, index2) => {
+            if(array1[index1] != array2[index2]) {
+                if(this.collisionCheck(array1[index1], array2[index2])){
+                    console.log(value.position.x)
+                    array1.splice(index1,1);
+                    array2.splice(index2,1);
+                }
+            }
+        })
+    })
 }
 
 //simple collision check for non-player objects
@@ -312,7 +326,7 @@ projectileEntityCollision(entityArray, projectileArray) {
 
                 //below if statement determines if the enemy is a melee enemy being hit, comment out if disabling friendly fire
                 //&& projectile.type !== "enemyProjectile" was added while testing item spawning, can be removed or refactored once item is implemented for real (eventually, i swear)
-                if(this.behaviorAttributes[entity.type].destructible && projectile.type !== "enemyProjectile" && entity.health <=0) { //"&& entity.type === Enemy.melee" was 2nd part of if statement but i changed it
+                if(this.behaviorAttributes[entity.type].destructible && projectile.type !== "entityProjectile" && entity.health <=0) { //"&& entity.type === Enemy.melee" was 2nd part of if statement but i changed it
                     //START TEST CODE
                     //test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("../Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), entity.position.x, entity.position.y));
                     //END TEST CODE
@@ -320,6 +334,9 @@ projectileEntityCollision(entityArray, projectileArray) {
 
                 }
                 projectile.setToSplice=true;
+                if(entity.type === "entityProjectile" || entity.type ==="playerProjectile") {
+                    entity.setToSplice=true;
+                }
                 //projectileArray.splice(projectileIndex, 1);//possibly change to bounce? changing velocity to opposite should mimic diagonal reflection
                 }
         })
@@ -350,7 +367,7 @@ playerEntityCollision(player, enemyArray) {
     })
 }
 
-enemyCollisionCheck(array1, array2) {
+entityCollisionCheck(array1, array2) {
     array1.forEach((value1, index1) => {
         array2.forEach((value2, index2) => {
             if(array2[index2] != array1[index1]) {
@@ -513,9 +530,10 @@ entityCollisionResolution(entity1, entity2) {
 
     //Eventually refactor the code to be in seperate update functions, for collision, map, player position etc.
     mapHandler() {
-        this.enemyCollisionCheck(meleeEnemyCharter, meleeEnemyCharter);
-        this.enemyCollisionCheck(meleeEnemyCharter, rangedEnemyCharter);
-        this.enemyCollisionCheck(rangedEnemyCharter, rangedEnemyCharter);
+        this.entityCollisionCheck(meleeEnemyCharter, meleeEnemyCharter);
+        this.entityCollisionCheck(meleeEnemyCharter, rangedEnemyCharter);
+        this.entityCollisionCheck(rangedEnemyCharter, rangedEnemyCharter);
+        //this.projectileCollisionCheck(projectilesArray, enemyProjectilesArray);
         if(nextMap === true) {
             this.changeMap();
         }
@@ -524,16 +542,21 @@ entityCollisionResolution(entity1, entity2) {
         this.camera.clampCamera(this.player); 
         //still needs some refining, mostly the destroy on hit/splice stuff
         this.projectileObjectCollision(projectilesArray, gameObjectMasterArray);
-        this.projectileObjectCollision(enemyProjectilesArray, gameObjectMasterArray);
+        this.projectileObjectCollision(entityProjectilesArray, gameObjectMasterArray);
         this.playerObjectCollision(this.player, gameObjectMasterArray);
-        this.projectilePlayerCollision(enemyProjectilesArray, this.player);
-        this.projectileEntityCollision(projectilesArray, enemyProjectilesArray);
+        this.projectilePlayerCollision(entityProjectilesArray, this.player);
+        this.projectileEntityCollision(projectilesArray, entityProjectilesArray);
         this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
-        this.projectileEntityCollision(meleeEnemyCharter, enemyProjectilesArray);
+        this.projectileEntityCollision(meleeEnemyCharter, entityProjectilesArray);
         this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
         projectilesArray.forEach((projectile, index) => {
             if(projectile.setToSplice === true) {
                 projectilesArray.splice(index, 1);
+            }
+        })
+        entityProjectilesArray.forEach((projectile, index) => {
+            if(projectile.setToSplice === true) {
+                entityProjectilesArray.splice(index, 1);
             }
         })
         this.playerEntityCollision(this.player, meleeEnemyCharter);
@@ -582,7 +605,7 @@ entityCollisionResolution(entity1, entity2) {
 
         cullObjects() {
             projectilesArray.length = 0;
-            enemyProjectilesArray.length = 0;
+            entityProjectilesArray.length = 0;
             treeObjectCharter.length = 0;
             rockObjectCharter.length = 0;
             bushObjectCharter.length = 0;   

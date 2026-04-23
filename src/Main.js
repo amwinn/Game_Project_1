@@ -79,7 +79,7 @@ const inputLogic = new InputLogic(gameLogic, camera, player);
 
 
 export const projectilesArray = [];
-export const enemyProjectilesArray = [];
+export const entityProjectilesArray = [];
 
 
 
@@ -147,7 +147,7 @@ function gameLoop(){
         enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
         if(enemy.cooldownTimer <= 0) {
             //projectileHandler.castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
-            castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
+            castEntityProjectile(entityProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
             enemy.cooldownTimer = enemy.cooldown
             enemy.mana -= 10;
         }
@@ -161,9 +161,9 @@ function gameLoop(){
         projectile.projectileBounds(projectile, renderLogic.mapWidth, renderLogic.mapHeight, projectileIndex, projectilesArray);
     })   
 
-    enemyProjectilesArray.forEach((enemyProjectile, enemyProjectileIndex) => {
+    entityProjectilesArray.forEach((enemyProjectile, enemyProjectileIndex) => {
         enemyProjectile.updateProjectile(renderer, renderLogic.camera);
-        enemyProjectile.projectileBounds(enemyProjectile, renderLogic.mapWidth, renderLogic.mapHeight, enemyProjectileIndex, enemyProjectilesArray);
+        enemyProjectile.projectileBounds(enemyProjectile, renderLogic.mapWidth, renderLogic.mapHeight, enemyProjectileIndex, entityProjectilesArray);
     })
     requestAnimationFrame(gameLoop);
 
