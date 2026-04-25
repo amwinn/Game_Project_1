@@ -1,22 +1,23 @@
 import { Position, Size, Sprite } from "../Utility.js";
 export default class Area {
-    static cone = "cone";
-    static radius = "radius";
-    constructor(type, ability, position, size, velocity, sprite) {
+    static conal = "conal";
+    static radial = "radial";
+    constructor(type, ability, position) {
         this.type = type;
         this.ability = ability;
         this.position = position;
-        this.size = size;
-        this.velocity = velocity;
-        this.sprite = new Sprite();
-        this.radius = ability.form.radius;
+        //this.velocity = velocity;
+        this.radius = ability.form.data_config.radius;
+        this.sprite = new Sprite(ability.form.data_config.sprite, this.radius *2, this.radius*2);
+        this.size = new Size(this.radius*2, this.radius*2);
+
     }
 
     //IMPORTANT, DETERMINE IF I NEED SIZE AND RADIUS, OR ONE OR THE OTHER
     //Probably size for sprite image, radius for collision related code
 
     renderAreaOfEffect(camera, renderer) {
-        renderer.drawImage(this.sprite.image, this.position.x - camera.x, this.position.y - camera.y, this.size.dw, this.size.dh)
+        renderer.drawImage(this.sprite.image, this.position.x - camera.x, this.position.y - camera.y, this.size.dw, this.size.dh);
     }
 
     scale(ability, scale) {

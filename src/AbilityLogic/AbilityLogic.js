@@ -1,6 +1,9 @@
 import { inputState } from "../Input/InputState.js";
 import { Position, Size, Sprite } from "../Utility.js";
 import Projectile from "../AbilityEntity/Projectile.js";
+import Area from "../AbilityEntity/AreaofEffect.js";
+import { radialArray } from "../Main.js";
+
 export function castAbility(ability, source, dataSet){
     let form = ability.form.type;
     switch(form) {
@@ -43,7 +46,8 @@ function castRadial(ability, source, dataSet) {
     const size = new Size(ability.form.data_config.radius *2, ability.form.data_config.radius *2);
     //const casterPosition = new Position(source.position.x, source.position.y)//trying to spawn position at middle of caster
     const radialPosition = new Position(source.position.x - source.size.dw/2, source.position.y - source.size.dh/2);//might need to redo above and current lines
-    dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, radialPosition, size, {x:0, y:0}, new Sprite(ability.form.data_config.sprite, size.dw, size.dh)))
+    dataSet.radialArray.push(new Area(Area.radial, ability, radialPosition));
+    //dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, radialPosition, size, {x:0, y:0}, new Sprite(ability.form.data_config.sprite, size.dw, size.dh)))
 }
 
 

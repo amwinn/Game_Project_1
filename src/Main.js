@@ -80,6 +80,7 @@ const inputLogic = new InputLogic(gameLogic, camera, player);
 
 export const projectilesArray = [];
 export const entityProjectilesArray = [];
+export const radialArray = [];
 
 
 
@@ -122,7 +123,11 @@ function gameLoop(){
     renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
     renderLogic.renderHandler(renderer);
     inputLogic.executeInput();
-
+    radialArray.forEach((radial, index) => {
+        console.log(radial.radius
+        )
+        radial.renderAreaOfEffect(camera, renderer);
+    })
     portalArray.forEach((portal, portalIndex) => {
         if(portal.spawnTimer <= 0) {
             const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y

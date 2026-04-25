@@ -1,5 +1,5 @@
 import { defaultKeyBindings } from "../Configs/KeybindingsConfig.js";
-import { projectilesArray } from "../Main.js";
+import { projectilesArray, radialArray } from "../Main.js";
 import MovementAction from "../Actions/MovementAction.js";
 import ProjectileAction from "../Actions/ProjectileAction.js";
 import AbilityAction from "../Actions/abilityAction.js";
@@ -57,6 +57,7 @@ export default class InputLogic {
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
             defaultKeyBindings[key].process(this.player, {
                 projectilesArray:projectilesArray,
+                radialArray: radialArray,
                 cursorData: inputState
             })
             //defaultKeyBindings[key].process(this.player, e, {this.camera, projectilesArray})
@@ -73,6 +74,7 @@ export default class InputLogic {
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
             defaultKeyBindings[key].process(this.player, {
                 projectilesArray:projectilesArray,
+                radialArray:radialArray,
                 cursorData: inputState
             })
         }
