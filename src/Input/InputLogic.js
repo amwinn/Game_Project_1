@@ -4,6 +4,7 @@ import MovementAction from "../Actions/MovementAction.js";
 import ProjectileAction from "../Actions/ProjectileAction.js";
 import AbilityAction from "../Actions/abilityAction.js";
 import { inputState } from "./InputState.js";
+import { dataSet } from "../Main.js";
 
 export const activeMovementKeys = new Set(); //perhaps move to a more centralized area?
 
@@ -55,11 +56,7 @@ export default class InputLogic {
             //console.log(key)
         }
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
-            defaultKeyBindings[key].process(this.player, {
-                projectilesArray:projectilesArray,
-                radialArray: radialArray,
-                cursorData: inputState
-            })
+            defaultKeyBindings[key].process(this.player, dataSet)
             //defaultKeyBindings[key].process(this.player, e, {this.camera, projectilesArray})
         }
 
@@ -72,11 +69,7 @@ export default class InputLogic {
             defaultKeyBindings[key].process(this.player, e, this.camera)
         }
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
-            defaultKeyBindings[key].process(this.player, {
-                projectilesArray:projectilesArray,
-                radialArray:radialArray,
-                cursorData: inputState
-            })
+            defaultKeyBindings[key].process(this.player, dataSet)
         }
         //maybe dont need
     }

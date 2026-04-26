@@ -12,7 +12,7 @@ import GameLogic, { objectSpawnTracker } from "./GameLogic/GameLogic.js";
 import InputLogic from "./Input/InputLogic.js";
 import { ability_repository } from "../data/ability_data/ability_repository.js";
 import { castEntityProjectile } from "./AbilityLogic/AbilityLogic.js";
-
+import { inputState } from "./Input/InputState.js";
 import { weapon_data } from "../data/item_data/weapon_data.js";
 
 import { generateUID } from "./Utility.js";
@@ -82,6 +82,11 @@ export const projectilesArray = [];
 export const entityProjectilesArray = [];
 export const radialArray = [];
 
+export const dataSet = {
+    projectilesArray: projectilesArray,
+    radialArray: radialArray,
+    cursorData: inputState
+}
 
 
 let meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //both were map.player.size.dw/dh /2
@@ -123,11 +128,6 @@ function gameLoop(){
     renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
     renderLogic.renderHandler(renderer);
     inputLogic.executeInput();
-    radialArray.forEach((radial, index) => {
-        console.log(radial.radius
-        )
-        radial.renderAreaOfEffect(camera, renderer);
-    })
     portalArray.forEach((portal, portalIndex) => {
         if(portal.spawnTimer <= 0) {
             const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y
