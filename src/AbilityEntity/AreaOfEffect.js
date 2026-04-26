@@ -16,7 +16,7 @@ export default class Area {
     //IMPORTANT, DETERMINE IF I NEED SIZE AND RADIUS, OR ONE OR THE OTHER
     //Probably size for sprite image, radius for collision related code
 
-    renderAreaOfEffect(camera, renderer) {
+    renderAreaOfEffect(renderer, camera) {
         renderer.drawImage(this.sprite.image, this.position.x - camera.x, this.position.y - camera.y, this.size.dw, this.size.dh);
     }
 
