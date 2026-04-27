@@ -42,15 +42,15 @@ export const spellnova = {
     form: {
         type: "radial",
         data_config: {
-            sprite: "../images/magic_bolt1.png",
-            radius: 100, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
+            sprite: "../images/spellnova_test.png",
+            radius: 200, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
             scale: 1, //in the update function for radials, can have the size = size *= ability.form.data_config.scale, then every x seconds, scale +=.25 if scale < scaleMax?
             scale_multiplier: 0.25
         }
 
     },
     effect: [
-        {type: "damage", amount: 50}
+        {type: "damage", amount: 150}
     ]
 }
 
