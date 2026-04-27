@@ -4,7 +4,7 @@ import Entity, { meleeEnemyCharter, rangedEnemyCharter } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
 //import { nextMap, changeNextMap } from "./Grid.js";
 //import { playerSpawned, changePlayerSpawnState } from "./Grid.js";
-import { entityProjectilesArray, gameObjectMasterArray } from "../Main.js";
+import { entityProjectilesArray, gameObjectMasterArray, radialArray } from "../Main.js";
 import { projectilesArray } from "../Main.js";
 import { screenSize } from "../Main.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
@@ -198,6 +198,63 @@ withinBottomBounds(character, mapWidth, mapheight) {
 
 ..................................................................................................................................
 */
+
+//might replace other two funcs with this if it works
+//would do findNearest(circle.position.x, square.position.x, square.position.x +square.size.dw)
+//do same for y axis
+findNearest(location, boundStart, boundEnd) {
+    //if(location < boundStart) {return boundStart}
+    //else if(loation > boundEnd) {return boundEnd}
+    //else {return location}
+}
+
+findNearestX(circle, square) {
+    if(circle.position.x < square.position.x) {
+        return square.position.x;
+    } else if(circle.position.x > square.position.x + square.size.dw) {
+        return square.position.x + square.size.dw;
+    } else {
+        return circle.position.x; //so basically if the circle isnt left or right of the square's bounds, it will be inside the bounds. so nearest x is the circle's x
+    }
+}
+
+findNearestY(circle, square) {
+    if(circle.position.y < square.position.y) {
+        return square.position.y;
+    } else if(circle.position.y > square.position.y + square.size.dh) {
+        return square.position.y + square.size.dh
+    } else {return circle.position.y}
+}
+
+//ROUGH-DRAFT, collision between radial and box
+isColliding_circleSquare(circle, square) {    
+    let nearestX = this.findNearestX(circle,square);
+    let nearestY = this.findNearestY(circle, square);
+
+    const distanceX = circle.position.x - nearestX;
+    const distanceY = circle.position.y - nearestY;
+    return (distanceX**2) + (distanceY**2) <= circle.radius**2;
+}
+resolveColliding_circleSquare(circle, square) {
+    if(square.type && this.behaviorAttributes[square.type].destructible) {
+        if(circle.ability) {
+            applyEffects(circle.ability.effect, square);
+
+        }
+    }
+}
+radialEntityCollision(radialArray, entityArray) {
+    radialArray.forEach((radial, radialIndex) =>{
+        entityArray.forEach((entity, entityIndex) => {
+            if(this.isColliding_circleSquare(radial, entity)) {
+                console.log("a")
+                this.resolveColliding_circleSquare(radial, entity);
+                //radial.setToSplice = true;
+                
+            }
+        })
+    })
+}
 
 //WIP, LOOKS TO BE WORKING GOOD SO FAR
 projectileObjectCollision(projectileArray, gameObjectMasterArray) {
@@ -530,6 +587,8 @@ entityCollisionResolution(entity1, entity2) {
 
     //Eventually refactor the code to be in seperate update functions, for collision, map, player position etc.
     mapHandler() {
+        this.radialEntityCollision(radialArray, meleeEnemyCharter);
+        this.radialEntityCollision(radialArray, rangedEnemyCharter);
         this.entityCollisionCheck(meleeEnemyCharter, meleeEnemyCharter);
         this.entityCollisionCheck(meleeEnemyCharter, rangedEnemyCharter);
         this.entityCollisionCheck(rangedEnemyCharter, rangedEnemyCharter);
@@ -549,6 +608,11 @@ entityCollisionResolution(entity1, entity2) {
         this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
         this.projectileEntityCollision(meleeEnemyCharter, entityProjectilesArray);
         this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
+        radialArray.forEach((radial, index) => {
+            if(radial.setToSplice ===true) {
+                radialArray.splice(index, 1);
+            }
+        })
         projectilesArray.forEach((projectile, index) => {
             if(projectile.setToSplice === true) {
                 projectilesArray.splice(index, 1);

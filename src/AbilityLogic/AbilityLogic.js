@@ -43,9 +43,11 @@ export function castEntityProjectile(array, enemy, target, ability) {
 }
 
 function castRadial(ability, source, dataSet) {
-    const size = new Size(ability.form.data_config.radius *2, ability.form.data_config.radius *2);
+    const radius = ability.form.data_config.radius;
+    const size = new Size(radius *2, radius *2);
     //const casterPosition = new Position(source.position.x, source.position.y)//trying to spawn position at middle of caster
-    const radialPosition = new Position(source.position.x - source.size.dw/2, source.position.y - source.size.dh/2);//might need to redo above and current lines
+    const sourceCenter = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2);
+    const radialPosition = new Position(sourceCenter.x, sourceCenter.y);//might need to redo above and current lines
     dataSet.radialArray.push(new Area(Area.radial, ability, radialPosition));
     //dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, radialPosition, size, {x:0, y:0}, new Sprite(ability.form.data_config.sprite, size.dw, size.dh)))
 }
