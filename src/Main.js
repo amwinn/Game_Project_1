@@ -144,12 +144,18 @@ function gameLoop(){
     meleeEnemyCharter.forEach((enemy, index) => {  
         enemy.updateMeleeEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
         enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
+        if(enemy.health <= 0) {
+            meleeEnemyCharter.splice(index, 1)
+        }
     })
 
 
     rangedEnemyCharter.forEach((enemy, index) => {
         enemy.updateRangedEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
         enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
+        if(enemy.health <=0) {
+            rangedEnemyCharter.splice(index, 1);
+        }
         if(enemy.cooldownTimer <= 0) {
             //projectileHandler.castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
             castEntityProjectile(entityProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
