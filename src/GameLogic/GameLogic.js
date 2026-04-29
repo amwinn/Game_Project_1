@@ -198,6 +198,17 @@ withinBottomBounds(character, mapWidth, mapheight) {
 
 ..................................................................................................................................
 */
+//ROUGH-DRAFT, collision between two circles
+checkCollision_circle(circle1, circle2) {
+    const distanceX = circle1.position.x + circle2.position.x;
+    const distanceY = circle2.position.y + circle2.position.y;
+    const distanceSquared = distanceX * distanceX + distanceY *distanceY;
+
+    return (distanceSquared >= (circle1.radius + circle2.radius)**2);
+
+}
+
+
 
 //might replace other two funcs with this if it works
 //would do findNearest(circle.position.x, square.position.x, square.position.x +square.size.dw)
@@ -227,7 +238,7 @@ findNearestY(circle, square) {
 }
 
 //ROUGH-DRAFT, collision between radial and box
-isColliding_circleSquare(circle, square) {    
+checkCollision_circleSquare(circle, square) {    
     let nearestX = this.findNearestX(circle,square);
     let nearestY = this.findNearestY(circle, square);
 
@@ -246,7 +257,7 @@ resolveColliding_circleSquare(circle, square) {
 radialEntityCollision(radialArray, entityArray) {
     radialArray.forEach((radial, radialIndex) =>{
         entityArray.forEach((entity, entityIndex) => {
-            if(this.isColliding_circleSquare(radial, entity)) {
+            if(this.checkCollision_circleSquare(radial, entity)) {
                 console.log("a")
                 this.resolveColliding_circleSquare(radial, entity);
                 //radial.setToSplice = true;
