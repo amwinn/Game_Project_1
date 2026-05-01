@@ -17,6 +17,7 @@ import Item from "../Item.js";
 import { testItemMap } from "../Main.js";
 
 import { applyEffects } from "../AbilityLogic/AbilityEffect.js";
+import Area from "../AbilityEntity/AreaofEffect.js";
 
 let nextMap = false;
 let playerSpawned = false;
@@ -39,11 +40,37 @@ export default class GameLogic {
         [GameObject.gate]: {destructible: false},
         [GameObject.deadTree]: {destructible: true},
         [GameObject.portal]: {destructible: true},
-        ['forest_sprite']: {destructible: true},
-        ['greater_forest_sprite']: {destructible: true},
+        [Entity.forest_creature]: {destructible: true},
+        [Entity.greater_forest_creature]: {destructible: true},
         [Projectile.playerProjectile]: {destructible: true},
         [Projectile.entityProjectile]: {destructible: true},
+        [Area.radial]: {destructable: false}
     };
+    /*
+..................................................................................................................................
+
+            Spawn Logic
+
+..................................................................................................................................
+*/
+//function is from the early days of the project, needs some heavy refactoring/improving at some point
+spawnEntity(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown) {
+    if(array.length < maxEnemyCount) {
+        array.push(new Entity(enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown));
+    }
+}
+
+/*
+..................................................................................................................................
+
+            End Spawn Logic
+
+..................................................................................................................................
+*/
+
+
+
+
 /*
 ..................................................................................................................................
 

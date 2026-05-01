@@ -89,18 +89,20 @@ export const dataSet = {
 }
 
 
-let meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //both were map.player.size.dw/dh /2
-let rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //was map.player.size.dw/3, map.player.size.dh/2
+// let meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //both were map.player.size.dw/dh /2
+// let rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //was map.player.size.dw/3, map.player.size.dh/2
+//recently moved to the portal array.foreach section, right before the spawnEnemy function is called
 
 
 
 
 //Temporary position, most likely moving to gamelogic.js
-function spawnEnemy(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown) {
-    if(array.length < maxEnemyCount) {
-        array.push(new Entity(enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown));
-    }
-}
+// function spawnEnemy(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown) {
+//     if(array.length < maxEnemyCount) {
+//         array.push(new Entity(enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown));
+//     }
+// }
+//recently moved to gamelogic under new spawnlogic section, remove soon
 
 
 //Temporary object to interface enemy spell casting until spell and ability logic are properly added and structured
@@ -132,8 +134,10 @@ function gameLoop(){
         if(portal.spawnTimer <= 0) {
             const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y
             const magePosition  = new Position(portal.position.x, portal.position.y) //same
-            spawnEnemy(meleeEnemyCharter, 10, 'forest_sprite', Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 500, 700); //had to have both velocity values or else it wouldnt have worked
-            spawnEnemy(rangedEnemyCharter, 5, 'greater_forest_sprite', Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 500, 700); //maybe change cooldown number to random number, between 400-500?   
+            const meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
+            const rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
+            gameLogic.spawnEntity(meleeEnemyCharter, 10, Entity.forest_creature, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 500, 700); //had to have both velocity values or else it wouldnt have worked
+            gameLogic.spawnEntity(rangedEnemyCharter, 5, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 500, 700); //maybe change cooldown number to random number, between 400-500?   
             portal.spawnTimer = portal.spawnTime;      
         }
         portal.spawnTimer --;
