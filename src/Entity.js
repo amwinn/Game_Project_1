@@ -13,6 +13,8 @@ let inRange;
 export default class Entity {
     static melee = "melee";
     static mage = "mage";
+    static forest_creature = "forest_creature";
+    static greater_forest_creature = "greater_forest_creature";
     constructor(type, role, position, size, velocity, cooldownTimer, cooldown) {
         this.type = type;
         this.role = role;
@@ -30,10 +32,10 @@ export default class Entity {
 
     //was if(this.type === Entity.melee/mage), but changed to if(this.type === forest_sprite))
     determineSprite() {
-        if(this.type === 'forest_sprite') {
+        if(this.type === Entity.forest_creature) {
             return new Sprite(spriteData[this.type]["stance_1"]["default"], this.size.dw, this.size.dh);
         }
-        if(this.type === "greater_forest_sprite") {
+        if(this.type === Entity.greater_forest_creature) {
             return new Sprite(spriteData[this.type]["stance_1"]["default"], this.size.dw, this.size.dh);
         }
 
