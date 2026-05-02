@@ -17,7 +17,7 @@ export const spellbolt = {
     form: {
         type: "projectile",
         data_config: {
-            sprite: "../images/magic_bolt1.png",
+            sprite: "../images/spellbolt_test.png",
             radius: 15,
             //size: {dw: radius * 2, dh: radius * 2},
             speed: 5,
