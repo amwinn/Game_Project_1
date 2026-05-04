@@ -138,9 +138,12 @@ export default class RenderLogic{
     }
 
 
-
+//REMEMBER: first to render means deepest on the render layer, if wanting to cover other rendered objects, must be rendered AFTER said objects
     renderHandler(renderer) {      
         this.renderMap(renderer);
+        radialArray.forEach((radial, index) => {
+            radial.renderAreaOfEffect(renderer, this.camera);
+        })
         this.renderObjects(renderer);
         this.renderPlayer(renderer, this.player, this.camera);
 
@@ -151,9 +154,7 @@ export default class RenderLogic{
         rangedEnemyCharter.forEach((entity, i) => {
             this.renderEntity(renderer, entity, this.camera);
         })
-        radialArray.forEach((radial, index) => {
-            radial.renderAreaOfEffect(renderer, this.camera);
-        })
+
         //TEST CODE
         test_item_array.forEach((item, i) => {
             this.test_renderLoot(renderer, item, this.camera)
