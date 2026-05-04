@@ -171,9 +171,7 @@ export default class RenderLogic{
         this.renderMap(renderer);
         this.renderObjects(renderer);
         this.renderPlayer(renderer, this.player, this.camera);
-        radialArray.forEach((radial, index) => {
-        radial.renderAreaOfEffect(renderer, this.camera);
-    })
+
         meleeEnemyCharter.forEach((entity, i) => {
             this.renderEntity(renderer,entity, this.camera);
         })
@@ -181,7 +179,9 @@ export default class RenderLogic{
         rangedEnemyCharter.forEach((entity, i) => {
             this.renderEntity(renderer, entity, this.camera);
         })
-
+        radialArray.forEach((radial, index) => {
+            radial.renderAreaOfEffect(renderer, this.camera);
+        })
         //TEST CODE
         test_item_array.forEach((item, i) => {
             this.test_renderLoot(renderer, item, this.camera)
