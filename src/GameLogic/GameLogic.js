@@ -322,7 +322,8 @@ projectileCollisionCheck(array1, array2) {
     array1.forEach((value,index1) => {
         array2.forEach((value2, index2) => {
             if(array1[index1] != array2[index2]) {
-                if(this.collisionCheck(array1[index1], array2[index2])){
+                //was this.collisionCheck(), changed to be radius-based collision test
+                if(this.checkCollision_circle(array1[index1], array2[index2])){
                     console.log(value.position.x)
                     array1.splice(index1,1);
                     array2.splice(index2,1);
