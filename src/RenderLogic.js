@@ -34,16 +34,10 @@ export function changeNextMap(boolean) {
 let objectIndex;
 export default class RenderLogic{
     constructor(mapData, camera, player){
-        // this.zoneWidth = zoneWidth;
-        // this.zoneHeight = zoneHeight;
-        //this.mapData = new MapData();
         this.mapData = mapData;
         this.tileMap = this.mapData.tileMap;
         this.camera = camera;
         this.player = player;
-        
-        //this.tileMap.tsize = zoneWidth; //maybe not even necessary
-        //this.tileMap.tsize = zoneHeight;
         this.initializeProperties();
         
         document.addEventListener("keydown", this.keyDownCodes);
@@ -54,9 +48,6 @@ export default class RenderLogic{
 
 
     initializeProperties(){
-    // this.mapWidth = this.tileMap.cols * this.tileMap.tsize;
-    // this.mapHeight = this.tileMap.rows * this.tileMap.tsize;
-    //just replace the above with below
     this.mapWidth = this.tileMap.getMapWidth();
     this.mapHeight = this.tileMap.getMapHeight();
 
@@ -126,18 +117,11 @@ export default class RenderLogic{
                 }
                 
 
-                //creates a background grass for object
+                //creates a background grass for object, the +22 modifiers to size fix the artifact lines, oddly enough they werent visible in fullscreen f11 mode
                 if(selectedTile && selectedTile.arrayType && selectedTile.type) { //was if(tile > 2)
                     this.renderSprite(renderer, defaultFloorSprite.sprite, x, y, this.tileMap.tsize+22, this.tileMap.tsize+22); //just recently added this +22 to the dw and dh, else there were grid lines all over
                 }
 
-                //Assignes sprite image to objects determined by tile number in MapDB's biomeTileSheet
-                //moved to createGameObjects() in GameLogic.js
-                // if(selectedTile && selectedTile.arrayType && selectedTile.type) {
-                //     selectedTile.arrayType.forEach((value, index) => {
-                //         value.sprite = selectedTile.sprite;
-                //     })
-                // }
 
             } 
         }  
@@ -145,15 +129,6 @@ export default class RenderLogic{
 
 
     renderObjects(renderer) {
-        // const gameObjectCharters = [
-        //     rockObjectCharter,
-        //     bushObjectCharter,
-        //     treeObjectCharter,
-        //     gateObjectCharter,
-        //     deadTreeObjectCharter,
-        //     portalArray
-        // ]
-        //replaced gameObjectCharters with gameObjectMasterArray.forEach
         gameObjectMasterArray.forEach((objectArray, objectArrayIndex) => {
             objectArray.forEach((object, objectIndex) => {
                 this.renderSprite(renderer, object.sprite, object.position.x , object.position.y , object.size.dw, object.size.dh);
@@ -165,9 +140,6 @@ export default class RenderLogic{
 
 
     renderHandler(renderer) {      
-        // if(nextMap === true) {
-        //     this.changeMap(renderer);
-        // }
         this.renderMap(renderer);
         this.renderObjects(renderer);
         this.renderPlayer(renderer, this.player, this.camera);
@@ -188,19 +160,10 @@ export default class RenderLogic{
         })
         //END TEST CODE
 
-        //this.renderEntity(renderer, this.camera);
-        //just removed the below line (player determine sprite)
-        //this.player.determineSprite();
-        //this.camera.clampCamera(this.player); //remove if reverting camera changes
-        //this.updatePlayer();
-        //playerSpawned = true; 
-        //this.player.movePlayer(this.mapWidth, this.mapHeight); //remove if reverting camera changes
         
     }
 
 
-//fellas fellas fellas
-//x >= 0 && x < this.mapWidth && y >= 0 && y < this.mapHeight
  
     renderSprite(renderer, sprite, x, y, dw, dh) {
         if(x >= 0 && x < this.mapWidth && y >= 0 && y < this.mapHeight) {
@@ -213,7 +176,7 @@ export default class RenderLogic{
         renderer.drawImage(player.sprite.image, player.position.x - camera.x , player.position.y - camera.y, this.mapData.tileMap.tsize/1.5, this.mapData.tileMap.tsize/1.5);
     }
 
-    //was previously in Entity.js, exactly as is, revert to there if any unforseen issues
+
     renderEntity(renderer, entity, camera) {
         renderer.drawImage(entity.sprite.image,entity.position.x - camera.x, entity.position.y - camera.y, entity.size.dw, entity.size.dh);
     }
