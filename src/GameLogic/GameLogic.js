@@ -9,7 +9,7 @@ import { projectilesArray } from "../Main.js";
 import { screenSize } from "../Main.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
 import Projectile from "../AbilityEntity/Projectile.js";
-import { spriteData } from "../../data/creature_spriteData.js";
+import { CREATURE_RENDER } from "../../data/creature_data.js";
 import { spriteData_player } from "../../data/player_spriteData.js";
 
 import { test_item_array } from "../Main.js";
@@ -149,11 +149,11 @@ playerSpriteManager(player) {
 spriteManager_meleeForestSprite(array,player) {
     array.forEach((entity, index) => {
         if(entity.position.x > player.position.x ) {
-            entity.sprite.image.src = spriteData[entity.type]["stance_1"]["left"];
+            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["left"];
         } else if (entity.position.x < player.position.x) {
-            entity.sprite.image.src = spriteData[entity.type]["stance_1"]["right"];
+            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["right"];
         } else {
-            entity.sprite.image.src = spriteData[entity.type]["stance_1"]["default"];
+            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["default"];
         }
     })
 }
@@ -162,11 +162,11 @@ spriteManager_meleeForestSprite(array,player) {
 spriteManager_mageForestSprite(array,player){
     array.forEach((entity, index) => {
         if(entity.position.x > player.position.x ) {
-            entity.sprite.image.src = spriteData[entity.type]["stance_1"]["left"];
+            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["left"];
         } else if (entity.position.x < player.position.x) {
-            entity.sprite.image.src = spriteData[entity.type]["stance_1"]["right"];
+            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["right"];
         } else {
-            entity.sprite.image.src = spriteData[entity.type]["stance_1"]["default"];
+            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["default"];
         }
     })
 }
