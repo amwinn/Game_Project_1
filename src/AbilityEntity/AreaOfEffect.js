@@ -9,9 +9,11 @@ export default class Area {
         //this.velocity = velocity;
         this.radius = ability.form.data_config.radius;
         this.diameter = this.radius *2;
-        this.sprite = new Sprite(ability.form.data_config.sprite, this.diameter, this.diameter);
         this.size = new Size(this.diameter, this.diameter);
 
+        this.animationIndex = 0;
+        this.animationDuration = ability.form.data_config.animationDuration || 0;
+        this.sprite = new Sprite(ability.form.data_config.sprite[this.animationIndex], this.diameter, this.diameter);
     }
 
     //IMPORTANT, DETERMINE IF I NEED SIZE AND RADIUS, OR ONE OR THE OTHER

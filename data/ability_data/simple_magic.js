@@ -19,7 +19,6 @@ export const spellbolt = {
         data_config: {
             sprite: "../images/spellbolt_test.png",
             radius: 15,
-            //size: {dw: radius * 2, dh: radius * 2},
             speed: 5,
             scale: 1.25 //not sure if i really need, just incase for dynamic size or something, remove if doesnt come to fruition
     },
@@ -42,12 +41,13 @@ export const spellnova = {
     form: {
         type: "radial",
         data_config: {
-            sprite: "../images/spellnova_test.png",
-            sprite_duration: 200,
-            radius: 200, //makes sense that maybe instead of size have radius, or have size: {radius:100} or something akin to that
+            sprite: [
+                "../images/spellnova_test.png","../images/spellnova_test.png","../images/spellnova_test.png"
+            ],
+            animation_duration: 200,
+            radius: 200, 
             scale: 1, //in the update function for radials, can have the size = size *= ability.form.data_config.scale, then every x seconds, scale +=.25 if scale < scaleMax?
             scale_multiplier: 0.25,
-            duration: 100
         }
 
     },
@@ -57,3 +57,5 @@ export const spellnova = {
 }
 
 //maybe add spritePath?
+
+//if an effect is a dot, or multi tick nova, then under effect, there would be type: damage, amount 10, hitCount/tick: 5, interval: 200, or something akin to this

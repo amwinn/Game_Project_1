@@ -46,7 +46,7 @@ export default class GameLogic {
         [Projectile.entityProjectile]: {destructible: true},
         [Area.radial]: {destructable: false}
     };
-    /*
+/*
 ..................................................................................................................................
 
             Spawn Logic
@@ -64,6 +64,72 @@ spawnEntity(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity
 ..................................................................................................................................
 
             End Spawn Logic
+
+..................................................................................................................................
+*/
+/*
+..................................................................................................................................
+
+            Animation Logic
+
+..................................................................................................................................
+*/
+
+//slowly implement the animations frames to here
+//remember to horizontally mirror all 3 frames so 6 in total, 3 for left, 3 for right orientation
+
+playerSpriteManager(player) {
+    let animationDuration = 40;
+    let selectedSpriteSet = spriteData_player.walk[player.animationDirection];
+
+    if (activeMovementKeys.size > 0) {
+        player.animationTimer++;
+    }
+    if (activeMovementKeys.size === 0) {
+        player.animationIndex = 0;
+        player.sprite.image.src = selectedSpriteSet[player.animationIndex];
+    }
+
+    if (player.animationTimer >= animationDuration) {
+        player.animationIndex++;
+        player.animationTimer = 0;
+    }
+    if (player.animationIndex >= selectedSpriteSet.length) {
+        player.animationIndex = 0;
+    }
+
+    player.sprite.image.src = selectedSpriteSet[player.animationIndex];
+
+
+   
+    // original rough draft implementation; discard below once new player sprite added in
+    // if(player.direction === "left") {
+    //     player.sprite.image.src = spriteData_player["stance_1"]["left"];
+    // } else if (player.direction === "right") {
+    //     player.sprite.image.src = spriteData_player["stance_1"]["right"];
+    // } else {
+    //     player.sprite.image.src === spriteData_player["stance_1"]["default"];
+    // }
+}
+
+//radial ability animation
+radialAbilityAnimation(ability) {
+    let animationDuration = 100; //100 placeholder
+    let spriteSet = ability; //placeholder
+
+}
+
+
+
+
+
+
+
+
+/*
+..................................................................................................................................
+
+            End Animation Logic
 
 ..................................................................................................................................
 */
@@ -106,42 +172,7 @@ adjustDiagonalVelocity(player){
 
 }
 
-//slowly implement the animations frames to here
-//remember to horizontally mirror all 3 frames so 6 in total, 3 for left, 3 for right orientation
 
-playerSpriteManager(player) {
-    let animationDuration = 40;
-    let selectedSpriteSet = spriteData_player.walk[player.animationDirection];
-
-    if (activeMovementKeys.size > 0) {
-        player.animationTimer++;
-    }
-    if (activeMovementKeys.size === 0) {
-        player.animationIndex = 0;
-        player.sprite.image.src = selectedSpriteSet[player.animationIndex];
-    }
-
-    if (player.animationTimer >= animationDuration) {
-        player.animationIndex++;
-        player.animationTimer = 0;
-    }
-    if (player.animationIndex >= selectedSpriteSet.length) {
-        player.animationIndex = 0;
-    }
-
-    player.sprite.image.src = selectedSpriteSet[player.animationIndex];
-
-
-   
-    // original rough draft implementation; discard below once new player sprite added in
-    // if(player.direction === "left") {
-    //     player.sprite.image.src = spriteData_player["stance_1"]["left"];
-    // } else if (player.direction === "right") {
-    //     player.sprite.image.src = spriteData_player["stance_1"]["right"];
-    // } else {
-    //     player.sprite.image.src === spriteData_player["stance_1"]["default"];
-    // }
-}
 
 
 //alternative check is to check the velocity, if less than 0 x, dir equals left, if over 0 = right
