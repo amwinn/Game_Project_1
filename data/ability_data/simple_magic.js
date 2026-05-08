@@ -42,7 +42,7 @@ export const spellnova = {
         type: "radial",
         data_config: {
             sprite: [
-                "../images/spellnova_test.png","../images/spellnova_test.png","../images/spellnova_test.png"
+                "../images/abilities/simple_magic/spellnova_1.png","../images/abilities/simple_magic/spellnova_1.png","../images/abilities/simple_magic/spellnova_1.png"
             ],
             animation_duration: 200,
             radius: 200, 
