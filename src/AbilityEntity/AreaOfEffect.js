@@ -29,3 +29,9 @@ export default class Area {
 
 
 }
+
+//different types of radials
+//nova (expands from center outwards), radial (size is same entire duration)
+//so perhaps change current castRadial func in abilitylogic.js to castNovaArea, and make a castRadialArea or something thus akin
+
+//nova needs: duration and/or initialscale endscale, so with a radius of 100 that might be assumed to be the endscale, initialscale might be smaller by x factor, so endscale 1.0, initial scale .25?
