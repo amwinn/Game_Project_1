@@ -1,5 +1,6 @@
 import { Position, Size, Sprite } from "./Utility.js";
-import { CREATURE_RENDER } from "../data/creature_data.js";
+import { CREATURE_RENDER } from "../data/entity_data/entity_render.js";
+import { CREATURE_TYPE } from "../data/entity_data/entity_type.js";
 
 export const meleeEnemyCharter = [];
 export const rangedEnemyCharter = [];

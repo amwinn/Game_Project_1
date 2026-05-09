@@ -1,6 +1,6 @@
 
 
-
+//shoudl this data import data from entity_type to use ENTITY_TYPE[FOREST_CREATURE]?
 //imported and directly referenced in src/GameLogic/Gamelogic.js and Entity.js in the determineSprite func
 export const CREATURE_RENDER = {
     forest_creature: {
@@ -38,9 +38,9 @@ export const    CREATURE_TYPE = {
 //NEEDS BIG CHANGES, NO SPRITE STUFF IN HERE ONLY TYPE-RELATED
 export const CREATURE_CONFIG = {
     forestSprite: {
-        sprite_left: null,//creature_sprite_data.forestsprite.sprite.left,
-        sprite_right: null,//creature_sprite_data.forestsprite.sprite.left,
-        sprite_default: null,//creature_sprite_data.forestsprite.sprite.left,
+        sprite_left: null,//imported sprite object.left
+        sprite_right: null,//imported sprite object.right
+        sprite_default: null,//imported sprite object.right
         health_default: 100,
         attack: 4,
         defense: 2,

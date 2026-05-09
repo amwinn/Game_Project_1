@@ -9,7 +9,7 @@ import { projectilesArray } from "../Main.js";
 import { screenSize } from "../Main.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
 import Projectile from "../AbilityEntity/Projectile.js";
-import { CREATURE_RENDER } from "../../data/creature_data.js";
+import { CREATURE_RENDER } from "../../data/entity_data/entity_render.js"
 import { spriteData_player } from "../../data/player_spriteData.js";
 
 import { test_item_array } from "../Main.js";
