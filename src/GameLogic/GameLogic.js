@@ -680,7 +680,9 @@ entityCollisionResolution(entity1, entity2) {
         this.projectileEntityCollision(meleeEnemyCharter, entityProjectilesArray);
         this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
         radialArray.forEach((radial, index) => {
-            if(radial.setToSplice ===true) {
+                radial.updateNova(radial,radial.ability, this.player);
+                console.log(radial.radius)
+            if(radial.delete ===true) {
                 radialArray.splice(index, 1);
             }
         })
