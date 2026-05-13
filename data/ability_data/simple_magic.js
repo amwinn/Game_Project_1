@@ -45,10 +45,10 @@ export const spellnova = {
                 "../images/abilities/simple_magic/spellnova_1.png","../images/abilities/simple_magic/spellnova_1.png","../images/abilities/simple_magic/spellnova_1.png"
             ],
             animation_duration: 200,
-            radius: 200, 
-            base_scale: .25,
-            final_scale: 1, //in the update function for radials, can have the size = size *= ability.form.data_config.scale, then every x seconds, scale +=.25 if scale < scaleMax?
-            scale_increment: 0.25,
+            radius: 150, 
+            base_scale: 0.25,
+            max_scale: 1, //in the update function for radials, can have the size = size *= ability.form.data_config.scale, then every x seconds, scale +=.25 if scale < scaleMax?
+            scale_incrementor: 0.25,
         }
 
     },
