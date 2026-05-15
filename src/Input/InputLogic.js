@@ -1,5 +1,5 @@
 import { defaultKeyBindings } from "../Configs/KeybindingsConfig.js";
-import { projectilesArray, radialArray } from "../Main.js";
+import { projectilesArray, eruptiveArray } from "../Main.js";
 import MovementAction from "../Actions/MovementAction.js";
 import ProjectileAction from "../Actions/ProjectileAction.js";
 import AbilityAction from "../Actions/abilityAction.js";

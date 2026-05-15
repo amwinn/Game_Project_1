@@ -4,7 +4,7 @@ import Entity, { meleeEnemyCharter, rangedEnemyCharter } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
 //import { nextMap, changeNextMap } from "./Grid.js";
 //import { playerSpawned, changePlayerSpawnState } from "./Grid.js";
-import { entityProjectilesArray, gameObjectMasterArray, radialArray } from "../Main.js";
+import { entityProjectilesArray, gameObjectMasterArray, eruptiveArray } from "../Main.js";
 import { projectilesArray } from "../Main.js";
 import { screenSize } from "../Main.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
@@ -658,8 +658,8 @@ entityCollisionResolution(entity1, entity2) {
 
     //Eventually refactor the code to be in seperate update functions, for collision, map, player position etc.
     mapHandler() {
-        this.radialEntityCollision(radialArray, meleeEnemyCharter);
-        this.radialEntityCollision(radialArray, rangedEnemyCharter);
+        this.radialEntityCollision(eruptiveArray, meleeEnemyCharter);
+        this.radialEntityCollision(eruptiveArray, rangedEnemyCharter);
         this.entityCollisionCheck(meleeEnemyCharter, meleeEnemyCharter);
         this.entityCollisionCheck(meleeEnemyCharter, rangedEnemyCharter);
         this.entityCollisionCheck(rangedEnemyCharter, rangedEnemyCharter);
@@ -679,11 +679,11 @@ entityCollisionResolution(entity1, entity2) {
         this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
         this.projectileEntityCollision(meleeEnemyCharter, entityProjectilesArray);
         this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
-        radialArray.forEach((radial, index) => {
-                radial.updateNova(radial,radial.ability, this.player);
-                console.log(radial.radius)
-            if(radial.delete ===true) {
-                radialArray.splice(index, 1);
+        eruptiveArray.forEach((eruptive, index) => {
+                eruptive.updateEruptive(eruptive,eruptive.ability, this.player);
+                console.log(eruptive.radius)
+            if(eruptive.delete ===true) {
+                eruptiveArray.splice(index, 1);
             }
         })
         projectilesArray.forEach((projectile, index) => {

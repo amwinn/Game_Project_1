@@ -5,7 +5,7 @@ import Player from "./Player.js";
 
 import { screenSize } from "./Main.js"; //this was preventing the game from loading because it was calling before the grid class in main
 import { meleeEnemyCharter, rangedEnemyCharter } from "./Entity.js";
-import { projectilesArray, entityProjectilesArray, radialArray } from "./Main.js";
+import { projectilesArray, entityProjectilesArray, eruptiveArray } from "./Main.js";
 import Portal from "./Portal.js";
 import { portalArray } from "./Portal.js";
 //import { mapDatabase, biomeTileSheets } from "./MapDB.js";
@@ -141,8 +141,8 @@ export default class RenderLogic{
 //REMEMBER: first to render means deepest on the render layer, if wanting to cover other rendered objects, must be rendered AFTER said objects
     renderHandler(renderer) {      
         this.renderMap(renderer);
-        radialArray.forEach((radial, index) => {
-            radial.renderAreaOfEffect(renderer, this.camera);
+        eruptiveArray.forEach((eruptive, index) => {
+            eruptive.renderAreaOfEffect(renderer, this.camera);
         })
         this.renderObjects(renderer);
         this.renderPlayer(renderer, this.player, this.camera);

@@ -2,7 +2,7 @@ import { Position, Size, Sprite } from "../Utility.js";
 export default class Area {
     static conal = "conal";
     static radial = "radial";
-    static nova = "nova";
+    static eruptive = "eruptive";
     constructor(type, ability, position) {
         this.type = type;
         this.ability = ability;
@@ -29,19 +29,22 @@ export default class Area {
         //size * ability.form.scale / 2 or something such as this, /2 to stop it from being too drastic? or simply make the scale 1, 1.25, 1.5, 2, etc., instead of 1, 5, 10 etc.
     }
 
-    updateNova(nova, ability, player){
-        console.log(nova.scale)
-        this.clampToPlayer(nova, player);
-        if(nova.scale >= ability.form.data_config.max_scale) {
-            nova.delete = true;
+    updateEruptive(eruptive, ability, player){
+        console.log(eruptive.scale)
+        this.clampToPlayer(eruptive, player);
+        if(eruptive.scale >= ability.form.data_config.max_scale) {
+            eruptive.delete = true;
         }
-        if(nova.scale < ability.form.data_config.max_scale) {
-            nova.scale += ability.form.data_config.scale_incrementor/20;
+        if(eruptive.scale < ability.form.data_config.max_scale) {
+            eruptive.scale += ability.form.data_config.scale_incrementor/20;
         }
-        nova.radius = ability.form.data_config.radius * nova.scale;
-        nova.diameter = nova.radius*2;
-        nova.size.dw = nova.diameter;
-        nova.size.dh = nova.diameter;
+        if(eruptive.scale > ability.form.data_config.max_scale) {
+            eruptive.scale = ability.form.data_config.max_scale;
+        }
+        eruptive.radius = ability.form.data_config.radius * eruptive.scale;
+        eruptive.diameter = eruptive.radius*2;
+        eruptive.size.dw = eruptive.diameter;
+        eruptive.size.dh = eruptive.diameter;
         //if scale < ability.form.data_config.final_scale, scale += ability.form.data_config.scale_multiplier
         //if scale >= ability.form.data_config.final_scale, delete
     }

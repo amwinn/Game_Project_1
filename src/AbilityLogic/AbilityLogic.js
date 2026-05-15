@@ -2,7 +2,7 @@ import { inputState } from "../Input/InputState.js";
 import { Position, Size, Sprite } from "../Utility.js";
 import Projectile from "../AbilityEntity/Projectile.js";
 import Area from "../AbilityEntity/AreaofEffect.js";
-import { radialArray } from "../Main.js";
+import { eruptiveArray } from "../Main.js";
 
 export function castAbility(ability, source, dataSet){
     let form = ability.form.type;
@@ -10,10 +10,11 @@ export function castAbility(ability, source, dataSet){
         case "projectile":
             castProjectile(ability, source, dataSet);
             break;
-        case "radial":
-            console.log(ability)
-            castRadial(ability, source, dataSet)
-            break;
+        // case "radial":
+        //     castRadial(ability, source, dataSet);
+        //     break;
+        case "eruptive":
+            castEruptive(ability, source, dataSet);
     }
 }
 
@@ -44,13 +45,13 @@ export function castEntityProjectile(array, enemy, target, ability) {
     array.push(new Projectile(Projectile.entityProjectile, ability, position, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
 }
 
-function castRadial(ability, source, dataSet) {
+function castEruptive(ability, source, dataSet) {
     //const radius = ability.form.data_config.radius * ability.form.data_config.base_radius;
     //const size = new Size(radius *2, radius *2);
     //const casterPosition = new Position(source.position.x, source.position.y)//trying to spawn position at middle of caster
     const sourceCenter = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2);
-    const radialPosition = new Position(sourceCenter.x, sourceCenter.y);//might need to redo above and current lines
-    dataSet.radialArray.push(new Area(Area.radial, ability, radialPosition));
+    const eruptivePosition = new Position(sourceCenter.x, sourceCenter.y);//might need to redo above and current lines
+    dataSet.eruptiveArray.push(new Area(Area.eruptive, ability, eruptivePosition));
     //dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, radialPosition, size, {x:0, y:0}, new Sprite(ability.form.data_config.sprite, size.dw, size.dh)))
 }
 

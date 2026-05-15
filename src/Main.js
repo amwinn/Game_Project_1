@@ -80,9 +80,11 @@ const inputLogic = new InputLogic(gameLogic, camera, player);
 
 export const projectilesArray = [];
 export const entityProjectilesArray = [];
+export const eruptiveArray = [];
 export const radialArray = [];
 
 export const dataSet = {
+    eruptiveArray: eruptiveArray,
     projectilesArray: projectilesArray,
     radialArray: radialArray,
     cursorData: inputState
