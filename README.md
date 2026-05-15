@@ -3,9 +3,6 @@
 
 A 2D tile-based game built purely in Vanilla JavaScript
 
-## Test Demo
-[Play]()
-
 ## Purpose
 Learn the fundamentals of programming in an engaging way
 
