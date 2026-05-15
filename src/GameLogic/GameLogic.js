@@ -17,7 +17,7 @@ import Item from "../Item.js";
 import { testItemMap } from "../Main.js";
 
 import { applyEffects } from "../AbilityLogic/AbilityEffect.js";
-import Area from "../AbilityEntity/AreaOfEffect.js";
+import Area from "../AbilityEntity/tempAreaOfEffect.js";
 
 let nextMap = false;
 let playerSpawned = false;
