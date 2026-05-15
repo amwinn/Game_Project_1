@@ -1,4 +1,4 @@
-import AbilityAction from "../Actions/abilityAction.js"
+import AbilityAction from "../Actions/AbilityAction.js"
 import MovementAction from "../Actions/MovementAction.js"
 import ProjectileAction from "../Actions/ProjectileAction.js"
 
