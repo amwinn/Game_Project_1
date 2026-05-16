@@ -41,7 +41,7 @@ export function castEntityProjectile(array, enemy, target, ability) {
     const size = new Size(30,30);
     const angle = Math.atan2(((target.position.y + target.size.dh/5) - enemy.position.y), ((target.position.x + target.size.dw/5) - enemy.position.x)); //dw/5 and dh/5 can be adjusted as needed
     const position = new Position(enemy.position.x+enemy.size.dw/2, enemy.position.y+enemy.size.dh/2);
-    const sprite = new Sprite("../images/magic_bolt1.png", size.dw, size.dh)
+    const sprite = new Sprite("Images/Abilities/simple_magic/spellbolt_test.png", size.dw, size.dh)
     array.push(new Projectile(Projectile.entityProjectile, ability, position, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
 }
 

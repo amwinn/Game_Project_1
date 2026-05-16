@@ -17,7 +17,7 @@ export const spellbolt = {
     form: {
         type: "projectile",
         data_config: {
-            sprite: "Images/spellbolt_test.png",
+            sprite: "Images/Abilities/simple_magic/spellbolt_test.png",
             radius: 15,
             speed: 5,
             scale: 1.25 //not sure if i really need, just incase for dynamic size or something, remove if doesnt come to fruition
@@ -42,7 +42,7 @@ export const spellnova = {
         type: "eruptive",
         data_config: {
             sprite: [
-                "Images/abilities/simple_magic/spellnova_1.png","../images/abilities/simple_magic/spellnova_1.png","../images/abilities/simple_magic/spellnova_1.png"
+                "Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png"
             ],
             animation_duration: 200,
             radius: 150, 
