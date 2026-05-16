@@ -11,23 +11,23 @@ export default class MapData {
 //if adding deadTree1.png for example, will need to put arraytype and type for the default floor of each map to pop up, so that dead tree can be used in any biome
     biomeTileSheets = {
         "forest": {
-            0: {sprite: new Sprite("./Images/Forest/practice_grass5.png")},            
-            2: {sprite: new Sprite("./Images/Forest/practice_grass4.png")},
-            3: {sprite: new Sprite("./Images/Forest/practice_cypress1.png"), arrayType: treeObjectCharter, type: GameObject.tree},       
-            4: {sprite: new Sprite("./Images/Forest/practice_bush1.png"), arrayType: bushObjectCharter, type: GameObject.bush},
-            5: {sprite: new Sprite("./Images/Forest/practice_rock1.png"), arrayType: rockObjectCharter, type: GameObject.rock}, 
-            6: {sprite: new Sprite("./Images/Forest/practice_portal1.png"), arrayType: portalArray, type: GameObject.portal},
-            7: {sprite: new Sprite("./Images/Forest/practice_gate3.png"), arrayType: gateObjectCharter, type: GameObject.gate}
+            0: {sprite: new Sprite("Images/Forest/practice_grass5.png")},            
+            2: {sprite: new Sprite("Images/Forest/practice_grass4.png")},
+            3: {sprite: new Sprite("Images/Forest/practice_cypress1.png"), arrayType: treeObjectCharter, type: GameObject.tree},       
+            4: {sprite: new Sprite("Images/Forest/practice_bush1.png"), arrayType: bushObjectCharter, type: GameObject.bush},
+            5: {sprite: new Sprite("Images/Forest/practice_rock1.png"), arrayType: rockObjectCharter, type: GameObject.rock}, 
+            6: {sprite: new Sprite("Images/Forest/practice_portal1.png"), arrayType: portalArray, type: GameObject.portal},
+            7: {sprite: new Sprite("Images/Forest/practice_gate3.png"), arrayType: gateObjectCharter, type: GameObject.gate}
 
         },
         "swamp": {
-            0: {sprite: new Sprite("./Images/Swamp/practice_swampGrass1.png")},            
-            2: {sprite: new Sprite("./Images/Swamp/practice_swampGrass1.png")},
-            3: {sprite: new Sprite("./Images/Swamp/practice_deadTree1.png"), arrayType: deadTreeObjectCharter, type: GameObject.deadTree},       
-            4: {sprite: new Sprite("./Images/Forest/practice_bush1.png"), arrayType: bushObjectCharter, type: GameObject.bush},
-            5: {sprite: new Sprite("./Images/Forest/practice_rock1.png"), arrayType: rockObjectCharter, type: GameObject.rock}, 
-            6: {sprite: new Sprite("./Images/Forest/practice_portal1.png"), arrayType: portalArray, type: GameObject.portal},
-            7: {sprite: new Sprite("./Images/Forest/practice_gate3.png"), arrayType: gateObjectCharter, type: GameObject.gate}
+            0: {sprite: new Sprite("Images/Swamp/practice_swampGrass1.png")},            
+            2: {sprite: new Sprite("Images/Swamp/practice_swampGrass1.png")},
+            3: {sprite: new Sprite("Images/Swamp/practice_deadTree1.png"), arrayType: deadTreeObjectCharter, type: GameObject.deadTree},       
+            4: {sprite: new Sprite("Images/Forest/practice_bush1.png"), arrayType: bushObjectCharter, type: GameObject.bush},
+            5: {sprite: new Sprite("Images/Forest/practice_rock1.png"), arrayType: rockObjectCharter, type: GameObject.rock}, 
+            6: {sprite: new Sprite("Images/Forest/practice_portal1.png"), arrayType: portalArray, type: GameObject.portal},
+            7: {sprite: new Sprite("Images/Forest/practice_gate3.png"), arrayType: gateObjectCharter, type: GameObject.gate}
 
         }
     }

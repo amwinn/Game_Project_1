@@ -17,7 +17,7 @@ import Item from "../Item.js";
 import { testItemMap } from "../Main.js";
 
 import { applyEffects } from "../AbilityLogic/AbilityEffect.js";
-import Area from "../AbilityEntity/tempAreaOfEffect.js";
+import Area from "../AbilityEntity/AreaOfEffect.js";
 
 let nextMap = false;
 let playerSpawned = false;
@@ -338,7 +338,7 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
                     //recently added && projectile.type !== Projectile.enemyProjectile to the below if statement because the enemies were spawning items but not destroying portal
                     if(objectArray === portalArray && projectile.type !== Projectile.entityProjectile) { 
                     //START TEST CODE
-                    test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("./Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), object.position.x, object.position.y));
+                    test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), object.position.x, object.position.y));
                     console.log(test_item_array)
                     //END TEST CODE
                 }

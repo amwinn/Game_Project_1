@@ -1,7 +1,7 @@
 import { inputState } from "../Input/InputState.js";
 import { Position, Size, Sprite } from "../Utility.js";
 import Projectile from "../AbilityEntity/Projectile.js";
-import Area from "../AbilityEntity/tempAreaOfEffect.js";
+import Area from "../AbilityEntity/AreaOfEffect.js";
 import { eruptiveArray } from "../Main.js";
 
 export function castAbility(ability, source, dataSet){

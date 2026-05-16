@@ -4,23 +4,23 @@ export const spriteData_player = {
 
 
     idle: {
-        left: "./Images/Entities/Entity_player/StoneAutomaton_walk_left_1.png",
-        right: "./Images/Entities/Entity_player/StoneAutomaton_walk_right_1.png"
+        left: "Images/Entities/Entity_player/StoneAutomaton_walk_left_1.png",
+        right: "Images/Entities/Entity_player/StoneAutomaton_walk_right_1.png"
     },
 
     walk: {
         left: [
-        "./Images/Entities/Entity_player/StoneAutomaton_walk_left_1.png",
-        "./Images/Entities/Entity_player/StoneAutomaton_walk_left_2.png",
-        "./Images/Entities/Entity_player/StoneAutomaton_walk_left_1.png",
-        "./Images/Entities/Entity_player/StoneAutomaton_walk_left_3.png"
+        "Images/Entities/Entity_player/StoneAutomaton_walk_left_1.png",
+        "Images/Entities/Entity_player/StoneAutomaton_walk_left_2.png",
+        "Images/Entities/Entity_player/StoneAutomaton_walk_left_1.png",
+        "Images/Entities/Entity_player/StoneAutomaton_walk_left_3.png"
         ],
 
         right: [
-        "./Images/Entities/Entity_player/StoneAutomaton_walk_right_1.png",
-        "./Images/Entities/Entity_player/StoneAutomaton_walk_right_2.png",
-        "./Images/Entities/Entity_player/StoneAutomaton_walk_right_1.png",
-        "./Images/Entities/Entity_player/StoneAutomaton_walk_right_3.png"
+        "Images/Entities/Entity_player/StoneAutomaton_walk_right_1.png",
+        "Images/Entities/Entity_player/StoneAutomaton_walk_right_2.png",
+        "Images/Entities/Entity_player/StoneAutomaton_walk_right_1.png",
+        "Images/Entities/Entity_player/StoneAutomaton_walk_right_3.png"
         ]
     },
     
