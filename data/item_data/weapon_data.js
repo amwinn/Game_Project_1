@@ -4,7 +4,7 @@ export const weapon_data  = [
     {
         id: 1,
         name: "bronze_2handed_sword",
-        sprite_default: new Sprite("../images/draft_loot_bag1.png"),
+        sprite_default: new Sprite("Images/draft_loot_bag1.png"),
         sprite_right: null,
         sprite_left: null,
         physical_attack:5,

@@ -454,9 +454,6 @@ projectileEntityCollision(entityArray, projectileArray) {
                 //below if statement determines if the enemy is a melee enemy being hit, comment out if disabling friendly fire
                 //&& projectile.type !== "enemyProjectile" was added while testing item spawning, can be removed or refactored once item is implemented for real (eventually, i swear)
                 if(this.behaviorAttributes[entity.type].destructible && projectile.type !== "entityProjectile") { //"&& entity.type === Enemy.melee" was 2nd part of if statement but i changed it
-                    //START TEST CODE
-                    //test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("../Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), entity.position.x, entity.position.y));
-                    //END TEST CODE
                     //entity splicing is handled under the entity update at the moment, dont need it heresd
                     //entityArray.splice(entityIndex, 1);
 
