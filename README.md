@@ -5,12 +5,12 @@
 A 2D tile-based game built purely in Vanilla JavaScript
 
 ## Play Test Build
-[Launch Test Build] (https://amwinn.github.io/Game_Project_1/)
+https://amwinn.github.io/Game_Project_1/
 
 ## Controls
 - Movement - W, A, S, D
-- Primary Attack - left click or R
-- Secondary Attack - T
+- Projectile Attack - left click or R
+- Area of Effect Attack - T
 
 ## Purpose
 Learn the fundamentals of programming in an engaging way
