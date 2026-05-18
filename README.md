@@ -1,6 +1,6 @@
 # Game Project 1 (Final Name TBD)
-> This game is currently a work in progress and thus missing many features
-> For testing purposes, bushes, rocks, and trees can be destroyed by player projectiles
+> - This game is currently a work in progress and thus missing many features
+> - For testing purposes, bushes, rocks, and trees can be destroyed by player projectiles
 
 A 2D tile-based game built purely in Vanilla JavaScript
 
