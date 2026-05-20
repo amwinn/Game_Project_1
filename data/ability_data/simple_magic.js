@@ -44,13 +44,38 @@ export const spellnova = {
             sprite: [
                 "Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png"
             ],
-            animation_duration: 200,
+            duration: 200,
             radius: 150, 
             base_scale: 0.25,
             max_scale: 1, 
             scale_incrementor: 0.25,
         }
 
+    },
+    effect: [
+        {type: "damage", amount: 150}
+    ]
+}
+
+export const spellblast = {
+    id:"spellblast",
+    cooldown: 600,
+    resource: [
+        {type: "mana", amount: 0}
+    ],
+    required: [
+        {type: "mana", amount: 0}
+    ],
+    form: {
+        type: "radial",
+        data_config: {
+            sprite: null,
+            duration: null,
+            radius: null,
+            base_scale: null,
+            max_scale: null,
+            scale_incrementor: null
+        }
     },
     effect: [
         {type: "damage", amount: 150}

@@ -14,7 +14,10 @@ export default class Area {
         this.scale = ability.form.data_config.base_scale;
 
         this.animationIndex = 0;
-        this.animationDuration = ability.form.data_config.animationDuration || 0;
+        this.duration = ability.form.data_config.duration;
+        //might not need to declare animationDuration here, perhaps just in animation logic function?
+        //this.animationDuration = this.duration;
+        //this.animationDuration = ability.form.data_config.animationDuration || 0;
         this.sprite = new Sprite(ability.form.data_config.sprite[this.animationIndex], this.diameter, this.diameter);
     }
 
