@@ -9,8 +9,8 @@ https://amwinn.github.io/Game_Project_1/
 
 ## Controls
 - Movement - W, A, S, D
-- Projectile Attack - left click or R
-- Area of Effect Attack - T
+- Projectile Attack - left click or E
+- Area of Effect Attack - Q
 
 ## Purpose
 Learn the fundamentals of programming in an engaging way

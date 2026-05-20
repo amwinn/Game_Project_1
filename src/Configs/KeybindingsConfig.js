@@ -10,6 +10,6 @@ export const defaultKeyBindings = {
     "KeyW": new MovementAction(MovementAction.up),
     "KeyD": new MovementAction(MovementAction.right),
     "click": new AbilityAction("spellbolt"), // was new ProjectileAction() - slowly being phased out as AbilityAction is introduced in the code
-    "KeyR": new AbilityAction("spellbolt"),
-    "KeyT": new AbilityAction("spellnova")
+    "KeyE": new AbilityAction("spellbolt"),
+    "KeyQ": new AbilityAction("spellnova")
 }
