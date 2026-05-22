@@ -304,10 +304,13 @@ checkCollision_circleSquare(circle, square) {
     const distanceY = circle.position.y - nearestY;
     return (distanceX**2) + (distanceY**2) <= circle.radius**2;
 }
+
+//below needs some work, assumes that the circle will be the spell and the square is relegated to target only
+//change this.player to circle.owner once relevant code has been implemented
 resolveColliding_circleSquare(circle, square) {
-    if(square.type && this.behaviorAttributes[square.type].destructible) {
+    if(square.type && this.behaviorAttributes[square.type].destructible && circle.type !=="entityProjectile") {
         if(circle.ability) {
-            applyEffects(circle.ability.effect, square);
+            applyEffects(circle.ability.effect, square, this.player);
 
         }
     }
@@ -441,7 +444,12 @@ projectileEntityCollision(entityArray, projectileArray) {
                 // projectile.position.y + projectile.size.dh > entity.position.y  &&
                 // projectile.position.y < entity.position.y  + entity.size.dh
             ) {
-                applyEffects(projectile.ability.effect, entity);
+                //below needs some work, assumes that entity is relegated only to the target, while player is not
+                //change this.player to circle.owner once relevant code has been implemented
+                if(projectile.type !== "entityProjectile" && entity.type !== "entityProjectile") {
+                applyEffects(projectile.ability.effect, entity, this.player);                    
+                }
+
                 // the below code was commented out, its is causing 2 enemies to be deleted because of the other if statement also firing after this one, so it deletes the next man up
                 // doesnt seem to have any purpose compared to the next function below it, but keeping as im unsure of my original intentions, possibly related to objects being plugged in to this function
                 // created before i took a brief break

@@ -30,6 +30,7 @@ function castProjectile(ability, source, dataSet) {
     const velocity = {x: Math.cos(angle)*5, y: Math.sin(angle)*5};
     const position = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2); //was +32, +50
     dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, position, velocity, new Sprite(ability.form.data_config.sprite, size.dw, size.dh) ));
+    //perhaps move the below somewhere else, or make an "applyCost()" function akin to the applyEffects()
     ability.resource.forEach((resource,index) => {
         source[resource.type] -= resource.amount;
     });
@@ -52,6 +53,9 @@ function castEruptive(ability, source, dataSet) {
     const sourceCenter = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2);
     const eruptivePosition = new Position(sourceCenter.x, sourceCenter.y);//might need to redo above and current lines
     dataSet.eruptiveArray.push(new Area(Area.eruptive, ability, eruptivePosition));
+    ability.resource.forEach((resource,index) => {
+        source[resource.type] -= resource.amount;
+    });
     //dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, radialPosition, size, {x:0, y:0}, new Sprite(ability.form.data_config.sprite, size.dw, size.dh)))
 }
 

@@ -24,7 +24,9 @@ export const spellbolt = {
     },
 
     },
-    effect:[{type: "damage", amount: 20}
+    effect:[
+        {type: "damage", amount: 5},
+        {type: "mana_leech", amount: 20}
     ]
 
 }
@@ -33,10 +35,10 @@ export const spellnova = {
     id:"spellnova",
     cooldown: 600,
     resource: [
-        {type: "mana", amount: 0}
+        {type: "mana", amount: 50}
     ],
     required: [
-        {type: "mana", amount: 0}
+        {type: "mana", amount: 50}
     ],
     form: {
         type: "eruptive",
