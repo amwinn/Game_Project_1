@@ -35,10 +35,10 @@ export const spellnova = {
     id:"spellnova",
     cooldown: 600,
     resource: [
-        {type: "mana", amount: 50}
+        {type: "mana", amount: 40}
     ],
     required: [
-        {type: "mana", amount: 50}
+        {type: "mana", amount: 40}
     ],
     form: {
         type: "eruptive",
@@ -55,7 +55,7 @@ export const spellnova = {
 
     },
     effect: [
-        {type: "damage", amount: 150}
+        {type: "damage", amount: 100}
     ]
 }
 
