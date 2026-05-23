@@ -91,6 +91,19 @@ export const dataSet = {
 }
 
 
+//temporary function to display mana, ui will be after ability system and inventory/item system
+function displayVitals(player) {
+    renderer.font = "40px Chaucer";
+    renderer.fillStyle = "DeepSkyBlue";
+
+    renderer.fillText(
+        `MANA: ${player.mana}/${player.max_mana}`,
+        25,
+        50
+    );
+}
+
+
 // let meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //both were map.player.size.dw/dh /2
 // let rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //was map.player.size.dw/3, map.player.size.dh/2
 //recently moved to the portal array.foreach section, right before the spawnEnemy function is called
@@ -131,6 +144,7 @@ function gameLoop(){
     gameLogic.movementLogicUpdate();
     renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
     renderLogic.renderHandler(renderer);
+    displayVitals(player);
     inputLogic.executeInput();
     portalArray.forEach((portal, portalIndex) => {
         if(portal.spawnTimer <= 0) {

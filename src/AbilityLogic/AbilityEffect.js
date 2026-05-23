@@ -9,9 +9,11 @@ export function applyEffects(effects, target, source) {
                     target.mana -= effect.amount;
                 }
                 //add to if statement && source.mana += effect.amount <= source.max_mana (could do something similar for min_mana? instead of setting to 0 as below)
-                if("mana" in source) {
+                if("mana" in source && (source.mana + effect.amount <= source.max_mana)) {
                     console.log("hasmana")
                     source.mana += effect.amount;
+                } else if ("mana" in source && (source.mana + effect.amount > source.max_mana)) {
+                    source.mana = source.max_mana;
                 }
                 if(target.mana < 0) {
                     target.mana = 0;

@@ -20,6 +20,7 @@ export default class Player{
         this.sprite = new Sprite(); //tentatively replaces "COMMENT#id" line
         this.health = 100;//rough draft
         this.mana = 100;//rough draft
+        this.max_mana = 100;
         
         //maybe use dot notation for default? not sure, either works.
         //this.sprite = new Sprite(spriteData_player.walk[this.direction[this.animationIndex]]);
