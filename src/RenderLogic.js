@@ -174,7 +174,7 @@ export default class RenderLogic{
     }
 
     renderPlayer(renderer, player, camera) {
-        renderer.drawImage(player.sprite.image, player.position.x - camera.x , player.position.y - camera.y, this.mapData.tileMap.tsize/1.5, this.mapData.tileMap.tsize/1.5);
+        renderer.drawImage(player.sprite.image, player.position.x - camera.x , player.position.y - camera.y, player.size.dw, player.size.dh);
     }
 
 
