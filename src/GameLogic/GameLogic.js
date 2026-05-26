@@ -79,6 +79,7 @@ spawnEntity(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity
 //remember to horizontally mirror all 3 frames so 6 in total, 3 for left, 3 for right orientation
 
 playerSpriteManager(player) {
+    console.log(player.sprite)
     let animationDuration = 40;
     let selectedSpriteSet = spriteData_player.walk[player.animationDirection];
 
