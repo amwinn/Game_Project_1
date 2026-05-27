@@ -94,12 +94,14 @@ playerSpriteManager(player) {
     if (player.animationTimer >= animationDuration) {
         player.animationIndex++;
         player.animationTimer = 0;
+        player.sprite.image.src = selectedSpriteSet[player.animationIndex];
     }
     if (player.animationIndex >= selectedSpriteSet.length) {
         player.animationIndex = 0;
+        player.sprite.image.src = selectedSpriteSet[player.animationIndex];
     }
 
-    player.sprite.image.src = selectedSpriteSet[player.animationIndex];
+    //player.sprite.image.src = selectedSpriteSet[player.animationIndex];
 
 
    
