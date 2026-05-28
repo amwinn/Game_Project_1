@@ -32,9 +32,13 @@ export default class Area {
         //size * ability.form.scale / 2 or something such as this, /2 to stop it from being too drastic? or simply make the scale 1, 1.25, 1.5, 2, etc., instead of 1, 5, 10 etc.
     }
 
-    updateEruptive(eruptive, ability, player){
+    updateRadial(radial, ability, player) {
+
+    }
+
+    updateEruptive(eruptive, ability, caster){
         console.log(eruptive.scale)
-        this.clampToPlayer(eruptive, player);
+        this.clampToCaster(eruptive, caster);
         if(eruptive.scale >= ability.form.data_config.max_scale) {
             eruptive.delete = true;
         }
@@ -52,9 +56,9 @@ export default class Area {
         //if scale >= ability.form.data_config.final_scale, delete
     }
 
-    clampToPlayer(area,player) {
-        area.position.x = player.position.x + player.size.dw /2;
-        area.position.y = player.position.y + player.size.dh /2;
+    clampToCaster(area,caster) {
+        area.position.x = caster.position.x + caster.size.dw /2;
+        area.position.y = caster.position.y + caster.size.dh /2;
     }
 
 
