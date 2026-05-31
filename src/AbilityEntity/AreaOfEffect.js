@@ -33,6 +33,18 @@ export default class Area {
     }
 
     updateRadial(radial, ability, player) {
+        //radial x/y = player x/y
+        //if radial timer >= radial duration, radial.collidable = false, radial.delete = true
+
+    }
+
+    //move renderRadial to renderlogic.js once working, or at least call there -- might actually be better to leave here as declaration and merely call in renderlogic
+    renderRadial(radial, ability, player) {
+
+    }
+
+    //move animateRadial to gamelogic.js once working, or animationlogic.js if made by then
+    animateRadial(radial, ability, player) {
 
     }
 
