@@ -13,12 +13,19 @@ export default class AssetRegistry {
     //would need an array or object to store the images in
 
 
-    loadImageGroup(data) {
+    loadImageGroup(entityData, gameObjectData) {
+        //loadEntityRenders(EntityData)
+        //loadGameObjectRenders(gameObjectData)
 
     }
 
     loadEntityRenders(data) {
         //need to iterate through data object keys unless turning it to array
+    }
+
+    unloadImageGroup(group) {
+        //destroy image objects when swapping map
+        //no need to actually utilize yet until many more images are added to the images folder - currently few enough to all be loaded at once 
     }
 
 
