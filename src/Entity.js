@@ -21,11 +21,13 @@ export default class Entity {
         this.role = role;
         //this.role = role;
         this.position = position;
+        this.direction = "left"; // not yet used besides in determineSprite()
         this.size = size;
         this.velocity = velocity;
         this.cooldownTimer = cooldownTimer;
         this.cooldown = cooldown;
-        this.sprite = this.determineSprite();
+        this.sprite = new Sprite(CREATURE_RENDER[this.type].idle[this.direction][0], this.size.dw, this.size.dh)
+        //this.sprite = this.determineSprite();
         this.health = 30;
         this.mana = 100;
         
@@ -33,11 +35,12 @@ export default class Entity {
 
     //was if(this.type === Entity.melee/mage), but changed to if(this.type === forest_sprite))
     determineSprite() {
+        console.log(CREATURE_RENDER[this.type].idle[this.direction][0])
         if(this.type === Entity.forest_creature) {
-            return new Sprite(CREATURE_RENDER[this.type]["stance_1"]["default"], this.size.dw, this.size.dh);
+            return new Sprite(CREATURE_RENDER[this.type].idle[this.direction][0], this.size.dw, this.size.dh);
         }
         if(this.type === Entity.greater_forest_creature) {
-            return new Sprite(CREATURE_RENDER[this.type]["stance_1"]["default"], this.size.dw, this.size.dh);
+            return new Sprite(CREATURE_RENDER[this.type].idle[this.direction][0], this.size.dw, this.size.dh);   ///["stance_1"]["default"]
         }
 
     }
