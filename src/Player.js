@@ -17,7 +17,7 @@ export default class Player{
         this.animationDirection = "right"
         this.animationTimer = 0;
         this.animationIndex = 0;
-        this.sprite = new Sprite(spriteData_player.idle.right, size.dw, size.dh); //tentatively replaces "COMMENT#id" line
+        this.sprite = new Sprite(spriteData_player.idle[this.direction][0], size.dw, size.dh); //tentatively replaces "COMMENT#id" line
         this.health = 100;//rough draft
         this.mana = 100;//rough draft
         this.max_mana = 100;
