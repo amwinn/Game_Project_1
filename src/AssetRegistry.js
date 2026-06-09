@@ -1,3 +1,4 @@
+import { Sprite } from "./Utility.js";
 //import all sprite paths here perhaps?
 //can act sort of as a registry akin to the spell registry
 
@@ -18,8 +19,21 @@ export default class AssetRegistry {
         //loadGameObjectRenders(gameObjectData)
 
     }
-
+//pseudo code below
     loadEntityRenders(data) {
+        //rough-draft
+        data.idle.left.forEach((item, index) => {
+            return new Sprite(item, null, null);
+        });
+        data.idle.right.forEach((item, index) => {
+            return new Sprite(item, null, null);
+        });
+            data.walk.left.forEach((item, index) => {
+            return new Sprite(item, null, null);
+        });
+            data.walk.right.forEach((item, index) => {
+            return new Sprite(item, null, null);
+        });
         //need to iterate through data object keys unless turning it to array
     }
 
