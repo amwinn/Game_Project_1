@@ -2,7 +2,9 @@ import { Sprite } from "./Utility.js";
 //import all sprite paths here perhaps?
 //can act sort of as a registry akin to the spell registry
 
-
+//array and objects iterated using different words
+//for (const key in object)
+//for (const item of array)
 
 
 export default class AssetRegistry {
@@ -20,20 +22,41 @@ export default class AssetRegistry {
 
     }
 //pseudo code below
+//for entities, function called twice, loadEntityRenders(ENTITY_RENDERS[CREATURE_TYPE.FOREST_CREATURE]) and loadEntityRenders(ENTITY_RENDERS[CREATURE_TYPE.GREATER_FOREST_CREATURE])
+//for entities, key hierarchy is state, direction, item hierarchy is simply item of data[state][direction]
+//for const state in data 
+//for const direction in data[state]
+//for const item of data[state][direction] new Sprite()
     loadEntityRenders(data) {
-        //rough-draft
-        data.idle.left.forEach((item, index) => {
-            return new Sprite(item, null, null);
-        });
-        data.idle.right.forEach((item, index) => {
-            return new Sprite(item, null, null);
-        });
-            data.walk.left.forEach((item, index) => {
-            return new Sprite(item, null, null);
-        });
-            data.walk.right.forEach((item, index) => {
-            return new Sprite(item, null, null);
-        });
+        const renderGroup = {};
+        for(const animationState in data) {
+            renderGroup[animationState] = {};
+            for(const direction in data[animationState]) {
+                renderGroup[animationState][direction] = [];
+                for(const imagePath of data[animationState][direction]) {
+                    renderGroup[animationState][direction].push(
+                        new Sprite(imagePath, null, null)
+                    );
+                }
+            }
+        }
+        return renderGroup;
+
+
+
+        //original pseudo code, delete soon
+        // data.idle.left.forEach((item, index) => {
+        //     return new Sprite(item, null, null);
+        // });
+        // data.idle.right.forEach((item, index) => {
+        //     return new Sprite(item, null, null);
+        // });
+        //     data.walk.left.forEach((item, index) => {
+        //     return new Sprite(item, null, null);
+        // });
+        //     data.walk.right.forEach((item, index) => {
+        //     return new Sprite(item, null, null);
+        // });
         //need to iterate through data object keys unless turning it to array
     }
 
