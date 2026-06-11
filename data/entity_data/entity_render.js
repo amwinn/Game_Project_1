@@ -59,7 +59,7 @@ export const CREATURE_RENDER = {
         //BELOW MUST BE REPLACES BEFORE PLUGGING CREATURE_RENDER INTO IMAGE LOADING FUNCTIONS, OR ELSE WILL ITERATE THROUGH STANCE_1 WHICH ISNT FORMATTED FOR THE NEW SYSTEM
         //deprecate below section once fully replaced
         stance_1: {
-            left: "Images/Entities/Entity_forestSpriteMage/forestSpriteMage_right.png",
+            left: "Images/Entities/Entity_forestSpriteMage/forestSpriteMage_left.png",
             right: "Images/Entities/Entity_forestSpriteMage/forestSpriteMage_right.png",
             default: "Images/Entities/Entity_forestSpriteMage/forestSpriteMage_1.png"
         }
