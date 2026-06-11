@@ -6,6 +6,22 @@ import { Sprite } from "./Utility.js";
 //for (const key in object)
 //for (const item of array)
 
+//temp export version to test player caching
+export function loadEntityRenders(data) {
+    const renderGroup = {};
+    for(const animationState in data) {
+        renderGroup[animationState] = {};
+        for(const direction in data[animationState]) {
+            renderGroup[animationState][direction] = [];
+            for(const imagePath of data[animationState][direction]) {
+                renderGroup[animationState][direction].push(
+                    new Sprite(imagePath, null, null)
+                );
+            }
+        }
+    }
+    return renderGroup;
+}
 
 export default class AssetRegistry {
     constructor() {
@@ -17,7 +33,7 @@ export default class AssetRegistry {
 
 
     loadImageGroup(entityData, gameObjectData) {
-        //loadEntityRenders(EntityData)
+        loadEntityRenders(entityData)
         //loadGameObjectRenders(gameObjectData)
 
     }
@@ -41,23 +57,6 @@ export default class AssetRegistry {
             }
         }
         return renderGroup;
-
-
-
-        //original pseudo code, delete soon
-        // data.idle.left.forEach((item, index) => {
-        //     return new Sprite(item, null, null);
-        // });
-        // data.idle.right.forEach((item, index) => {
-        //     return new Sprite(item, null, null);
-        // });
-        //     data.walk.left.forEach((item, index) => {
-        //     return new Sprite(item, null, null);
-        // });
-        //     data.walk.right.forEach((item, index) => {
-        //     return new Sprite(item, null, null);
-        // });
-        //need to iterate through data object keys unless turning it to array
     }
 
     unloadImageGroup(group) {
