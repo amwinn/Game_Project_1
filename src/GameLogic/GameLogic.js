@@ -95,7 +95,7 @@ playerSpriteManager(player) {
     }
     if (activeMovementKeys.size === 0) {
         player.animationIndex = 0;
-        player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
+        player.sprite = selectedSpriteSet[player.animationIndex];
     }
 
     if (player.animationTimer >= animationDuration) {
@@ -108,7 +108,7 @@ playerSpriteManager(player) {
         //player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
     }
 
-    player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
+    player.sprite = selectedSpriteSet[player.animationIndex];
 
 
    
