@@ -19,6 +19,10 @@ import { testItemMap } from "../Main.js";
 import { applyEffects } from "../AbilityLogic/AbilityEffect.js";
 import Area from "../AbilityEntity/AreaOfEffect.js";
 
+//temp, will live in assetregistry unless the class ends up being useless
+import { loadEntityRenders } from "../AssetRegistry.js";
+//end temp
+
 let nextMap = false;
 let playerSpawned = false;
 export const objectSpawnTracker = new Set();
@@ -77,31 +81,34 @@ spawnEntity(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity
 
 //slowly implement the animations frames to here
 //remember to horizontally mirror all 3 frames so 6 in total, 3 for left, 3 for right orientation
-
+//start placeholder
+playerSprites = loadEntityRenders(spriteData_player);
+//end placeholder
 playerSpriteManager(player) {
     //console.log(player.sprite)
     let animationDuration = 40;
-    let selectedSpriteSet = spriteData_player.walk[player.animationDirection];
+    //this.playerSprites is using temp placeholder code/function
+    let selectedSpriteSet = this.playerSprites.walk[player.animationDirection];
 
     if (activeMovementKeys.size > 0) {
         player.animationTimer++;
     }
     if (activeMovementKeys.size === 0) {
         player.animationIndex = 0;
-        player.sprite.image.src = selectedSpriteSet[player.animationIndex];
+        player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
     }
 
     if (player.animationTimer >= animationDuration) {
         player.animationIndex++;
         player.animationTimer = 0;
-        player.sprite.image.src = selectedSpriteSet[player.animationIndex];
+        //player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
     }
     if (player.animationIndex >= selectedSpriteSet.length) {
         player.animationIndex = 0;
-        player.sprite.image.src = selectedSpriteSet[player.animationIndex];
+        //player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
     }
 
-    //player.sprite.image.src = selectedSpriteSet[player.animationIndex];
+    player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
 
 
    
