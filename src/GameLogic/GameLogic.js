@@ -21,6 +21,9 @@ import Area from "../AbilityEntity/AreaOfEffect.js";
 
 //temp, will live in assetregistry unless the class ends up being useless
 import { loadEntityRenders } from "../AssetRegistry.js";
+let playerSprites = loadEntityRenders(spriteData_player);
+let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
+let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
 //end temp
 
 let nextMap = false;
@@ -82,13 +85,13 @@ spawnEntity(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity
 //slowly implement the animations frames to here
 //remember to horizontally mirror all 3 frames so 6 in total, 3 for left, 3 for right orientation
 //start placeholder
-playerSprites = loadEntityRenders(spriteData_player);
+// playerSprites = loadEntityRenders(spriteData_player);
 //end placeholder
 playerSpriteManager(player) {
     //console.log(player.sprite)
     let animationDuration = 40;
     //this.playerSprites is using temp placeholder code/function
-    let selectedSpriteSet = this.playerSprites.walk[player.animationDirection];
+    let selectedSpriteSet = playerSprites.walk[player.animationDirection];
 
     if (activeMovementKeys.size > 0) {
         player.animationTimer++;
@@ -184,30 +187,30 @@ adjustDiagonalVelocity(player){
 
 
 
-
+//refactor to be closer to player sprite manager
 //alternative check is to check the velocity, if less than 0 x, dir equals left, if over 0 = right
 //feed entityDirectonData config object to the entity properties (no need for construct arg as far as i see at this moment)
 spriteManager_meleeForestSprite(array,player) {
     array.forEach((entity, index) => {
         if(entity.position.x > player.position.x ) {
-            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["left"];
+            entity.sprite = forest_creatureSprites.walk["left"][0];
         } else if (entity.position.x < player.position.x) {
-            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["right"];
+            entity.sprite = forest_creatureSprites.walk["right"][0];
         } else {
-            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["default"];
+            entity.sprite = forest_creatureSprites.idle[entity.direction][0];
         }
     })
 }
 
-
+//refactor to be closer to player sprite manager
 spriteManager_mageForestSprite(array,player){
     array.forEach((entity, index) => {
         if(entity.position.x > player.position.x ) {
-            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["left"];
+            entity.sprite = greater_forest_creatureSprites.walk["left"][0];
         } else if (entity.position.x < player.position.x) {
-            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["right"];
+            entity.sprite = greater_forest_creatureSprites.walk["right"][0];
         } else {
-            entity.sprite.image.src = CREATURE_RENDER[entity.type]["stance_1"]["default"];
+            entity.sprite = greater_forest_creatureSprites.idle[entity.direction][0];
         }
     })
 }
