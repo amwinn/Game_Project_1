@@ -21,7 +21,7 @@ export default class Entity {
         this.role = role;
         //this.role = role;
         this.position = position;
-        this.direction = "left"; // not yet used besides in determineSprite()
+        this.direction = "left"; // not yet used besides in determineSprite() and the temporary code in sprite manager funcs inside gamelogic.js
         this.size = size;
         this.velocity = velocity;
         this.cooldownTimer = cooldownTimer;
