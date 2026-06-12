@@ -2,6 +2,7 @@ import { Sprite } from "./Utility.js";
 import GameObject, {rockObjectCharter, treeObjectCharter, bushObjectCharter, gateObjectCharter, deadTreeObjectCharter} from "./GameObject.js";
 import { portalArray } from "./Portal.js";
 
+//ENTIRE CLASS NEEDS TO BE REFACTORED EVENTUALLY, MOST LIKELY WHEN PROC GEN IS INTRODUCED, TILEMAP NEEDS TO BE DATA PERHAPS, PEEL AWAY THE GETTILE FUNCTION ELSEWHERE?
 
 export default class MapData {
     constructor() {
