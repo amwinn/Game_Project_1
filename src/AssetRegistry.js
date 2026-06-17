@@ -1,3 +1,4 @@
+import { CREATURE_RENDER } from "../data/entity_data/entity_render.js";
 import { Sprite } from "./Utility.js";
 //import all sprite paths here perhaps?
 //can act sort of as a registry akin to the spell registry
@@ -31,7 +32,7 @@ export default class AssetRegistry {
     //registerImageObject() something like this could automatically create an image/sprite() obejct?
     //would need an array or object to store the images in
 
-
+//might not use the loadImageGroup, might instead keep the two separate, loadEntityRenders(), loadGameObjectRenders()
     loadImageGroup(entityData, gameObjectData) {
         loadEntityRenders(entityData)
         //loadGameObjectRenders(gameObjectData)
@@ -76,6 +77,14 @@ export default class AssetRegistry {
 //for example, has all biome data, so const uncachedRegistry= {swamp: {SWAMP_OBJECT_RENDER, SKELETON_RENDER}, forest: {FOREST_OBJECT_RENDER, CREATURE_RENDER}}
 //under constructor this.registry = [] or something akin to this
 //then biomeAssetRegistry.changeBiome(load, unload) would yield biomeAssetRegistry.changeBiome(uncachedRegistry[new_biome], biomeAssetRegistry.registry)
+//if keeping as one single instance, could just have a manager function that calls as such
+//forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
+//greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
+//player_sprites = loadEntityRenders(spriteData_player)
+//in this situation all sprite data would be cached at once, even biomes that are not the current map; would have assetRegistry.swamp_objects, assetRegistry.forest_objects etc.
+
+
+
 
 //updated brainstorm 2:
 //will have one single instance of AssetRegistry
