@@ -3,8 +3,9 @@ export default class Area {
     static conal = "conal";
     static radial = "radial";
     static eruptive = "eruptive";
-    constructor(type, ability, position) {
+    constructor(type, ability, position, behavior) {
         this.type = type;
+        this.behavior = behavior;
         this.ability = ability;
         this.position = position;
         //this.velocity = velocity;
@@ -20,6 +21,23 @@ export default class Area {
         //this.animationDuration = ability.form.data_config.animationDuration || 0;
         this.sprite = new Sprite(ability.form.data_config.sprite[this.animationIndex], this.diameter, this.diameter);
     }
+
+    updateRadial(radial, ability, caster) {
+    radial.clampToCaster(radial, caster);
+    //radial x/y = player x/y
+    //if radial timer >= radial duration, radial.collidable = false, radial.delete = true
+
+    }
+
+    updateBehavior(area, ability, caster) {
+        switch(area.behavior) {
+            case Area.behavior:
+                this.updateEruptive(area, ability, caster);
+                break
+        }
+    }
+
+
 
     //IMPORTANT, DETERMINE IF I NEED SIZE AND RADIUS, OR ONE OR THE OTHER
     //Probably size for sprite image, radius for collision related code
