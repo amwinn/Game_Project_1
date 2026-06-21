@@ -44,12 +44,14 @@ export default class Area {
     }
 
     //move animateRadial to gamelogic.js once working, or animationlogic.js if made by then
-    animateRadial(radial, ability, player) {
+    animateRadial(radial, behavior, ability, player) {
+        //behavior = getBehavior(behavior)
+        //radial.behavior(radial, ability, caster) can you even do that? store function in variable and then call it thus? not sure, will research
 
     }
 
+    //rename to animateEruption(type, ability, caster) then under updateRadial(behavior, ability, caster) {somehow link behavior to the appropriate function (eruptive, instant, etc.) and call it}
     updateEruptive(eruptive, ability, caster){
-        console.log(eruptive.scale)
         this.clampToCaster(eruptive, caster);
         if(eruptive.scale >= ability.form.data_config.max_scale) {
             eruptive.delete = true;
@@ -75,6 +77,15 @@ export default class Area {
 
 
 }
+
+
+//current update:
+//radial, conal, square are forms
+//eruptive, instant are behaviors
+//maybe make change type to form and behavior variables in constructor param
+
+
+
 
 //different types of radials
 //nova (expands from center outwards), radial (size is same entire duration)
