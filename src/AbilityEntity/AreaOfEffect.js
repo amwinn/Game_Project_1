@@ -69,21 +69,21 @@ export default class Area {
     }
 
     //rename to animateEruption(type, ability, caster) then under updateRadial(behavior, ability, caster) {somehow link behavior to the appropriate function (eruptive, instant, etc.) and call it}
-    updateEruptive(eruptive, ability, caster){
-        this.clampToCaster(eruptive, caster);
-        if(eruptive.scale >= ability.form.data_config.max_scale) {
-            eruptive.delete = true;
+    updateEruptive(area, ability, caster){
+        this.clampToCaster(area, caster);
+        if(area.scale >= ability.form.data_config.max_scale) {
+            area.delete = true;
         }
-        if(eruptive.scale < ability.form.data_config.max_scale) {
-            eruptive.scale += ability.form.data_config.scale_incrementor/20;
+        if(area.scale < ability.form.data_config.max_scale) {
+            area.scale += ability.form.data_config.scale_incrementor/20;
         }
-        if(eruptive.scale > ability.form.data_config.max_scale) {
-            eruptive.scale = ability.form.data_config.max_scale;
+        if(area.scale > ability.form.data_config.max_scale) {
+            area.scale = ability.form.data_config.max_scale;
         }
-        eruptive.radius = ability.form.data_config.radius * eruptive.scale;
-        eruptive.diameter = eruptive.radius*2;
-        eruptive.size.dw = eruptive.diameter;
-        eruptive.size.dh = eruptive.diameter;
+        area.radius = ability.form.data_config.radius * area.scale;
+        area.diameter = area.radius*2;
+        area.size.dw = area.diameter;
+        area.size.dh = area.diameter;
         //if scale < ability.form.data_config.final_scale, scale += ability.form.data_config.scale_multiplier
         //if scale >= ability.form.data_config.final_scale, delete
     }
