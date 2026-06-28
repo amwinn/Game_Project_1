@@ -24,14 +24,15 @@ export default class Area {
 
     updateRadial(radial, ability, caster) {
     radial.clampToCaster(radial, caster);
+    this.updateBehavior(radial, ability, caster);
     //radial x/y = player x/y
     //if radial timer >= radial duration, radial.collidable = false, radial.delete = true
 
     }
 
     updateBehavior(area, ability, caster) {
-        switch(area.behavior) {
-            case Area.behavior:
+        switch(ability.form.behavior) {
+            case area.behavior:
                 this.updateEruptive(area, ability, caster);
                 break
         }
@@ -101,6 +102,12 @@ export default class Area {
 //radial, conal, square are forms
 //eruptive, instant are behaviors
 //maybe make change type to form and behavior variables in constructor param
+
+//flow: 
+//areaUpdate(area, ability, caster) {
+//  formUpdate(area.type);
+//  behaviorUpdate(area.behavior)
+//}
 
 
 
