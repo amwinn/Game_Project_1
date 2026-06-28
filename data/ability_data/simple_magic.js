@@ -41,7 +41,8 @@ export const spellnova = {
         {type: "mana", amount: 40}
     ],
     form: {
-        type: "eruptive",
+        type: "radial",
+        behavior: "eruptive",
         data_config: {
             sprite: [
                 "Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png"
