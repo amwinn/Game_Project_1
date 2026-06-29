@@ -22,11 +22,17 @@ export default class Area {
         this.sprite = new Sprite(ability.form.data_config.sprite[this.animationIndex], this.diameter, this.diameter);
     }
 
-    updateRadial(radial, ability, caster) {
-    radial.clampToCaster(radial, caster);
-    this.updateBehavior(radial, ability, caster);
+    updateArea(area, ability, caster) {
+    //updateForm();
+    area.clampToCaster(area, caster); //eventually move to be conditional on if the data says clamp: false, or clamp: true?
+    this.updateBehavior(area, ability, caster);
     //radial x/y = player x/y
     //if radial timer >= radial duration, radial.collidable = false, radial.delete = true
+
+    }
+
+    updateForm() {
+        //switch statements for radial, conal, square, (arc?) etc
 
     }
 
@@ -36,6 +42,13 @@ export default class Area {
                 this.updateEruptive(area, ability, caster);
                 break
         }
+    }
+
+    //research how games do "instant" casted aoe in terms of when collision is checked etc.
+    updateRadial(radial, ability, player) {
+    //radial x/y = player x/y
+    //if radial timer >= radial duration, radial.collidable = false, radial.delete = true
+
     }
 
 
@@ -51,11 +64,6 @@ export default class Area {
         //size * ability.form.scale / 2 or something such as this, /2 to stop it from being too drastic? or simply make the scale 1, 1.25, 1.5, 2, etc., instead of 1, 5, 10 etc.
     }
 
-    updateRadial(radial, ability, player) {
-        //radial x/y = player x/y
-        //if radial timer >= radial duration, radial.collidable = false, radial.delete = true
-
-    }
 
     //move renderRadial to renderlogic.js once working, or at least call there -- might actually be better to leave here as declaration and merely call in renderlogic
     renderRadial(radial, ability, player) {
