@@ -3,6 +3,7 @@ export default class Area {
     static conal = "conal";
     static radial = "radial";
     static eruptive = "eruptive";
+    static static = "static";
     constructor(type, ability, position, behavior) {
         this.type = type;
         this.behavior = behavior;
@@ -44,10 +45,20 @@ export default class Area {
         }
     }
 
+    updateStatic(aoe, ability, caster) {
+        //if aoe timer >= ability duration, aoe.collidable = false
+        //if aoe timer = ability.duration /2, collision check and aoe.collidable = false after the check is performed for an entire loop through entities.
+        //if aoe timer >= ability.duration, aoe.delete = true;
+    }
+    animateStatic() {
+        //use similar frame setup as player sprite manager
+        
+    }
+
     //research how games do "instant" casted aoe in terms of when collision is checked etc.
     updateRadial(radial, ability, player) {
     //radial x/y = player x/y
-    //if radial timer >= radial duration, radial.collidable = false, radial.delete = true
+    
 
     }
 
