@@ -48,6 +48,7 @@ export const spellnova = {
                 "Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png"
             ],
             duration: 200,
+            trigger: 100,
             radius: 150, 
             base_scale: 0.25,
             max_scale: 1, 
