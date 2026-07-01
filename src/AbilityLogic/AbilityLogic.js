@@ -15,6 +15,7 @@ export function castAbility(ability, source, dataSet){
         //     break;
         case "radial":
             castRadial(ability, source, dataSet);
+            break;
     }
 }
 
