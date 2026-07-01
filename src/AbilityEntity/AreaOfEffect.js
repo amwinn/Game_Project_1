@@ -17,6 +17,7 @@ export default class Area {
 
         this.animationIndex = 0;
         this.duration = ability.form.data_config.duration;
+        this.durationTimer = 0;
         //might not need to declare animationDuration here, perhaps just in animation logic function?
         //this.animationDuration = this.duration;
         //this.animationDuration = ability.form.data_config.animationDuration || 0;
@@ -32,32 +33,44 @@ export default class Area {
 
     }
 
-    updateForm() {
+    updateForm(area, ability, caster) {
         //switch statements for radial, conal, square, (arc?) etc
-
+        switch(ability.type) {
+            case area.radial:
+                this.updateRadial(area, ability, caster);
+                break;
+        }
     }
 
     updateBehavior(area, ability, caster) {
         switch(ability.form.behavior) {
-            case area.behavior:
+            case area.eruptive:
                 this.updateEruptive(area, ability, caster);
-                break
+                break;
+            case area.static:
+                break;
         }
     }
 
-    updateStatic(aoe, ability, caster) {
-        //if aoe timer >= ability duration, aoe.collidable = false
+    updateStatic(area, ability, caster) {
+        area.durationTimer ++;
         //if aoe timer = ability.duration /2, collision check and aoe.collidable = false after the check is performed for an entire loop through entities.
-        //if aoe timer >= ability.duration, aoe.delete = true;
     }
-    animateStatic() {
+
+    //move to gamelogic.js once working
+    animateStatic(area, ability, caster) {
+        let selectedSpriteSet = ability.form.data_config.sprite;
+        let frameDuration = 40; //duration of each frame
+
         //use similar frame setup as player sprite manager
         
     }
 
     //research how games do "instant" casted aoe in terms of when collision is checked etc.
     updateRadial(radial, ability, player) {
-    //radial x/y = player x/y
+    //is this update func even necessary? behavior func could handle it all perhaps? keep separate for now
+    //duration timer ++
+    //if duration timer >= duration, radial.delete = true, radial.collidable = false, maybe radial.sprite = null?
     
 
     }
@@ -115,6 +128,15 @@ export default class Area {
 
 
 }
+
+//form
+//radial, conal, square
+
+//behavior
+//expand, contract, static
+
+//delivery
+//instant, delayed, modifier
 
 
 //current update:
