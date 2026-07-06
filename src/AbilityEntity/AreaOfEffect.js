@@ -59,8 +59,9 @@ export default class Area {
 
     //move to gamelogic.js once working
     animateStatic(area, ability, caster) {
-        let selectedSpriteSet = ability.form.data_config.sprite;
+        let selectedSpriteSet = ability.form.data_config.sprite; //might be overkill if there is a single static image that doesnt change, best to keep format though 
         let frameDuration = 40; //duration of each frame
+        let frameIndex = 0; //not doing caster.animationIndex if i dont need to, would like to trim properties
 
         //use similar frame setup as player sprite manager
         
