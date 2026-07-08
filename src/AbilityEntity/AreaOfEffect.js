@@ -53,7 +53,7 @@ export default class Area {
     }
 
     updateStatic(area, ability, caster) {
-        area.durationTimer ++;
+        area.durationTimer ++; //best to put here incase duration is shared by animation and gamelogics
         //if aoe timer = ability.duration /2, collision check and aoe.collidable = false after the check is performed for an entire loop through entities.
     }
 
@@ -61,7 +61,13 @@ export default class Area {
     animateStatic(area, ability, caster) {
         let selectedSpriteSet = ability.form.data_config.sprite; //might be overkill if there is a single static image that doesnt change, best to keep format though 
         let frameDuration = 40; //duration of each frame
+        let frameTimer = 0;
         let frameIndex = 0; //not doing caster.animationIndex if i dont need to, would like to trim properties
+
+        frameTimer ++;
+        if(frameTimer >= frameDuration) {
+            
+        }
 
         //use similar frame setup as player sprite manager
         
