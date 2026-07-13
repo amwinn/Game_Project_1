@@ -66,7 +66,11 @@ export default class Area {
 
         frameTimer ++;
         if(frameTimer >= frameDuration) {
-            
+            frameIndex ++;
+            frameTimer =0;
+        }
+        if(frameIndex >= selectedSpriteSet.length) {
+            frameIndex = 0;
         }
 
         //use similar frame setup as player sprite manager
