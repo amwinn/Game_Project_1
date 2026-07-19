@@ -59,6 +59,7 @@ export default class Area {
 
     //move to gamelogic.js once working
     animateStatic(area, ability, caster) {
+        console.log(area.sprite)
         let selectedSpriteSet = ability.form.data_config.sprite; //might be overkill if there is a single static image that doesnt change, best to keep format though 
         let frameDuration = 40; //duration of each frame
         let frameTimer = 0;
@@ -67,6 +68,7 @@ export default class Area {
         frameTimer ++;
         if(frameTimer >= frameDuration) {
             frameIndex ++;
+            caster.sprite = selectedSpriteSet[frameIndex];
             frameTimer =0;
         }
         if(frameIndex >= selectedSpriteSet.length) {
@@ -114,6 +116,7 @@ export default class Area {
 
     //rename to animateEruption(type, ability, caster) then under updateRadial(behavior, ability, caster) {somehow link behavior to the appropriate function (eruptive, instant, etc.) and call it}
     updateEruptive(area, ability, caster){
+        this.animateStatic(area, ability, caster);
         this.clampToCaster(area, caster);
         if(area.scale >= ability.form.data_config.max_scale) {
             area.delete = true;
