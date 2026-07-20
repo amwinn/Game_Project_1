@@ -41,11 +41,11 @@ export const spellnova = {
         {type: "mana", amount: 40}
     ],
     form: {
-        type: "radial",
+        type: "radial", //would like this to eventually be AREA_TYPE["radial"] or akin to that
         behavior: "eruptive",
         data_config: {
             sprite: [
-                "Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png"
+                "Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png","Images/spellnova_test.png"
             ],
             duration: 200,
             trigger: 100,
