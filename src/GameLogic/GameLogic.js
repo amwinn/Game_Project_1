@@ -697,10 +697,11 @@ entityCollisionResolution(entity1, entity2) {
         this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
         this.projectileEntityCollision(meleeEnemyCharter, entityProjectilesArray);
         this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
-        radialArray.forEach((eruptive, index) => {
-                eruptive.updateEruptive(eruptive,eruptive.ability, this.player);
-                console.log(eruptive.radius)
-            if(eruptive.delete ===true) {
+        radialArray.forEach((radial, index) => {
+            radial.animateStatic(radial, radial.ability)
+            radial.updateEruptive(radial,radial.ability, this.player);
+            //console.log(eruptive.radius)
+            if(radial.delete ===true) {
                 radialArray.splice(index, 1);
             }
         })

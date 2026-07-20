@@ -15,6 +15,7 @@ export default class Area {
         this.size = new Size(this.diameter, this.diameter);
         this.scale = ability.form.data_config.base_scale;
 
+        this.animationTimer = 0;
         this.animationIndex = 0;
         this.duration = ability.form.data_config.duration;
         this.durationTimer = 0;
@@ -59,21 +60,22 @@ export default class Area {
 
     //move to gamelogic.js once working
     animateStatic(area, ability, caster) {
-        console.log(area.sprite)
+        //console.log(area.sprite.image.src)
         let selectedSpriteSet = ability.form.data_config.sprite; //might be overkill if there is a single static image that doesnt change, best to keep format though 
-        let frameDuration = 40; //duration of each frame
-        let frameTimer = 0;
-        let frameIndex = 0; //not doing caster.animationIndex if i dont need to, would like to trim properties
+        let frameDuration = 20; //duration of each frame
 
-        frameTimer ++;
-        if(frameTimer >= frameDuration) {
-            frameIndex ++;
-            caster.sprite = selectedSpriteSet[frameIndex];
-            frameTimer =0;
+
+        area.animationTimer++;
+        console.log(area.animationTimer, area.animationIndex, selectedSpriteSet.length)
+        if(area.animationTimer >= frameDuration) {
+            area.animationIndex++;
+            area.animationTimer = 0;
         }
-        if(frameIndex >= selectedSpriteSet.length) {
-            frameIndex = 0;
+        if(area.animationIndex >= selectedSpriteSet.length) {
+            area.animationIndex = 0;
         }
+        console.log(area.animationIndex)
+        area.sprite.image.src = selectedSpriteSet[area.animationIndex];
 
         //use similar frame setup as player sprite manager
         
@@ -116,7 +118,6 @@ export default class Area {
 
     //rename to animateEruption(type, ability, caster) then under updateRadial(behavior, ability, caster) {somehow link behavior to the appropriate function (eruptive, instant, etc.) and call it}
     updateEruptive(area, ability, caster){
-        this.animateStatic(area, ability, caster);
         this.clampToCaster(area, caster);
         if(area.scale >= ability.form.data_config.max_scale) {
             area.delete = true;
