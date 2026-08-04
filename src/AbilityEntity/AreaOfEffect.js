@@ -53,8 +53,19 @@ export default class Area {
         }
     }
 
+
+    //maybe add a manageAnimation or updateAnimation that will sort byhh form/type etc., thats where animatestatic would be located
+
     updateStatic(area, ability, caster) {
-        area.durationTimer ++; //best to put here incase duration is shared by animation and gamelogics
+        area.durationTimer ++;
+        if(area.durationTimer >= area.ability.data_config.duration) {
+            area.delete = true;
+        }
+        if(area.durationTimer === area.ability.data_config.duration /2) {
+            //collision check goes here
+        }
+        
+        //best to put here incase duration is shared by animation and gamelogics
         //if aoe timer = ability.duration /2, collision check and aoe.collidable = false after the check is performed for an entire loop through entities.
     }
 
