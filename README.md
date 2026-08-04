@@ -10,7 +10,8 @@ https://amwinn.github.io/Game_Project_1/
 ## Controls
 - Movement - W, A, S, D
 - Projectile Attack - left click or E
-- Area of Effect Attack - Q
+- Area of Effect Attack (Spell Nova) - Q
+- [WIP] Area of Effect Attack (Spell Blast) - T
 
 ## Purpose
 Learn the fundamentals of programming in an engaging way
