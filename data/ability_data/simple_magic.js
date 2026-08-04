@@ -72,13 +72,18 @@ export const spellblast = {
     ],
     form: {
         type: "radial",
+        behavior: "statis",
         data_config: {
-            sprite: null,
-            duration: null,
-            radius: null,
-            base_scale: null,
-            max_scale: null,
-            scale_incrementor: null
+            sprite: [
+                "Images/Abilities/simple_magic/spellnova_1.png",
+                "Images/spellnova_test.png",
+                "Images/Abilities/simple_magic/spellnova_1.png"
+            ],
+            duration: 200,
+            radius: 500,
+            base_scale: 1,
+            max_scale: 1,
+            scale_incrementor: 0.25
         }
     },
     effect: [
