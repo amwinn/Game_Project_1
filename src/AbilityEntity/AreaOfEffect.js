@@ -43,10 +43,18 @@ export default class Area {
         }
     }
 
+    animateBehavior(area, ability, caster){
+        switch(ability.form.behavior) {
+            case area.static:
+                area.animateStatic(area,ability,caster);
+        }
+
+    }
+
     updateBehavior(area, ability, caster) {
         switch(ability.form.behavior) {
             case area.eruptive:
-                this.updateEruptive(area, ability, caster);
+                area.updateEruptive(area, ability, caster);
                 break;
             case area.static:
                 break;
