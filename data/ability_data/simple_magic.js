@@ -65,14 +65,14 @@ export const spellblast = {
     id:"spellblast",
     cooldown: 600,
     resource: [
-        {type: "mana", amount: 0}
+        {type: "mana", amount: 40}
     ],
     required: [
-        {type: "mana", amount: 0}
+        {type: "mana", amount: 40}
     ],
     form: {
         type: "radial",
-        behavior: "statis",
+        behavior: "static",
         data_config: {
             sprite: [
                 "Images/Abilities/simple_magic/spellnova_1.png",
@@ -80,7 +80,7 @@ export const spellblast = {
                 "Images/Abilities/simple_magic/spellnova_1.png"
             ],
             duration: 200,
-            radius: 500,
+            radius: 300,
             base_scale: 1,
             max_scale: 1,
             scale_incrementor: 0.25
