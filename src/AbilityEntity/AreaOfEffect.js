@@ -42,21 +42,23 @@ export default class Area {
                 break;
         }
     }
-
+//updateX can be gamelogic, renderX can be renderlogic, animateX can be animation logic(currently still in gamelogic.js)
     animateBehavior(area, ability, caster){
         switch(ability.form.behavior) {
-            case area.static:
+            case Area.static:
                 area.animateStatic(area,ability,caster);
         }
+        //could have animateEruptive, currently only one frame sprite but might make more
 
     }
 
     updateBehavior(area, ability, caster) {
         switch(ability.form.behavior) {
-            case area.eruptive:
+            case Area.eruptive:
                 area.updateEruptive(area, ability, caster);
                 break;
-            case area.static:
+            case Area.static:
+                area.updateStatic(area, ability, caster);
                 break;
         }
     }
@@ -66,10 +68,10 @@ export default class Area {
 
     updateStatic(area, ability, caster) {
         area.durationTimer ++;
-        if(area.durationTimer >= area.ability.data_config.duration) {
+        if(area.durationTimer >= area.ability.form.data_config.duration) {
             area.delete = true;
         }
-        if(area.durationTimer === area.ability.data_config.duration /2) {
+        if(area.durationTimer === area.ability.form.data_config.duration /2) {
             //collision check goes here
         }
         
