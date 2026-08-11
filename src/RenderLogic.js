@@ -141,8 +141,9 @@ export default class RenderLogic{
 //REMEMBER: first to render means deepest on the render layer, if wanting to cover other rendered objects, must be rendered AFTER said objects
     renderHandler(renderer) {      
         this.renderMap(renderer);
-        radialArray.forEach((eruptive, index) => {
-            eruptive.renderAreaOfEffect(renderer, this.camera);
+        radialArray.forEach((radial, index) => {
+            radial.renderAreaOfEffect(renderer, this.camera);
+            
         })
         this.renderObjects(renderer);
         this.renderPlayer(renderer, this.player, this.camera);
