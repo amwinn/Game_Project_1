@@ -36,8 +36,8 @@ export default class Area {
 
     updateForm(area, ability, caster) {
         //switch statements for radial, conal, square, (arc?) etc
-        switch(ability.type) {
-            case area.radial:
+        switch(ability.form.type) {
+            case Area.radial:
                 this.updateRadial(area, ability, caster);
                 break;
         }
@@ -47,6 +47,10 @@ export default class Area {
         switch(ability.form.behavior) {
             case Area.static:
                 area.animateStatic(area,ability,caster);
+                break;
+            case Area.eruptive:
+                area.animateEruptive(area, ability, caster);
+                break;
         }
         //could have animateEruptive, currently only one frame sprite but might make more
 
@@ -73,6 +77,7 @@ export default class Area {
         }
         if(area.durationTimer === area.ability.form.data_config.duration /2) {
             //collision check goes here
+            //actually collision logic doesnt go anywhere near this, just make a collidable = true, then in collision could make a collidable = false?
         }
         
         //best to put here incase duration is shared by animation and gamelogics
@@ -102,8 +107,26 @@ export default class Area {
         
     }
 
+    animateEruptive(area, ability, caster) {
+        let selectedSpriteSet = ability.form.data_config.sprite;
+        let frameDuration = 20;
+
+        area.animationTimer++;
+        console.log(area.animationTimer, area.animationIndex, selectedSpriteSet.length)
+        if(area.animationTimer >= frameDuration) {
+            area.animationIndex++;
+            area.animationTimer = 0;
+        }
+        if(area.animationIndex >= selectedSpriteSet.length) {
+            area.animationIndex = 0;
+        }
+        console.log(area.animationIndex)
+        area.sprite.image.src = selectedSpriteSet[area.animationIndex];
+    }
+
     //research how games do "instant" casted aoe in terms of when collision is checked etc.
-    updateRadial(radial, ability, player) {
+    updateRadial(radial, ability, caster) {
+        this.clampToCaster(radial, caster);
     //is this update func even necessary? behavior func could handle it all perhaps? keep separate for now
     //duration timer ++
     //if duration timer >= duration, radial.delete = true, radial.collidable = false, maybe radial.sprite = null?
@@ -139,10 +162,11 @@ export default class Area {
 
     //rename to animateEruption(type, ability, caster) then under updateRadial(behavior, ability, caster) {somehow link behavior to the appropriate function (eruptive, instant, etc.) and call it}
     updateEruptive(area, ability, caster){
-        this.clampToCaster(area, caster);
+        //this.clampToCaster(area, caster); //moved to updateRadial, trying to streamline
         if(area.scale >= ability.form.data_config.max_scale) {
             area.delete = true;
         }
+        //could potentially use duration as a scale incrementor instead of having it every single tick - slower novas would have a longer duration?
         if(area.scale < ability.form.data_config.max_scale) {
             area.scale += ability.form.data_config.scale_incrementor/20;
         }
