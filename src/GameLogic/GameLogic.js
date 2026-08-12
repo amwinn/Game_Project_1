@@ -698,6 +698,7 @@ entityCollisionResolution(entity1, entity2) {
         this.projectileEntityCollision(meleeEnemyCharter, entityProjectilesArray);
         this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
         radialArray.forEach((radial, index) => {
+            radial.updateForm(radial, radial.ability,this.player)
             radial.animateBehavior(radial, radial.ability, this.player);
             radial.updateBehavior(radial, radial.ability, this.player);
             //radial.updateEruptive(radial,radial.ability, this.player);
