@@ -167,7 +167,7 @@ export default class Area {
         //the duration code here isnt useful until i change the scaling to be tied with duration
         area.durationTimer++;
         if(area.durationTimer === area.duration/2) {
-            area.collidable === true;
+            area.collidable = true;
             console.log("nova halfway point");
         }
 
