@@ -76,6 +76,7 @@ export default class Area {
             area.delete = true;
         }
         if(area.durationTimer === area.ability.form.data_config.duration /2) {
+            area.collidable = true; //need to reset to false after? not sure
             //collision check goes here
             //actually collision logic doesnt go anywhere near this, just make a collidable = true, then in collision could make a collidable = false?
         }
@@ -92,7 +93,7 @@ export default class Area {
 
 
         area.animationTimer++;
-        console.log(area.animationTimer, area.animationIndex, selectedSpriteSet.length)
+        //console.log(area.animationTimer, area.animationIndex, selectedSpriteSet.length)
         if(area.animationTimer >= frameDuration) {
             area.animationIndex++;
             area.animationTimer = 0;
@@ -100,7 +101,7 @@ export default class Area {
         if(area.animationIndex >= selectedSpriteSet.length) {
             area.animationIndex = 0;
         }
-        console.log(area.animationIndex)
+        //console.log(area.animationIndex)
         area.sprite.image.src = selectedSpriteSet[area.animationIndex];
 
         //use similar frame setup as player sprite manager
@@ -112,7 +113,7 @@ export default class Area {
         let frameDuration = 20;
 
         area.animationTimer++;
-        console.log(area.animationTimer, area.animationIndex, selectedSpriteSet.length)
+        //console.log(area.animationTimer, area.animationIndex, selectedSpriteSet.length)
         if(area.animationTimer >= frameDuration) {
             area.animationIndex++;
             area.animationTimer = 0;
@@ -120,7 +121,7 @@ export default class Area {
         if(area.animationIndex >= selectedSpriteSet.length) {
             area.animationIndex = 0;
         }
-        console.log(area.animationIndex)
+        //console.log(area.animationIndex)
         area.sprite.image.src = selectedSpriteSet[area.animationIndex];
     }
 
@@ -163,7 +164,17 @@ export default class Area {
     //rename to animateEruption(type, ability, caster) then under updateRadial(behavior, ability, caster) {somehow link behavior to the appropriate function (eruptive, instant, etc.) and call it}
     updateEruptive(area, ability, caster){
         //this.clampToCaster(area, caster); //moved to updateRadial, trying to streamline
-        if(area.scale >= ability.form.data_config.max_scale) {
+        //the duration code here isnt useful until i change the scaling to be tied with duration
+        area.durationTimer++;
+        if(area.durationTimer === area.duration/2) {
+            area.collidable === true;
+            console.log("nova halfway point");
+        }
+
+        // if(area.scale >= ability.form.data_config.max_scale) {
+        //     area.delete = true;
+        // }
+        if(area.durationTimer >= area.duration) {
             area.delete = true;
         }
         //could potentially use duration as a scale incrementor instead of having it every single tick - slower novas would have a longer duration?
