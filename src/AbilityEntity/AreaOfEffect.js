@@ -79,6 +79,8 @@ export default class Area {
             area.collidable = true; //need to reset to false after? not sure
             //collision check goes here
             //actually collision logic doesnt go anywhere near this, just make a collidable = true, then in collision could make a collidable = false?
+        } else {
+            area.collidable = false;
         }
         
         //best to put here incase duration is shared by animation and gamelogics
@@ -166,10 +168,12 @@ export default class Area {
         //this.clampToCaster(area, caster); //moved to updateRadial, trying to streamline
         //the duration code here isnt useful until i change the scaling to be tied with duration
         area.durationTimer++;
-        if(area.durationTimer === area.duration/2) {
+        if(area.durationTimer === area.duration*.9) {
             area.collidable = true;
-            console.log("nova halfway point");
+        } else {
+            area.collidable = false;
         }
+
 
         // if(area.scale >= ability.form.data_config.max_scale) {
         //     area.delete = true;
@@ -178,13 +182,16 @@ export default class Area {
             area.delete = true;
         }
         //could potentially use duration as a scale incrementor instead of having it every single tick - slower novas would have a longer duration?
-        if(area.scale < ability.form.data_config.max_scale) {
-            area.scale += ability.form.data_config.scale_incrementor/20;
-        }
-        if(area.scale > ability.form.data_config.max_scale) {
-            area.scale = ability.form.data_config.max_scale;
-        }
-        area.radius = ability.form.data_config.radius * area.scale;
+        //now using duration as incrementation, keeping below code incase of bug/unforseen issue
+        // if(area.scale < ability.form.data_config.max_scale) {
+        //     area.scale += ability.form.data_config.scale_incrementor/20;
+        // }
+        // if(area.scale > ability.form.data_config.max_scale) {
+        //     area.scale = ability.form.data_config.max_scale;
+        // }
+        //this single line replace all of the complex relationships i was trying to make with scale incrementors etc.
+        area.radius = ability.form.data_config.radius / (area.duration / area.durationTimer);
+        //area.radius = ability.form.data_config.radius * area.scale;
         area.diameter = area.radius*2;
         area.size.dw = area.diameter;
         area.size.dh = area.diameter;

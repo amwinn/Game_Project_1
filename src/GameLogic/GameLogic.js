@@ -335,9 +335,7 @@ radialEntityCollision(radialArray, entityArray) {
         if (radial.collidable === true) { //this may have caused some lag/freezing, only happened once but keep an eye, remove if continues
             entityArray.forEach((entity, entityIndex) => {
                 if (this.checkCollision_circleSquare(radial, entity)) {
-                    console.log("a")
                     this.resolveColliding_circleSquare(radial, entity);
-                    radial.collidable === false; //this may have caused some lag/freezing, only happened once but keep an eye, remove if continues
                     //radial.setToSplice = true;
 
                 }
