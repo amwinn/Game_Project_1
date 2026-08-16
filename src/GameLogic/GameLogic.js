@@ -21,6 +21,7 @@ import Area from "../AbilityEntity/AreaOfEffect.js";
 
 //temp, will live in assetregistry unless the class ends up being useless
 import { loadEntityRenders } from "../AssetRegistry.js";
+import Player from "../Player.js";
 let playerSprites = loadEntityRenders(spriteData_player);
 let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
 let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
@@ -444,7 +445,11 @@ projectilePlayerCollision(array, player) {
             arrayItem.position.y + arrayItem.size.dh > player.position.y &&
             arrayItem.position.y  < player.position.y + player.size.dh          
         ) {
-            array.splice(arrayIndex, 1);
+            if(arrayItem.source !== player) {
+                array.splice(arrayIndex, 1);
+                console.log(arrayItem.source)
+            }
+            //array.splice(arrayIndex, 1);
             console.log("collision between " + (arrayItem?.type || "unknown") + " and " + (player?.type || "unknown player type"));
         }
 
@@ -463,8 +468,10 @@ projectileEntityCollision(entityArray, projectileArray) {
             ) {
                 //below needs some work, assumes that entity is relegated only to the target, while player is not
                 //change this.player to circle.owner once relevant code has been implemented
-                if(projectile.type !== "entityProjectile" && entity.type !== "entityProjectile") {
-                applyEffects(projectile.ability.effect, entity, this.player);                    
+                //below was originally if(projectile.type !== "entityProjectile" && entity.type !== "entityProjectile")
+                if(projectile.source !== entity && projectile !== entity) {
+                applyEffects(projectile.ability.effect, entity, this.player);   
+                projectile.setToSplice = true;                 
                 }
 
                 // the below code was commented out, its is causing 2 enemies to be deleted because of the other if statement also firing after this one, so it deletes the next man up
@@ -483,7 +490,7 @@ projectileEntityCollision(entityArray, projectileArray) {
                     //entityArray.splice(entityIndex, 1);
 
                 }
-                projectile.setToSplice=true;
+                //projectile.setToSplice=true;
                 if(entity.type === "entityProjectile" || entity.type ==="playerProjectile") {
                     entity.setToSplice=true;
                 }
@@ -694,12 +701,12 @@ entityCollisionResolution(entity1, entity2) {
         this.camera.clampCamera(this.player); 
         //still needs some refining, mostly the destroy on hit/splice stuff
         this.projectileObjectCollision(projectilesArray, gameObjectMasterArray);
-        this.projectileObjectCollision(entityProjectilesArray, gameObjectMasterArray);
+        this.projectileObjectCollision(projectilesArray, gameObjectMasterArray);
         this.playerObjectCollision(this.player, gameObjectMasterArray);
-        this.projectilePlayerCollision(entityProjectilesArray, this.player);
-        this.projectileEntityCollision(projectilesArray, entityProjectilesArray);
+        this.projectilePlayerCollision(projectilesArray, this.player);
+        //this.projectileEntityCollision(projectilesArray, projectilesArray);
         this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
-        this.projectileEntityCollision(meleeEnemyCharter, entityProjectilesArray);
+        this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
         this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
         radialArray.forEach((radial, index) => {
             radial.updateForm(radial, radial.ability,this.player)
