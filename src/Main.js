@@ -11,7 +11,7 @@ import MapData from "./MapDB.js";
 import GameLogic, { objectSpawnTracker } from "./GameLogic/GameLogic.js";
 import InputLogic from "./Input/InputLogic.js";
 import { ability_repository } from "../data/ability_data/ability_repository.js";
-import { castEntityProjectile } from "./AbilityLogic/AbilityLogic.js";
+import { castProjectile, castEntityProjectile } from "./AbilityLogic/AbilityLogic.js";
 import { inputState } from "./Input/InputState.js";
 import { weapon_data } from "../data/item_data/weapon_data.js";
 
@@ -32,16 +32,16 @@ import { spellbolt } from "../data/ability_data/simple_magic.js";
 
 document.body.style.cursor = "crosshair";
 
-//Sets canvas and context
+//Canvas / Context
 const gameMap = document.getElementById("gameCanvas");
 const renderer = gameMap.getContext("2d");
 
-//Sets screenSize
+//Screensize
 export const screenSize = {width: window.innerWidth, height: window.innerHeight};
 
-//Sets total canvas size
-gameMap.width = 8000//3328;  //canvas size
-gameMap.height = 4000//1792; //canvas size
+//Sets total canvas size, not used atm
+gameMap.width = 8000//3328;  //canvas size, not used atm
+gameMap.height = 4000//1792; //canvas size, not used atm
 
 
 
@@ -178,7 +178,8 @@ function gameLoop(){
         }
         if(enemy.cooldownTimer <= 0) {
             //projectileHandler.castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
-            castEntityProjectile(entityProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
+            castEntityProjectile(projectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
+            //castProjectile(ability_repository["spellbolt"], enemy, dataSet)
             enemy.cooldownTimer = enemy.cooldown
             enemy.mana -= 10;
         }
