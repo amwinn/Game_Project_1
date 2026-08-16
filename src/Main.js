@@ -1,6 +1,6 @@
 import Player from "./Player.js"; //gives error if i use capital P????
 import Projectile from "./AbilityEntity/Projectile.js";
-import Entity, { meleeEnemyCharter, rangedEnemyCharter } from "./Entity.js";
+import Entity, { meleeEntityArray, rangedEntityArray } from "./Entity.js";
 import Camera from "./Camera.js";
 import RenderLogic from "./RenderLogic.js";
 import { deadTreeObjectCharter, gateObjectCharter, rockObjectCharter, treeObjectCharter, bushObjectCharter} from "./GameObject.js";
@@ -64,8 +64,8 @@ export const testItemMap = new Map(weapon_data.map(item => [item.id, item]));
 
 //below is not yet used, would need to implement another forEach layer into the projectileEntity function at GameLogic.js
 export const enemyMasterArray = [
-    meleeEnemyCharter,
-    rangedEnemyCharter
+    meleeEntityArray,
+    rangedEntityArray
 ];
 
 let playerPosition = new Position(screenSize.width/2, screenSize.height/2);
@@ -152,8 +152,8 @@ function gameLoop(){
             const magePosition  = new Position(portal.position.x, portal.position.y) //same
             const meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
             const rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
-            gameLogic.spawnEntity(meleeEnemyCharter, 10, Entity.forest_creature, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 500, 700); //had to have both velocity values or else it wouldnt have worked
-            gameLogic.spawnEntity(rangedEnemyCharter, 5, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 500, 700); //maybe change cooldown number to random number, between 400-500?   
+            gameLogic.spawnEntity(meleeEntityArray, 10, Entity.forest_creature, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 500, 700); //had to have both velocity values or else it wouldnt have worked
+            gameLogic.spawnEntity(rangedEntityArray, 5, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 500, 700); //maybe change cooldown number to random number, between 400-500?   
             portal.spawnTimer = portal.spawnTime;      
         }
         portal.spawnTimer --;
@@ -161,20 +161,20 @@ function gameLoop(){
     })
 
 
-    meleeEnemyCharter.forEach((enemy, index) => {  
+    meleeEntityArray.forEach((enemy, index) => {  
         enemy.updateMeleeEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
         enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
         if(enemy.health <= 0) {
-            meleeEnemyCharter.splice(index, 1)
+            meleeEntityArray.splice(index, 1)
         }
     })
 
 
-    rangedEnemyCharter.forEach((enemy, index) => {
+    rangedEntityArray.forEach((enemy, index) => {
         enemy.updateRangedEnemy(renderer, enemy, renderLogic.player, renderLogic.camera);
         enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
         if(enemy.health <=0) {
-            rangedEnemyCharter.splice(index, 1);
+            rangedEntityArray.splice(index, 1);
         }
         if(enemy.cooldownTimer <= 0) {
             //projectileHandler.castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);

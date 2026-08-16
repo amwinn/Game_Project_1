@@ -1,6 +1,6 @@
 import GameObject, {rockObjectCharter, bushObjectCharter, treeObjectCharter, gateObjectCharter, deadTreeObjectCharter} from "../GameObject.js";
 import Portal, { portalArray } from "../Portal.js";
-import Entity, { meleeEnemyCharter, rangedEnemyCharter } from "../Entity.js";
+import Entity, { meleeEntityArray, rangedEntityArray } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
 //import { nextMap, changeNextMap } from "./Grid.js";
 //import { playerSpawned, changePlayerSpawnState } from "./Grid.js";
@@ -687,11 +687,11 @@ entityCollisionResolution(entity1, entity2) {
 
     //Eventually refactor the code to be in seperate update functions, for collision, map, player position etc.
     mapHandler() {
-        this.radialEntityCollision(radialArray, meleeEnemyCharter);
-        this.radialEntityCollision(radialArray, rangedEnemyCharter);
-        this.entityCollisionCheck(meleeEnemyCharter, meleeEnemyCharter);
-        this.entityCollisionCheck(meleeEnemyCharter, rangedEnemyCharter);
-        this.entityCollisionCheck(rangedEnemyCharter, rangedEnemyCharter);
+        this.radialEntityCollision(radialArray, meleeEntityArray);
+        this.radialEntityCollision(radialArray, rangedEntityArray);
+        this.entityCollisionCheck(meleeEntityArray, meleeEntityArray);
+        this.entityCollisionCheck(meleeEntityArray, rangedEntityArray);
+        this.entityCollisionCheck(rangedEntityArray, rangedEntityArray);
         //this.projectileCollisionCheck(projectilesArray, enemyProjectilesArray);
         if(nextMap === true) {
             this.changeMap();
@@ -705,9 +705,9 @@ entityCollisionResolution(entity1, entity2) {
         this.playerObjectCollision(this.player, gameObjectMasterArray);
         this.projectilePlayerCollision(projectilesArray, this.player);
         //this.projectileEntityCollision(projectilesArray, projectilesArray);
-        this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
-        this.projectileEntityCollision(meleeEnemyCharter, projectilesArray);
-        this.projectileEntityCollision(rangedEnemyCharter, projectilesArray);
+        this.projectileEntityCollision(meleeEntityArray, projectilesArray);
+        this.projectileEntityCollision(meleeEntityArray, projectilesArray);
+        this.projectileEntityCollision(rangedEntityArray, projectilesArray);
         radialArray.forEach((radial, index) => {
             radial.updateForm(radial, radial.ability,this.player)
             radial.animateBehavior(radial, radial.ability, this.player);
@@ -728,8 +728,8 @@ entityCollisionResolution(entity1, entity2) {
                 entityProjectilesArray.splice(index, 1);
             }
         })
-        this.playerEntityCollision(this.player, meleeEnemyCharter);
-        this.playerEntityCollision(this.player, rangedEnemyCharter);
+        this.playerEntityCollision(this.player, meleeEntityArray);
+        this.playerEntityCollision(this.player, rangedEntityArray);
         playerSpawned = true;
         //changePlayerSpawnState(true);
         //console.log(playerSpawned);
@@ -739,8 +739,8 @@ entityCollisionResolution(entity1, entity2) {
     movementLogicUpdate() {
         this.adjustDiagonalVelocity(this.player);
         this.playerSpriteManager(this.player);
-        this.spriteManager_meleeForestSprite(meleeEnemyCharter, this.player);
-        this.spriteManager_mageForestSprite(rangedEnemyCharter, this.player);
+        this.spriteManager_meleeForestSprite(meleeEntityArray, this.player);
+        this.spriteManager_mageForestSprite(rangedEntityArray, this.player);
         //this.checkPlayerBounds(this.player, this.mapWidth, this.mapHeight);
         
     }
@@ -780,8 +780,8 @@ entityCollisionResolution(entity1, entity2) {
             bushObjectCharter.length = 0;   
             gateObjectCharter.length = 0;
             deadTreeObjectCharter.length = 0;
-            meleeEnemyCharter.length = 0;
-            rangedEnemyCharter.length = 0
+            meleeEntityArray.length = 0;
+            rangedEntityArray.length = 0
             portalArray.length = 0;
             test_item_array.length= 0; //START TEST //END TEST
             objectSpawnTracker.clear();

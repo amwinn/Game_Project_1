@@ -4,7 +4,7 @@ import Camera from "./Camera.js";
 import Player from "./Player.js";
 
 import { screenSize } from "./Main.js"; //this was preventing the game from loading because it was calling before the grid class in main
-import { meleeEnemyCharter, rangedEnemyCharter } from "./Entity.js";
+import { meleeEntityArray, rangedEntityArray } from "./Entity.js";
 import { projectilesArray, entityProjectilesArray, radialArray } from "./Main.js";
 import Portal from "./Portal.js";
 import { portalArray } from "./Portal.js";
@@ -148,11 +148,11 @@ export default class RenderLogic{
         this.renderObjects(renderer);
         this.renderPlayer(renderer, this.player, this.camera);
 
-        meleeEnemyCharter.forEach((entity, i) => {
+        meleeEntityArray.forEach((entity, i) => {
             this.renderEntity(renderer,entity, this.camera);
         })
 
-        rangedEnemyCharter.forEach((entity, i) => {
+        rangedEntityArray.forEach((entity, i) => {
             this.renderEntity(renderer, entity, this.camera);
         })
 
@@ -197,8 +197,8 @@ export default class RenderLogic{
         bushObjectCharter.length = 0;   
         gateObjectCharter.length = 0;
         deadTreeObjectCharter.length = 0;
-        meleeEnemyCharter.length = 0;
-        rangedEnemyCharter.length = 0
+        meleeEntityArray.length = 0;
+        rangedEntityArray.length = 0
         portalArray.length = 0;
         objectSpawnTracker.clear();
     }
