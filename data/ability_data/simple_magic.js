@@ -45,7 +45,7 @@ export const spellnova = {
         behavior: "eruptive",
         data_config: {
             sprite: [
-                "Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png","Images/spellnova_test.png"
+                "Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png"
             ],
             duration: 150,
             trigger: 100,
@@ -75,9 +75,7 @@ export const spellblast = {
         behavior: "static",
         data_config: {
             sprite: [
-                "Images/Abilities/simple_magic/spellnova_1.png",
-                "Images/spellnova_test.png",
-                "Images/Abilities/simple_magic/spellnova_1.png"
+                "Images/spellnova_test.png"
             ],
             duration: 150,
             radius: 100,
