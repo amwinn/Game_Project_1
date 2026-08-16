@@ -3,10 +3,11 @@ import { Position, Size, Sprite } from "../Utility.js";
 export default class Projectile {
     static playerProjectile = "playerProjectile";
     static entityProjectile = "entityProjectile";
-    constructor(type, ability, position, velocity) {
+    constructor(type, ability, source, position, velocity) {
         //const abilityData = ability.form.data_config maybe? then wont have to list out long pathing
         this.type = type;
         this.ability = ability;
+        this.source = source;
         this.position = position;
         this.radius = ability.form.data_config.radius;
         this.size = new Size(this.radius*2, this.radius*2);
