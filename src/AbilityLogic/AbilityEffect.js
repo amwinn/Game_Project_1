@@ -1,22 +1,23 @@
-export function applyEffects(effects, target, source) {
+//called in gamelogic.js in collision functions
+export function applyEffects(effects, inflictor, inflicted) {
     effects.forEach((effect) => {
         switch(effect.type) {
             case "damage":
-                target.health -= effect.amount;
+                inflicted.health -= effect.amount;
                 break;
             case "mana_leech":
-                if("mana" in target) {
-                    target.mana -= effect.amount;
+                if("mana" in inflicted) {
+                    inflicted.mana -= effect.amount;
                 }
                 //add to if statement && source.mana += effect.amount <= source.max_mana (could do something similar for min_mana? instead of setting to 0 as below)
-                if("mana" in source && (source.mana + effect.amount <= source.max_mana)) {
+                if("mana" in inflictor && (inflictor.mana + effect.amount <= inflictor.max_mana)) {
                     console.log("hasmana")
-                    source.mana += effect.amount;
-                } else if ("mana" in source && (source.mana + effect.amount > source.max_mana)) {
-                    source.mana = source.max_mana;
+                    inflictor.mana += effect.amount;
+                } else if ("mana" in inflictor && (inflictor.mana + effect.amount > inflictor.max_mana)) {
+                    inflictor.mana = inflictor.max_mana;
                 }
-                if(target.mana < 0) {
-                    target.mana = 0;
+                if(inflicted.mana < 0) {
+                    inflicted.mana = 0;
                 }
                 break;
         }

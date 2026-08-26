@@ -324,7 +324,7 @@ checkCollision_circleSquare(circle, square) {
 resolveColliding_circleSquare(circle, square) {
     if(square.type && this.behaviorAttributes[square.type].destructible && circle.type !=="entityProjectile") {
         if(circle.ability) {
-            applyEffects(circle.ability.effect, square, this.player);
+            applyEffects(circle.ability.effect, this.player, square);
 
         }
     }
@@ -470,7 +470,7 @@ projectileEntityCollision(entityArray, projectileArray) {
                 //change this.player to circle.owner once relevant code has been implemented
                 //below was originally if(projectile.type !== "entityProjectile" && entity.type !== "entityProjectile")
                 if(projectile.source !== entity && projectile !== entity) {
-                applyEffects(projectile.ability.effect, entity, this.player);   
+                applyEffects(projectile.ability.effect, this.player, entity);   
                 projectile.setToSplice = true;                 
                 }
 
