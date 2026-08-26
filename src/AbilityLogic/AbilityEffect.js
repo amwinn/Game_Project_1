@@ -20,6 +20,11 @@ export function applyEffects(effects, inflictor, inflicted) {
                     inflicted.mana = 0;
                 }
                 break;
+                //in progress:
+                case "slow":
+                    inflicted.velocity.x -= effect.amount;
+                    inflicted.velocity.y -= effect.amount;
+                break;
         }
     });
     //cylce through the effects array
