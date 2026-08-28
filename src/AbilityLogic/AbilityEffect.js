@@ -1,5 +1,5 @@
 //called in gamelogic.js in collision functions
-export function applyEffects(effects, inflictor, inflicted) {
+export function applyEffects(effects, ability, inflictor, inflicted) {
     effects.forEach((effect) => {
         switch(effect.type) {
             case "damage":
@@ -22,7 +22,10 @@ export function applyEffects(effects, inflictor, inflicted) {
                 break;
                 //in progress:
                 case "slow":
-                    inflicted.speed -= effect.amount;
+                    if(inflicted.slowed !== true) {
+                        inflicted.speed -=effect.amount;
+                    }
+                    inflicted.slowed =true; //very rough wip, change to modifiers array and add "slowed" etc.?
                 break;
         }
     });
