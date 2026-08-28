@@ -152,8 +152,8 @@ function gameLoop(){
             const magePosition  = new Position(portal.position.x, portal.position.y) //same
             const meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
             const rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
-            gameLogic.spawnEntity(meleeEntityArray, 10, Entity.forest_creature, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 500, 700); //had to have both velocity values or else it wouldnt have worked
-            gameLogic.spawnEntity(rangedEntityArray, 5, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 500, 700); //maybe change cooldown number to random number, between 400-500?   
+            gameLogic.spawnEntity(meleeEntityArray, 20, Entity.forest_creature, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 500, 700); //had to have both velocity values or else it wouldnt have worked
+            gameLogic.spawnEntity(rangedEntityArray, 3, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 500, 700); //maybe change cooldown number to random number, between 400-500?   
             portal.spawnTimer = portal.spawnTime;      
         }
         portal.spawnTimer --;
