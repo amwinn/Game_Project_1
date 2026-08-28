@@ -22,8 +22,7 @@ export function applyEffects(effects, inflictor, inflicted) {
                 break;
                 //in progress:
                 case "slow":
-                    inflicted.velocity.x -= effect.amount;
-                    inflicted.velocity.y -= effect.amount;
+                    inflicted.speed -= effect.amount;
                 break;
         }
     });

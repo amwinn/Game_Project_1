@@ -30,6 +30,7 @@ export default class Entity {
         //this.sprite = this.determineSprite();
         this.health = 30;
         this.mana = 100;
+        this.speed = 1;
         
     }
 
@@ -59,8 +60,8 @@ export default class Entity {
         }
 
 
-        this.position.x = this.position.x + this.velocity.x;
-        this.position.y = this.position.y + this.velocity.y;
+        this.position.x = this.position.x + this.velocity.x *this.speed;
+        this.position.y = this.position.y + this.velocity.y *this.speed;
         
     }
 
@@ -74,8 +75,8 @@ export default class Entity {
             this.velocity.y = Math.sin(angle)/1.5;
             this.velocity.x = Math.cos(angle)/1.5;
         }
-        this.position.x = this.position.x + this.velocity.x;
-        this.position.y = this.position.y + this.velocity.y;
+        this.position.x = this.position.x + this.velocity.x *this.speed;
+        this.position.y = this.position.y + this.velocity.y *this.speed;
         
     }
 
