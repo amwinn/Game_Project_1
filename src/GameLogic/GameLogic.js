@@ -270,13 +270,14 @@ withinBottomBounds(character, mapWidth, mapheight) {
 
 ..................................................................................................................................
 */
-//ROUGH-DRAFT, collision between two circles
+//ROUGH-DRAFT, collision between two circles, DISABLE IF ANY ISSUES REGARDING PROJECTILES
+//was adding x + x and y+y instead of subtracting; was also using >= for return (distanceSquared <= (circle1.radius + circle2.radius)**2);
 checkCollision_circle(circle1, circle2) {
-    const distanceX = circle1.position.x + circle2.position.x;
-    const distanceY = circle2.position.y + circle2.position.y;
+    const distanceX = circle1.position.x - circle2.position.x;
+    const distanceY = circle1.position.y - circle2.position.y;
     const distanceSquared = distanceX * distanceX + distanceY *distanceY;
 
-    return (distanceSquared >= (circle1.radius + circle2.radius)**2);
+    return (distanceSquared <= (circle1.radius + circle2.radius)**2);
 
 }
 
@@ -373,7 +374,7 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
 projectileCollisionCheck(array1, array2) {
     array1.forEach((value,index1) => {
         array2.forEach((value2, index2) => {
-            if(array1[index1] != array2[index2]) {
+            if(array1[index1] !== array2[index2]) {
                 //was this.collisionCheck(), changed to be radius-based collision test
                 if(this.checkCollision_circle(array1[index1], array2[index2])){
                     console.log(value.position.x)
@@ -692,7 +693,7 @@ entityCollisionResolution(entity1, entity2) {
         this.entityCollisionCheck(meleeEntityArray, meleeEntityArray);
         this.entityCollisionCheck(meleeEntityArray, rangedEntityArray);
         this.entityCollisionCheck(rangedEntityArray, rangedEntityArray);
-        //this.projectileCollisionCheck(projectilesArray, enemyProjectilesArray);
+        this.projectileCollisionCheck(projectilesArray, projectilesArray);
         if(nextMap === true) {
             this.changeMap();
         }
