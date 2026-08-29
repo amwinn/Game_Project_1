@@ -103,6 +103,25 @@ function displayVitals(player) {
     );
 }
 
+function displayControls() {
+    renderer.font = "20px Chaucer";
+    //renderer.textAlign = "center"; //only need if centering on screen, putting in bottom left corner for now
+    renderer.fillStyle = "GhostWhite"; //BurlyWood was first choice but was somewhat hard to see
+    renderer.fillText(
+        'CONTROLS', 25, screenSize.height - 100
+    );
+    renderer.fillText(
+        'Q: Knockback', 25, screenSize.height - 75
+    );
+    renderer.fillText(
+        'T: Slow', 25, screenSize.height - 50
+    );
+    renderer.fillText(
+        'Click/E: Mana Drain', 25, screenSize.height - 25
+    );
+    renderer.textAlign = "left" //resetting it for the displayVitals func
+}
+
 
 // let meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //both were map.player.size.dw/dh /2
 // let rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //was map.player.size.dw/3, map.player.size.dh/2
@@ -145,6 +164,7 @@ function gameLoop(){
     renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
     renderLogic.renderHandler(renderer);
     displayVitals(player);
+    displayControls();
     inputLogic.executeInput();
     portalArray.forEach((portal, portalIndex) => {
         if(portal.spawnTimer <= 0) {
@@ -153,7 +173,7 @@ function gameLoop(){
             const meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
             const rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
             gameLogic.spawnEntity(meleeEntityArray, 20, Entity.forest_creature, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 500, 700); //had to have both velocity values or else it wouldnt have worked
-            gameLogic.spawnEntity(rangedEntityArray, 3, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 500, 700); //maybe change cooldown number to random number, between 400-500?   
+            gameLogic.spawnEntity(rangedEntityArray, 10, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 500, 700); //maybe change cooldown number to random number, between 400-500?   
             portal.spawnTimer = portal.spawnTime;      
         }
         portal.spawnTimer --;
