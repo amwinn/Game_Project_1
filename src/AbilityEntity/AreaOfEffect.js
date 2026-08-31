@@ -4,10 +4,11 @@ export default class Area {
     static radial = "radial";
     static eruptive = "eruptive";
     static static = "static";
-    constructor(type, ability, position, behavior) {
+    constructor(type, ability, source, position, behavior) {
         this.type = type;
         this.behavior = behavior;
         this.ability = ability;
+        this.source = source;
         this.position = position;
         //this.velocity = velocity;
         this.radius = ability.form.data_config.radius * ability.form.data_config.base_scale; //this.radius = ability.form.data_config.radius*ability.form.data_config.initial_scale

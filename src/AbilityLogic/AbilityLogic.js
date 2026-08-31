@@ -53,7 +53,7 @@ function castRadial(ability, source, dataSet) {
     //const casterPosition = new Position(source.position.x, source.position.y)//trying to spawn position at middle of caster
     const sourceCenter = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2);
     const radialPosition = new Position(sourceCenter.x, sourceCenter.y);//might need to redo above and current lines
-    dataSet.radialArray.push(new Area(Area.radial, ability, radialPosition, ability.form.behavior));
+    dataSet.radialArray.push(new Area(Area.radial, ability, source, radialPosition, ability.form.behavior));
     ability.resource.forEach((resource,index) => {
         source[resource.type] -= resource.amount;
     });
