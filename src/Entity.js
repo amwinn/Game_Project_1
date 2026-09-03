@@ -31,6 +31,7 @@ export default class Entity {
         this.health = 30;
         this.mana = 100;
         this.speed = 1;
+        this.modifiers = [];
         
     }
 
