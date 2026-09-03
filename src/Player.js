@@ -21,6 +21,8 @@ export default class Player{
         this.health = 100;//rough draft
         this.mana = 100;//rough draft
         this.max_mana = 100;
+        this.base_speed = 1;
+        this.speed = 1;
         
         //maybe use dot notation for default? not sure, either works.
         //this.sprite = new Sprite(spriteData_player.walk[this.direction[this.animationIndex]]);
