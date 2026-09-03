@@ -30,6 +30,7 @@ export default class Entity {
         //this.sprite = this.determineSprite();
         this.health = 30;
         this.mana = 100;
+        this.base_speed = 1;
         this.speed = 1;
         this.modifiers = [];
         
