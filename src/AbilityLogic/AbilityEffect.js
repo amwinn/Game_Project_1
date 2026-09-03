@@ -1,4 +1,6 @@
+import Modifier from "../AbilityEntity/Modifier.js";
 //called in gamelogic.js in collision functions
+//to clarify, effects is called effect in the spell data, therefor when this func is called in gamelogic.js the first param is (ability.effect), not (ability.effects)
 export function applyEffects(effects, ability, inflictor, inflicted) {
     effects.forEach((effect) => {
         switch(effect.type) {
@@ -22,10 +24,13 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                 break;
                 //in progress:
                 case "slow":
+                    // if (inflicted.modifiers) {
+                    //     inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability)); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
+                    // }
                     if(inflicted.slowed !== true) {
                         inflicted.speed -=effect.amount;
                     }
-                    inflicted.slowed =true; //very rough wip, change to modifiers array and add "slowed" etc.?
+                    // inflicted.slowed =true; //very rough wip, change to modifiers array and add "slowed" etc.?
                 break;
                 case "knockback":
                     //code taken from my gamelogic.js entityCollisionResolution and tweaked to only adjust one entity; if making improvements there, maybe tweak this again
@@ -59,3 +64,5 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
     //buff
     //debuff
 }
+
+//import modifier arrays here perhaps, and apply effects here? so calculations go here. modifier just handles the lifetime of the buffs/debuffs, not the -= amount etc.
