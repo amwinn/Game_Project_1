@@ -15,13 +15,13 @@ export default class MovementAction extends Action {
 
 
     moveUp(character) {
-        character.position.y -= character.velocity;
+        character.position.y -= character.velocity * character.speed;
         character.direction = "up";
         //console.log(" is moving up");
     }
 
     moveDown(character) {
-        character.position.y += character.velocity;
+        character.position.y += character.velocity * character.speed;
         character.direction = "down";
         //console.log(" is moving down");
         
@@ -29,7 +29,7 @@ export default class MovementAction extends Action {
 
     moveLeft(character) {
 
-        character.position.x -= character.velocity;
+        character.position.x -= character.velocity * character.speed;
         character.direction = "left";
         character.animationDirection = "left";
         //console.log(" is moving left");
@@ -37,7 +37,7 @@ export default class MovementAction extends Action {
     }
 
     moveRight(character) {
-        character.position.x += character.velocity;
+        character.position.x += character.velocity * character.speed;
         character.direction = "right";
         character.animationDirection = "right";
 
