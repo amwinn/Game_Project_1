@@ -27,7 +27,7 @@ export const spellbolt = {
     effect:[
         {type: "damage", amount: 5},
         {type: "mana_leech", amount: 20},
-        {type: "slow", amount: 0.4}
+        {type: "slow", duration: 500, amount: 0.4}
     ]
 
 }
@@ -87,7 +87,7 @@ export const spellblast = {
     },
     effect: [
         {type: "damage", amount: 10},
-        {type: "slow", amount: .75}
+        {type: "slow", duration: 500, amount: .75}
     ]
 }
 
