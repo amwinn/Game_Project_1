@@ -111,10 +111,10 @@ function displayControls() {
         'CONTROLS', 25, screenSize.height - 100
     );
     renderer.fillText(
-        'Q: Knockback', 25, screenSize.height - 75
+        'Q: Nova', 25, screenSize.height - 75
     );
     renderer.fillText(
-        'T: Slow', 25, screenSize.height - 50
+        'T: Blast', 25, screenSize.height - 50
     );
     renderer.fillText(
         'Click/E: Mana Drain', 25, screenSize.height - 25
