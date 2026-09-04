@@ -23,14 +23,21 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                 }
                 break;
                 //in progress:
-                case "slow":
-                    // if (inflicted.modifiers) {
-                    //     inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability)); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
-                    // }
-                    if(inflicted.slowed !== true) {
-                        inflicted.speed -=effect.amount;
+                case "fast":
+                    if (inflicted.modifiers) {
+                        inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability)); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
                     }
-                    // inflicted.slowed =true; //very rough wip, change to modifiers array and add "slowed" etc.?
+                    break;
+                case "slow":
+                    if (inflicted.modifiers && inflicted.slowed !== true ) {
+                        inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability)); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
+                        inflicted.speed = setSpeed(inflicted);
+                    }
+                    //inflicted.speed = setSpeed(inflicted); //move once logic is solidified, to somewhere that is onyl called when a modifier is added or removed.
+                    // if(!inflicted.slowed) {
+                    //     inflicted.speed -=effect.amount;
+                    // }
+                    inflicted.slowed =true; //very rough wip, change to modifiers array and add "slowed" etc.?
                 break;
                 case "knockback":
                     //code taken from my gamelogic.js entityCollisionResolution and tweaked to only adjust one entity; if making improvements there, maybe tweak this again
@@ -55,14 +62,63 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                     // inflicted.position.x += (inflicted.velocity.x + effect.amount);
                     // inflicted.position.y += (inflicted.velocity.y + effect.amount);
                     break;
-        }
-    });
+                    case "stun":
+                        if(inflicted.modifiers) {
+                            inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability));
+                            inflicted.speed = setSpeed(inflicted);
+                        }
+                        break;
+        } 
+    }); 
     //cylce through the effects array
     //damage
     //heal
     //eot (effect over time, hot or dot)
     //buff
     //debuff
+}
+
+//removes old ones?
+export function updateModifiers(entity) {
+    for(const modifier of entity.modifiers) {
+        modifier.update();
+        if(modifier.delete) {
+            entity.modifiers.splice(modifier);
+        }
+    }
+}
+
+//only handles duplicate effects perhaps
+export function coordinateModifiers(entity) {
+    for(const modifier of entity.modifiers) {
+
+    }
+
+}
+
+export function setSpeed(entity) {
+    entity.speed = entity.base_speed;
+    for(const modifier of entity.modifiers) {
+        switch(modifier.effect.type) {
+            case "slow":
+                entity.speed -= modifier.amount;
+                break;
+            case "fast":
+                entity.speed += modifier.amount;
+                break;
+            case "stun":
+                entity.speed = 0;
+                break;
+        }
+        // if(modifier.effect.type === "slow") {
+        //     entity.speed -= modifier.amount;
+        // }
+        // if(modifier.effect.type === "fast") {
+        //     entity.speed += modifier.amount;
+        // }
+    }
+    return entity.speed;
+
 }
 
 //import modifier arrays here perhaps, and apply effects here? so calculations go here. modifier just handles the lifetime of the buffs/debuffs, not the -= amount etc.
