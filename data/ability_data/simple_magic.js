@@ -27,7 +27,7 @@ export const spellbolt = {
     effect:[
         {type: "damage", amount: 5},
         {type: "mana_leech", amount: 20},
-        {type: "slow", duration: 500, amount: 0.4}
+        {type: "slow", duration: 500, amount: 0.75}
     ]
 
 }
@@ -50,7 +50,7 @@ export const spellnova = {
             ],
             duration: 150,
             trigger: 100,
-            radius: 200, 
+            radius: 300, 
             base_scale: 0.25,
             max_scale: 1, 
             scale_incrementor: 0.25,
@@ -58,7 +58,9 @@ export const spellnova = {
 
     },
     effect: [
-        {type: "knockback", amount: 75}
+        {type: "knockback", amount: 75},
+        {type: "slow", duration: 2500, amount: .95},
+        {type: "stun", duration: 1500}
     ]
 }
 
@@ -87,7 +89,7 @@ export const spellblast = {
     },
     effect: [
         {type: "damage", amount: 10},
-        {type: "slow", duration: 500, amount: .75}
+        {type: "fast", duration: 1500, amount: 1.75}
     ]
 }
 
