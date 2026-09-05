@@ -50,10 +50,10 @@ export default class Entity {
     }
 
    
-    updateMeleeEnemy(renderer, enemy, target, camera) { 
-        updateModifiers(enemy);
-        setSpeed(enemy);
-        inRange = this.entityRangeCheck(enemy, target, 20 )
+    updateMeleeEntity(renderer, entity, target, camera) { 
+        updateModifiers(entity);
+        setSpeed(entity);
+        inRange = this.entityRangeCheck(entity, target, 20 )
         if(inRange != true) { 
             const angle = Math.atan2(((target.position.y + target.size.dh/5) - this.position.y), ((target.position.x + target.size.dw/5) - this.position.x))  //the /5 for size x and size y are to make center of player sprite the target, not top left
             this.velocity.y = Math.sin(angle)/1.5;
@@ -70,7 +70,9 @@ export default class Entity {
         
     }
 
-    updateRangedEnemy(renderer, entity, target, camera) {
+    updateRangedEntity(renderer, entity, target, camera) {
+        updateModifiers(entity);
+        setSpeed(entity);
         inRange = this.entityRangeCheck(entity, target, 300);
         if (inRange === true && enemySelfCollision != true) {
             this.velocity.x = 0;
