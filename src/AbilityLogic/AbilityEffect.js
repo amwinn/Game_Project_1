@@ -32,6 +32,7 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                     if (inflicted.modifiers && inflicted.slowed !== true ) {
                         inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability)); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
                         inflicted.speed = setSpeed(inflicted);
+                        coordinateModifiers(inflicted, ability,effect);
                     }
                     //inflicted.speed = setSpeed(inflicted); //move once logic is solidified, to somewhere that is onyl called when a modifier is added or removed.
                     // if(!inflicted.slowed) {
@@ -89,10 +90,21 @@ export function updateModifiers(entity) {
 }
 
 //only handles duplicate effects perhaps
-export function coordinateModifiers(entity) {
-    for(const modifier of entity.modifiers) {
+export function coordinateModifiers(entity, ability, effect) {
+    // for(const modifier of entity.modifiers) {
+    //     if(effect.type === modifier.effect.type && modifier.ability === ability) {
+    //         console.log("match",ability, modifier.ability)
+    //     }  if (effect.type === modifier.effect.type && modifier.ability !== ability) {
+    //         console.log("diff",ability, modifier.ability)
+    //     }
+    // }
+    /////////////////////////////////////////////////////
+    // entity.modifiers.forEach((modifier, index) => {
+    //     if (effect.type === modifier.effect.type && modifier.ability === ability) {
+    //         console.log("match")
+    //     }
 
-    }
+    // })
 
 }
 
@@ -110,12 +122,7 @@ export function setSpeed(entity) {
                 entity.speed = 0;
                 break;
         }
-        // if(modifier.effect.type === "slow") {
-        //     entity.speed -= modifier.amount;
-        // }
-        // if(modifier.effect.type === "fast") {
-        //     entity.speed += modifier.amount;
-        // }
+
     }
     return entity.speed;
 
