@@ -29,16 +29,16 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                     }
                     break;
                 case "slow":
-                    if (inflicted.modifiers && inflicted.slowed !== true ) {
+                    if (inflicted.modifiers) { //&& inflicted.slowed !== true
                         inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability)); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
+                        coordinateModifiers(inflicted, ability, effect);
                         inflicted.speed = setSpeed(inflicted);
-                        coordinateModifiers(inflicted, ability,effect);
-                    }
+                    } 
                     //inflicted.speed = setSpeed(inflicted); //move once logic is solidified, to somewhere that is onyl called when a modifier is added or removed.
                     // if(!inflicted.slowed) {
                     //     inflicted.speed -=effect.amount;
                     // }
-                    inflicted.slowed =true; //very rough wip, change to modifiers array and add "slowed" etc.?
+                    //inflicted.slowed =true; //very rough wip, change to modifiers array and add "slowed" etc.?
                 break;
                 case "knockback":
                     //code taken from my gamelogic.js entityCollisionResolution and tweaked to only adjust one entity; if making improvements there, maybe tweak this again
@@ -83,6 +83,7 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
 export function updateModifiers(entity) {
     for(const modifier of entity.modifiers) {
         modifier.update();
+        //modifier.update();
         if(modifier.delete) {
             entity.modifiers.splice(modifier);
         }
@@ -91,13 +92,19 @@ export function updateModifiers(entity) {
 
 //only handles duplicate effects perhaps
 export function coordinateModifiers(entity, ability, effect) {
-    // for(const modifier of entity.modifiers) {
-    //     if(effect.type === modifier.effect.type && modifier.ability === ability) {
-    //         console.log("match",ability, modifier.ability)
-    //     }  if (effect.type === modifier.effect.type && modifier.ability !== ability) {
-    //         console.log("diff",ability, modifier.ability)
-    //     }
-    // }
+    for(const modifier of entity.modifiers) {
+        if(effect.type === modifier.effect.type && modifier.ability === ability) {
+            console.log("same")
+            console.log("match",ability, modifier.ability)
+        }  if (effect.type === modifier.effect.type && modifier.ability !== ability) {
+                if(effect.duration > modifier.durationTimer) {
+                console.log("DIFFERENT")
+                modifier.effect.active = false;
+                console.log("inactive")
+            }
+            console.log("diff",ability, modifier.ability)
+        }
+    }
     /////////////////////////////////////////////////////
     // entity.modifiers.forEach((modifier, index) => {
     //     if (effect.type === modifier.effect.type && modifier.ability === ability) {
@@ -111,9 +118,10 @@ export function coordinateModifiers(entity, ability, effect) {
 export function setSpeed(entity) {
     entity.speed = entity.base_speed;
     for(const modifier of entity.modifiers) {
-        switch(modifier.effect.type) {
+        if(modifier.active === true) {
+            switch(modifier.effect.type) {
             case "slow":
-                entity.speed -= modifier.amount;
+                entity.speed = modifier.amount * entity.base_speed;
                 break;
             case "fast":
                 entity.speed += modifier.amount;
@@ -121,7 +129,20 @@ export function setSpeed(entity) {
             case "stun":
                 entity.speed = 0;
                 break;
+            }
         }
+        // switch(modifier.effect.type) {
+        //     case "slow":
+        //         entity.speed = modifier.amount * entity.base_speed;
+        //         console.log('done')
+        //         break;
+        //     case "fast":
+        //         entity.speed += modifier.amount;
+        //         break;
+        //     case "stun":
+        //         entity.speed = 0;
+        //         break;
+        // }
 
     }
     return entity.speed;
