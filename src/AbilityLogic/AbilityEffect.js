@@ -89,6 +89,20 @@ export function updateModifiers(entity) {
         }
     }
 }
+export function assignActiveness(entity, ability, effect) {
+    if(entity.modifiers) {
+        entity.modifiers.forEach((modifier, index) => {
+            //check type ie. "slow"
+                //if same check amount
+                    //if same check duration
+                        //longer duration stays active
+                    //if different, larger amount stays active
+                //if different move on
+
+        })
+    }
+}
+
 
 //only handles duplicate effects perhaps
 export function coordinateModifiers(entity, ability, effect) {
