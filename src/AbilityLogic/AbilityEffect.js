@@ -89,9 +89,23 @@ export function updateModifiers(entity) {
         }
     }
 }
-export function assignActiveness(entity, ability, effect) {
+
+
+//LOGIC NEEDS WORKED ON, cant set to active when comparing the effect with every single modifier,will constantly swap active to true and false depending on each item
+export function assignByAmount(a,b) {
+    if(a.amount > b.amount) {
+    }
+
+
+}
+//NEEDS WORKED ON, needs to stop the iteration once a false is flagged, if there is an amount larger for example, needs to set active = false and return
+export function assignActiveness(entity, effect,ability
+) {
     if(entity.modifiers) {
         entity.modifiers.forEach((modifier, index) => {
+            if(modifier.effect.type === effect.type) {
+                assignByAmount(modifier.effect, effect); //important to keep the .effect after modifier, so that the function doesnt have to account for such a thing
+            }
             //check type ie. "slow"
                 //if same check amount
                     //if same check duration
