@@ -30,8 +30,11 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                     break;
                 case "slow":
                     if (inflicted.modifiers) { //&& inflicted.slowed !== true
-                        inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability)); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
-                        coordinateModifiers(inflicted, ability, effect);
+                        const modifier = new Modifier(effect, inflictor, inflicted, ability);
+                        assignActiveness(inflicted, modifier);
+                        inflicted.modifiers.push(modifier); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
+                        //assignActiveness(effect));
+                        //coordinateModifiers(inflicted, ability, effect);
                         inflicted.speed = setSpeed(inflicted);
                     } 
                     //inflicted.speed = setSpeed(inflicted); //move once logic is solidified, to somewhere that is onyl called when a modifier is added or removed.
@@ -91,31 +94,45 @@ export function updateModifiers(entity) {
 }
 
 
-//LOGIC NEEDS WORKED ON, cant set to active when comparing the effect with every single modifier,will constantly swap active to true and false depending on each item
-export function assignByAmount(a,b) {
-    if(a.amount > b.amount) {
-    }
 
-
-}
-//NEEDS WORKED ON, needs to stop the iteration once a false is flagged, if there is an amount larger for example, needs to set active = false and return
-export function assignActiveness(entity, effect,ability
-) {
-    if(entity.modifiers) {
-        entity.modifiers.forEach((modifier, index) => {
-            if(modifier.effect.type === effect.type) {
-                assignByAmount(modifier.effect, effect); //important to keep the .effect after modifier, so that the function doesnt have to account for such a thing
-            }
-            //check type ie. "slow"
-                //if same check amount
-                    //if same check duration
-                        //longer duration stays active
-                    //if different, larger amount stays active
-                //if different move on
-
-        })
+export function assignActiveness(entity, newModifier) {
+    for(const modifier of entity.modifiers) {
+        if(modifier.effect.type !== newModifier.effect.type) {
+            console.log("different type")
+            continue;
+        }
+        console.log(modifier.amount, newModifier.amount)
+        if(modifier.amount > newModifier.amount) {
+            newModifier.active = false;
+            console.log("inactive by amount")
+            return;
+        }
+        if(modifier.amount === newModifier.amount) {
+            newModifier.active = (newModifier.durationRemaining > modifier.durationRemaining);
+            console.log("decided upon by duration")
+        }
+        
     }
 }
+
+
+// export function assignActiveness(entity, effect,ability
+// ) {
+//     if(entity.modifiers) {
+//         entity.modifiers.forEach((modifier, index) => {
+//             if(modifier.effect.type === effect.type) {
+//                 assignByAmount(modifier.effect, effect); //important to keep the .effect after modifier, so that the function doesnt have to account for such a thing
+//             }
+//             //check type ie. "slow"
+//                 //if same check amount
+//                     //if same check duration
+//                         //longer duration stays active
+//                     //if different, larger amount stays active
+//                 //if different move on
+
+//         })
+//     }
+// }
 
 
 //only handles duplicate effects perhaps
@@ -127,7 +144,7 @@ export function coordinateModifiers(entity, ability, effect) {
         }  if (effect.type === modifier.effect.type && modifier.ability !== ability) {
                 if(effect.duration > modifier.durationTimer) {
                 console.log("DIFFERENT")
-                modifier.effect.active = false;
+                modifier.active = false; //was modifier.effect.active
                 console.log("inactive")
             }
             console.log("diff",ability, modifier.ability)
