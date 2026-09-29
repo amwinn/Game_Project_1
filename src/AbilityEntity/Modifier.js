@@ -7,16 +7,22 @@ export default class Modifier {
         this.duration = effect?.duration || "null";
         this.amount = effect?.amount || "null";
         this.durationTimer = 0;
+        this.durationRemaining = this.duration;
         this.delete = false;
         this.active = true; //set to active = false in eventual function that handles duplicate effects (having a 75% slow, makes the active 40% one inactive)
     }
     //modArray.forEach((item, i) => {update(item)})
+    
+    //idk if this is the best way to create duration remaining
     update() {
+        //console.log(this.durationRemaining)
+        this.durationRemaining = this.duration -this.durationTimer;
         this.durationTimer ++;
         if(this.durationTimer >= this.duration) {
             this.delete = true;
             this.active = false;
         }
+
     }
 
     //probably scrap the below, using above for now
