@@ -166,10 +166,10 @@ export function setSpeed(entity) {
         if(modifier.active === true) {
             switch(modifier.effect.type) {
             case "slow":
-                entity.speed = modifier.amount * entity.base_speed;
+                entity.speed = 1 * (entity.base_speed - modifier.amount);
                 break;
             case "fast":
-                entity.speed += modifier.amount;
+                entity.speed = 1* (entity.base_speed + modifier.amount);
                 break;
             case "stun":
                 entity.speed = 0;
