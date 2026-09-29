@@ -51,8 +51,8 @@ export default class Entity {
 
    
     updateMeleeEntity(renderer, entity, target, camera) { 
-        updateModifiers(entity);
-        setSpeed(entity);
+        updateModifiers(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
+        setSpeed(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
         inRange = this.entityRangeCheck(entity, target, 20 )
         if(inRange != true) { 
             const angle = Math.atan2(((target.position.y + target.size.dh/5) - this.position.y), ((target.position.x + target.size.dw/5) - this.position.x))  //the /5 for size x and size y are to make center of player sprite the target, not top left
