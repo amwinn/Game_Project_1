@@ -1,7 +1,7 @@
 import { Position, Size, Sprite } from "./Utility.js";
 import { CREATURE_RENDER } from "../data/entity_data/entity_render.js";
 import { CREATURE_TYPE } from "../data/entity_data/entity_type.js";
-import { applyEffects, updateModifiers, setSpeed } from "./AbilityLogic/AbilityEffect.js";
+import { applyEffects, updateModifiers, setSpeed, updateActiveness } from "./AbilityLogic/AbilityEffect.js";
 
 export const meleeEntityArray = [];
 export const rangedEntityArray = [];
@@ -52,7 +52,8 @@ export default class Entity {
    
     updateMeleeEntity(renderer, entity, target, camera) { 
         updateModifiers(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
-        setSpeed(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
+        // updateActiveness(entity);
+        //setSpeed(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
         inRange = this.entityRangeCheck(entity, target, 20 )
         if(inRange != true) { 
             const angle = Math.atan2(((target.position.y + target.size.dh/5) - this.position.y), ((target.position.x + target.size.dw/5) - this.position.x))  //the /5 for size x and size y are to make center of player sprite the target, not top left
