@@ -9,7 +9,7 @@ export default class Modifier {
         this.durationTimer = 0;
         this.durationRemaining = this.duration;
         this.delete = false;
-        this.active = true; //set to active = false in eventual function that handles duplicate effects (having a 75% slow, makes the active 40% one inactive)
+        this.active = false; //set to active = false in eventual function that handles duplicate effects (having a 75% slow, makes the active 40% one inactive)
     }
     //modArray.forEach((item, i) => {update(item)})
     
