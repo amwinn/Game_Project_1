@@ -94,7 +94,7 @@ export function updateModifiers(entity) {
 }
 
 
-
+//change up a bit, stop declaring the .active until the end, or else it will change many times
 export function assignActiveness(entity, newModifier) {
     for(const modifier of entity.modifiers) {
         if(modifier.effect.type !== newModifier.effect.type) {
@@ -108,11 +108,15 @@ export function assignActiveness(entity, newModifier) {
             return;
         }
         if(modifier.amount === newModifier.amount) {
-            newModifier.active = (newModifier.durationRemaining > modifier.durationRemaining);
-            console.log("decided upon by duration")
+            if(newModifier.durationRemaining < modifier.durationRemaining) {
+                newModifier.active = false;
+                console.log("decided upon by duration")
+                return;
+            }
         }
-        
     }
+    console.log("its active")
+    newModifier.active = true;
 }
 
 
