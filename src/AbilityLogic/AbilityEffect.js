@@ -66,12 +66,12 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                     // inflicted.position.x += (inflicted.velocity.x + effect.amount);
                     // inflicted.position.y += (inflicted.velocity.y + effect.amount);
                     break;
-                    case "stun":
-                        if(inflicted.modifiers) {
-                            inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability));
-                            inflicted.speed = setSpeed(inflicted);
-                        }
-                        break;
+                case "stun":
+                    if(inflicted.modifiers) {
+                        inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability));
+                        inflicted.speed = setSpeed(inflicted);
+                    }
+                    break;
         } 
     }); 
     //cylce through the effects array
@@ -84,14 +84,22 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
 
 //removes old ones?
 export function updateModifiers(entity) {
-    for(const modifier of entity.modifiers) {
-        modifier.update();
-        //modifier.update();
-        if(modifier.delete) {
-            entity.modifiers.splice(modifier);
+    for(let i = 0; i < entity.modifiers.length; i++) {
+        entity.modifiers[i].update();
+        if(entity.modifiers[i].delete) {
+            entity.modifiers.splice(entity.modifiers[i], 1);
         }
     }
 }
+// export function updateModifiers(entity) {
+//     for(const modifier of entity.modifiers) {
+//         modifier.update();
+//         //modifier.update();
+//         if(modifier.delete) {
+//             entity.modifiers.splice(modifier);
+//         }
+//     }
+// }
 
 
 //change up a bit, stop declaring the .active until the end, or else it will change many times
@@ -101,13 +109,14 @@ export function assignActiveness(entity, newModifier) {
             console.log("different type")
             continue;
         }
-        console.log(modifier.amount, newModifier.amount)
+        console.log(modifier.durationRemaining, newModifier.durationRemaining)
         if(modifier.amount > newModifier.amount) {
             newModifier.active = false;
             console.log("inactive by amount")
             return;
         }
         if(modifier.amount === newModifier.amount) {
+            console.log("here")
             if(newModifier.durationRemaining < modifier.durationRemaining) {
                 newModifier.active = false;
                 console.log("decided upon by duration")
