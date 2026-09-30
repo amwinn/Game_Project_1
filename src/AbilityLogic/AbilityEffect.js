@@ -87,7 +87,7 @@ export function updateModifiers(entity) {
     for(let i = 0; i < entity.modifiers.length; i++) {
         entity.modifiers[i].update();
         if(entity.modifiers[i].delete) {
-            entity.modifiers.splice(entity.modifiers[i], 1);
+            entity.modifiers.splice(i, 1);
             updateActiveness(entity);
             setSpeed(entity);
         }
@@ -122,7 +122,7 @@ export function assignActiveness(entity, newModifier) {
         }
         if(modifier.amount === newModifier.amount) {
             console.log("here")
-            if(newModifier.durationRemaining < modifier.durationRemaining) {
+            if(newModifier.durationRemaining <= modifier.durationRemaining) {
                 newModifier.active = false;
                 console.log("decided upon by duration")
                 return;
