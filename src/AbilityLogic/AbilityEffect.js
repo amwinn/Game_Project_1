@@ -88,6 +88,8 @@ export function updateModifiers(entity) {
         entity.modifiers[i].update();
         if(entity.modifiers[i].delete) {
             entity.modifiers.splice(entity.modifiers[i], 1);
+            updateActiveness(entity);
+            setSpeed(entity);
         }
     }
 }
@@ -105,6 +107,9 @@ export function updateModifiers(entity) {
 //change up a bit, stop declaring the .active until the end, or else it will change many times
 export function assignActiveness(entity, newModifier) {
     for(const modifier of entity.modifiers) {
+        if(modifier === newModifier) {
+            continue; //mainly for updateActiveness() to not check agains itself
+        }
         if(modifier.effect.type !== newModifier.effect.type) {
             console.log("different type")
             continue;
@@ -126,6 +131,15 @@ export function assignActiveness(entity, newModifier) {
     }
     console.log("its active")
     newModifier.active = true;
+}
+
+export function updateActiveness(entity) {
+    for(const modifier of entity.modifiers) {
+        modifier.active = false;
+    }
+    for(const modifier of entity.modifiers) {
+        assignActiveness(entity, modifier);
+    }
 }
 
 
