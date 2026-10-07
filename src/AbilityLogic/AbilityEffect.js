@@ -139,6 +139,7 @@ export function updateActiveness(entity) {
     }
     for(const modifier of entity.modifiers) {
         assignActiveness(entity, modifier);
+        setSpeed(entity)
     }
 }
 
@@ -187,22 +188,34 @@ export function coordinateModifiers(entity, ability, effect) {
 
 }
 
+
 export function setSpeed(entity) {
-    entity.speed = entity.base_speed;
+    //entity.speed = entity.base_speed;
+    let fastComponent = 1;
+    let slowComponent = 1;
+    let stunComponent = 1;
     for(const modifier of entity.modifiers) {
         if(modifier.active === true) {
             switch(modifier.effect.type) {
             case "slow":
-                entity.speed = 1 * (entity.base_speed - modifier.amount);
+                slowComponent = modifier.effect.amount;
+                // entity.speed = 1 * (entity.base_speed - modifier.amount);
                 break;
             case "fast":
-                entity.speed = 1* (entity.base_speed + modifier.amount);
+                //maybe move the +1 to be in the data as 1.25 instead of .25
+                fastComponent = modifier.effect.amount +1;
+                // entity.speed = 1* (entity.base_speed + modifier.amount);
                 break;
             case "stun":
-                entity.speed = 0;
+                stunComponent = 0;
+                console.log(stunComponent)
+                // entity.speed = 0;
                 break;
             }
         }
+        //works as 1*((fastcomp - slowcomp) *stuncomp) instead of 1*(1+(fastcomp-slowcomp)*stuncomp)
+        entity.speed = 1*((fastComponent-slowComponent) *stunComponent);
+        console.log(entity.speed);
         // switch(modifier.effect.type) {
         //     case "slow":
         //         entity.speed = modifier.amount * entity.base_speed;
