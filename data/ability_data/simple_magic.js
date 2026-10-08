@@ -61,7 +61,7 @@ export const spellnova = {
         {type: "knockback", amount: 75},
         {type: "slow", duration: 2500, amount: 0.9},
         {type: "stun", duration: 1000},
-        {type: "fast", duration: 2500, amount: .5}
+        {type: "fast", duration: 2500, amount: 1.5}
         //{type: "slow", duration: 2500, amount: .9}
     ]
 }
@@ -91,7 +91,7 @@ export const spellblast = {
     },
     effect: [
         {type: "damage", amount: 1},
-        {type: "fast", duration: 1500, amount: .9}
+        {type: "fast", duration: 1500, amount: 1.9}
     ]
 }
 
