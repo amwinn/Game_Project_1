@@ -6,7 +6,7 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
         switch(effect.type) {
             case "damage":
                 inflicted.health -= effect.amount;
-                break;
+                //break;
             case "mana_leech":
                 if("mana" in inflicted) {
                     inflicted.mana -= effect.amount;
@@ -21,13 +21,13 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                 if(inflicted.mana < 0) {
                     inflicted.mana = 0;
                 }
-                break;
+                //break;
                 //in progress:
                 case "fast":
                     if (inflicted.modifiers) {
                         inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability)); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
                     }
-                    break;
+                    //break;
                 case "slow":
                     if (inflicted.modifiers) { //&& inflicted.slowed !== true
                         const modifier = new Modifier(effect, inflictor, inflicted, ability);
@@ -35,14 +35,14 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                         inflicted.modifiers.push(modifier); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
                         //assignActiveness(effect));
                         //coordinateModifiers(inflicted, ability, effect);
-                        inflicted.speed = setSpeed(inflicted);
+                        setSpeed(inflicted);
                     } 
                     //inflicted.speed = setSpeed(inflicted); //move once logic is solidified, to somewhere that is onyl called when a modifier is added or removed.
                     // if(!inflicted.slowed) {
                     //     inflicted.speed -=effect.amount;
                     // }
                     //inflicted.slowed =true; //very rough wip, change to modifiers array and add "slowed" etc.?
-                break;
+                    //break;
                 case "knockback":
                     //code taken from my gamelogic.js entityCollisionResolution and tweaked to only adjust one entity; if making improvements there, maybe tweak this again
                     if(ability.position.x === inflicted.position.x) {
@@ -65,13 +65,13 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                     
                     // inflicted.position.x += (inflicted.velocity.x + effect.amount);
                     // inflicted.position.y += (inflicted.velocity.y + effect.amount);
-                    break;
+                    //break;
                 case "stun":
                     if(inflicted.modifiers) {
                         inflicted.modifiers.push(new Modifier(effect, inflictor, inflicted, ability));
-                        inflicted.speed = setSpeed(inflicted);
+                        setSpeed(inflicted);
                     }
-                    break;
+                    //break;
         } 
     }); 
     //cylce through the effects array
@@ -131,6 +131,7 @@ export function assignActiveness(entity, newModifier) {
     }
     console.log("its active")
     newModifier.active = true;
+    setSpeed(entity);
 }
 
 export function updateActiveness(entity) {
@@ -140,6 +141,7 @@ export function updateActiveness(entity) {
     for(const modifier of entity.modifiers) {
         assignActiveness(entity, modifier);
         setSpeed(entity)
+        console.log(setSpeed(entity))
     }
 }
 
@@ -190,45 +192,31 @@ export function coordinateModifiers(entity, ability, effect) {
 
 
 export function setSpeed(entity) {
-    //entity.speed = entity.base_speed;
-    let fastComponent = 1;
-    let slowComponent = 1;
-    let stunComponent = 1;
+    entity.speed = entity.base_speed;
+    let fastComponent = 1; //1 default as additive and as multiplicative
+    let slowComponent = 0; //0 default as additive, 1 as multiplicative
+    let stunComponent = 1; //1 default as additive and multiplicative
     for(const modifier of entity.modifiers) {
         if(modifier.active === true) {
             switch(modifier.effect.type) {
-            case "slow":
-                slowComponent = modifier.effect.amount;
-                // entity.speed = 1 * (entity.base_speed - modifier.amount);
-                break;
-            case "fast":
-                //maybe move the +1 to be in the data as 1.25 instead of .25
-                fastComponent = modifier.effect.amount +1;
-                // entity.speed = 1* (entity.base_speed + modifier.amount);
-                break;
-            case "stun":
-                stunComponent = 0;
-                console.log(stunComponent)
-                // entity.speed = 0;
-                break;
+                case "slow":
+                    slowComponent = modifier.effect.amount;
+                    // entity.speed = 1 * (entity.base_speed - modifier.amount);
+                    //break;
+                case "fast":
+                    //maybe move the +1 to be in the data as 1.25 instead of .25
+                    fastComponent = modifier.effect.amount;
+                    // entity.speed = 1* (entity.base_speed + modifier.amount);
+                    //break;
+                case "stun":
+                    stunComponent = 0;
+                    console.log("STUN OVERRIDE")
+                    // entity.speed = 0;
+                    //break;
+                
             }
         }
-        //works as 1*((fastcomp - slowcomp) *stuncomp) instead of 1*(1+(fastcomp-slowcomp)*stuncomp)
         entity.speed = 1*((fastComponent-slowComponent) *stunComponent);
-        console.log(entity.speed);
-        // switch(modifier.effect.type) {
-        //     case "slow":
-        //         entity.speed = modifier.amount * entity.base_speed;
-        //         console.log('done')
-        //         break;
-        //     case "fast":
-        //         entity.speed += modifier.amount;
-        //         break;
-        //     case "stun":
-        //         entity.speed = 0;
-        //         break;
-        // }
-
     }
     return entity.speed;
 
