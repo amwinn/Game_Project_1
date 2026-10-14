@@ -74,7 +74,7 @@ export default class Entity {
 
     updateRangedEntity(renderer, entity, target, camera) {
         updateModifiers(entity);
-        setSpeed(entity);
+        //setSpeed(entity);
         inRange = this.entityRangeCheck(entity, target, 300);
         if (inRange === true && enemySelfCollision != true) {
             this.velocity.x = 0;
