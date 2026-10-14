@@ -1,4 +1,5 @@
 import Modifier from "../AbilityEntity/Modifier.js";
+import { assignActiveness, updateActiveness } from "./ModifierLogic.js";
 //called in gamelogic.js in collision functions
 //to clarify, effects is called effect in the spell data, therefor when this func is called in gamelogic.js the first param is (ability.effect), not (ability.effects)
 export function applyEffects(effects, ability, inflictor, inflicted) {
@@ -81,17 +82,17 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
 }
 
 //removes old ones?
-export function updateModifiers(entity) {
-    for(let i = 0; i < entity.modifiers.length; i++) {
-        entity.modifiers[i].update();
-        if(entity.modifiers[i].delete) {
-            entity.modifiers.splice(i, 1);
-            updateActiveness(entity);
-            //entity.speed = setSpeed(entity);
-        }
-    }
-    entity.speed = setSpeed(entity);
-}
+// export function updateModifiers(entity) {
+//     for(let i = 0; i < entity.modifiers.length; i++) {
+//         entity.modifiers[i].update();
+//         if(entity.modifiers[i].delete) {
+//             entity.modifiers.splice(i, 1);
+//             updateActiveness(entity);
+//             //entity.speed = setSpeed(entity);
+//         }
+//     }
+//     entity.speed = setSpeed(entity);
+// }
 // export function updateModifiers(entity) {
 //     for(const modifier of entity.modifiers) {
 //         modifier.update();
@@ -104,45 +105,45 @@ export function updateModifiers(entity) {
 
 
 //change up a bit, stop declaring the .active until the end, or else it will change many times
-export function assignActiveness(entity, newModifier) {
-    for(const modifier of entity.modifiers) {
-        if(modifier === newModifier) {
-            continue; //mainly for updateActiveness() to not check agains itself
-        }
-        if(modifier.effect.type !== newModifier.effect.type) {
-            console.log("different type")
-            continue;
-        }
-        console.log(modifier.durationRemaining, newModifier.durationRemaining)
-        if(modifier.amount > newModifier.amount) {
-            newModifier.active = false;
-            console.log("inactive by amount")
-            return;
-        }
-        if(modifier.amount === newModifier.amount) {
-            console.log("here")
-            if(newModifier.durationRemaining <= modifier.durationRemaining) {
-                newModifier.active = false;
-                console.log("decided upon by duration")
-                return;
-            }
-        }
-    }
-    console.log("its active:", newModifier.effect.type)
-    newModifier.active = true;
-}
+// export function assignActiveness(entity, newModifier) {
+//     for(const modifier of entity.modifiers) {
+//         if(modifier === newModifier) {
+//             continue; //mainly for updateActiveness() to not check agains itself
+//         }
+//         if(modifier.effect.type !== newModifier.effect.type) {
+//             console.log("different type")
+//             continue;
+//         }
+//         console.log(modifier.durationRemaining, newModifier.durationRemaining)
+//         if(modifier.amount > newModifier.amount) {
+//             newModifier.active = false;
+//             console.log("inactive by amount")
+//             return;
+//         }
+//         if(modifier.amount === newModifier.amount) {
+//             console.log("here")
+//             if(newModifier.durationRemaining <= modifier.durationRemaining) {
+//                 newModifier.active = false;
+//                 console.log("decided upon by duration")
+//                 return;
+//             }
+//         }
+//     }
+//     console.log("its active:", newModifier.effect.type)
+//     newModifier.active = true;
+// }
 
-export function updateActiveness(entity) {
-    for(const modifier of entity.modifiers) {
-        modifier.active = false;
-    }
-    for(const modifier of entity.modifiers) {
-        assignActiveness(entity, modifier);
-        //entity.speed = setSpeed(entity)
-        //console.log(setSpeed(entity))
-    }
-    entity.speed = setSpeed(entity);
-}
+// export function updateActiveness(entity) {
+//     for(const modifier of entity.modifiers) {
+//         modifier.active = false;
+//     }
+//     for(const modifier of entity.modifiers) {
+//         assignActiveness(entity, modifier);
+//         //entity.speed = setSpeed(entity)
+//         //console.log(setSpeed(entity))
+//     }
+//     entity.speed = setSpeed(entity);
+// }
 
 
 // export function assignActiveness(entity, effect,ability
@@ -190,36 +191,36 @@ export function updateActiveness(entity) {
 // }
 
 
-export function setSpeed(entity) {
-    //entity.speed = entity.base_speed;
-    let fastComponent = 1; //1 default as additive and as multiplicative
-    let slowComponent = 0; //0 default as additive, 1 as multiplicative
-    let stunComponent = 1; //1 default as additive and multiplicative
-    for(const modifier of entity.modifiers) {
-        if(modifier.active === true) {
-            switch(modifier.effect.type) {
-                case "slow":
-                    slowComponent = modifier.effect.amount;
-                    // entity.speed = 1 * (entity.base_speed - modifier.amount);
-                    break;
-                case "fast":
-                    //maybe move the +1 to be in the data as 1.25 instead of .25
-                    fastComponent = modifier.effect.amount;
-                    // entity.speed = 1* (entity.base_speed + modifier.amount);
-                    break;
-                case "stun":
-                    stunComponent = 0;
-                    console.log("STUN OVERRIDE")
-                    // entity.speed = 0;
-                    break;
+// export function setSpeed(entity) {
+//     //entity.speed = entity.base_speed;
+//     let fastComponent = 1; //1 default as additive and as multiplicative
+//     let slowComponent = 0; //0 default as additive, 1 as multiplicative
+//     let stunComponent = 1; //1 default as additive and multiplicative
+//     for(const modifier of entity.modifiers) {
+//         if(modifier.active === true) {
+//             switch(modifier.effect.type) {
+//                 case "slow":
+//                     slowComponent = modifier.effect.amount;
+//                     // entity.speed = 1 * (entity.base_speed - modifier.amount);
+//                     break;
+//                 case "fast":
+//                     //maybe move the +1 to be in the data as 1.25 instead of .25
+//                     fastComponent = modifier.effect.amount;
+//                     // entity.speed = 1* (entity.base_speed + modifier.amount);
+//                     break;
+//                 case "stun":
+//                     stunComponent = 0;
+//                     console.log("STUN OVERRIDE")
+//                     // entity.speed = 0;
+//                     break;
                 
-            }
-        }
-        //entity.speed = 1*((fastComponent-slowComponent) *stunComponent);
-    }
-    entity.speed = 1*((fastComponent-slowComponent)*stunComponent);
-    return entity.speed;
+//             }
+//         }
+//         //entity.speed = 1*((fastComponent-slowComponent) *stunComponent);
+//     }
+//     entity.speed = 1*((fastComponent-slowComponent)*stunComponent);
+//     return entity.speed;
 
-}
+// }
 
 //import modifier arrays here perhaps, and apply effects here? so calculations go here. modifier just handles the lifetime of the buffs/debuffs, not the -= amount etc.
