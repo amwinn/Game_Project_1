@@ -1,7 +1,8 @@
 import { Position, Size, Sprite } from "./Utility.js";
 import { CREATURE_RENDER } from "../data/entity_data/entity_render.js";
 import { CREATURE_TYPE } from "../data/entity_data/entity_type.js";
-import { applyEffects, updateModifiers, setSpeed, updateActiveness } from "./AbilityLogic/AbilityEffect.js";
+import { applyEffects, updateActiveness } from "./AbilityLogic/AbilityEffect.js";
+import { updateModifiers } from "./AbilityLogic/ModifierLogic.js";
 
 export const meleeEntityArray = [];
 export const rangedEntityArray = [];
