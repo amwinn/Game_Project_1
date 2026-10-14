@@ -1,3 +1,5 @@
+import { returnSpeed } from "../GameLogic/MovementLogic.js";
+
 export function assignActiveness(entity, newModifier) {
     for(const modifier of entity.modifiers) {
         if(modifier === newModifier) {
@@ -33,10 +35,8 @@ export function updateActiveness(entity) {
     }
     for(const modifier of entity.modifiers) {
         assignActiveness(entity, modifier);
-        //entity.speed = setSpeed(entity)
-        //console.log(setSpeed(entity))
     }
-    entity.speed = setSpeed(entity);
+    entity.speed = returnSpeed(entity);
 }
 
 export function updateModifiers(entity) {
@@ -45,8 +45,7 @@ export function updateModifiers(entity) {
         if(entity.modifiers[i].delete) {
             entity.modifiers.splice(i, 1);
             updateActiveness(entity);
-            //entity.speed = setSpeed(entity);
         }
     }
-    entity.speed = setSpeed(entity);
+    entity.speed = returnSpeed(entity);
 }
