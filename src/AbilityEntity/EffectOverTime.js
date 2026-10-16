@@ -10,10 +10,27 @@ export default class EffectOverTime {
         this.inflictor = inflictor;
         this.inflicted = inflicted;
         this.ability = ability;
-        //duration
+        this.duration = ability?.duration ?? null;
+        this.durationTimer = 0;
+        this.durationRemaining = 0;
+        //tickAmount?
+        //amount?
         //durationTimer
         //tickInterval
+        //maybe add active as a safety net incase it doesnt delete properly?
     }
+
+    update() {
+        this.durationRemaining = this.duration - this.durationTimer;
+        this.durationTimer ++;
+        if(this.durationRemaining <= 0) {
+            this.delete = true;
+            //this.active = false; only add if adding this.active as a prop
+        }
+
+    }
+
+
 }
 
 //first draft:
