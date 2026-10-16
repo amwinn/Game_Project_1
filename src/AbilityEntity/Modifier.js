@@ -4,8 +4,8 @@ export default class Modifier {
         this.source = inflictor;
         this.inflicted = inflicted;
         this.ability = ability;
-        this.duration = effect?.duration || "null";
-        this.amount = effect?.amount || "null";
+        this.duration = effect?.duration ?? null;
+        this.amount = effect?.amount ?? null;
         this.durationTimer = 0;
         this.durationRemaining = this.duration;
         this.delete = false;
