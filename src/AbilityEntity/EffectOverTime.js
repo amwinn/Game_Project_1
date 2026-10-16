@@ -10,13 +10,13 @@ export default class EffectOverTime {
         this.inflictor = inflictor;
         this.inflicted = inflicted;
         this.ability = ability;
+        this.amount = ability?.amount ?? null;
         this.duration = ability?.duration ?? null;
         this.durationTimer = 0;
         this.durationRemaining = 0;
-        //tickAmount?
         //amount?
-        //durationTimer
-        //tickInterval
+        //this.ticks = ability?.ticks ?? null;
+        //this.tickSpacing = 0; //then in update this.tickSpacing = this.duration / this.ticks;
         //maybe add active as a safety net incase it doesnt delete properly?
     }
 
@@ -33,6 +33,11 @@ export default class EffectOverTime {
 
 }
 
+//maybe type and behavior gall under the effect array such as {type: "effectOverTime" subtype: "mana" behavior "drain"}
+export function effectOverTime(type, hehavior, effect, inflicted, inflictor, ability) {
+    //switch behavior, then for each case call a drainOvertime() or funnelOverTime() function
+}
+
 //first draft:
 //here or elsewhere, make a dealEffectOverTime
 //one primary function, effectOverTime(type,behavior, other params)
@@ -43,3 +48,9 @@ export default class EffectOverTime {
 //mostly keep the updateEffectOverTime() function here, update duration, tick, timers, update state etc
 //inside the drainOverTime, could have a calculate/returnDamage or calculate/returnAmount
 //that is shared between funnel and drain
+
+
+//plan:
+//tick amount static
+//tick interval or durationTimer can be sped up depending on haste or int or something akin to this
+//in other words duration will be affected by stats, but tick amount will always be as declared
