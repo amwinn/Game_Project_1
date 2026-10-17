@@ -2,9 +2,9 @@
 
 // instead of mana_drain = "mana_drain", could have just mana, stamina, health, then behavior drain and funnel
 export default class EffectOverTime {
-    static MANA_DRAIN = "mana_drain";
-    static HEALTH_DRAIN = "health_drain";
-    static STAMINA_DRAIN = "stamina_drain";
+    // static MANA_DRAIN = "mana_drain";
+    // static HEALTH_DRAIN = "health_drain";
+    // static STAMINA_DRAIN = "stamina_drain";
     constructor(effect, inflictor, inflicted, ability) {
         this.effect = effect;
         this.inflictor = inflictor;
