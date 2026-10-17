@@ -35,6 +35,7 @@ export default class Entity {
         this.base_speed = 1;
         this.speed = 1;
         this.modifiers = [];
+        this.effectsOverTime = [];
         
     }
 
