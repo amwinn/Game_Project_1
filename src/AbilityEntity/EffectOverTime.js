@@ -14,18 +14,23 @@ export default class EffectOverTime {
         this.duration = ability?.duration ?? null;
         this.durationTimer = 0;
         this.durationRemaining = 0;
-        //amount?
-        //this.ticks = ability?.ticks ?? null;
-        //this.tickSpacing = 0; //then in update this.tickSpacing = this.duration / this.ticks;
+        this.ticks = ability?.ticks ?? null;
+        this.tickTimer = 0;
+        this.tickSpacing = 0; //then in update this.tickSpacing = this.duration / this.ticks;
         //maybe add active as a safety net incase it doesnt delete properly?
     }
 
     update() {
         this.durationRemaining = this.duration - this.durationTimer;
+        this.tickSpacing = this.duration / this.ticks;
         this.durationTimer ++;
+        this.tickTimer ++;
         if(this.durationRemaining <= 0) {
             this.delete = true;
             //this.active = false; only add if adding this.active as a prop
+        }
+        if(this.tickTimer >= this.tickSpacing) {
+            //applyDamage();
         }
 
     }
@@ -34,8 +39,18 @@ export default class EffectOverTime {
 }
 
 //maybe type and behavior gall under the effect array such as {type: "effectOverTime" subtype: "mana" behavior "drain"}
-export function effectOverTime(type, hehavior, effect, inflicted, inflictor, ability) {
+//or make type "drain" "funnel", and then a focus: "mana", "stamina", health" etc.
+export function applyEffectOverTime(type, focus, effect, inflicted, inflictor, ability) {
+    switch(type) {
+        case "drain":
+            //drainOvertime()
+    }
     //switch behavior, then for each case call a drainOvertime() or funnelOverTime() function
+}
+
+function applyDrainOverTime(type, focus, effect, inflicted, inflictor, ability){
+    //new EffectOverTime();
+    //
 }
 
 //first draft:
