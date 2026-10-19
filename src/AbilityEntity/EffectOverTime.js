@@ -30,7 +30,7 @@ export default class EffectOverTime {
             //this.active = false; only add if adding this.active as a prop
         }
         if(this.tickTimer >= this.tickSpacing) {
-            //applyDamage();
+            applyEffectOverTime(this.effect, this.inflicted, this.inflictor, this.ability);
         }
 
     }
@@ -40,27 +40,31 @@ export default class EffectOverTime {
 
 //maybe type and behavior gall under the effect array such as {type: "effectOverTime" subtype: "mana" behavior "drain"}
 //or make type "drain" "funnel", and then a focus: "mana", "stamina", health" etc.
-export function applyEffectOverTime(type, focus, effect, inflicted, inflictor, ability) {
-    switch(type) {
+export function applyEffectOverTime(effect, inflicted, inflictor, ability) {
+    switch(effect.type) {
         case "drain":
-            applyDrainTick(type, focus, effect, inflicted, inflictor, ability);
+            applyDrainTick(effect, inflicted, inflictor, ability);
             break;
         case "funnel":
-            applyFunnelTick(type, focus, effect, inflicted, inflictor, ability)
+            applyFunnelTick(effect, inflicted, inflictor, ability)
     }
     //switch behavior, then for each case call a drainOvertime() or funnelOverTime() function
 }
 
-function applyDrainTick(type, focus, effect, inflicted, inflictor, ability){
-    if(inflicted[focus]) {
+function applyDrainTick(effect, inflicted, inflictor, ability){
+    if(effect.subType in inflicted) {
         inflicted.focus -= effect.amount;
-        inflicted.focus += effect.amount;
+    }
+    if(effect.subType in inflictor) {
+        inflictor.focus += effect.amount;
     }
 }
 
-function applyFunnelTick(type, focus, effect, inflicted, inflictor, ability) {
-    if(inflicted[focus]) {
+function applyFunnelTick(effect, inflicted, inflictor, ability) {
+    if(effect.subType in inflicted) {
         inflicted.focus += effect.amount;
+    }
+    if(effect.subType in inflictor) {
         inflictor.focus -= effect.amount;
     }
 }
