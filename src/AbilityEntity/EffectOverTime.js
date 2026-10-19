@@ -43,14 +43,26 @@ export default class EffectOverTime {
 export function applyEffectOverTime(type, focus, effect, inflicted, inflictor, ability) {
     switch(type) {
         case "drain":
-            //drainOvertime()
+            applyDrainTick(type, focus, effect, inflicted, inflictor, ability);
+            break;
+        case "funnel":
+            applyFunnelTick(type, focus, effect, inflicted, inflictor, ability)
     }
     //switch behavior, then for each case call a drainOvertime() or funnelOverTime() function
 }
 
-function applyDrainOverTime(type, focus, effect, inflicted, inflictor, ability){
-    //new EffectOverTime();
-    //
+function applyDrainTick(type, focus, effect, inflicted, inflictor, ability){
+    if(inflicted[focus]) {
+        inflicted.focus -= effect.amount;
+        inflicted.focus += effect.amount;
+    }
+}
+
+function applyFunnelTick(type, focus, effect, inflicted, inflictor, ability) {
+    if(inflicted[focus]) {
+        inflicted.focus += effect.amount;
+        inflictor.focus -= effect.amount;
+    }
 }
 
 //first draft:
