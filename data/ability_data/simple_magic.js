@@ -28,7 +28,7 @@ export const spellbolt = {
         // {type: "damage", amount: 1},
         // {type: "mana_leech", amount: 20},
         // {type: "slow", duration: 500, amount: 0.5}
-        {type: "drain", duration: 1000, amount: 20, ticks: 5} //decided not to tie initital damage into the same effect, keeping a separate type: "damage" format instead
+        {type: "drain", subtype: "mana",duration: 1000, amount: 20, ticks: 5} //decided not to tie initital damage into the same effect, keeping a separate type: "damage" format instead
     ]
 
 }
