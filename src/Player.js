@@ -1,5 +1,6 @@
 import { Sprite, Position } from "./Utility.js";
 import { spriteData_player } from "../data/player_spriteData.js";
+import { updateModifiers } from "./AbilityLogic/ModifierLogic.js";
 
 export default class Player{
     constructor(position, size, velocity) {
@@ -23,6 +24,8 @@ export default class Player{
         this.max_mana = 100;
         this.base_speed = 1;
         this.speed = 1;
+        this.modifiers = [];
+        this.effectsOverTime = [];
         
         //maybe use dot notation for default? not sure, either works.
         //this.sprite = new Sprite(spriteData_player.walk[this.direction[this.animationIndex]]);
@@ -31,6 +34,7 @@ export default class Player{
         //document.addEventListener("keydown", this.keyDownCodes);
         //document.addEventListener("keyup", this.keyUpCodes);
     }
+
 
     //deprecated and moved to gamelogic.js as new function
     // determineSprite() {
