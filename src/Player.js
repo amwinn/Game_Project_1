@@ -35,6 +35,12 @@ export default class Player{
         //document.addEventListener("keyup", this.keyUpCodes);
     }
 
+        update(player) {
+        updateModifiers(player);
+        player.effectsOverTime.forEach((effect,i) => {
+            effect.update();
+        });
+    }
 
     //deprecated and moved to gamelogic.js as new function
     // determineSprite() {
