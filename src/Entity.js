@@ -3,6 +3,7 @@ import { CREATURE_RENDER } from "../data/entity_data/entity_render.js";
 import { CREATURE_TYPE } from "../data/entity_data/entity_type.js";
 import { applyEffects } from "./AbilityLogic/AbilityEffect.js";
 import { updateModifiers } from "./AbilityLogic/ModifierLogic.js";
+import EffectOverTime from "./AbilityEntity/EffectOverTime.js";
 
 export const meleeEntityArray = [];
 export const rangedEntityArray = [];
@@ -54,6 +55,9 @@ export default class Entity {
    
     updateMeleeEntity(renderer, entity, target, camera) { 
         updateModifiers(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
+        entity.effectsOverTime.forEach((effect,i) =>{
+            effect.update();
+        })
         // updateActiveness(entity);
         //setSpeed(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
         inRange = this.entityRangeCheck(entity, target, 20 )
@@ -75,6 +79,9 @@ export default class Entity {
 
     updateRangedEntity(renderer, entity, target, camera) {
         updateModifiers(entity);
+        entity.effectsOverTime.forEach((effect,i) =>{
+            effect.update();
+        })
         //setSpeed(entity);
         inRange = this.entityRangeCheck(entity, target, 300);
         if (inRange === true && enemySelfCollision != true) {
