@@ -1,3 +1,4 @@
+import EffectOverTime from "../AbilityEntity/EffectOverTime.js";
 import Modifier from "../AbilityEntity/Modifier.js";
 import { assignActiveness, updateActiveness } from "./ModifierLogic.js";
 //called in gamelogic.js in collision functions
@@ -5,6 +6,12 @@ import { assignActiveness, updateActiveness } from "./ModifierLogic.js";
 export function applyEffects(effects, ability, inflictor, inflicted) {
     effects.forEach((effect) => {
         switch(effect.type) {
+            case "drain": 
+                const effectOverTime = new EffectOverTime(effect, inflictor, inflicted, ability);
+                if(inflicted.effectsOverTime) {
+                    inflicted.effectsOverTime.push(effectOverTime);
+                }
+                break;
             case "damage":
                 inflicted.health -= effect.amount;
                 break;
