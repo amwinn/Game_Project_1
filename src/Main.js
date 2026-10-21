@@ -181,29 +181,29 @@ function gameLoop(){
     })
 
 
-    meleeEntityArray.forEach((enemy, index) => {  
-        enemy.updateMeleeEntity(renderer, enemy, renderLogic.player, renderLogic.camera);
-        enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
-        if(enemy.health <= 0) {
+    meleeEntityArray.forEach((entity, index) => {  
+        entity.updateMeleeEntity(renderer, entity, renderLogic.player, renderLogic.camera);
+        entity.enemyBounds(entity, renderLogic.mapWidth, renderLogic.mapHeight);
+        if(entity.health <= 0) {
             meleeEntityArray.splice(index, 1)
         }
     })
 
 
-    rangedEntityArray.forEach((enemy, index) => {
-        enemy.updateRangedEntity(renderer, enemy, renderLogic.player, renderLogic.camera);
-        enemy.enemyBounds(enemy, renderLogic.mapWidth, renderLogic.mapHeight);
-        if(enemy.health <=0) {
+    rangedEntityArray.forEach((entity, index) => {
+        entity.updateRangedEntity(renderer, entity, renderLogic.player, renderLogic.camera);
+        entity.enemyBounds(entity, renderLogic.mapWidth, renderLogic.mapHeight);
+        if(entity.health <=0) {
             rangedEntityArray.splice(index, 1);
         }
-        if(enemy.cooldownTimer <= 0) {
+        if(entity.cooldownTimer <= 0) {
             //projectileHandler.castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
-            castEntityProjectile(projectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
+            castEntityProjectile(projectilesArray, entity, renderLogic.player, ability_repository["spellbolt"]);
             //castProjectile(ability_repository["spellbolt"], enemy, dataSet)
-            enemy.cooldownTimer = enemy.cooldown
-            enemy.mana -= 10;
+            entity.cooldownTimer = entity.cooldown
+            entity.mana -= 10;
         }
-        enemy.cooldownTimer --;
+        entity.cooldownTimer --;
     })
 
 
@@ -217,6 +217,7 @@ function gameLoop(){
         enemyProjectile.updateProjectile(renderer, renderLogic.camera);
         enemyProjectile.projectileBounds(enemyProjectile, renderLogic.mapWidth, renderLogic.mapHeight, enemyProjectileIndex, entityProjectilesArray);
     })
+    player.update(player);
     requestAnimationFrame(gameLoop);
 
 
