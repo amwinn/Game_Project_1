@@ -35,6 +35,8 @@ export default class Player{
         //document.addEventListener("keyup", this.keyUpCodes);
     }
 
+    //needs cleaned up
+    //called in main.js
         update(player) {
         updateModifiers(player);
         player.effectsOverTime.forEach((effect,i) => {
