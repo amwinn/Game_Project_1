@@ -41,8 +41,6 @@ export default class EffectOverTime {
 
 }
 
-//maybe type and behavior gall under the effect array such as {type: "effectOverTime" subtype: "mana" behavior "drain"}
-//or make type "drain" "funnel", and then a focus: "mana", "stamina", health" etc.
 export function applyEffectOverTime(effect, inflicted, inflictor, ability) {
     switch(effect.type) {
         case "drain":
@@ -51,7 +49,6 @@ export function applyEffectOverTime(effect, inflicted, inflictor, ability) {
         case "funnel":
             applyFunnelTick(effect, inflicted, inflictor, ability)
     }
-    //switch behavior, then for each case call a drainOvertime() or funnelOverTime() function
 }
 
 function applyDrainTick(effect, inflicted, inflictor, ability){
