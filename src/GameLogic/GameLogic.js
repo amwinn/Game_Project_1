@@ -447,9 +447,11 @@ projectilePlayerCollision(array, player) {
             arrayItem.position.y  < player.position.y + player.size.dh          
         ) {
             if(arrayItem.source !== player) {
-                array.splice(arrayIndex, 1);
+                applyEffects(arrayItem.ability.effect, arrayItem, arrayItem.source, player);
+                console.log(arrayItem.ability.effect)
                 console.log(arrayItem.source)
-            }
+                array.splice(arrayIndex, 1);
+            } 
             //array.splice(arrayIndex, 1);
             console.log("collision between " + (arrayItem?.type || "unknown") + " and " + (player?.type || "unknown player type"));
         }
