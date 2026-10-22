@@ -448,8 +448,7 @@ projectilePlayerCollision(array, player) {
         ) {
             if(arrayItem.source !== player) {
                 applyEffects(arrayItem.ability.effect, arrayItem, arrayItem.source, player);
-                console.log(arrayItem.ability.effect)
-                console.log(arrayItem.source)
+                console.log(arrayItem.source);
                 array.splice(arrayIndex, 1);
             } 
             //array.splice(arrayIndex, 1);
