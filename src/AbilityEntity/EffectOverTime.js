@@ -47,7 +47,8 @@ export function applyEffectOverTime(effect, inflicted, inflictor, ability) {
             applyDrainTick(effect, inflicted, inflictor, ability);
             break;
         case "funnel":
-            applyFunnelTick(effect, inflicted, inflictor, ability)
+            applyFunnelTick(effect, inflicted, inflictor, ability);
+            break;
     }
 }
 

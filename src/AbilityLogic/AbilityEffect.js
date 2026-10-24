@@ -6,7 +6,8 @@ import { assignActiveness, updateActiveness } from "./ModifierLogic.js";
 export function applyEffects(effects, ability, inflictor, inflicted) {
     effects.forEach((effect) => {
         switch(effect.type) {
-            case "drain": 
+            case "drain":
+            case "funnel":
                 const effectOverTime = new EffectOverTime(effect, inflictor, inflicted, ability);
                 if(inflicted.effectsOverTime) {
                     inflicted.effectsOverTime.push(effectOverTime);
