@@ -708,7 +708,7 @@ entityCollisionResolution(entity1, entity2) {
         this.projectilePlayerCollision(projectilesArray, this.player);
         //this.projectileEntityCollision(projectilesArray, projectilesArray);
         this.projectileEntityCollision(meleeEntityArray, projectilesArray);
-        this.projectileEntityCollision(meleeEntityArray, projectilesArray);
+        //this.projectileEntityCollision(meleeEntityArray, projectilesArray);
         this.projectileEntityCollision(rangedEntityArray, projectilesArray);
         radialArray.forEach((radial, index) => {
             radial.updateForm(radial, radial.ability,this.player)
