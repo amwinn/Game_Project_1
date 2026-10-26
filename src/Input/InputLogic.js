@@ -52,7 +52,7 @@ export default class InputLogic {
         
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof MovementAction) {
             activeMovementKeys.add(key);
-            defaultKeyBindings[key].process(this.gameLogic, this.player);
+            //defaultKeyBindings[key].process(this.gameLogic, this.player, deltaTime);
             //console.log(key)
         }
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
@@ -85,11 +85,11 @@ export default class InputLogic {
     }
 
 
-    executeInput(){
+    executeInput(deltaTime){
         //this.player.setPreviousPosition(); //has to go at top of function scope, else diagonal movement was no-clipping through objects; now inside adjustDiagonalVelocity inside gamelogic.js
         activeMovementKeys.forEach(key => {
             // console.log(key)
-            defaultKeyBindings[key].process(this.gameLogic, this.player);
+            defaultKeyBindings[key].process(this.gameLogic, this.player, deltaTime);
         })
         //this.adjustDiagonalVelocity(this.player); //now called in movementLogicUpdate() func in gamelogic.js
     }

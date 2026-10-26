@@ -70,7 +70,7 @@ export const enemyMasterArray = [
 
 let playerPosition = new Position(screenSize.width/2, screenSize.height/2);
 let playerSize = new Size(mapData.tileMap.tsize/1.5, mapData.tileMap.tsize/1.5); //both were /1.5
-let player = new Player(playerPosition, playerSize, 2);
+let player = new Player(playerPosition, playerSize, 332);
 
 //DEPENDENTS
 const renderLogic = new RenderLogic(mapData, camera, player); //originally objectMap, changed to map, easier to type and more concise
@@ -154,7 +154,7 @@ function gameLoop(){
     //i could technically just give gameLoop a parameter, and then parameterName - lastTime /1000, but performance.now() feels like the better approach for now so im not putting too much on RAF
     //so deltaTime is just the measure of time that has elapsed between the current time and the last time. /1000 converts the milliseconds to seconds
     let currentTime = performance.now();
-    let deltaTime = (currentTime - lastTime) /1000;
+    const deltaTime = (currentTime - lastTime) /1000;
     lastTime = currentTime;
     //console.log(deltaTime)
     //requestAnimationFrame(gameLoop); //moving to end of function
@@ -165,7 +165,7 @@ function gameLoop(){
     renderLogic.renderHandler(renderer);
     displayVitals(player);
     displayControls();
-    inputLogic.executeInput();
+    inputLogic.executeInput(deltaTime);
     portalArray.forEach((portal, portalIndex) => {
         if(portal.spawnTimer <= 0) {
             const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y

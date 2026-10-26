@@ -14,30 +14,30 @@ export default class MovementAction extends Action {
     }
 
 
-    moveUp(character) {
-        character.position.y -= character.velocity * character.speed;
+    moveUp(character, deltaTime) {
+        character.position.y -= character.velocity * character.speed *deltaTime;
         character.direction = "up";
         //console.log(" is moving up");
     }
 
-    moveDown(character) {
-        character.position.y += character.velocity * character.speed;
+    moveDown(character, deltaTime) {
+        character.position.y += character.velocity * character.speed *deltaTime;
         character.direction = "down";
         //console.log(" is moving down");
         
     }
 
-    moveLeft(character) {
+    moveLeft(character, deltaTime) {
 
-        character.position.x -= character.velocity * character.speed;
+        character.position.x -= character.velocity * character.speed *deltaTime;
         character.direction = "left";
         character.animationDirection = "left";
         //console.log(" is moving left");
 
     }
 
-    moveRight(character) {
-        character.position.x += character.velocity * character.speed;
+    moveRight(character, deltaTime) {
+        character.position.x += character.velocity * character.speed *deltaTime;
         character.direction = "right";
         character.animationDirection = "right";
 
@@ -45,7 +45,7 @@ export default class MovementAction extends Action {
     }
 
 
-    process(gameLogic, character) {
+    process(gameLogic, character, deltaTime) {
 
         //console.log(gameLogic.isInBounds(character, gameLogic.mapWidth, gameLogic.mapHeight))
         //console.log(character.direction)
@@ -60,16 +60,16 @@ export default class MovementAction extends Action {
         // }
         //MUST BE THIS.DIRECTION, NOT CHARACTER.DIRECTION, CHAR IS NOT INSTANCE OF CLASS, THIS. IS THE TEMPLATE FOR INSTANCE, THE PLACEHOLDER.
         if(this.direction === MovementAction.up && gameLogic.withinTopBounds(character, gameLogic.mapWidth, gameLogic.mapHeight)) {
-            this.moveUp(character);
+            this.moveUp(character, deltaTime);
         }
         else if(this.direction === MovementAction.down && gameLogic.withinBottomBounds(character, gameLogic.mapWidth, gameLogic.mapHeight)) {
-            this.moveDown(character);
+            this.moveDown(character, deltaTime);
         }
         else if(this.direction === MovementAction.left && gameLogic.withinLeftBounds(character, gameLogic.mapWidth, gameLogic.mapHeight)) {
-            this.moveLeft(character);
+            this.moveLeft(character, deltaTime);
         }
         else if(this.direction === MovementAction.right && gameLogic.withinRightBounds(character, gameLogic.mapWidth, gameLogic.mapHeight)) {
-            this.moveRight(character);
+            this.moveRight(character, deltaTime);
         }
 
     }
