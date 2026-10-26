@@ -16,24 +16,26 @@ export default class EffectOverTime {
         this.durationRemaining = 0;
         this.ticks = effect?.ticks ?? null;
         this.tickTimer = 0;
-        this.tickSpacing = 0; //then in update this.tickSpacing = this.duration / this.ticks;
+        this.tickSpacing = this.duration / this.ticks; //then in update this.tickSpacing = this.duration / this.ticks;
         this.ticksRemaining = this.ticks;
         //maybe add active as a safety net incase it doesnt delete properly?
     }
 
-    update() {
+    update(deltaTime) {
         this.durationRemaining = this.duration - this.durationTimer;
-        this.tickSpacing = this.duration / this.ticks;
-        this.durationTimer ++;
-        this.tickTimer ++;
+        //this.tickSpacing = this.duration / this.ticks;
+        this.durationTimer += deltaTime;
+        this.tickTimer += deltaTime;
         if(this.durationRemaining <= 0) {
             this.delete = true;
+            return;
             //this.active = false; only add if adding this.active as a prop
         }
-        if(this.tickTimer >= this.tickSpacing && this.durationRemaining >0 && this.ticksRemaining >0 ) {
+        //the below if originally had && durationRemaining >0
+        if(this.tickTimer >= this.tickSpacing && this.ticksRemaining >0 ) {
             applyEffectOverTime(this.effect, this.inflicted, this.inflictor, this.ability);
             this.ticksRemaining--;
-            console.log("applying")
+            this.tickTimer-=this.tickSpacing;
         }
 
     }
@@ -55,19 +57,19 @@ export function applyEffectOverTime(effect, inflicted, inflictor, ability) {
 function applyDrainTick(effect, inflicted, inflictor, ability){
     if(effect.subType in inflicted && inflicted[effect.subType] >0+effect.amount) {
         console.log(inflicted.mana)
-        inflicted[effect.subType] -= effect.amount/10;
+        inflicted[effect.subType] -= effect.amount;
     }
     if(effect.subType in inflictor && inflictor[effect.subType] < 100-effect.amount) {
-        inflictor[effect.subType] += effect.amount/10;
+        inflictor[effect.subType] += effect.amount;
     }
 }
 
 function applyFunnelTick(effect, inflicted, inflictor, ability) {
     if(effect.subType in inflicted && inflicted[effect.subType] <100-effect.amount) {
-        inflicted[effect.subType] += effect.amount/10;
+        inflicted[effect.subType] += effect.amount;
     }
     if(effect.subType in inflictor && inflicted[effect.subType] >0+effect.amount) {
-        inflictor[effect.subType] -= effect.amount/10;
+        inflictor[effect.subType] -= effect.amount;
     }
 }
 

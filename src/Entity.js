@@ -53,10 +53,10 @@ export default class Entity {
     }
 
    
-    updateMeleeEntity(renderer, entity, target, camera) { 
+    updateMeleeEntity(renderer, entity, target, camera, deltaTime) { 
         updateModifiers(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
         entity.effectsOverTime.forEach((effect,i) =>{
-            effect.update();
+            effect.update(deltaTime);
         })
         // updateActiveness(entity);
         //setSpeed(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
@@ -77,10 +77,10 @@ export default class Entity {
         
     }
 
-    updateRangedEntity(renderer, entity, target, camera) {
+    updateRangedEntity(renderer, entity, target, camera, deltaTime) {
         updateModifiers(entity);
         entity.effectsOverTime.forEach((effect,i) =>{
-            effect.update();
+            effect.update(deltaTime);
         })
         //setSpeed(entity);
         inRange = this.entityRangeCheck(entity, target, 300);

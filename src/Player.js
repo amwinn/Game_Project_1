@@ -37,10 +37,10 @@ export default class Player{
 
     //needs cleaned up
     //called in main.js
-        update(player) {
+    update(player, deltaTime) {
         updateModifiers(player);
         player.effectsOverTime.forEach((effect,i) => {
-            effect.update();
+            effect.update(deltaTime);
         });
     }
 

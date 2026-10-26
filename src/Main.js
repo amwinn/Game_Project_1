@@ -182,7 +182,7 @@ function gameLoop(){
 
 
     meleeEntityArray.forEach((entity, index) => {  
-        entity.updateMeleeEntity(renderer, entity, renderLogic.player, renderLogic.camera);
+        entity.updateMeleeEntity(renderer, entity, renderLogic.player, renderLogic.camera, deltaTime);
         entity.enemyBounds(entity, renderLogic.mapWidth, renderLogic.mapHeight);
         if(entity.health <= 0) {
             meleeEntityArray.splice(index, 1)
@@ -191,7 +191,7 @@ function gameLoop(){
 
 
     rangedEntityArray.forEach((entity, index) => {
-        entity.updateRangedEntity(renderer, entity, renderLogic.player, renderLogic.camera);
+        entity.updateRangedEntity(renderer, entity, renderLogic.player, renderLogic.camera, deltaTime);
         entity.enemyBounds(entity, renderLogic.mapWidth, renderLogic.mapHeight);
         if(entity.health <=0) {
             rangedEntityArray.splice(index, 1);
@@ -217,7 +217,7 @@ function gameLoop(){
         enemyProjectile.updateProjectile(renderer, renderLogic.camera);
         enemyProjectile.projectileBounds(enemyProjectile, renderLogic.mapWidth, renderLogic.mapHeight, enemyProjectileIndex, entityProjectilesArray);
     })
-    player.update(player);
+    player.update(player, deltaTime);
     requestAnimationFrame(gameLoop);
 
 
