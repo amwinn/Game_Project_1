@@ -63,7 +63,7 @@ export const spellnova = {
         {type: "slow", duration: 25, amount: 0.9},
         {type: "stun", duration: 10},
         {type: "fast", duration: 25, amount: 1.1},
-        {type: "drain", subType: "health", duration: 1000, amount: 10, ticks: 10}
+        {type: "drain", subType: "health", duration: 10, amount: 10, ticks: 10}
         //{type: "slow", duration: 2500, amount: .9}
     ]
 }
