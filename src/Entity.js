@@ -54,7 +54,7 @@ export default class Entity {
 
    
     updateMeleeEntity(renderer, entity, target, camera, deltaTime) { 
-        updateModifiers(entity); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
+        updateModifiers(entity, deltaTime); //IMPORTED FROM APPLYEFFECTS WHILE TESTING
         entity.effectsOverTime.forEach((effect,i) =>{
             effect.update(deltaTime);
         })
@@ -78,7 +78,7 @@ export default class Entity {
     }
 
     updateRangedEntity(renderer, entity, target, camera, deltaTime) {
-        updateModifiers(entity);
+        updateModifiers(entity, deltaTime);
         entity.effectsOverTime.forEach((effect,i) =>{
             effect.update(deltaTime);
         })

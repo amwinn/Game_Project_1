@@ -39,9 +39,9 @@ export function updateActiveness(entity) {
     entity.speed = returnSpeed(entity);
 }
 
-export function updateModifiers(entity) {
+export function updateModifiers(entity, deltaTime) {
     for(let i = 0; i < entity.modifiers.length; i++) {
-        entity.modifiers[i].update();
+        entity.modifiers[i].update(deltaTime);
         if(entity.modifiers[i].delete) {
             entity.modifiers.splice(i, 1);
             updateActiveness(entity);

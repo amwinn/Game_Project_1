@@ -14,10 +14,9 @@ export default class Modifier {
     //modArray.forEach((item, i) => {update(item)})
     
     //idk if this is the best way to create duration remaining
-    update() {
-        //console.log(this.durationRemaining)
+    update(deltaTime) {
+        this.durationTimer +=deltaTime;
         this.durationRemaining = this.duration -this.durationTimer;
-        this.durationTimer ++;
         if(this.durationTimer >= this.duration) {
             this.delete = true;
             this.active = false;

@@ -27,7 +27,7 @@ export const spellbolt = {
     effect:[
         {type: "damage", amount: 1},
         // {type: "mana_leech", amount: 20},
-        {type: "slow", duration: 500, amount: 0.5},
+        {type: "slow", duration: 5, amount: 0.5},
         {type: "drain", subType: "mana", duration: 10, amount: 5, ticks: 5} //decided not to tie initital damage into the same effect, keeping a separate type: "damage" format instead
     ]
 
@@ -60,9 +60,9 @@ export const spellnova = {
     },
     effect: [
         {type: "knockback", amount: 75},
-        {type: "slow", duration: 2500, amount: 0.9},
-        {type: "stun", duration: 1000},
-        {type: "fast", duration: 2500, amount: 1.1},
+        {type: "slow", duration: 25, amount: 0.9},
+        {type: "stun", duration: 10},
+        {type: "fast", duration: 25, amount: 1.1},
         {type: "drain", subType: "health", duration: 1000, amount: 10, ticks: 10}
         //{type: "slow", duration: 2500, amount: .9}
     ]
@@ -93,7 +93,7 @@ export const spellblast = {
     },
     effect: [
         {type: "damage", amount: 1},
-        {type: "fast", duration: 1500, amount: 1.9}
+        {type: "fast", duration: 15, amount: 1.9}
     ]
 }
 
