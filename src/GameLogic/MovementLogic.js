@@ -13,7 +13,6 @@ export function returnSpeed(entity) {
                     break;
                 case "stun":
                     stunComponent = 0;
-                    console.log("STUN OVERRIDE")
                     break;
             }
         }
