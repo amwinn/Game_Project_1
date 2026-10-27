@@ -45,6 +45,7 @@ export function updateModifiers(entity, deltaTime) {
         if(entity.modifiers[i].delete) {
             entity.modifiers.splice(i, 1);
             updateActiveness(entity);
+            i--;//just so that it doesnt skip the next one, if works here implement elsewhere too, dont want to have to iterate backwards, aesthetically void
         }
     }
     entity.speed = returnSpeed(entity);
