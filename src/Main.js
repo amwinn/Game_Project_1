@@ -148,15 +148,18 @@ function renderLoot(renderer) {
        
     });
 }
-let lastTime = 0;
+let lastTime = null;
 function gameLoop(){
     //requestAnimationFrame automatically fills its callback function, so requestAnimationFrame(callback), with a timestamp, which is performance.now();
     //i could technically just give gameLoop a parameter, and then parameterName - lastTime /1000, but performance.now() feels like the better approach for now so im not putting too much on RAF
     //so deltaTime is just the measure of time that has elapsed between the current time and the last time. /1000 converts the milliseconds to seconds
     let currentTime = performance.now();
+    if(lastTime === null) {
+        lastTime = currentTime;
+    }
     const deltaTime = (currentTime - lastTime) /1000;//REMINDER, MEASURED IN SECONDS, BECAUSE WE /1000
     lastTime = currentTime;
-    //console.log(deltaTime)
+    console.log(deltaTime)
     //requestAnimationFrame(gameLoop); //moving to end of function
     renderer.clearRect(0,0, gameMap.width, gameMap.height);
     gameLogic.mapHandler();
