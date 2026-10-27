@@ -4,16 +4,13 @@
 
 export const spellbolt = {
     id:"spellbolt",
-    cooldown: 300,
-    //not really sure if i need redundancy below with resource and required, but it is an important distinction
-    //incase there is a spell that REQUIRES 10 health, but doesnt COST/CONSUME 10 health
+    cooldown: 3,
     resource: [
         {type: "mana", amount: 0}
     ],
     required: [
         {type: "mana", amount: 0}
     ],
-
     form: {
         type: "projectile",
         data_config: {
@@ -21,12 +18,10 @@ export const spellbolt = {
             radius: 15,
             speed: 5,
             scale: 1.25 //not sure if i really need, just incase for dynamic size or something, remove if doesnt come to fruition
-    },
-
+        },
     },
     effect:[
         {type: "damage", amount: 1},
-        // {type: "mana_leech", amount: 20},
         {type: "slow", duration: 5, amount: 0.5},
         {type: "drain", subType: "mana", duration: 10, amount: 5, ticks: 5} //decided not to tie initital damage into the same effect, keeping a separate type: "damage" format instead
     ]
