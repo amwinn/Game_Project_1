@@ -154,7 +154,7 @@ function gameLoop(){
     //i could technically just give gameLoop a parameter, and then parameterName - lastTime /1000, but performance.now() feels like the better approach for now so im not putting too much on RAF
     //so deltaTime is just the measure of time that has elapsed between the current time and the last time. /1000 converts the milliseconds to seconds
     let currentTime = performance.now();
-    const deltaTime = (currentTime - lastTime) /1000;
+    const deltaTime = (currentTime - lastTime) /1000;//REMINDER, MEASURED IN SECONDS, BECAUSE WE /1000
     lastTime = currentTime;
     //console.log(deltaTime)
     //requestAnimationFrame(gameLoop); //moving to end of function
