@@ -12,12 +12,10 @@ export default class AbilityAction extends Action {
 
     process(source, dataSet) {
         const ability = ability_repository[this.abilityID];
-        // castAbility(ability, source, dataSet);
         if(resourceCheck(source, ability.resource)) {
            castAbility(ability, source, dataSet);
            console.log(resourceCheck(source, ability.resource))
         }
-        console.log(source[ability.resource[0].type]) //testing to prove "mana" string from data can be used with player.mana
     }
 
 
