@@ -711,9 +711,9 @@ entityCollisionResolution(entity1, entity2) {
         //this.projectileEntityCollision(meleeEntityArray, projectilesArray);
         this.projectileEntityCollision(rangedEntityArray, projectilesArray);
         radialArray.forEach((radial, index) => {
-            radial.updateForm(radial, radial.ability,this.player)
+            radial.updateForm(radial, radial.ability,this.player)//atm is just a clamp-to-player
             radial.animateBehavior(radial, radial.ability, this.player, deltaTime);
-            radial.updateBehavior(radial, radial.ability, this.player);
+            radial.updateBehavior(radial, radial.ability, this.player, deltaTime);
             //radial.updateEruptive(radial,radial.ability, this.player);
             //console.log(eruptive.radius)
             if(radial.delete ===true) {

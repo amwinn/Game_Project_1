@@ -26,10 +26,10 @@ export default class Area {
         this.sprite = new Sprite(ability.form.data_config.sprite[this.animationIndex], this.diameter, this.diameter);
     }
 
-    updateArea(area, ability, caster) {
+    updateArea(area, ability, caster, deltaTime) {
     //updateForm();
     area.clampToCaster(area, caster); //eventually move to be conditional on if the data says clamp: false, or clamp: true?
-    this.updateBehavior(area, ability, caster);
+    this.updateBehavior(area, ability, caster, deltaTime);
     //radial x/y = player x/y
     //if radial timer >= radial duration, radial.collidable = false, radial.delete = true
 
@@ -57,13 +57,13 @@ export default class Area {
 
     }
 
-    updateBehavior(area, ability, caster) {
+    updateBehavior(area, ability, caster, deltaTime) {
         switch(ability.form.behavior) {
             case Area.eruptive:
-                area.updateEruptive(area, ability, caster);
+                area.updateEruptive(area, ability, caster, deltaTime);
                 break;
             case Area.static:
-                area.updateStatic(area, ability, caster);
+                area.updateStatic(area, ability, caster, deltaTime);
                 break;
         }
     }
@@ -71,8 +71,8 @@ export default class Area {
 
     //maybe add a manageAnimation or updateAnimation that will sort byhh form/type etc., thats where animatestatic would be located
 
-    updateStatic(area, ability, caster) {
-        area.durationTimer ++;
+    updateStatic(area, ability, caster, deltaTime) {
+        area.durationTimer +=deltaTime;
         if(area.durationTimer >= area.ability.form.data_config.duration) {
             area.delete = true;
         }
@@ -165,10 +165,10 @@ export default class Area {
     }
 
     //rename to animateEruption(type, ability, caster) then under updateRadial(behavior, ability, caster) {somehow link behavior to the appropriate function (eruptive, instant, etc.) and call it}
-    updateEruptive(area, ability, caster){
+    updateEruptive(area, ability, caster, deltaTime){
         //this.clampToCaster(area, caster); //moved to updateRadial, trying to streamline
         //the duration code here isnt useful until i change the scaling to be tied with duration
-        area.durationTimer++;
+        area.durationTimer+= deltaTime;
         if(area.durationTimer === area.duration*.9) {
             area.collidable = true;
         } else {

@@ -44,7 +44,7 @@ export const spellnova = {
             sprite: [
                 "Images/Abilities/simple_magic/spellnova_1.png","Images/Abilities/simple_magic/spellnova_1.png"
             ],
-            duration: 150,
+            duration: 0.75,
             trigger: 100,
             radius: 300, 
             base_scale: 0.25,
@@ -79,7 +79,7 @@ export const spellblast = {
             sprite: [
                 "Images/spellnova_test.png", "Images/Abilities/simple_magic/spellnova_1.png"
             ],
-            duration: 150,
+            duration: 0.75,
             radius: 150,
             base_scale: 1,
             max_scale: 1,
