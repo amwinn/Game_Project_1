@@ -163,7 +163,7 @@ function gameLoop(){
     //requestAnimationFrame(gameLoop); //moving to end of function
     renderer.clearRect(0,0, gameMap.width, gameMap.height);
     gameLogic.mapHandler();
-    gameLogic.movementLogicUpdate();
+    gameLogic.movementLogicUpdate(deltaTime);
     renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
     renderLogic.renderHandler(renderer);
     displayVitals(player);

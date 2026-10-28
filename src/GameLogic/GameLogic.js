@@ -88,14 +88,14 @@ spawnEntity(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity
 //start placeholder
 // playerSprites = loadEntityRenders(spriteData_player);
 //end placeholder
-playerSpriteManager(player) {
+playerSpriteManager(player, deltaTime) {
     //console.log(player.sprite)
-    let animationDuration = 40;
+    let animationDuration = 0.25; //pre-delta-time was 40
     //this.playerSprites is using temp placeholder code/function
     let selectedSpriteSet = playerSprites.walk[player.animationDirection];
 
     if (activeMovementKeys.size > 0) {
-        player.animationTimer++;
+        player.animationTimer+= deltaTime;
     }
     if (activeMovementKeys.size === 0) {
         player.animationIndex = 0;
@@ -738,9 +738,9 @@ entityCollisionResolution(entity1, entity2) {
 
     }
 
-    movementLogicUpdate() {
+    movementLogicUpdate(deltaTime) {
         this.adjustDiagonalVelocity(this.player);
-        this.playerSpriteManager(this.player);
+        this.playerSpriteManager(this.player, deltaTime);
         this.spriteManager_meleeForestSprite(meleeEntityArray, this.player);
         this.spriteManager_mageForestSprite(rangedEntityArray, this.player);
         //this.checkPlayerBounds(this.player, this.mapWidth, this.mapHeight);
