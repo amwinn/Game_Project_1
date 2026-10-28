@@ -77,7 +77,7 @@ export const spellblast = {
         behavior: "static",
         data_config: {
             sprite: [
-                "Images/spellnova_test.png"
+                "Images/spellnova_test.png", "Images/Abilities/simple_magic/spellnova_1.png"
             ],
             duration: 150,
             radius: 150,

@@ -44,13 +44,13 @@ export default class Area {
         }
     }
 //updateX can be gamelogic, renderX can be renderlogic, animateX can be animation logic(currently still in gamelogic.js)
-    animateBehavior(area, ability, caster){
+    animateBehavior(area, ability, caster,deltaTime){
         switch(ability.form.behavior) {
             case Area.static:
-                area.animateStatic(area,ability,caster);
+                area.animateStatic(area,ability,caster, deltaTime);
                 break;
             case Area.eruptive:
-                area.animateEruptive(area, ability, caster);
+                area.animateEruptive(area, ability, caster, deltaTime);
                 break;
         }
         //could have animateEruptive, currently only one frame sprite but might make more
@@ -89,13 +89,13 @@ export default class Area {
     }
 
     //move to gamelogic.js once working
-    animateStatic(area, ability, caster) {
+    animateStatic(area, ability, caster, deltaTime) {
         //console.log(area.sprite.image.src)
         let selectedSpriteSet = ability.form.data_config.sprite; //might be overkill if there is a single static image that doesnt change, best to keep format though 
-        let frameDuration = 20; //duration of each frame
+        let frameDuration = .2; //duration of each frame, pre-delta-time was 20
 
 
-        area.animationTimer++;
+        area.animationTimer+= deltaTime;
         //console.log(area.animationTimer, area.animationIndex, selectedSpriteSet.length)
         if(area.animationTimer >= frameDuration) {
             area.animationIndex++;
@@ -111,11 +111,11 @@ export default class Area {
         
     }
 
-    animateEruptive(area, ability, caster) {
+    animateEruptive(area, ability, caster, deltaTime) {
         let selectedSpriteSet = ability.form.data_config.sprite;
-        let frameDuration = 20;
+        let frameDuration = .2; //pre-delta-time was 20
 
-        area.animationTimer++;
+        area.animationTimer += deltaTime;
         //console.log(area.animationTimer, area.animationIndex, selectedSpriteSet.length)
         if(area.animationTimer >= frameDuration) {
             area.animationIndex++;

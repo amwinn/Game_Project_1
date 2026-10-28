@@ -162,7 +162,7 @@ function gameLoop(){
     console.log(deltaTime)
     //requestAnimationFrame(gameLoop); //moving to end of function
     renderer.clearRect(0,0, gameMap.width, gameMap.height);
-    gameLogic.mapHandler();
+    gameLogic.mapHandler(deltaTime);
     gameLogic.movementLogicUpdate(deltaTime);
     renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
     renderLogic.renderHandler(renderer);

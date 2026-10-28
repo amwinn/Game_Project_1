@@ -688,7 +688,7 @@ entityCollisionResolution(entity1, entity2) {
 
 
     //Eventually refactor the code to be in seperate update functions, for collision, map, player position etc.
-    mapHandler() {
+    mapHandler(deltaTime) {
         this.radialEntityCollision(radialArray, meleeEntityArray);
         this.radialEntityCollision(radialArray, rangedEntityArray);
         this.entityCollisionCheck(meleeEntityArray, meleeEntityArray);
@@ -712,7 +712,7 @@ entityCollisionResolution(entity1, entity2) {
         this.projectileEntityCollision(rangedEntityArray, projectilesArray);
         radialArray.forEach((radial, index) => {
             radial.updateForm(radial, radial.ability,this.player)
-            radial.animateBehavior(radial, radial.ability, this.player);
+            radial.animateBehavior(radial, radial.ability, this.player, deltaTime);
             radial.updateBehavior(radial, radial.ability, this.player);
             //radial.updateEruptive(radial,radial.ability, this.player);
             //console.log(eruptive.radius)
