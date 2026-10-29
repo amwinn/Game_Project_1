@@ -169,7 +169,7 @@ export default class Area {
         //this.clampToCaster(area, caster); //moved to updateRadial, trying to streamline
         //the duration code here isnt useful until i change the scaling to be tied with duration
         area.durationTimer+= deltaTime;
-        if(area.durationTimer === area.duration*.9) {
+        if(area.durationTimer >= area.duration * 0.9 && area.duration >= area.duration) { //was if(area.durationTimer === area.duration*.9) but with deltaTime it will never actually be exactly === to .9 because of infinite repeating nature of delta time
             area.collidable = true;
         } else {
             area.collidable = false;
