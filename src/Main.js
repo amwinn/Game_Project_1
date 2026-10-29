@@ -81,7 +81,6 @@ const inputLogic = new InputLogic(gameLogic, camera, player);
 export const projectilesArray = [];
 export const entityProjectilesArray = [];
 export const radialArray = [];
-//export const radialArray = [];
 
 export const dataSet = {
     eruptiveArray: radialArray,
@@ -123,45 +122,23 @@ function displayControls() {
 }
 
 
-// let meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //both were map.player.size.dw/dh /2
-// let rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //was map.player.size.dw/3, map.player.size.dh/2
-//recently moved to the portal array.foreach section, right before the spawnEnemy function is called
-
-
-
-
-//Temporary position, most likely moving to gamelogic.js
-// function spawnEnemy(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown) {
-//     if(array.length < maxEnemyCount) {
-//         array.push(new Entity(enemyType, enemyRole, position, size, velocity, cooldownTimer, cooldown));
-//     }
-// }
-//recently moved to gamelogic under new spawnlogic section, remove soon
-
-
-//Temporary object to interface enemy spell casting until spell and ability logic are properly added and structured
-//const projectileHandler = new Projectile();
-
 function renderLoot(renderer) {
     test_item_array.forEach((item, i) => {
        renderer.drawImage(item.sprite.image, item.x-camera.x, item.y-camera.x, 64, 64);
        
     });
 }
+
 let lastTime = null;
 function gameLoop(){
-    //requestAnimationFrame automatically fills its callback function, so requestAnimationFrame(callback), with a timestamp, which is performance.now();
-    //i could technically just give gameLoop a parameter, and then parameterName - lastTime /1000, but performance.now() feels like the better approach for now so im not putting too much on RAF
-    //so deltaTime is just the measure of time that has elapsed between the current time and the last time. /1000 converts the milliseconds to seconds
     let currentTime = performance.now();
     if(lastTime === null) {
         lastTime = currentTime;
     }
-    const deltaTime = (currentTime - lastTime) /1000;//REMINDER, MEASURED IN SECONDS, BECAUSE WE /1000
+    const deltaTime = (currentTime - lastTime) /1000;//REMINDER, MEASURED IN SECONDS, BECAUSE WE /1000 TO CONVERT MILLISECONDS TO SECONDS
     lastTime = currentTime;
-    //console.log(deltaTime)
-    //requestAnimationFrame(gameLoop); //moving to end of function
     renderer.clearRect(0,0, gameMap.width, gameMap.height);
+
     gameLogic.mapHandler(deltaTime);
     gameLogic.movementLogicUpdate(deltaTime);
     gameLogic.spawnLogicUpdate(deltaTime);
@@ -170,20 +147,6 @@ function gameLoop(){
     displayVitals(player);
     displayControls();
     inputLogic.executeInput(deltaTime);
-    // portalArray.forEach((portal, portalIndex) => {
-    //     portal.updatePortal(deltaTime)
-    //     if(portal.spawnTimer >= portal.spawnTime) {
-    //         const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y
-    //         const magePosition  = new Position(portal.position.x, portal.position.y) //same
-    //         const meleeEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
-    //         const rangedEnemySize = new Size(mapData.tileMap.tsize/2, mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
-    //         spawnEntity(meleeEntityArray, 50, Entity.forest_creature, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 5, 7); //had to have both velocity values or else it wouldnt have worked
-    //         spawnEntity(rangedEntityArray, 25, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 5, 7); //maybe change cooldown number to random number, between 400-500?   
-    //         portal.spawnTimer = 0;      
-    //     }
-        
-    // })
-
 
     meleeEntityArray.forEach((entity, index) => {  
         entity.updateMeleeEntity(renderer, entity, renderLogic.player, renderLogic.camera, deltaTime);
@@ -193,7 +156,6 @@ function gameLoop(){
         }
     })
 
-
     rangedEntityArray.forEach((entity, index) => {
         entity.updateRangedEntity(renderer, entity, renderLogic.player, renderLogic.camera, deltaTime);
         entity.enemyBounds(entity, renderLogic.mapWidth, renderLogic.mapHeight);
@@ -201,7 +163,6 @@ function gameLoop(){
             rangedEntityArray.splice(index, 1);
         }
         if(entity.cooldownTimer <= 0) {
-            //projectileHandler.castEntityProjectile(enemyProjectilesArray, enemy, renderLogic.player, ability_repository["spellbolt"]);
             castEntityProjectile(projectilesArray, entity, renderLogic.player, ability_repository["spellbolt"]);
             //castProjectile(ability_repository["spellbolt"], enemy, dataSet)
             entity.cooldownTimer = entity.cooldown
@@ -209,8 +170,6 @@ function gameLoop(){
         }
         entity.cooldownTimer -=deltaTime;
     })
-
-
 
     projectilesArray.forEach((projectile, projectileIndex) => {
         projectile.updateProjectile(renderer, renderLogic.camera);
@@ -223,7 +182,6 @@ function gameLoop(){
     })
     player.update(player, deltaTime);
     requestAnimationFrame(gameLoop);
-
 
 }
 
