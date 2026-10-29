@@ -68,6 +68,23 @@ spawnEntity(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity
     }
 }
 
+updatePortalSpawner(array, deltaTime) {
+    for(const portal of array) {
+        console.log(portal.spawnTimer)
+        portal.updatePortal(deltaTime);
+        if(portal.spawnTimer >= portal.spawnTime) {
+            const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y
+            const magePosition  = new Position(portal.position.x, portal.position.y) //same
+            const meleeEnemySize = new Size(this.mapData.tileMap.tsize/2, this.mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
+            const rangedEnemySize = new Size(this.mapData.tileMap.tsize/2, this.mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
+            this.spawnEntity(meleeEntityArray, 50, Entity.forest_creature, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 5, 7); //had to have both velocity values or else it wouldnt have worked
+            this.spawnEntity(rangedEntityArray, 25, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 5, 7); //maybe change cooldown number to random number, between 400-500?   
+            portal.spawnTimer = 0;      
+        }
+    }
+}
+
+
 /*
 ..................................................................................................................................
 
@@ -648,7 +665,7 @@ entityCollisionResolution(entity1, entity2) {
                         objectSpawnTracker.add(tileID);
                     }
                     if (!objectSpawnTracker.has(tileID) && isTileValid && selectedTile.type === GameObject.portal) {
-                        selectedTile.arrayType.push(new Portal(selectedTile.type, objectPosition, objectSize, 400, 400, 100))
+                        selectedTile.arrayType.push(new Portal(selectedTile.type, objectPosition, objectSize, 4))
                         objectSpawnTracker.add(tileID);
                     }
                 }
@@ -736,6 +753,10 @@ entityCollisionResolution(entity1, entity2) {
         //changePlayerSpawnState(true);
         //console.log(playerSpawned);
 
+    }
+
+    spawnLogicUpdate(deltaTime) {
+        this.updatePortalSpawner(portalArray, deltaTime);
     }
 
     movementLogicUpdate(deltaTime) {
