@@ -70,7 +70,6 @@ spawnEntity(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity
 
 updatePortalSpawner(array, deltaTime) {
     for(const portal of array) {
-        console.log(portal.spawnTimer)
         portal.updatePortal(deltaTime);
         if(portal.spawnTimer >= portal.spawnTime) {
             const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y
