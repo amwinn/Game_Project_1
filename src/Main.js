@@ -42,9 +42,9 @@ export const screenSize = {width: window.innerWidth, height: window.innerHeight}
 //Sets total canvas size, not used atm
 gameMap.width = 8000//3328;  //canvas size, not used atm
 gameMap.height = 4000//1792; //canvas size, not used atm
-
-
-
+//temp test start
+const audio = new Audio("/Audio/changeOfSpirit1.wav");
+//temp test end
 //DEPENDENCIES
 let mapData = new MapData();
 let camera = new Camera(0,0, new Size(screenSize.width,screenSize.height));
@@ -131,6 +131,10 @@ function renderLoot(renderer) {
 
 let lastTime = null;
 function gameLoop(){
+    //temp test start
+    audio.volume = .2;
+    audio.play();
+    //temp test end
     let currentTime = performance.now();
     if(lastTime === null) {
         lastTime = currentTime;
