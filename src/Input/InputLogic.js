@@ -69,9 +69,10 @@ export default class InputLogic {
         inputState.cursor.screen.y = e.clientY;
         inputState.cursor.world.x = e.clientX + this.camera.x;
         inputState.cursor.world.y = e.clientY + this.camera.y;
-        if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof ProjectileAction) {
-            defaultKeyBindings[key].process(this.player, e, this.camera)
-        }
+        //remove soon, looks to be obsolete
+        // if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof ProjectileAction) {
+        //     defaultKeyBindings[key].process(this.player, e, this.camera)
+        // }
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof AbilityAction) {
             defaultKeyBindings[key].process(this.player, dataSet)
         }

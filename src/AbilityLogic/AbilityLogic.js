@@ -38,13 +38,14 @@ export function castProjectile(ability, source, dataSet) {
 }
 
 //not yet ready, need to remove enemyProjectile, just have projectilesArray, conform the castEntityProjectile parameters to the castProjectile
-export function castEntityProjectile(array, enemy, target, ability) {
+//dataSet.projectilesArray.push was just array.push
+export function castEntityProjectile(dataSet, source, target, ability) {
     const radius = ability.form.data_config.radius;
     const size = new Size(30,30);
-    const angle = Math.atan2(((target.position.y + target.size.dh/5) - enemy.position.y), ((target.position.x + target.size.dw/5) - enemy.position.x)); //dw/5 and dh/5 can be adjusted as needed
-    const position = new Position(enemy.position.x+enemy.size.dw/2, enemy.position.y+enemy.size.dh/2);
+    const angle = Math.atan2(((target.position.y + target.size.dh/5) - source.position.y), ((target.position.x + target.size.dw/5) - source.position.x)); //dw/5 and dh/5 can be adjusted as needed
+    const position = new Position(source.position.x+source.size.dw/2, source.position.y+source.size.dh/2);
     const sprite = new Sprite("Images/Abilities/simple_magic/spellbolt_test.png", size.dw, size.dh)
-    array.push(new Projectile(Projectile.entityProjectile, ability, enemy, position, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
+    dataSet.projectilesArray.push(new Projectile(Projectile.entityProjectile, ability, source, position, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
 }
 
 function castRadial(ability, source, dataSet) {
