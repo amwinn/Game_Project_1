@@ -18,6 +18,7 @@ export default class InputLogic {
         document.addEventListener("keyup", this.executeKeyUp);
         document.addEventListener("mousedown", this.executeMouseDown);
         document.addEventListener("mouseup", this.executeMouseUp);
+        document.addEventListener("contextmenu", function (e) {e.preventDefault()}) //stops context menue from opening on right click
         /* important to note that apparently its bad practice to have the addEventListener functions in the constructor, but since its only called once i dont see an issue.
         if it becomes a problem, maybe make a create() func that holds the document.addEventListener and a destroy() func that holds document.removeEventListener */
 
