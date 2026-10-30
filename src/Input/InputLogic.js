@@ -65,6 +65,10 @@ export default class InputLogic {
     executeMouseDown = (e) => {
         //projectile action is being slowly phased out of all code
         const key = "click";
+        inputState.cursor.screen.x = e.clientX;
+        inputState.cursor.screen.y = e.clientY;
+        inputState.cursor.world.x = e.clientX + this.camera.x;
+        inputState.cursor.world.y = e.clientY + this.camera.y;
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof ProjectileAction) {
             defaultKeyBindings[key].process(this.player, e, this.camera)
         }
