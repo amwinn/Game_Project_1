@@ -43,7 +43,7 @@ export const screenSize = {width: window.innerWidth, height: window.innerHeight}
 gameMap.width = 8000//3328;  //canvas size, not used atm
 gameMap.height = 4000//1792; //canvas size, not used atm
 //temp test start
-const audio = new Audio("/Audio/changeOfSpirit1.wav");
+const audio = new Audio("Audio/changeOfSpirit1.wav");
 //temp test end
 //DEPENDENCIES
 let mapData = new MapData();
@@ -167,7 +167,7 @@ function gameLoop(){
             rangedEntityArray.splice(index, 1);
         }
         if(entity.cooldownTimer <= 0) {
-            castEntityProjectile(projectilesArray, entity, renderLogic.player, ability_repository["spellbolt"]);
+            castEntityProjectile(dataSet, entity, renderLogic.player, ability_repository["spellbolt"]); //dataSet was projectilesArray
             //castProjectile(ability_repository["spellbolt"], enemy, dataSet)
             entity.cooldownTimer = entity.cooldown
             entity.mana -= 10;
