@@ -1,15 +1,114 @@
-import { CREATURE_TYPE } from "./entity_type.js"
+import { CREATURE_TYPE, PLAYER_TYPE } from "./entity_type.js"
 
 
-//NEEDS BIG CHANGES, NO SPRITE STUFF IN HERE ONLY TYPE-RELATED
 export const CREATURE_CONFIG = {
     [CREATURE_TYPE.FOREST_CREATURE]: {
-        sprite_left: null,//imported sprite object.left
-        sprite_right: null,//imported sprite object.right
-        sprite_default: null,//imported sprite object.right
-        health_default: 100,
-        attack: 4,
-        defense: 2,
-        skill_tree: "wild magic"
+        stats: {
+            health: {
+                health: 100,
+                default: 100,
+                max: 100,
+                min: 0
+            },
+            mana: {
+                mana: 100,
+                default: 100,
+                max: 100,
+                min: 0
+            },
+            stamina: {
+                stamina: 100,
+                default: 100,
+                max: 100,
+                min: 0
+            }
+        },
+
+        defense: {
+            arcane: 0,
+            fire: 0,
+            frost: 0,
+            holy: 0,
+            nature: 0,
+            physical: 0,
+            water: 0,
+            wind: 0,
+            unholy: 0
+        }
+    },
+
+    [CREATURE_TYPE.GREATER_FOREST_CREATURE]: {
+                stats: {
+            health: {
+                health: 100,
+                default: 100,
+                max: 100,
+                min: 0
+            },
+            mana: {
+                mana: 100,
+                default: 100,
+                max: 100,
+                min: 0
+            },
+            stamina: {
+                stamina: 100,
+                default: 100,
+                max: 100,
+                min: 0
+            }
+        },
+
+        defense: {
+            arcane: 0,
+            fire: 0,
+            frost: 0,
+            holy: 0,
+            nature: 0,
+            physical: 0,
+            water: 0,
+            wind: 0,
+            unholy: 0
+        }
+    }
+}
+
+
+
+
+export const PLAYER_CONFIG = {
+    [PLAYER_TYPE.PLAYER]: {
+        stats: {
+            health: {
+                health: 100,
+                default: 100,
+                max: 100,
+                min: 0
+            },
+            mana: {
+                mana: 100,
+                default: 100,
+                max: 100,
+                min: 0
+            },
+            stamina: {
+                stamina: 100,
+                default: 100,
+                max: 100,
+                min: 0
+            }
+        },
+        
+        defense: {
+            arcane: 0,
+            fire: 0,
+            frost: 0,
+            holy: 0,
+            nature: 0,
+            physical: 0,
+            water: 0,
+            wind: 0,
+            unholy: 0
+        },
     }
 }
