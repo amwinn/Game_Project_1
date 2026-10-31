@@ -7,13 +7,13 @@ export function calculateDamage(inflicted, inflictor, effect, ability) {
     if(effect.damage_type) {
         const damageCategory = effect.damage_type.category;
         const damageType = effect.damage_type.type;
-        const defense = [damageCategory][damageType];
+        const defense = inflicted.defense[damageCategory][damageType];
     }
 
     if(!effect.damage_type) {
         const damageCategory = ability.damage_type.category;
         const damageType = ability.damage_type.type;
-        const defense = [damageCategory][damageType];
+        const defense = inflicted.defense[damageCategory][damageType];
     }
     
 }
