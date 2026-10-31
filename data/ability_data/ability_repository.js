@@ -1,4 +1,4 @@
-import { frostbolt } from "./Frost_magic.js"
+import { frostbolt } from "./frost_magic.js"
 import { spellbolt, spellnova, spellblast } from "./simple_magic.js"
 
 export const ability_repository = {
