@@ -11,7 +11,7 @@ export default class AbilityAction extends Action {
 
 
     process(source, dataSet) {
-        const ability = ability_repository[this.abilityID];
+        const ability = this.abilityID; //was const ability = ability_repository[this.abilityID]; when ability_repository only had one layer instead of simple_magic/frost objects layer
         if(resourceCheck(source, ability.resource)) {
            castAbility(ability, source, dataSet);
            console.log(resourceCheck(source, ability.resource))

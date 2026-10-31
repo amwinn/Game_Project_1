@@ -40,6 +40,7 @@ export function castProjectile(ability, source, dataSet) {
 //not yet ready, need to remove enemyProjectile, just have projectilesArray, conform the castEntityProjectile parameters to the castProjectile
 //dataSet.projectilesArray.push was just array.push
 export function castEntityProjectile(dataSet, source, target, ability) {
+    console.log(ability.form)
     const radius = ability.form.data_config.radius;
     const size = new Size(30,30);
     const angle = Math.atan2(((target.position.y + target.size.dh/5) - source.position.y), ((target.position.x + target.size.dw/5) - source.position.x)); //dw/5 and dh/5 can be adjusted as needed

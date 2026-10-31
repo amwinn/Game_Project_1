@@ -167,7 +167,7 @@ function gameLoop(){
             rangedEntityArray.splice(index, 1);
         }
         if(entity.cooldownTimer <= 0) {
-            castEntityProjectile(dataSet, entity, renderLogic.player, ability_repository["spellbolt"]); //dataSet was projectilesArray, slowly conglomerating with player cast logic
+            castEntityProjectile(dataSet, entity, renderLogic.player, ability_repository.simple_magic["spellbolt"]); //dataSet was projectilesArray, slowly conglomerating with player cast logic
             //castProjectile(ability_repository["spellbolt"], enemy, dataSet)
             entity.cooldownTimer = entity.cooldown
             entity.mana -= 10;
