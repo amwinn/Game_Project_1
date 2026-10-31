@@ -1,5 +1,6 @@
 import { Sprite, Position } from "./Utility.js";
 import { spriteData_player } from "../data/player_spriteData.js";
+import { PLAYER_RENDER } from "../data/entity_data/entity_render.js";
 import { updateModifiers } from "./AbilityLogic/ModifierLogic.js";
 
 export default class Player{
@@ -18,7 +19,7 @@ export default class Player{
         this.animationDirection = "right"
         this.animationTimer = 0;
         this.animationIndex = 0;
-        this.sprite = new Sprite(spriteData_player.idle[this.direction][0], size.dw, size.dh); //tentatively replaces "COMMENT#id" line
+        this.sprite = new Sprite(PLAYER_RENDER.idle[this.direction][0], size.dw, size.dh); //tentatively replaces "COMMENT#id" line
         this.health = 100;//rough draft
         this.mana = 100;//rough draft
         this.max_mana = 100;

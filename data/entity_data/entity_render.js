@@ -66,6 +66,33 @@ export const CREATURE_RENDER = {
     }
 }
 
+
+//imported and directly referenced in src/Player.js, and GameLogic.js under the playerSpriteManager function
+//important to note that right now player_render only has one layer, while creature render has another layer beyond, that distinguishes between the two creature types
+//might therefore be necessary to format player the same way, just for format consistency, could also add a low health sprite set later on that could take advantage of that
 export const PLAYER_RENDER = {
+    idle: {
+        left: [
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_left_1.png"
+        ],
+        right: [
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_right_1.png"
+        ]
+    },
+
+    walk: {
+        left: [
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_left_1.png",
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_left_2.png",
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_left_1.png",
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_left_3.png"
+        ],
+        right: [
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_right_1.png",
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_right_2.png",
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_right_1.png",
+            "./Images/Entities/Entity_player/StoneAutomaton_walk_right_3.png"
+        ]
+    },
     
 }

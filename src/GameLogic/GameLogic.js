@@ -9,7 +9,7 @@ import { projectilesArray } from "../Main.js";
 import { screenSize } from "../Main.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
 import Projectile from "../AbilityEntity/Projectile.js";
-import { CREATURE_RENDER } from "../../data/entity_data/entity_render.js"
+import { CREATURE_RENDER, PLAYER_RENDER } from "../../data/entity_data/entity_render.js"
 import { spriteData_player } from "../../data/player_spriteData.js";
 
 import { test_item_array } from "../Main.js";
@@ -22,7 +22,7 @@ import Area from "../AbilityEntity/AreaOfEffect.js";
 //temp, will live in assetregistry unless the class ends up being useless
 import { loadEntityRenders } from "../AssetRegistry.js";
 import Player from "../Player.js";
-let playerSprites = loadEntityRenders(spriteData_player);
+let playerSprites = loadEntityRenders(PLAYER_RENDER);
 let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
 let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
 //end temp
