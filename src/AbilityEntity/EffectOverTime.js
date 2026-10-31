@@ -55,21 +55,21 @@ export function applyEffectOverTime(effect, inflicted, inflictor, ability) {
 }
 
 function applyDrainTick(effect, inflicted, inflictor, ability){
-    if(effect.subType in inflicted && inflicted[effect.subType] >0+effect.amount) {
+    if(effect.sub_type in inflicted && inflicted[effect.sub_type] >0+effect.amount) {
         console.log(inflicted.mana)
-        inflicted[effect.subType] -= effect.amount;
+        inflicted[effect.sub_type] -= effect.amount;
     }
-    if(effect.subType in inflictor && inflictor[effect.subType] < 100-effect.amount) {
-        inflictor[effect.subType] += effect.amount;
+    if(effect.sub_type in inflictor && inflictor[effect.sub_type] < 100-effect.amount) {
+        inflictor[effect.sub_type] += effect.amount;
     }
 }
 
 function applyFunnelTick(effect, inflicted, inflictor, ability) {
-    if(effect.subType in inflicted && inflicted[effect.subType] <100-effect.amount) {
-        inflicted[effect.subType] += effect.amount;
+    if(effect.sub_type in inflicted && inflicted[effect.sub_type] <100-effect.amount) {
+        inflicted[effect.sub_type] += effect.amount;
     }
-    if(effect.subType in inflictor && inflicted[effect.subType] >0+effect.amount) {
-        inflictor[effect.subType] -= effect.amount;
+    if(effect.sub_type in inflictor && inflicted[effect.sub_type] >0+effect.amount) {
+        inflictor[effect.sub_type] -= effect.amount;
     }
 }
 
