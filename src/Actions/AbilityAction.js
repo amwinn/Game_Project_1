@@ -5,7 +5,7 @@ import { requiredCheck, resourceCheck } from "../AbilityLogic/AbilityValidation.
 export default class AbilityAction extends Action {
     constructor(ability) {
         super();
-        this.abilityID = ability;
+        this.ability = ability;
     }
 
 
