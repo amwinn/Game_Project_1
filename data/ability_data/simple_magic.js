@@ -30,7 +30,7 @@ export const spellbolt = {
 
 export const spellnova = {
     id:"spellnova",
-    cooldown: 600,
+    cooldown: 6,
     resource: [
         {type: "mana", amount: 40}
     ],
@@ -65,7 +65,7 @@ export const spellnova = {
 
 export const spellblast = {
     id:"spellblast",
-    cooldown: 600,
+    cooldown: 6,
     resource: [
         {type: "mana", amount: 40}
     ],
