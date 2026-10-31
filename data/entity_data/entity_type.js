@@ -3,3 +3,7 @@ export const CREATURE_TYPE = {
     FOREST_CREATURE: "forest_creature",
     GREATER_FOREST_CREATURE: "greater_forest_creature"
 }
+
+export const PLAYER_TYPE = {
+    PLAYER: "player"
+}
