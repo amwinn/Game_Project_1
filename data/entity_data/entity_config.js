@@ -25,12 +25,13 @@ export const CREATURE_CONFIG = {
         },
 
         defense: {
+            affliction: 0,
             arcane: 0,
             fire: 0,
             frost: 0,
             holy: 0,
+            infliction: 0,
             nature: 0,
-            physical: 0,
             water: 0,
             wind: 0,
             unholy: 0
@@ -60,12 +61,13 @@ export const CREATURE_CONFIG = {
         },
 
         defense: {
+            affliction: 0,
             arcane: 0,
             fire: 0,
             frost: 0,
             holy: 0,
+            infliction: 0,
             nature: 0,
-            physical: 0,
             water: 0,
             wind: 0,
             unholy: 0
@@ -100,12 +102,13 @@ export const PLAYER_CONFIG = {
         },
         
         defense: {
+            affliction: 0,
             arcane: 0,
             fire: 0,
             frost: 0,
             holy: 0,
+            infliction: 0,
             nature: 0,
-            physical: 0,
             water: 0,
             wind: 0,
             unholy: 0
