@@ -3,15 +3,15 @@ import { ability_repository } from "../../data/ability_data/ability_repository.j
 import { castAbility } from "../AbilityLogic/AbilityLogic.js";
 import { requiredCheck, resourceCheck } from "../AbilityLogic/AbilityValidation.js";
 export default class AbilityAction extends Action {
-    constructor(abilityID) {
+    constructor(ability) {
         super();
-        this.abilityID = abilityID;
+        this.abilityID = ability;
     }
 
 
 
     process(source, dataSet) {
-        const ability = this.abilityID; //was const ability = ability_repository[this.abilityID]; when ability_repository only had one layer instead of simple_magic/frost objects layer
+        const ability = this.ability; //was const ability = ability_repository[this.abilityID]; when ability_repository only had one layer instead of simple_magic/frost objects layer
         if(resourceCheck(source, ability.resource)) {
            castAbility(ability, source, dataSet);
            console.log(resourceCheck(source, ability.resource))
@@ -20,3 +20,7 @@ export default class AbilityAction extends Action {
 
 
 }
+
+
+//Notes
+//Until recently ability property was abilityID, but now the ability object itself is passed into ability action class from keybindings config
