@@ -9,6 +9,7 @@ export const frostbolt = {
     ],
     form: {
         type: "projectile",
+        damageType: "frost",
         data_config: {
             sprite: "Images/Abilities/simple_magic/spellbolt_test.png",
             radius: 15,

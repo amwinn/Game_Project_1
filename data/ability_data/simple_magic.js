@@ -13,6 +13,7 @@ export const spellbolt = {
     ],
     form: {
         type: "projectile",
+        damage_type: "arcane",
         data_config: {
             sprite: "Images/Abilities/simple_magic/spellbolt_test.png",
             radius: 15,
@@ -39,6 +40,7 @@ export const spellnova = {
     ],
     form: {
         type: "radial", //would like this to eventually be AREA_TYPE["radial"] or akin to that
+        damage_type: "arcane",
         behavior: "eruptive",
         data_config: {
             sprite: [
@@ -74,6 +76,7 @@ export const spellblast = {
     ],
     form: {
         type: "radial",
+        damage_type: "arcane",
         behavior: "static",
         data_config: {
             sprite: [
