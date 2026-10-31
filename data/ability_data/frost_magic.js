@@ -1,5 +1,9 @@
 export const frostbolt = {
     id:"frostbolt",
+    damage_type: {
+        category: "elemental",
+        type: "frost"
+    },
     cooldown: 3,
     resource: [
         {type: "mana", amount: 10}
@@ -9,7 +13,6 @@ export const frostbolt = {
     ],
     form: {
         type: "projectile",
-        damageType: "frost",
         data_config: {
             sprite: "Images/Abilities/simple_magic/spellbolt_test.png",
             radius: 15,
@@ -19,7 +22,8 @@ export const frostbolt = {
     },
     effect:[
         {type: "damage", amount: 5},
-        {type: "slow", duration: 10, amount: 0.3}
+        {type: "slow", duration: 10, amount: 0.3},
+        {type: "drain", sub_type: "health", duration:10, amount:2, ticks: 5}
     ]
 
 }

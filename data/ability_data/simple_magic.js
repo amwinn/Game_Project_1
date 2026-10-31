@@ -4,6 +4,10 @@
 
 export const spellbolt = {
     id:"spellbolt",
+    damage_type: {
+        category: "sorcery",
+        type: "arcane"
+    },
     cooldown: 3,
     resource: [
         {type: "mana", amount: 0}
@@ -13,7 +17,6 @@ export const spellbolt = {
     ],
     form: {
         type: "projectile",
-        damage_type: "arcane",
         data_config: {
             sprite: "Images/Abilities/simple_magic/spellbolt_test.png",
             radius: 15,
@@ -24,13 +27,17 @@ export const spellbolt = {
     effect:[
         {type: "damage", amount: 1},
         {type: "slow", duration: 5, amount: 0.5},
-        {type: "drain", subType: "mana", duration: 10, amount: 5, ticks: 5} //decided not to tie initital damage into the same effect, keeping a separate type: "damage" format instead
+        {type: "drain", sub_type: "mana", duration: 10, amount: 5, ticks: 5} //decided not to tie initital damage into the same effect, keeping a separate type: "damage" format instead
     ]
 
 }
 
 export const spellnova = {
     id:"spellnova",
+    damage_type: {
+        category: "sorcery",
+        type: "arcane"
+    },
     cooldown: 6,
     resource: [
         {type: "mana", amount: 40}
@@ -40,7 +47,6 @@ export const spellnova = {
     ],
     form: {
         type: "radial", //would like this to eventually be AREA_TYPE["radial"] or akin to that
-        damage_type: "arcane",
         behavior: "eruptive",
         data_config: {
             sprite: [
@@ -60,13 +66,17 @@ export const spellnova = {
         {type: "slow", duration: 25, amount: 0.9},
         {type: "stun", duration: 10},
         {type: "fast", duration: 25, amount: 1.1},
-        {type: "drain", subType: "health", duration: 10, amount: 10, ticks: 10}
+        {type: "drain", sub_type: "health", duration: 10, amount: 10, ticks: 10}
         //{type: "slow", duration: 2500, amount: .9}
     ]
 }
 
 export const spellblast = {
     id:"spellblast",
+    damage_type: {
+        category: "sorcery",
+        type: "arcane"
+    },
     cooldown: 6,
     resource: [
         {type: "mana", amount: 40}
@@ -76,7 +86,6 @@ export const spellblast = {
     ],
     form: {
         type: "radial",
-        damage_type: "arcane",
         behavior: "static",
         data_config: {
             sprite: [
