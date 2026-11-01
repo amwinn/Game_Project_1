@@ -1,13 +1,18 @@
 
 export function applyDamage(inflicted, inflictor, effect, ability) {
-
+    const damage = calculateDamage(inflicted, inflictor, effect, ability);
+    inflicted -= damage;
 }
 
 export function calculateDamage(inflicted, inflictor, effect, ability) {
 
-    const damageCategory = effect.damage_type.category ?? ability.damage_type.category;
-    const damageType = effect.damage_type.type ?? ability.damage_type.type;
+    const damageCategory = effect?.damage_type.category ?? ability.damage_type.category;
+    const damageType = effect?.damage_type.type ?? ability.damage_type.type;
     const defense = inflicted[damageCategory][damageType];
+    const damage = effect.amount;
+    //calcs go here
+
+    return damage;
     
 }
 
