@@ -23,4 +23,4 @@
 - vector = {x: (destination.x - source.x), y: (destination.y - source.y)}
 - distanceSquared = (vector.x^2)+(vector.y^2)
 - rangeSquared = range^2
-- if (sqrDistance <= sqrRange) {attack/cast}
+- if (distanceSquared <= rangeSquared) {attack/cast}
