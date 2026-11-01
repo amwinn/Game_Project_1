@@ -25,3 +25,5 @@ export function calculateDamage(inflicted, inflictor, effect, ability) {
 //     misc logic here for handling immunities (first though is make immune a multiplier value of either 1 or 0, and each defense type can have an immune key, so defense.fire.immune = true;
 // }
 //have min damage of 1?
+
+//if using subtractive/additive, make sure defense cant allow inflicted to be immune to damage
