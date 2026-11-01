@@ -23,15 +23,22 @@ export function castAbility(ability, source, dataSet){
 
 //is this better or worse than just putting the code inside the switch? tentative on it, can always switch back easily
 export function castProjectile(ability, source, dataSet) {
-    const radius = ability.form.data_config.radius;
+    const vectorX = (dataSet.cursorData.cursor.world.x - (source.position.x + source.size.dw/2));
+    const vectorY = (dataSet.cursorData.cursor.world.y - (source.position.y + source.size.dh/2));
+    const distance = Math.sqrt(((vectorX**2) + (vectorY**2)));
+    if(distance === 0) {
+        return; //incase target is at source center
+    }
+    const velocity = {x:(vectorX/distance)*5, y:(vectorY/distance)*5};
+    // const radius = ability.form.data_config.radius;
     const size = new Size(ability.form.data_config.radius*2, ability.form.data_config.radius*2); //change to not be hardcoded, will need to refactor tilemap to be outside of mapdb class
-    const x = (dataSet.cursorData.cursor.world.x) - (source.position.x + source.size.dw/2); //was originally target. source.position.x + +32, and both cursor.y and .x were -20 instead of -5, still havent fixed that portion
-    const y = (dataSet.cursorData.cursor.world.y) - (source.position.y + source.size.dh/2); //was originally source.position.y +50
-    const angle = Math.atan2(y, x); // removed (y + camera.y, x + camera.x) and moved to const x and y values above; revert if any bug appears
-    const velocity = {x: Math.cos(angle)*5, y: Math.sin(angle)*5};
+    // const x = (dataSet.cursorData.cursor.world.x) - (source.position.x + source.size.dw/2); //was originally target. source.position.x + +32, and both cursor.y and .x were -20 instead of -5, still havent fixed that portion
+    // const y = (dataSet.cursorData.cursor.world.y) - (source.position.y + source.size.dh/2); //was originally source.position.y +50
+    //const angle = Math.atan2(y, x); // removed (y + camera.y, x + camera.x) and moved to const x and y values above; revert if any bug appears
+    //const velocity = {x: Math.cos(angle)*5, y: Math.sin(angle)*5};
     const position = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2); //was +32, +50
     dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, source, position, velocity, new Sprite(ability.form.data_config.sprite, size.dw, size.dh) ));
-    //perhaps move the below somewhere else, or make an "applyCost()" function akin to the applyEffects()
+    //perhaps move the below somewhere else, or make an "applyCost()" function akin to the applyEffects(), especially if introducing passives that reduce cost etc.
     ability.resource.forEach((resource,index) => {
         source[resource.type] -= resource.amount;
     });
