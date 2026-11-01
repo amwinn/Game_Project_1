@@ -15,11 +15,11 @@
 - velocity = {x: vector.x/distance, y: vector.y/distance}
 
 # Attack/Cast Range
-## Method  (more expensive at scale)
+### Method  (more expensive at scale)
 - vector = {x: (destination.x - source.x), y: (destination.y - source.y)}
 - distance = Math.sqrt(((vector.x^2)+(vector.y^2)))
 - if (distance <= range) {attack/cast}
-## Method 2 (cheaper at scale)
+### Method 2 (cheaper at scale)
 - vector = {x: (destination.x - source.x), y: (destination.y - source.y)}
 - distanceSquared = (vector.x^2)+(vector.y^2)
 - rangeSquared = range^2
