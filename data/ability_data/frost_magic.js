@@ -28,4 +28,3 @@ export const frostbolt = {
 
 }
 
-//had to recreate file due to file retaining capital F in the windows files somehow
