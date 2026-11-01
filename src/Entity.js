@@ -17,8 +17,8 @@ let inRange;
 export default class Entity {
     static melee = "melee";
     static mage = "mage";
-    static forest_creature = "forest_creature";
-    static greater_forest_creature = "greater_forest_creature";
+    static forest_creature = CREATURE_TYPE.FOREST_CREATURE; //was "forest_creature"
+    static greater_forest_creature = CREATURE_TYPE.GREATER_FOREST_CREATURE; //was "greater_forest_creature"
     constructor(type, role, position, size, velocity, cooldownTimer, cooldown) {
         this.type = type;
         this.role = role;
@@ -41,12 +41,15 @@ export default class Entity {
     }
 
     //was if(this.type === Entity.melee/mage), but changed to if(this.type === forest_sprite))
+    //refactor at some point to be more abstract, as to allow more types of entities without more if statements
+    //something like determineSprite(){return new Sprite(CREATURE_RENDER[THIS.TYPE].idle[this.direction][0, this.size.dw, this.size.dh]
+    //obviously that only works if CREATURE_RENDER holds all of the different entity types such as skeleton, beastman, etc., etc., but something akin to that would be ideal
     determineSprite() {
         console.log(CREATURE_RENDER[this.type].idle[this.direction][0])
-        if(this.type === Entity.forest_creature) {
+        if(this.type === CREATURE_TYPE.FOREST_CREATURE) {
             return new Sprite(CREATURE_RENDER[this.type].idle[this.direction][0], this.size.dw, this.size.dh);
         }
-        if(this.type === Entity.greater_forest_creature) {
+        if(this.type === CREATURE_TYPE.GREATER_FOREST_CREATURE) {
             return new Sprite(CREATURE_RENDER[this.type].idle[this.direction][0], this.size.dw, this.size.dh);   ///["stance_1"]["default"]
         }
 

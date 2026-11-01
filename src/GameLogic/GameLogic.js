@@ -10,6 +10,7 @@ import { screenSize } from "../Main.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
 import Projectile from "../AbilityEntity/Projectile.js";
 import { CREATURE_RENDER, PLAYER_RENDER } from "../../data/entity_data/entity_render.js"
+import { CREATURE_TYPE } from "../../data/entity_data/entity_type.js";
 import { spriteData_player } from "../../data/player_spriteData.js";
 
 import { test_item_array } from "../Main.js";
@@ -76,8 +77,8 @@ updatePortalSpawner(array, deltaTime) {
             const magePosition  = new Position(portal.position.x, portal.position.y) //same
             const meleeEnemySize = new Size(this.mapData.tileMap.tsize/2, this.mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
             const rangedEnemySize = new Size(this.mapData.tileMap.tsize/2, this.mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
-            this.spawnEntity(meleeEntityArray, 50, Entity.forest_creature, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 5, 7); //had to have both velocity values or else it wouldnt have worked
-            this.spawnEntity(rangedEntityArray, 25, Entity.greater_forest_creature, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 5, 7); //maybe change cooldown number to random number, between 400-500?   
+            this.spawnEntity(meleeEntityArray, 50, CREATURE_TYPE.FOREST_CREATURE, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 5, 7); //had to have both velocity values or else it wouldnt have worked
+            this.spawnEntity(rangedEntityArray, 25, CREATURE_TYPE.GREATER_FOREST_CREATURE, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 5, 7); //maybe change cooldown number to random number, between 400-500?   
             portal.spawnTimer = 0;      
         }
     }
