@@ -7,6 +7,7 @@ export default class Camera {
         this.size = size;
     }
 
+    //currently called in playerObjectCollision, mapHandler, and cnangeMap functions, all inside gamelogic.js
     clampCamera(player) {
         this.x = player.position.x - (this.size.dw/2); //maybe add - math.floor(this.size.dw/2) to prevent jittery movement
         this.y = player.position.y - (this.size.dh/2); 
