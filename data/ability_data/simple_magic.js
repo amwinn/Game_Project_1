@@ -66,7 +66,7 @@ export const spellnova = {
         {type: "slow", duration: 25, amount: 0.9},
         {type: "stun", duration: 10},
         {type: "fast", duration: 25, amount: 1.1},
-        {type: "drain", sub_type: "health", duration: 10, amount: 10, ticks: 10}
+        {type: "drain", sub_type: "health", damage_type: {category: "elemental:", type: "frost"}, duration: 10, amount: 10, ticks: 10}
         //{type: "slow", duration: 2500, amount: .9}
     ]
 }
@@ -107,3 +107,13 @@ export const spellblast = {
 //maybe add spritePath?
 
 //if an effect is a dot, or multi tick nova, then under effect, there would be type: damage, amount 10, hitCount/tick: 5, interval: 200, or something akin to this
+
+// Effect Type Formats:
+// Damage: type, amount
+// Fast: type, duration, amount
+// Knockback: type, amount
+// Slow: type, duration, amount
+// Stun: type, duration
+// Drain: type, sub_type, damage_type(optional), duration, amount, ticks
+// Funnel: type, sub_type, damage_type(optional), duration, amount, ticks
+// ^Note, still undecided on if Funnel needs to have damage_type, even as a consideration; doesn't hurt to have, just incase of the odd spell
