@@ -44,12 +44,15 @@ export default class InputLogic {
     executeMouseMove = (e) => {
         inputState.cursor.screen.x = e.clientX;
         inputState.cursor.screen.y = e.clientY;
-        inputState.cursor.world.x = e.clientX + this.camera.x;
-        inputState.cursor.world.y = e.clientY + this.camera.y;
+        inputState.cursor.world.x = inputState.cursor.screen.x + this.camera.x;
+        inputState.cursor.world.y = inputState.cursor.screen.y + this.camera.y;
         
     }
     executeKeyDown = (e) => {
         const key = e.code;//.toUpperCase();
+        //only need here if not being updated in main.js or elsewhere
+        //inputState.cursor.world.x = inputState.cursor.screen.x + this.camera.x;
+        //inputState.cursor.world.y = inputState.cursor.screen.y + this.camera.y;
         
         if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof MovementAction) {
             activeMovementKeys.add(key);
@@ -68,8 +71,8 @@ export default class InputLogic {
         const key = "click";
         inputState.cursor.screen.x = e.clientX;
         inputState.cursor.screen.y = e.clientY;
-        inputState.cursor.world.x = e.clientX + this.camera.x;
-        inputState.cursor.world.y = e.clientY + this.camera.y;
+        inputState.cursor.world.x = inputState.cursor.screen.x + this.camera.x;
+        inputState.cursor.world.y = inputState.cursor.screen.y + this.camera.y;
         //remove soon, looks to be obsolete
         // if(key in defaultKeyBindings && defaultKeyBindings[key] instanceof ProjectileAction) {
         //     defaultKeyBindings[key].process(this.player, e, this.camera)

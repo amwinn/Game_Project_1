@@ -146,6 +146,10 @@ function gameLoop(){
     gameLogic.mapHandler(deltaTime);
     gameLogic.movementLogicUpdate(deltaTime);
     gameLogic.spawnLogicUpdate(deltaTime);
+    //temp spot start
+    inputState.cursor.world.x = inputState.cursor.screen.x + camera.x;
+    inputState.cursor.world.y = inputState.cursor.screen.y + camera.y;
+    //temp spot end
     renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
     renderLogic.renderHandler(renderer);
     displayVitals(player);
