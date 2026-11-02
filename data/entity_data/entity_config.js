@@ -21,7 +21,7 @@ export const CREATURE_CONFIG = {
             }
         },
 
-        defense: {
+        defenses: {
             physical: {
                 infliction: 0,
                 affliction: 0
@@ -65,7 +65,7 @@ export const CREATURE_CONFIG = {
             }
         },
 
-        defense: {
+        defenses: {
             physical: {
                 infliction: 0,
                 affliction: 0
@@ -114,7 +114,7 @@ export const PLAYER_CONFIG = {
             }
         },
         
-        defense: {
+        defenses: {
             physical: {
                 infliction: 0,
                 affliction: 0
