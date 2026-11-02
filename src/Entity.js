@@ -42,6 +42,7 @@ export default class Entity {
         this.stats.health.current = this.stats.health.default;
         this.stats.stamina.current = this.stats.stamina.default;
         this.stats.mana.current = this.stats.mana.default;
+        this.defenses = this.config.defenses;
         
     }
 

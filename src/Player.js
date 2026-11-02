@@ -36,6 +36,7 @@ export default class Player{
         this.stats.health.current = this.stats.health.default;
         this.stats.stamina.current = this.stats.stamina.default;
         this.stats.mana.current = this.stats.mana.default;
+        this.defenses = this.config.defenses;
         
         //maybe use dot notation for default? not sure, either works.
         //this.sprite = new Sprite(spriteData_player.walk[this.direction[this.animationIndex]]);
