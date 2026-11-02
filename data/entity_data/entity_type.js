@@ -4,6 +4,7 @@ export const CREATURE_TYPE = {
     GREATER_FOREST_CREATURE: "greater_forest_creature"
 }
 
+//imported and used by player.js
 export const PLAYER_TYPE = {
     PLAYER: "player"
 }
