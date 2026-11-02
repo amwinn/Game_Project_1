@@ -96,7 +96,7 @@ function displayVitals(player) {
     renderer.fillStyle = "DeepSkyBlue";
 
     renderer.fillText(
-        `MANA: ${player.mana}/${player.max_mana}`,
+        `MANA: ${player.stats.mana.current}/${player.stats.mana.max}`,
         25,
         50
     );
