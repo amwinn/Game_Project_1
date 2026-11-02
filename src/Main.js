@@ -133,7 +133,7 @@ let lastTime = null;
 function gameLoop(){
     //temp test start
     audio.volume = .2;
-    audio.play();
+    //audio.play();
     //temp test end, remove once confirmed working on other pcs
     let currentTime = performance.now();
     if(lastTime === null) {
