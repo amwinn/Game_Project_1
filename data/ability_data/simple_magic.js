@@ -26,7 +26,7 @@ export const spellbolt = {
     },
     effect:[
         {type: "damage", amount: 1},
-        {type: "slow", duration: 5, amount: 0.5},
+        {type: "slow", duration: 5, amount: 0.9},
         {type: "drain", sub_type: "mana", duration: 10, amount: 5, ticks: 5} //decided not to tie initital damage into the same effect, keeping a separate type: "damage" format instead
     ]
 
@@ -65,7 +65,7 @@ export const spellnova = {
         {type: "knockback", amount: 75},
         {type: "slow", duration: 25, amount: 0.9},
         {type: "stun", duration: 10},
-        {type: "fast", duration: 25, amount: 1.1},
+        //{type: "fast", duration: 25, amount: 1.1},
         {type: "drain", sub_type: "health", damage_type: {category: "elemental:", type: "frost"}, duration: 10, amount: 10, ticks: 10}
         //{type: "slow", duration: 2500, amount: .9}
     ]
@@ -91,8 +91,8 @@ export const spellblast = {
             sprite: [
                 "Images/spellnova_test.png", "Images/Abilities/simple_magic/spellnova_1.png"
             ],
-            duration: 0.75,
-            radius: 150,
+            duration: .75,
+            radius: 200,
             base_scale: 1,
             max_scale: 1,
             scale_incrementor: 0.25
@@ -100,7 +100,7 @@ export const spellblast = {
     },
     effect: [
         {type: "damage", amount: 1},
-        {type: "fast", duration: 15, amount: 1.9}
+        {type: "fast", duration: 15, amount: 1.5}
     ]
 }
 
