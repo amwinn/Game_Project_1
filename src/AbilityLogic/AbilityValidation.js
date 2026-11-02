@@ -4,7 +4,7 @@ export function requiredCheck(source, conditions) {
     return conditions.every((condition) => {
         switch (condition.type){
             case "mana":
-                return source.mana >= condition.amount;
+                return source.stats.mana.current >= condition.amount;
         }
     });
 //will need to cycle through all requirement types
@@ -24,7 +24,7 @@ export function resourceCheck(source, resources) {
     return resources.every((resource) => {
         switch (resource.type) {
             case "mana":
-                return (source.mana >= resource.amount)
+                return (source.stats.mana.current >= resource.amount)
         }
 
     })
