@@ -20,6 +20,7 @@ export default class Area {
         this.animationIndex = 0;
         this.duration = ability.form.data_config.duration;
         this.durationTimer = 0;
+        this.active = true; // for static so that it can fire off once, because with delta time it wont be able to land on perfect numbers
         //might not need to declare animationDuration here, perhaps just in animation logic function?
         //this.animationDuration = this.duration;
         //this.animationDuration = ability.form.data_config.animationDuration || 0;
@@ -76,7 +77,7 @@ export default class Area {
         if(area.durationTimer >= area.ability.form.data_config.duration) {
             area.delete = true;
         }
-        if(area.durationTimer === area.ability.form.data_config.duration /2) {
+        if(area.durationTimer >= area.ability.form.data_config.duration *.5 && area.active) {
             area.collidable = true; //need to reset to false after? not sure
             //collision check goes here
             //actually collision logic doesnt go anywhere near this, just make a collidable = true, then in collision could make a collidable = false?
