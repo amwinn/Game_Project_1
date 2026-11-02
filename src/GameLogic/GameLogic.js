@@ -371,7 +371,7 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
         projectileArray.forEach((projectile, projectileIndex) => {
             objectArray.forEach((object, objectIndex) => {
                 if(this.collisionCheck(projectile, object)){
-                    console.log("collision between " + (projectile?.type || "unknown") + " and " + (object?.type || "unknown"));
+                    //console.log("collision between " + (projectile?.type || "unknown") + " and " + (object?.type || "unknown"));
                     if(this.behaviorAttributes[object.type].destructible && projectileArray != entityProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
                         objectArray.splice(objectIndex, 1);
                     }
@@ -395,7 +395,7 @@ projectileCollisionCheck(array1, array2) {
             if(array1[index1] !== array2[index2]) {
                 //was this.collisionCheck(), changed to be radius-based collision test
                 if(this.checkCollision_circle(array1[index1], array2[index2])){
-                    console.log(value.position.x)
+                    //console.log(value.position.x)
                     array1.splice(index1,1);
                     array2.splice(index2,1);
                 }
