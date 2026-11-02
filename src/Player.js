@@ -1,6 +1,8 @@
 import { Sprite, Position } from "./Utility.js";
 import { spriteData_player } from "../data/player_spriteData.js";
 import { PLAYER_RENDER } from "../data/entity_data/entity_render.js";
+import { PLAYER_CONFIG } from "../data/entity_data/entity_config.js";
+import { PLAYER_TYPE } from "../data/entity_data/entity_type.js";
 import { updateModifiers } from "./AbilityLogic/ModifierLogic.js";
 
 export default class Player{
@@ -8,6 +10,7 @@ export default class Player{
         this.position = position;
         // this.position.x = x;
         // this.position.y = y;
+        this.type = PLAYER_TYPE.PLAYER;
         this.size = size;
         // this.dw = dw;
         // this.dh = dh;
@@ -27,6 +30,12 @@ export default class Player{
         this.speed = 1;
         this.modifiers = [];
         this.effectsOverTime = [];
+        this.configReference = PLAYER_CONFIG[this.type];
+        this.config = structuredClone(PLAYER_CONFIG[this.type])
+        this.stats = this.config.stats;
+        this.stats.health.current = this.stats.health.default;
+        this.stats.stamina.current = this.stats.stamina.default;
+        this.stats.mana.current = this.stats.mana.default;
         
         //maybe use dot notation for default? not sure, either works.
         //this.sprite = new Sprite(spriteData_player.walk[this.direction[this.animationIndex]]);

@@ -1,4 +1,5 @@
 import { Position, Size, Sprite } from "./Utility.js";
+import { CREATURE_CONFIG } from "../data/entity_data/entity_config.js";
 import { CREATURE_RENDER } from "../data/entity_data/entity_render.js";
 import { CREATURE_TYPE } from "../data/entity_data/entity_type.js";
 import { applyEffects } from "./AbilityLogic/AbilityEffect.js";
@@ -31,12 +32,16 @@ export default class Entity {
         this.cooldown = cooldown;
         this.sprite = new Sprite(CREATURE_RENDER[this.type].idle[this.direction][0], this.size.dw, this.size.dh)
         //this.sprite = this.determineSprite();
-        this.health = 30;
-        this.mana = 100;
         this.base_speed = 1;
         this.speed = 1;
         this.modifiers = [];
         this.effectsOverTime = [];
+        this.configReference = CREATURE_CONFIG[this.type];
+        this.config = structuredClone(CREATURE_CONFIG[this.type]);
+        this.stats = this.config.stats;
+        this.stats.health.current = this.stats.health.default;
+        this.stats.stamina.current = this.stats.stamina.default;
+        this.stats.mana.current = this.stats.mana.default;
         
     }
 
