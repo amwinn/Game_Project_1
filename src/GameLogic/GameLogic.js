@@ -355,6 +355,7 @@ radialEntityCollision(radialArray, entityArray) {
             entityArray.forEach((entity, entityIndex) => {
                 if (this.checkCollision_circleSquare(radial, entity)) {
                     this.resolveColliding_circleSquare(radial, entity);
+                    radial.active === false;
                     //radial.setToSplice = true;
 
                 }
