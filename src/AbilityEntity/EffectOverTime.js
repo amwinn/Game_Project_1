@@ -1,3 +1,5 @@
+import { applyDamage } from "../AbilityLogic/Damage.js";
+
 //types: "mana_drain" "mana_funnel" etc.
 
 // instead of mana_drain = "mana_drain", could have just mana, stamina, health, then behavior drain and funnel
@@ -5,11 +7,12 @@ export default class EffectOverTime {
     // static MANA_DRAIN = "mana_drain";
     // static HEALTH_DRAIN = "health_drain";
     // static STAMINA_DRAIN = "stamina_drain";
-    constructor(effect, inflictor, inflicted, ability) {
+    constructor(effect, inflictor, inflicted, abilityEntity, abilityData) {
         this.effect = effect;
         this.inflictor = inflictor;
         this.inflicted = inflicted;
-        this.ability = ability;
+        this.abilityEntity = abilityEntity;
+        this.abilityData = abilityData;
         this.amount = effect?.amount ?? null;
         this.duration = effect?.duration ?? null;
         this.durationTimer = 0;
@@ -33,7 +36,7 @@ export default class EffectOverTime {
         }
         //the below if originally had && durationRemaining >0
         if(this.tickTimer >= this.tickSpacing && this.ticksRemaining >0 ) {
-            applyEffectOverTime(this.effect, this.inflicted, this.inflictor, this.ability);
+            applyEffectOverTime(this.effect, this.inflicted, this.inflictor, this.abilityEntity, this.abilityData);
             this.ticksRemaining--;
             this.tickTimer-=this.tickSpacing;
         }
@@ -43,32 +46,37 @@ export default class EffectOverTime {
 
 }
 
-export function applyEffectOverTime(effect, inflicted, inflictor, ability) {
+export function applyEffectOverTime(effect, inflicted, inflictor, abilityEntity, abilityData) {
     switch(effect.type) {
         case "drain":
-            applyDrainTick(effect, inflicted, inflictor, ability);
+            applyDrainTick(effect, inflicted, inflictor, abilityEntity, abilityData);
             break;
         case "funnel":
-            applyFunnelTick(effect, inflicted, inflictor, ability);
+            applyFunnelTick(effect, inflicted, inflictor, abilityEntity, abilityData);
             break;
     }
 }
 
-function applyDrainTick(effect, inflicted, inflictor, ability){
+function applyDrainTick(effect, inflicted, inflictor, abilityEntity, abilityData){
     if(inflicted.stats[effect.sub_type] && inflicted.stats[effect.sub_type].current - effect.amount >= inflicted.stats[effect.sub_type].min) {
-        console.log(inflicted.stats.mana.current)
-        inflicted.stats[effect.sub_type].current -= effect.amount;
+        //console.log(inflicted.stats[effect.sub_type].current)
+        //console.log(abilityData.damage_type)
+        //inflicted.stats[effect.sub_type].current -= effect.amount;
+        console.log(inflicted.stats[effect.sub_type].current)
+        //inflicted.stats[effect.sub_type].current = applyDamage(inflicted, inflictor, effect, abilityEntity, abilityData, inflicted.stats[effect.sub_type].current);
+        applyDamage(inflicted, inflictor, effect, abilityEntity, abilityData);
+        console.log(inflicted.stats[effect.sub_type].current)
     }
     if(inflictor.stats[effect.sub_type] && inflictor.stats[effect.sub_type].current + effect.amount <= inflictor.stats[effect.sub_type].max) {
         inflictor.stats[effect.sub_type].current += effect.amount;
     }
 }
 
-function applyFunnelTick(effect, inflicted, inflictor, ability) {
+function applyFunnelTick(effect, inflicted, inflictor, abilityEntity, abilityData) {
     if(inflicted.stats[effect.sub_type] && inflicted.stats[effect.sub_type].current + effect.amount <= inflicted.stats[effect.sub_type].max) {
         inflicted.stats[effect.sub_type].current += effect.amount;
     }
-    if(inflictor.stats[effect.sub_type] && inflicted.stats[effect.sub_type].current - effect.amount >= inflictor.stats[effect.sub_type].min) {
+    if(inflictor.stats[effect.sub_type] && inflictor.stats[effect.sub_type].current - effect.amount >= inflictor.stats[effect.sub_type].min) {
         inflictor.stats[effect.sub_type].current -= effect.amount;
     }
 }
