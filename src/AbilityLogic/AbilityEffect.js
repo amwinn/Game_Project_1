@@ -14,21 +14,21 @@ export function applyEffects(effects, abilityEntity, abilityData, inflictor, inf
                 }
                 break;
             case "damage":
-                inflicted.health -= effect.amount;
+                inflicted.stats.health.current -= effect.amount;
                 break;
             case "mana_leech":
                 if("mana" in inflicted) {
-                    inflicted.mana -= effect.amount;
+                    inflicted.stats.mana.current -= effect.amount;
                 }
                 //add to if statement && source.mana += effect.amount <= source.max_mana (could do something similar for min_mana? instead of setting to 0 as below)
-                if("mana" in inflictor && (inflictor.mana + effect.amount <= inflictor.max_mana)) {
+                if("mana" in inflictor && (inflictor.mana + effect.amount <= inflictor.stats.mana.max)) {
                     //console.log("hasmana")
-                    inflictor.mana += effect.amount;
-                } else if ("mana" in inflictor && (inflictor.mana + effect.amount > inflictor.max_mana)) {
-                    inflictor.mana = inflictor.max_mana;
+                    inflictor.stats.mana.current += effect.amount;
+                } else if (inflictor.stats.mana && (inflictor.stats.mana.current + effect.amount > inflictor.stats.mana.max)) {
+                    inflictor.mana = inflictor.stats.mana.max;
                 }
-                if(inflicted.mana < 0) {
-                    inflicted.mana = 0;
+                if(inflicted.stats.mana.current < inflicted.stats.mana.min) {
+                    inflicted.stats.mana.current = inflicted.stats.mana.min;
                 }
                 break;
                 //in progress:
