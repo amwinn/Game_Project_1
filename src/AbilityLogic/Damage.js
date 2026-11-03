@@ -7,10 +7,10 @@ export function applyDamage(inflicted, inflictor, effect, abilityEntity, ability
 }
 
 export function calculateDamage(inflicted, inflictor, effect, abilityEntity, abilityData) {
-    console.log(abilityData)
+    //console.log(abilityData)
     const damageCategory = effect?.damage_type?.category ?? abilityData.damage_type.category;
     const damageType = effect?.damage_type?.type ?? abilityData.damage_type.type;
-    console.log(damageCategory)
+    //console.log(damageCategory)
     const defense = inflicted.defenses[damageCategory][damageType];
     const damage = effect.amount - defense; //simple subtraction formula for testing
     //calcs go here eventually

@@ -62,10 +62,10 @@ function applyDrainTick(effect, inflicted, inflictor, abilityEntity, abilityData
         //console.log(inflicted.stats[effect.sub_type].current)
         //console.log(abilityData.damage_type)
         //inflicted.stats[effect.sub_type].current -= effect.amount;
-        console.log(inflicted.stats[effect.sub_type].current)
+        //console.log(inflicted.stats[effect.sub_type].current)
         //inflicted.stats[effect.sub_type].current = applyDamage(inflicted, inflictor, effect, abilityEntity, abilityData, inflicted.stats[effect.sub_type].current);
         applyDamage(inflicted, inflictor, effect, abilityEntity, abilityData);
-        console.log(inflicted.stats[effect.sub_type].current)
+        //console.log(inflicted.stats[effect.sub_type].current)
     }
     if(inflictor.stats[effect.sub_type] && inflictor.stats[effect.sub_type].current + effect.amount <= inflictor.stats[effect.sub_type].max) {
         inflictor.stats[effect.sub_type].current += effect.amount;
