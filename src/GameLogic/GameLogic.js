@@ -342,7 +342,7 @@ checkCollision_circleSquare(circle, square) {
 resolveColliding_circleSquare(circle, square) {
     if(square.type && this.behaviorAttributes[square.type].destructible && circle.type !=="entityProjectile") {
         if(circle.ability) {
-            applyEffects(circle.ability.effect, circle, circle.source, square);
+            applyEffects(circle.ability.effect, circle, circle.ability, circle.source, square);
 
         }
     }
@@ -465,7 +465,7 @@ projectilePlayerCollision(array, player) {
             arrayItem.position.y  < player.position.y + player.size.dh          
         ) {
             if(arrayItem.source !== player) {
-                applyEffects(arrayItem.ability.effect, arrayItem, arrayItem.source, player);
+                applyEffects(arrayItem.ability.effect, arrayItem, arrayItem.ability, arrayItem.source, player);
                 console.log(arrayItem.source);
                 array.splice(arrayIndex, 1);
             } 
@@ -490,7 +490,7 @@ projectileEntityCollision(entityArray, projectileArray) {
                 //change this.player to circle.owner once relevant code has been implemented
                 //below was originally if(projectile.type !== "entityProjectile" && entity.type !== "entityProjectile")
                 if(projectile.source !== entity && projectile !== entity) {
-                applyEffects(projectile.ability.effect, projectile, projectile.source, entity);   
+                applyEffects(projectile.ability.effect, projectile, projectile.ability, projectile.source, entity);   
                 projectile.setToSplice = true;                 
                 }
 
@@ -736,16 +736,19 @@ entityCollisionResolution(entity1, entity2) {
             //console.log(eruptive.radius)
             if(radial.delete ===true) {
                 radialArray.splice(index, 1);
+                //index--;
             }
         })
         projectilesArray.forEach((projectile, index) => {
             if(projectile.setToSplice === true) {
                 projectilesArray.splice(index, 1);
+                //index --;
             }
         })
         entityProjectilesArray.forEach((projectile, index) => {
             if(projectile.setToSplice === true) {
                 entityProjectilesArray.splice(index, 1);
+                //index--;
             }
         })
         this.playerEntityCollision(this.player, meleeEntityArray);

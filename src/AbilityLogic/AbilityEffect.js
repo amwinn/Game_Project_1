@@ -3,12 +3,12 @@ import Modifier from "../AbilityEntity/Modifier.js";
 import { assignActiveness, updateActiveness } from "./ModifierLogic.js";
 //called in gamelogic.js in collision functions
 //to clarify, effects is called effect in the spell data, therefor when this func is called in gamelogic.js the first param is (ability.effect), not (ability.effects)
-export function applyEffects(effects, ability, inflictor, inflicted) {
+export function applyEffects(effects, abilityEntity, abilityData, inflictor, inflicted) {
     effects.forEach((effect) => {
         switch(effect.type) {
             case "drain":
             case "funnel":
-                const effectOverTime = new EffectOverTime(effect, inflictor, inflicted, ability);
+                const effectOverTime = new EffectOverTime(effect, inflictor, inflicted, abilityEntity, abilityData);
                 if(inflicted.effectsOverTime) {
                     inflicted.effectsOverTime.push(effectOverTime);
                 }
@@ -34,14 +34,14 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                 //in progress:
                 case "fast":
                     if (inflicted.modifiers) {
-                        const modifier = new Modifier(effect, inflictor, inflicted, ability);
+                        const modifier = new Modifier(effect, inflictor, inflicted, abilityEntity);
                         assignActiveness(inflicted, modifier);
                         inflicted.modifiers.push(modifier); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
                     }
                     break;
                 case "slow":
                     if (inflicted.modifiers) { //&& inflicted.slowed !== true
-                        const modifier = new Modifier(effect, inflictor, inflicted, ability);
+                        const modifier = new Modifier(effect, inflictor, inflicted, abilityEntity);
                         assignActiveness(inflicted, modifier);
                         inflicted.modifiers.push(modifier); //IMPORTANT effect is an object, not just "slow", slow is the effect object's value for the type key {type:"slow"}
                         //assignActiveness(effect));
@@ -51,21 +51,21 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                     break;
                 case "knockback":
                     //code taken from my gamelogic.js entityCollisionResolution and tweaked to only adjust one entity; if making improvements there, maybe tweak this again
-                    if(ability.position.x === inflicted.position.x) {
+                    if(abilityEntity.position.x === inflicted.position.x) {
                         inflicted.position.x -= effect.amount;
                     }
 
-                    if(ability.position.x >= inflicted.position.x) {
+                    if(abilityEntity.position.x >= inflicted.position.x) {
                         inflicted.position.x -= effect.amount;
                     }
-                    if(inflicted.position.x >= ability.position.x) {
+                    if(inflicted.position.x >= abilityEntity.position.x) {
                         inflicted.position.x += effect.amount;
                     }
 
-                    if(ability.position.y >= inflicted.position.y) {
+                    if(abilityEntity.position.y >= inflicted.position.y) {
                         inflicted.position.y -= effect.amount;
                     }
-                    if(inflicted.position.y >= ability.position.y) {
+                    if(inflicted.position.y >= abilityEntity.position.y) {
                         inflicted.position.y += effect.amount;
                     }
                     
@@ -74,7 +74,7 @@ export function applyEffects(effects, ability, inflictor, inflicted) {
                     break;
                 case "stun":
                     if(inflicted.modifiers) {
-                        const modifier = new Modifier(effect, inflictor, inflicted, ability);
+                        const modifier = new Modifier(effect, inflictor, inflicted, abilityEntity);
                         assignActiveness(inflicted, modifier);
                         inflicted.modifiers.push(modifier);
                     }
