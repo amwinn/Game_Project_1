@@ -159,7 +159,7 @@ function gameLoop(){
     meleeEntityArray.forEach((entity, index) => {  
         entity.updateMeleeEntity(renderer, entity, renderLogic.player, renderLogic.camera, deltaTime);
         entity.enemyBounds(entity, renderLogic.mapWidth, renderLogic.mapHeight);
-        if(entity.health <= 0) {
+        if(entity.stats.health.current <= entity.stats.health.min) {
             meleeEntityArray.splice(index, 1)
         }
     })
@@ -167,14 +167,14 @@ function gameLoop(){
     rangedEntityArray.forEach((entity, index) => {
         entity.updateRangedEntity(renderer, entity, renderLogic.player, renderLogic.camera, deltaTime);
         entity.enemyBounds(entity, renderLogic.mapWidth, renderLogic.mapHeight);
-        if(entity.health <=0) {
+        if(entity.stats.health.current <= entity.stats.health.min) {
             rangedEntityArray.splice(index, 1);
         }
         if(entity.cooldownTimer <= 0) {
             castEntityProjectile(dataSet, entity, renderLogic.player, ability_repository.simple_magic["spellbolt"]); //dataSet was projectilesArray, slowly conglomerating with player cast logic
             //castProjectile(ability_repository["spellbolt"], enemy, dataSet)
             entity.cooldownTimer = entity.cooldown
-            entity.mana -= 10;
+            entity.stats.mana.current -= 10;
         }
         entity.cooldownTimer -=deltaTime;
     })
