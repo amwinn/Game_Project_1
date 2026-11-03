@@ -1,4 +1,5 @@
 import { applyDamage } from "../AbilityLogic/Damage.js";
+import { applyRenewal } from "../AbilityLogic/Renew.js";
 
 //types: "mana_drain" "mana_funnel" etc.
 
