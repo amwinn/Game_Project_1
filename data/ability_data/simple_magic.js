@@ -26,7 +26,7 @@ export const spellbolt = {
     },
     effect:[
         {type: "damage", amount: 1},
-        {type: "slow", duration: 5, amount: 0.9},
+        {type: "slow", duration: 5, amount: 0.35},
         {type: "drain", sub_type: "mana", duration: 10, amount: 5, ticks: 5} //decided not to tie initital damage into the same effect, keeping a separate type: "damage" format instead
     ]
 
@@ -62,12 +62,12 @@ export const spellnova = {
 
     },
     effect: [
-        {type: "damage", amount: 10},
+        {type: "damage", amount: 100},
         {type: "knockback", amount: 75},
         {type: "slow", duration: 25, amount: 0.9},
         {type: "stun", duration: 10},
         //{type: "fast", duration: 25, amount: 1.1},
-        {type: "drain", sub_type: "health", damage_type: {category: "elemental", type: "frost"}, duration: 10, amount: 100, ticks: 10}
+        {type: "drain", sub_type: "mana", damage_type: {category: "sorcery", type: "arcane"}, duration: 10, amount: 10, ticks: 10}
         //{type: "slow", duration: 2500, amount: .9}
     ]
 }
