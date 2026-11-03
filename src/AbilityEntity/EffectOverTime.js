@@ -58,26 +58,39 @@ export function applyEffectOverTime(effect, inflicted, inflictor, abilityEntity,
 }
 
 function applyDrainTick(effect, inflicted, inflictor, abilityEntity, abilityData){
-    if(inflicted.stats[effect.sub_type] && inflicted.stats[effect.sub_type].current - effect.amount >= inflicted.stats[effect.sub_type].min) {
+    if(inflicted.stats[effect.sub_type] ) { //&& inflicted.stats[effect.sub_type].current - effect.amount >= inflicted.stats[effect.sub_type].min
         //console.log(inflicted.stats[effect.sub_type].current)
         //console.log(abilityData.damage_type)
         //inflicted.stats[effect.sub_type].current -= effect.amount;
         //console.log(inflicted.stats[effect.sub_type].current)
         //inflicted.stats[effect.sub_type].current = applyDamage(inflicted, inflictor, effect, abilityEntity, abilityData, inflicted.stats[effect.sub_type].current);
         applyDamage(inflicted, inflictor, effect, abilityEntity, abilityData);
+        if(inflicted.stats[effect.sub_type].current < inflicted.stats[effect.sub_type].min) {
+            inflicted.stats[effect.sub_type].current = 0;
+        }
+
         //console.log(inflicted.stats[effect.sub_type].current)
     }
-    if(inflictor.stats[effect.sub_type] && inflictor.stats[effect.sub_type].current + effect.amount <= inflictor.stats[effect.sub_type].max) {
+    if(inflictor.stats[effect.sub_type] ) { //&& inflictor.stats[effect.sub_type].current + effect.amount <= inflictor.stats[effect.sub_type].max
         inflictor.stats[effect.sub_type].current += effect.amount;
+        if(inflictor.stats[effect.sub_type].current > inflictor.stats[effect.sub_type].max) {
+            inflictor.stats[effect.sub_type].current = inflictor.stats[effect.sub_type].max;
+        }
     }
 }
 
 function applyFunnelTick(effect, inflicted, inflictor, abilityEntity, abilityData) {
-    if(inflicted.stats[effect.sub_type] && inflicted.stats[effect.sub_type].current + effect.amount <= inflicted.stats[effect.sub_type].max) {
+    if(inflicted.stats[effect.sub_type] ) { //&& inflicted.stats[effect.sub_type].current + effect.amount <= inflicted.stats[effect.sub_type].max
         inflicted.stats[effect.sub_type].current += effect.amount;
+        if(inflicted.stats[effect.sub_type].current > inflicted.stats[effect.sub_type].max) {
+            inflicted.stats[effect.sub_type].current = inflicted.stats[effect.sub_type].max;
+        }
     }
-    if(inflictor.stats[effect.sub_type] && inflictor.stats[effect.sub_type].current - effect.amount >= inflictor.stats[effect.sub_type].min) {
+    if(inflictor.stats[effect.sub_type] ) { //&& inflictor.stats[effect.sub_type].current - effect.amount >= inflictor.stats[effect.sub_type].min
         inflictor.stats[effect.sub_type].current -= effect.amount;
+        if(inflictor.stats[effect.sub_type].current < inflictor.stats[effect.sub_type].min) {
+            inflictor.stats[effect.sub_type].current = inflictor.stats[effect.sub_type].min;
+        }
     }
 }
 
