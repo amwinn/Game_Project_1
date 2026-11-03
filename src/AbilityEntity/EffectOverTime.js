@@ -80,17 +80,19 @@ function applyDrainTick(effect, inflicted, inflictor, abilityEntity, abilityData
 }
 
 function applyFunnelTick(effect, inflicted, inflictor, abilityEntity, abilityData) {
-    if(inflicted.stats[effect.sub_type] ) { //&& inflicted.stats[effect.sub_type].current + effect.amount <= inflicted.stats[effect.sub_type].max
+    if(inflicted.stats[effect.sub_type] && inflictor.stats[effect.sub_type] ) { //&& inflicted.stats[effect.sub_type].current + effect.amount <= inflicted.stats[effect.sub_type].max
         inflicted.stats[effect.sub_type].current += effect.amount;
         if(inflicted.stats[effect.sub_type].current > inflicted.stats[effect.sub_type].max) {
             inflicted.stats[effect.sub_type].current = inflicted.stats[effect.sub_type].max;
         }
     }
-    if(inflictor.stats[effect.sub_type] ) { //&& inflictor.stats[effect.sub_type].current - effect.amount >= inflictor.stats[effect.sub_type].min
-        inflictor.stats[effect.sub_type].current -= effect.amount;
+    if(inflictor.stats[effect.sub_type] && inflicted.stats[effect.sub_type] ) { //&& inflictor.stats[effect.sub_type].current - effect.amount >= inflictor.stats[effect.sub_type].min
+        //inflictor.stats[effect.sub_type].current -= effect.amount;
+        applyDamage(inflictor, inflicted, effect, abilityEntity, abilityData); //NOTE that inflictor and inflicted are swapped in the param args b/c inflictor is taking the damage
         if(inflictor.stats[effect.sub_type].current < inflictor.stats[effect.sub_type].min) {
             inflictor.stats[effect.sub_type].current = inflictor.stats[effect.sub_type].min;
         }
+        console.log(inflictor.stats[effect.sub_type].current)
     }
 }
 
