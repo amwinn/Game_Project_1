@@ -62,6 +62,7 @@ export const spellnova = {
 
     },
     effect: [
+        {type: "damage", amount: 10},
         {type: "knockback", amount: 75},
         {type: "slow", duration: 25, amount: 0.9},
         {type: "stun", duration: 10},
