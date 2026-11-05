@@ -8,6 +8,7 @@ export function calculateRenewal(recipient, inflictor, effect, abilityEntity, ab
     const healtype = effect?.damage_type?.type ?? abilityData.damage_type.type; //refactor damage_type to be agnostic
     const defense = recipient.defenses[healCategory][healtype];
     const renewal = effect.amount - defense;
+    //not sure if i want -defense or not, adding for now, can easily remove, thinking is that a fire-affinitive mage (fire mage) might have built up resistance to fire even heals
     return renewal;
 
 }
