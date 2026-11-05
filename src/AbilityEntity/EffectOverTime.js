@@ -69,11 +69,11 @@ function applyDrainTick(effect, inflicted, inflictor, abilityEntity, abilityData
         if(inflicted.stats[effect.sub_type].current < inflicted.stats[effect.sub_type].min) {
             inflicted.stats[effect.sub_type].current = 0;
         }
-
         //console.log(inflicted.stats[effect.sub_type].current)
     }
     if(inflictor.stats[effect.sub_type] ) { //&& inflictor.stats[effect.sub_type].current + effect.amount <= inflictor.stats[effect.sub_type].max
-        inflictor.stats[effect.sub_type].current += effect.amount;
+        //inflictor.stats[effect.sub_type].current += effect.amount;
+        applyRenewal(inflictor, inflicted, effect, abilityEntity, abilityData);
         if(inflictor.stats[effect.sub_type].current > inflictor.stats[effect.sub_type].max) {
             inflictor.stats[effect.sub_type].current = inflictor.stats[effect.sub_type].max;
         }
@@ -82,7 +82,8 @@ function applyDrainTick(effect, inflicted, inflictor, abilityEntity, abilityData
 
 function applyFunnelTick(effect, inflicted, inflictor, abilityEntity, abilityData) {
     if(inflicted.stats[effect.sub_type] && inflictor.stats[effect.sub_type] ) { //&& inflicted.stats[effect.sub_type].current + effect.amount <= inflicted.stats[effect.sub_type].max
-        inflicted.stats[effect.sub_type].current += effect.amount;
+        //inflicted.stats[effect.sub_type].current += effect.amount;
+        applyRenewal(inflicted, inflictor, effect, abilityEntity, abilityData);
         if(inflicted.stats[effect.sub_type].current > inflicted.stats[effect.sub_type].max) {
             inflicted.stats[effect.sub_type].current = inflicted.stats[effect.sub_type].max;
         }

@@ -67,7 +67,7 @@ export const spellnova = {
         {type: "slow", duration: 25, amount: 0.9},
         {type: "stun", duration: 10},
         //{type: "fast", duration: 25, amount: 1.1},
-        {type: "funnel", sub_type: "mana", damage_type: {category: "sorcery", type: "arcane"}, duration: 10, amount: 1, ticks: 10}
+        {type: "funnel", sub_type: "mana", damage_type: {category: "sorcery", type: "ritual"}, duration: 10, amount: 1, ticks: 10}
         //{type: "slow", duration: 2500, amount: .9}
     ]
 }
