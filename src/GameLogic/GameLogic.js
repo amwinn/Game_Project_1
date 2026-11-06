@@ -1,6 +1,6 @@
 import GameObject, {rockObjectCharter, bushObjectCharter, treeObjectCharter, gateObjectCharter, deadTreeObjectCharter} from "../GameObject.js";
 import Portal, { portalArray } from "../Portal.js";
-import Entity, { meleeEntityArray, rangedEntityArray } from "../Entity.js";
+import Entity, { entityArraysObject, meleeEntityArray, rangedEntityArray } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
 //import { nextMap, changeNextMap } from "./Grid.js";
 //import { playerSpawned, changePlayerSpawnState } from "./Grid.js";
@@ -12,6 +12,9 @@ import Projectile from "../AbilityEntity/Projectile.js";
 import { CREATURE_RENDER, PLAYER_RENDER } from "../../data/entity_data/entity_render.js"
 import { CREATURE_TYPE } from "../../data/entity_data/entity_type.js";
 import { spriteData_player } from "../../data/player_spriteData.js";
+import { animationLogicUpdate } from "./AnimationLogic.js";
+import { movementLogicUpdate } from "./MovementLogic.js";
+
 
 import { test_item_array } from "../Main.js";
 import Item from "../Item.js";
@@ -707,6 +710,8 @@ entityCollisionResolution(entity1, entity2) {
 
     //Eventually refactor the code to be in seperate update functions, for collision, map, player position etc.
     mapHandler(deltaTime) {
+        movementLogicUpdate(this.player); //was from this file in the movement logic section
+        animationLogicUpdate(deltaTime, this.player, entityArraysObject); //was from this fiel in the movement logic section
         this.radialEntityCollision(radialArray, meleeEntityArray);
         this.radialEntityCollision(radialArray, rangedEntityArray);
         this.entityCollisionCheck(meleeEntityArray, meleeEntityArray);
@@ -763,14 +768,15 @@ entityCollisionResolution(entity1, entity2) {
         this.updatePortalSpawner(portalArray, deltaTime);
     }
 
-    movementLogicUpdate(deltaTime) {
-        this.adjustDiagonalVelocity(this.player);
-        this.playerSpriteManager(this.player, deltaTime);
-        this.spriteManager_meleeForestSprite(meleeEntityArray, this.player);
-        this.spriteManager_mageForestSprite(rangedEntityArray, this.player);
-        //this.checkPlayerBounds(this.player, this.mapWidth, this.mapHeight);
+    //tentatively moved to MovementLogic.js, along with all of the movement logic declarations
+    // movementLogicUpdate(deltaTime) {
+    //     this.adjustDiagonalVelocity(this.player);
+    //     this.playerSpriteManager(this.player, deltaTime);
+    //     this.spriteManager_meleeForestSprite(meleeEntityArray, this.player);
+    //     this.spriteManager_mageForestSprite(rangedEntityArray, this.player);
+    //     //this.checkPlayerBounds(this.player, this.mapWidth, this.mapHeight);
         
-    }
+    // }
 
     changeMap() {
         playerSpawned = false;
