@@ -8,6 +8,7 @@ import { Sprite } from "./Utility.js";
 //for (const item of array)
 
 //temp export version to test player caching
+//imported and directly used in AnimationLogic.js, was in Gamelogic.js before splitting up the big GLogic
 export function loadEntityRenders(data) {
     const renderGroup = {};
     for(const animationState in data) {
