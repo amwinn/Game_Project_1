@@ -144,7 +144,7 @@ function gameLoop(){
     renderer.clearRect(0,0, gameMap.width, gameMap.height);
 
     gameLogic.mapHandler(deltaTime);
-    gameLogic.movementLogicUpdate(deltaTime);
+    //gameLogic.movementLogicUpdate(deltaTime); //now called in gamelogic, using a function imported from MovementLogic.js, also split into AnimationLogic.js
     gameLogic.spawnLogicUpdate(deltaTime);
     //temp spot start
     inputState.cursor.world.x = inputState.cursor.screen.x + camera.x;
