@@ -10,6 +10,10 @@ export const ability_repository = {
 
     frost: {
     [frostbolt.id]: frostbolt
+    },
+
+    fire: {
+        
     }
 
 
