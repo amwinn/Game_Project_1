@@ -8,7 +8,10 @@ import EffectOverTime from "./AbilityEntity/EffectOverTime.js";
 
 export const meleeEntityArray = [];
 export const rangedEntityArray = [];
-
+export const entityArraysObject = {
+    meleeEntityArray: meleeEntityArray,
+    rangedEntityArray: rangedEntityArray
+}
 
 
 //File is still very much a work in progress, needs a lot of cleaning and refactoring, transfers to other gamelogic etc.
