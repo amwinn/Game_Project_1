@@ -8,6 +8,14 @@ export const ability_repository = {
     [spellblast.id]: spellblast,
     },
 
+    infliction: {
+
+    },
+
+    affliction: {
+
+    },
+
     frost: {
     [frostbolt.id]: frostbolt
     },
@@ -15,6 +23,7 @@ export const ability_repository = {
     fire: {
         
     }
+
 
 
 }
