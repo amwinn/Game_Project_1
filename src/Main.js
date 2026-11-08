@@ -17,6 +17,7 @@ import { weapon_data } from "../data/item_data/weapon_data.js";
 
 import { generateUID } from "./Utility.js";
 import { spellbolt } from "../data/ability_data/simple_magic.js";
+import { movementLogicUpdate } from "./GameLogic/MovementLogic.js";
 
 //******************************************************************************INITIAL GUIDANCE******************************************************************************
 //firstly, ctrl and - will zoom out on code and side bars, ctrl and + will zome in, we are one increment zoomed in, so to go default hit ctrl and -
@@ -142,9 +143,10 @@ function gameLoop(){
     const deltaTime = (currentTime - lastTime) /1000;//REMINDER, MEASURED IN SECONDS, BECAUSE WE /1000 TO CONVERT MILLISECONDS TO SECONDS
     lastTime = currentTime;
     renderer.clearRect(0,0, gameMap.width, gameMap.height);
-
     gameLogic.mapHandler(deltaTime);
     //gameLogic.movementLogicUpdate(deltaTime); //now called in gamelogic, using a function imported from MovementLogic.js, also split into AnimationLogic.js
+    movementLogicUpdate(player);
+    //player.setPreviousPosition();
     gameLogic.spawnLogicUpdate(deltaTime);
     //temp spot start
     inputState.cursor.world.x = inputState.cursor.screen.x + camera.x;
