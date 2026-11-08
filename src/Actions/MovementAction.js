@@ -1,6 +1,6 @@
 import Action from "./Action.js";
 import { Position } from "../Utility.js";
-
+import { withinBottomBounds, withinLeftBounds, withinRightBounds, withinTopBounds } from "../GameLogic/MovementLogic.js";
 
 export default class MovementAction extends Action {
 
@@ -28,7 +28,6 @@ export default class MovementAction extends Action {
     }
 
     moveLeft(character, deltaTime) {
-
         character.position.x -= character.velocity * character.speed *deltaTime;
         character.direction = "left";
         character.animationDirection = "left";
@@ -59,16 +58,16 @@ export default class MovementAction extends Action {
         //     case MovementAction.right: this.moveRight(character); break;
         // }
         //MUST BE THIS.DIRECTION, NOT CHARACTER.DIRECTION, CHAR IS NOT INSTANCE OF CLASS, THIS. IS THE TEMPLATE FOR INSTANCE, THE PLACEHOLDER.
-        if(this.direction === MovementAction.up && gameLogic.withinTopBounds(character, gameLogic.mapWidth, gameLogic.mapHeight)) {
+        if(this.direction === MovementAction.up && withinTopBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveUp(character, deltaTime);
         }
-        else if(this.direction === MovementAction.down && gameLogic.withinBottomBounds(character, gameLogic.mapWidth, gameLogic.mapHeight)) {
+        else if(this.direction === MovementAction.down && withinBottomBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveDown(character, deltaTime);
         }
-        else if(this.direction === MovementAction.left && gameLogic.withinLeftBounds(character, gameLogic.mapWidth, gameLogic.mapHeight)) {
+        else if(this.direction === MovementAction.left && withinLeftBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveLeft(character, deltaTime);
         }
-        else if(this.direction === MovementAction.right && gameLogic.withinRightBounds(character, gameLogic.mapWidth, gameLogic.mapHeight)) {
+        else if(this.direction === MovementAction.right && withinRightBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveRight(character, deltaTime);
         }
 
