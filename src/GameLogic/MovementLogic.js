@@ -1,4 +1,5 @@
 import { activeMovementKeys } from "../Input/InputLogic.js";
+import { tileMap, getMapWidth, getMapHeight } from "./MapLogic.js";
 
 /*
 ..................................................................................................................................
@@ -32,17 +33,20 @@ export function returnSpeed(entity) {
     return entity.speed;
 }
 
-export function withinLeftBounds(character, mapWidth, mapheight) {
-    return(character.position.x > 0)
+const mapWidth = getMapWidth();
+const mapHeight = getMapHeight();
+
+export function withinLeftBounds(character) {
+    return(character.position.x > 0);
 }
-export function withinRightBounds(character, mapWidth, mapheight) {
-    return(character.position.x + character.size.dw <= mapWidth)
+export function withinRightBounds(character) {
+    return(character.position.x + character.size.dw <= mapWidth);
 }
-export function withinTopBounds(character, mapWidth, mapheight) {
-    return(character.position.y >= 0)
+export function withinTopBounds(character) {
+    return(character.position.y >= 0);
 }
-export function withinBottomBounds(character, mapWidth, mapheight) {
-    return(character.position.y + character.size.dh <= mapheight)
+export function withinBottomBounds(character) {
+    return(character.position.y + character.size.dh <= mapHeight);
 }
 
 
