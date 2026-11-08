@@ -103,7 +103,11 @@ updatePortalSpawner(array, deltaTime) {
 ..................................................................................................................................
 */
 
-
+//slowly implement the animations frames to here
+//remember to horizontally mirror all 3 frames so 6 in total, 3 for left, 3 for right orientation
+//start placeholder
+// playerSprites = loadEntityRenders(spriteData_player);
+//end placeholder
 // playerSpriteManager(player, deltaTime) {
 //     //console.log(player.sprite)
 //     let animationDuration = 0.25; //pre-delta-time was 40
@@ -129,6 +133,9 @@ updatePortalSpawner(array, deltaTime) {
 //     }
 
 //     player.sprite = selectedSpriteSet[player.animationIndex];
+
+
+   
 
 // }
 
@@ -221,20 +228,46 @@ adjustDiagonalVelocity(player){
 //         }
 //     })
 // }
+//temporary, for real
+// checkPlayerBounds(player, mapWidth, mapHeight){
+    
+//     if(player.position.x  >= mapWidth) {
+//         player.position.x -= 2.5
+//     }
+//     if(player.position.x <= (mapWidth - mapWidth)){
+//         player.position.x += 2.5
+//     }
+//     if(player.position.y  <= (mapHeight - mapHeight)) {
+//         player.position.y += 2.5
+//     }if(player.position.y + player.size.dh >= mapHeight) {
+//         player.position.y -= 2.5
+//     }
+// }
 
+// isInBounds(subject, mapWidth, mapHeight) {
+//     if(
+//         subject.position.x  < mapWidth && //is within right bounds
+//         subject.position.x >= (mapWidth - mapWidth) && //is within left ^
+//         subject.position.y >= (mapHeight - mapHeight) && //is within top ^
+//         subject.position.y + subject.size.dh < mapHeight //is within bottom ^
+//     ) {
+//         return true;
+//     } 
+//     return false;   
+// }
 
-withinLeftBounds(character, mapWidth, mapheight) {
-    return(character.position.x > 0)
-}
-withinRightBounds(character, mapWidth, mapheight) {
-    return(character.position.x + character.size.dw <= mapWidth)
-}
-withinTopBounds(character, mapWidth, mapheight) {
-    return(character.position.y >= 0)
-}
-withinBottomBounds(character, mapWidth, mapheight) {
-    return(character.position.y + character.size.dh <= mapheight)
-}
+// withinLeftBounds(character, mapWidth, mapheight) {
+//     return(character.position.x > 0)
+// }
+// withinRightBounds(character, mapWidth, mapheight) {
+//     return(character.position.x + character.size.dw <= mapWidth)
+// }
+// withinTopBounds(character, mapWidth, mapheight) {
+//     return(character.position.y >= 0)
+// }
+// withinBottomBounds(character, mapWidth, mapheight) {
+//     return(character.position.y + character.size.dh <= mapheight)
+// }
 
 /*
 ..................................................................................................................................
