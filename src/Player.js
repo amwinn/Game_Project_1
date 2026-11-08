@@ -17,7 +17,7 @@ export default class Player{
         this.velocity = velocity;
         this.previousVelocity = velocity;
         this.diagonalVelocity = velocity*.7; //could instead do Math.SQRT2 but there are too many decimal positions involved
-        this.previousPosition = {x: position.x, y: position.y};
+        //this.previousPosition = {x: position.x, y: position.y};
         this.direction = "right"; //default value, could set to null but might mess with default rendered sprite?
         this.animationDirection = "right"
         this.animationTimer = 0;
