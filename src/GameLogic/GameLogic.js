@@ -703,7 +703,10 @@ entityCollisionResolution(entity1, entity2) {
 
     //Eventually refactor the code to be in seperate update functions, for collision, map, player position etc.
     mapHandler(deltaTime) {
-        movementLogicUpdate(this.player); //was from this file in the movement logic section
+        // this.createGameObjects();
+        // this.repositionPlayer();
+        // this.camera.clampCamera(this.player);
+        //movementLogicUpdate(this.player); //was from this file in the movement logic section
         animationLogicUpdate(deltaTime, this.player, entityArraysObject); //was from this fiel in the movement logic section
         this.radialEntityCollision(radialArray, meleeEntityArray);
         this.radialEntityCollision(radialArray, rangedEntityArray);
@@ -754,6 +757,7 @@ entityCollisionResolution(entity1, entity2) {
         playerSpawned = true;
         //changePlayerSpawnState(true);
         //console.log(playerSpawned);
+        movementLogicUpdate(this.player);
 
     }
 
@@ -764,9 +768,9 @@ entityCollisionResolution(entity1, entity2) {
     //tentatively moved to MovementLogic.js, along with all of the movement logic declarations
     // movementLogicUpdate(deltaTime) {
     //     this.adjustDiagonalVelocity(this.player);
-    //     this.playerSpriteManager(this.player, deltaTime);
-    //     this.spriteManager_meleeForestSprite(meleeEntityArray, this.player);
-    //     this.spriteManager_mageForestSprite(rangedEntityArray, this.player);
+    //     //this.playerSpriteManager(this.player, deltaTime);
+    //     //this.spriteManager_meleeForestSprite(meleeEntityArray, this.player);
+    //     //this.spriteManager_mageForestSprite(rangedEntityArray, this.player);
     //     //this.checkPlayerBounds(this.player, this.mapWidth, this.mapHeight);
         
     // }
