@@ -32,6 +32,19 @@ export function returnSpeed(entity) {
     return entity.speed;
 }
 
+export function withinLeftBounds(character, mapWidth, mapheight) {
+    return(character.position.x > 0)
+}
+export function withinRightBounds(character, mapWidth, mapheight) {
+    return(character.position.x + character.size.dw <= mapWidth)
+}
+export function withinTopBounds(character, mapWidth, mapheight) {
+    return(character.position.y >= 0)
+}
+export function withinBottomBounds(character, mapWidth, mapheight) {
+    return(character.position.y + character.size.dh <= mapheight)
+}
+
 
 export function movementLogicUpdate(player) {
     adjustDiagonalVelocity(player);
