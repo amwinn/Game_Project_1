@@ -197,57 +197,31 @@ adjustDiagonalVelocity(player){
 //refactor to be closer to player sprite manager
 //alternative check is to check the velocity, if less than 0 x, dir equals left, if over 0 = right
 //feed entityDirectonData config object to the entity properties (no need for construct arg as far as i see at this moment)
-spriteManager_meleeForestSprite(array,player) {
-    array.forEach((entity, index) => {
-        if(entity.position.x > player.position.x ) {
-            entity.sprite = forest_creatureSprites.walk["left"][0];
-        } else if (entity.position.x < player.position.x) {
-            entity.sprite = forest_creatureSprites.walk["right"][0];
-        } else {
-            entity.sprite = forest_creatureSprites.idle[entity.direction][0];
-        }
-    })
-}
-
-//refactor to be closer to player sprite manager
-spriteManager_mageForestSprite(array,player){
-    array.forEach((entity, index) => {
-        if(entity.position.x > player.position.x ) {
-            entity.sprite = greater_forest_creatureSprites.walk["left"][0];
-        } else if (entity.position.x < player.position.x) {
-            entity.sprite = greater_forest_creatureSprites.walk["right"][0];
-        } else {
-            entity.sprite = greater_forest_creatureSprites.idle[entity.direction][0];
-        }
-    })
-}
-//temporary, for real
-// checkPlayerBounds(player, mapWidth, mapHeight){
-    
-//     if(player.position.x  >= mapWidth) {
-//         player.position.x -= 2.5
-//     }
-//     if(player.position.x <= (mapWidth - mapWidth)){
-//         player.position.x += 2.5
-//     }
-//     if(player.position.y  <= (mapHeight - mapHeight)) {
-//         player.position.y += 2.5
-//     }if(player.position.y + player.size.dh >= mapHeight) {
-//         player.position.y -= 2.5
-//     }
+// spriteManager_meleeForestSprite(array,player) {
+//     array.forEach((entity, index) => {
+//         if(entity.position.x > player.position.x ) {
+//             entity.sprite = forest_creatureSprites.walk["left"][0];
+//         } else if (entity.position.x < player.position.x) {
+//             entity.sprite = forest_creatureSprites.walk["right"][0];
+//         } else {
+//             entity.sprite = forest_creatureSprites.idle[entity.direction][0];
+//         }
+//     })
 // }
 
-// isInBounds(subject, mapWidth, mapHeight) {
-//     if(
-//         subject.position.x  < mapWidth && //is within right bounds
-//         subject.position.x >= (mapWidth - mapWidth) && //is within left ^
-//         subject.position.y >= (mapHeight - mapHeight) && //is within top ^
-//         subject.position.y + subject.size.dh < mapHeight //is within bottom ^
-//     ) {
-//         return true;
-//     } 
-//     return false;   
+// //refactor to be closer to player sprite manager
+// spriteManager_mageForestSprite(array,player){
+//     array.forEach((entity, index) => {
+//         if(entity.position.x > player.position.x ) {
+//             entity.sprite = greater_forest_creatureSprites.walk["left"][0];
+//         } else if (entity.position.x < player.position.x) {
+//             entity.sprite = greater_forest_creatureSprites.walk["right"][0];
+//         } else {
+//             entity.sprite = greater_forest_creatureSprites.idle[entity.direction][0];
+//         }
+//     })
 // }
+
 
 withinLeftBounds(character, mapWidth, mapheight) {
     return(character.position.x > 0)
