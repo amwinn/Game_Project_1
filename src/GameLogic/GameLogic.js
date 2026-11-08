@@ -103,48 +103,34 @@ updatePortalSpawner(array, deltaTime) {
 ..................................................................................................................................
 */
 
-//slowly implement the animations frames to here
-//remember to horizontally mirror all 3 frames so 6 in total, 3 for left, 3 for right orientation
-//start placeholder
-// playerSprites = loadEntityRenders(spriteData_player);
-//end placeholder
-playerSpriteManager(player, deltaTime) {
-    //console.log(player.sprite)
-    let animationDuration = 0.25; //pre-delta-time was 40
-    //this.playerSprites is using temp placeholder code/function
-    let selectedSpriteSet = playerSprites.walk[player.animationDirection];
 
-    if (activeMovementKeys.size > 0) {
-        player.animationTimer+= deltaTime;
-    }
-    if (activeMovementKeys.size === 0) {
-        player.animationIndex = 0;
-        player.sprite = selectedSpriteSet[player.animationIndex];
-    }
+// playerSpriteManager(player, deltaTime) {
+//     //console.log(player.sprite)
+//     let animationDuration = 0.25; //pre-delta-time was 40
+//     //this.playerSprites is using temp placeholder code/function
+//     let selectedSpriteSet = playerSprites.walk[player.animationDirection];
 
-    if (player.animationTimer >= animationDuration) {
-        player.animationIndex++;
-        player.animationTimer = 0;
-        //player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
-    }
-    if (player.animationIndex >= selectedSpriteSet.length) {
-        player.animationIndex = 0;
-        //player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
-    }
+//     if (activeMovementKeys.size > 0) {
+//         player.animationTimer+= deltaTime;
+//     }
+//     if (activeMovementKeys.size === 0) {
+//         player.animationIndex = 0;
+//         player.sprite = selectedSpriteSet[player.animationIndex];
+//     }
 
-    player.sprite = selectedSpriteSet[player.animationIndex];
+//     if (player.animationTimer >= animationDuration) {
+//         player.animationIndex++;
+//         player.animationTimer = 0;
+//         //player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
+//     }
+//     if (player.animationIndex >= selectedSpriteSet.length) {
+//         player.animationIndex = 0;
+//         //player.sprite.image.src = selectedSpriteSet[player.animationIndex].image.src;
+//     }
 
+//     player.sprite = selectedSpriteSet[player.animationIndex];
 
-   
-    // original rough draft implementation; discard below once new player sprite added in
-    // if(player.direction === "left") {
-    //     player.sprite.image.src = spriteData_player["stance_1"]["left"];
-    // } else if (player.direction === "right") {
-    //     player.sprite.image.src = spriteData_player["stance_1"]["right"];
-    // } else {
-    //     player.sprite.image.src === spriteData_player["stance_1"]["default"];
-    // }
-}
+// }
 
 //radial ability animation
 radialAbilityAnimation(ability) {
