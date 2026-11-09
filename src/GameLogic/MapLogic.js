@@ -23,3 +23,22 @@ export function getTile(row, column) {
 export function getTileMap() {
     return tileMap;
 }
+
+
+export function mapChangeCondition(player, array) {
+    for(const object of array) {
+        if(
+            player.position.x  + player.size.dw/3  > object.position.x &&  
+            player.position.x   < object.position.x + object.size.dw /1.5 && 
+            player.position.y + player.size.dh/1.3 > object.position.y && 
+            player.position.y   < object.position.y + object.size.dh/1.5 
+        ) {
+            return true;
+        } else return false;
+
+    }
+}
+
+export function changeMap() {
+    
+}
