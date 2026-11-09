@@ -2,7 +2,7 @@ import { Sprite } from "./Utility.js";
 export const rockObjectCharter = []; 
 export const treeObjectCharter = []; 
 export const bushObjectCharter = [];
-export const gateObjectCharter = [];
+export const gateObjectArray = [];
 export const deadTreeObjectCharter = [];
 
 
