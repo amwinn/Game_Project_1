@@ -46,14 +46,14 @@ export default class MovementAction extends Action {
     }
 
     playerObjectCollision(player, gameObjectMasterArray) {
-        gameObjectMasterArray.forEach((objectArray) => {
-            objectArray.forEach((object, objectIndex) => {
+        for(const array of gameObjectMasterArray) {
+            for(const object of array) {
                 if(
                     player.position.x  + player.size.dw/3  > object.position.x &&  
                     player.position.x   < object.position.x + object.size.dw /1.5 && 
                     player.position.y + player.size.dh/1.3 > object.position.y && 
                     player.position.y   < object.position.y + object.size.dh/1.5 &&
-                    objectArray != gateObjectArray
+                    array != gateObjectArray
                 ) { 
                     switch(player.direction) {
                         case "up":
@@ -71,14 +71,45 @@ export default class MovementAction extends Action {
 
                     }
                 } 
-            });
-    
-        });
+
+            }
+        }
     }
+
+    // playerObjectCollision(player, gameObjectMasterArray) {
+    //     gameObjectMasterArray.forEach((objectArray) => {
+    //         objectArray.forEach((object, objectIndex) => {
+    //             if(
+    //                 player.position.x  + player.size.dw/3  > object.position.x &&  
+    //                 player.position.x   < object.position.x + object.size.dw /1.5 && 
+    //                 player.position.y + player.size.dh/1.3 > object.position.y && 
+    //                 player.position.y   < object.position.y + object.size.dh/1.5 &&
+    //                 objectArray != gateObjectArray
+    //             ) { 
+    //                 switch(player.direction) {
+    //                     case "up":
+    //                         player.position.y = player.previousPosition.y;
+    //                         break;
+    //                     case "down":
+    //                     player.position.y = player.previousPosition.y;
+    //                         break;
+    //                     case "left":
+    //                     player.position.x = player.previousPosition.x;
+    //                         break;
+    //                     case "right":
+    //                     player.position.x = player.previousPosition.x;
+    //                         break;
+
+    //                 }
+    //             } 
+    //         });
+    
+    //     });
+    // }
 
 
     process(gameLogic, character, deltaTime) {
-        //character.setPreviousPosition();
+        character.setPreviousPosition();
         //console.log(gameLogic.isInBounds(character, gameLogic.mapWidth, gameLogic.mapHeight))
         //console.log(character.direction)
         // character.previousPosition.x = character.position.x;
