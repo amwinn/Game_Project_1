@@ -1,4 +1,4 @@
-import GameObject, {rockObjectCharter, bushObjectCharter, treeObjectCharter, gateObjectCharter, deadTreeObjectCharter} from "../GameObject.js";
+import GameObject, {rockObjectCharter, bushObjectCharter, treeObjectCharter, gateObjectArray, deadTreeObjectCharter} from "../GameObject.js";
 import Portal, { portalArray } from "../Portal.js";
 import Entity, { entityArraysObject, meleeEntityArray, rangedEntityArray } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
@@ -425,11 +425,11 @@ playerObjectCollision(player, gameObjectMasterArray) {
 
     
                 //must be in if statement or else it will prevent the player from re-positioning during changeMap
-                if(playerSpawned) {
-                    player.position.x = player.previousPosition.x;
-                    player.position.y = player.previousPosition.y;
-                    this.camera.clampCamera(player); // if this isnt here, the camera moves past the player for just a split moment, comment this out to see if you dont believe your past self.
-                }
+                // if(playerSpawned) {
+                //     // player.position.x = player.previousPosition.x;
+                //     // player.position.y = player.previousPosition.y;
+                //     //this.camera.clampCamera(player); // if this isnt here, the camera moves past the player for just a split moment, comment this out to see if you dont believe your past self.
+                // }
                 if(!playerSpawned || nextMap === true) {
                     console.log("collision is detected and playerspawn is false");
                     objectArray.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
@@ -439,7 +439,7 @@ playerObjectCollision(player, gameObjectMasterArray) {
                 //     player.position.x = player.previousPosition.x;
                 //     player.position.y = player.previousPosition.y;
                 // }
-                if(objectArray === gateObjectCharter) {
+                if(objectArray === gateObjectArray) {
                     //teleports player to next map/level
                     nextMap = true;
                     //changeNextMap(true); //function to change nextMap value as its read-only once imported
@@ -757,7 +757,7 @@ entityCollisionResolution(entity1, entity2) {
         playerSpawned = true;
         //changePlayerSpawnState(true);
         //console.log(playerSpawned);
-        movementLogicUpdate(this.player);
+        //movementLogicUpdate(this.player);
 
     }
 
@@ -808,7 +808,7 @@ entityCollisionResolution(entity1, entity2) {
             treeObjectCharter.length = 0;
             rockObjectCharter.length = 0;
             bushObjectCharter.length = 0;   
-            gateObjectCharter.length = 0;
+            gateObjectArray.length = 0;
             deadTreeObjectCharter.length = 0;
             meleeEntityArray.length = 0;
             rangedEntityArray.length = 0
