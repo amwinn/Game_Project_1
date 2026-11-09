@@ -57,7 +57,7 @@ export function movementLogicUpdate(player) {
 //this will need to be changed to be more abstract in that it will have to take in whatever keys are assigned to movement
 //perhaps something like activeMovementKeys.has(defaultKeyBindings.up.key) which wouldnt work but just a thought
 function adjustDiagonalVelocity(player){
-    player.setPreviousPosition(); 
+    //player.setPreviousPosition(); 
     const isDiagonal = (
         (activeMovementKeys.has("KeyW") && activeMovementKeys.has("KeyD")) ||
         (activeMovementKeys.has("KeyW") && activeMovementKeys.has("KeyA")) ||
