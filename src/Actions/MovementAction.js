@@ -93,28 +93,19 @@ export default class MovementAction extends Action {
         //MUST BE THIS.DIRECTION, NOT CHARACTER.DIRECTION, CHAR IS NOT INSTANCE OF CLASS, THIS. IS THE TEMPLATE FOR INSTANCE, THE PLACEHOLDER.
         if(this.direction === MovementAction.up && withinTopBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveUp(character, deltaTime);
-            if(this.playerObjectCollision(character, gameObjectMasterArray)) {
-                character.position.y = character.previousPosition.y;
-            }
+            this.playerObjectCollision(character, gameObjectMasterArray);
         }
         else if(this.direction === MovementAction.down && withinBottomBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveDown(character, deltaTime);
-            if(this.playerObjectCollision(character, gameObjectMasterArray)) {
-                character.position.y = character.previousPosition.y;
-            }
+            this.playerObjectCollision(character, gameObjectMasterArray);
         }
         else if(this.direction === MovementAction.left && withinLeftBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveLeft(character, deltaTime);
-            if(this.playerObjectCollision(character, gameObjectMasterArray)) {
-                console.log(character.position.x, character.previousPosition.x)
-                character.position.x = character.previousPosition.x;
-            }
+            this.playerObjectCollision(character, gameObjectMasterArray);
         }
         else if(this.direction === MovementAction.right && withinRightBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveRight(character, deltaTime);
-            if(this.playerObjectCollision(character, gameObjectMasterArray)) {
-                character.position.x = character.previousPosition.x;
-            }
+            this.playerObjectCollision(character, gameObjectMasterArray);
         }
 
     }
