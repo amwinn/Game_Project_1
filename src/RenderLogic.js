@@ -1,4 +1,4 @@
-import GameObject, {rockObjectCharter, treeObjectCharter, bushObjectCharter, gateObjectCharter, deadTreeObjectCharter} from "./GameObject.js";
+import GameObject, {rockObjectCharter, treeObjectCharter, bushObjectCharter, gateObjectArray, deadTreeObjectCharter} from "./GameObject.js";
 import { gameObjectMasterArray } from "./Main.js";
 import Camera from "./Camera.js";
 import Player from "./Player.js";
@@ -195,7 +195,7 @@ export default class RenderLogic{
         treeObjectCharter.length = 0;
         rockObjectCharter.length = 0;
         bushObjectCharter.length = 0;   
-        gateObjectCharter.length = 0;
+        gateObjectArray.length = 0;
         deadTreeObjectCharter.length = 0;
         meleeEntityArray.length = 0;
         rangedEntityArray.length = 0
