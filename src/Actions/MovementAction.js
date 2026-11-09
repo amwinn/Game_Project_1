@@ -2,6 +2,7 @@ import Action from "./Action.js";
 import { Position } from "../Utility.js";
 import { withinBottomBounds, withinLeftBounds, withinRightBounds, withinTopBounds } from "../GameLogic/MovementLogic.js";
 import { gameObjectMasterArray } from "../Main.js";
+import { gateObjectArray } from "../GameObject.js";
 
 export default class MovementAction extends Action {
 
@@ -51,7 +52,8 @@ export default class MovementAction extends Action {
                     player.position.x  + player.size.dw/3  > object.position.x &&  
                     player.position.x   < object.position.x + object.size.dw /1.5 && 
                     player.position.y + player.size.dh/1.3 > object.position.y && 
-                    player.position.y   < object.position.y + object.size.dh/1.5 
+                    player.position.y   < object.position.y + object.size.dh/1.5 &&
+                    objectArray != gateObjectArray
                 ) { 
                     switch(player.direction) {
                         case "up":
