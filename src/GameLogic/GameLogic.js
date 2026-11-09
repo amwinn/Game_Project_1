@@ -14,7 +14,7 @@ import { CREATURE_TYPE } from "../../data/entity_data/entity_type.js";
 import { spriteData_player } from "../../data/player_spriteData.js";
 import { animationLogicUpdate } from "./AnimationLogic.js";
 import { movementLogicUpdate } from "./MovementLogic.js";
-
+import { mapChangeCondition } from "./MapLogic.js";
 
 import { test_item_array } from "../Main.js";
 import Item from "../Item.js";
@@ -439,6 +439,7 @@ playerObjectCollision(player, gameObjectMasterArray) {
                 //     player.position.x = player.previousPosition.x;
                 //     player.position.y = player.previousPosition.y;
                 // }
+                //console.log(mapChangeCondition(player, gateObjectArray));
                 if(objectArray === gateObjectArray) {
                     //teleports player to next map/level
                     nextMap = true;
@@ -757,7 +758,7 @@ entityCollisionResolution(entity1, entity2) {
         playerSpawned = true;
         //changePlayerSpawnState(true);
         //console.log(playerSpawned);
-        //movementLogicUpdate(this.player);
+        movementLogicUpdate(this.player);
 
     }
 
