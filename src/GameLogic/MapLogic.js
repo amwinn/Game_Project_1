@@ -20,19 +20,19 @@ export const tileMapData = {
 }
 
 export function getMapWidth() {
-    return tileMap.columns * tileMap.tsize;
+    return tileMapConfig.columns * tileMapConfig.tsize;
 }
 
 export function getMapHeight() {
-    return tileMap.rows * tileMap.tsize;
+    return tileMapConfig.rows * tileMapConfig.tsize;
 }
 
 export function getTile(row, column) {
-    return tileMap.tiles[row * tileMap.columns + column]
+    return tileMapData.tiles[row * tileMapConfig.columns + column]
 }
 
 export function getTileMap() {
-    return tileMap;
+    return {config: tileMapConfig, data: tileMapData};
 }
 
 
