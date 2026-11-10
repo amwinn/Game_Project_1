@@ -8,6 +8,17 @@ export const tileMap = {
     tiles: mapDatabase[0].tiles,//delete if need //.tiles is needed because mapDatabase holds an array of objects not maps, the objects have the maps in a tile array
 };
 
+export const tileMapConfig = {
+    columns: 26,
+    rows: 14,
+    tsize: 128*1.4,
+}
+
+export const tileMapData = {
+    mapIndex: 0,
+    tiles:mapDatabase[0].tiles
+}
+
 export function getMapWidth() {
     return tileMap.columns * tileMap.tsize;
 }
