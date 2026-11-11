@@ -3,7 +3,9 @@ import { spriteData_player } from "../data/player_spriteData.js";
 import { PLAYER_RENDER } from "../data/entity_data/entity_render.js";
 import { PLAYER_CONFIG } from "../data/entity_data/entity_config.js";
 import { PLAYER_TYPE } from "../data/entity_data/entity_type.js";
+import { ENTITY_STATE } from "../data/entity_data/entity_state.js";
 import { updateModifiers } from "./AbilityLogic/ModifierLogic.js";
+import { screenSize } from "./Main.js";
 
 export default class Player{
     constructor(position, size, velocity) {
@@ -23,9 +25,10 @@ export default class Player{
         this.animationTimer = 0;
         this.animationIndex = 0;
         this.sprite = new Sprite(PLAYER_RENDER.idle[this.direction][0], size.dw, size.dh); //tentatively replaces "COMMENT#id" line
-        this.health = 100;//rough draft
-        this.mana = 100;//rough draft
-        this.max_mana = 100;
+        // this.health = 100;//rough draft
+        // this.mana = 100;//rough draft
+        // this.max_mana = 100;
+        this.spawnState = ENTITY_STATE.UNSPAWNED;
         this.base_speed = 1;
         this.speed = 1;
         this.modifiers = [];
@@ -50,6 +53,11 @@ export default class Player{
         player.effectsOverTime.forEach((effect,i) => {
             effect.update(deltaTime);
         });
+    }
+
+    spawnPlayer() {
+        this.position.x = screenSize.width/2;
+        this.position.y = screenSize.height/2;
     }
 
 
