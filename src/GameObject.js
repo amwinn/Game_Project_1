@@ -1,9 +1,9 @@
 import { Sprite } from "./Utility.js";
-export const rockObjectCharter = []; 
-export const treeObjectCharter = []; 
-export const bushObjectCharter = [];
+export const rockObjectArray = []; 
+export const treeObjectArray = []; 
+export const bushObjectArray = [];
 export const gateObjectArray = [];
-export const deadTreeObjectCharter = [];
+export const deadTreeObjectArray = [];
 
 
 

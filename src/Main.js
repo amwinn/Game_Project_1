@@ -3,7 +3,7 @@ import Projectile from "./AbilityEntity/Projectile.js";
 import Entity, { meleeEntityArray, rangedEntityArray } from "./Entity.js";
 import Camera from "./Camera.js";
 import RenderLogic from "./RenderLogic.js";
-import { deadTreeObjectCharter, gateObjectArray, rockObjectCharter, treeObjectCharter, bushObjectCharter} from "./GameObject.js";
+import { deadTreeObjectArray, gateObjectArray, rockObjectArray, treeObjectArray, bushObjectArray} from "./GameObject.js";
 import Portal from "./Portal.js";
 import { portalArray } from "./Portal.js";
 import { Position, Size, Sprite } from "./Utility.js";
@@ -52,11 +52,11 @@ let camera = new Camera(0,0, new Size(screenSize.width,screenSize.height));
 
 export const test_item_array = [];
 export const gameObjectMasterArray = [
-    rockObjectCharter,
-    bushObjectCharter,
-    treeObjectCharter,
+    rockObjectArray,
+    bushObjectArray,
+    treeObjectArray,
     gateObjectArray,
-    deadTreeObjectCharter,
+    deadTreeObjectArray,
     portalArray
 ];
 

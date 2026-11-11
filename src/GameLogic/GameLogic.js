@@ -1,4 +1,4 @@
-import GameObject, {rockObjectCharter, bushObjectCharter, treeObjectCharter, gateObjectArray, deadTreeObjectCharter} from "../GameObject.js";
+import GameObject, {rockObjectArray, bushObjectArray, treeObjectArray, gateObjectArray, deadTreeObjectArray} from "../GameObject.js";
 import Portal, { portalArray } from "../Portal.js";
 import Entity, { entityArraysObject, meleeEntityArray, rangedEntityArray } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
@@ -806,11 +806,11 @@ entityCollisionResolution(entity1, entity2) {
         cullObjects() {
             projectilesArray.length = 0;
             entityProjectilesArray.length = 0;
-            treeObjectCharter.length = 0;
-            rockObjectCharter.length = 0;
-            bushObjectCharter.length = 0;   
+            treeObjectArray.length = 0;
+            rockObjectArray.length = 0;
+            bushObjectArray.length = 0;   
             gateObjectArray.length = 0;
-            deadTreeObjectCharter.length = 0;
+            deadTreeObjectArray.length = 0;
             meleeEntityArray.length = 0;
             rangedEntityArray.length = 0
             portalArray.length = 0;

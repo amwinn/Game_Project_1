@@ -1,5 +1,5 @@
 import { Sprite } from "./Utility.js";
-import GameObject, {rockObjectCharter, treeObjectCharter, bushObjectCharter, gateObjectArray, deadTreeObjectCharter} from "./GameObject.js";
+import GameObject, {rockObjectArray, treeObjectArray, bushObjectArray, gateObjectArray, deadTreeObjectArray} from "./GameObject.js";
 import { portalArray } from "./Portal.js";
 
 //ENTIRE CLASS NEEDS TO BE REFACTORED EVENTUALLY, MOST LIKELY WHEN PROC GEN IS INTRODUCED, TILEMAP NEEDS TO BE DATA PERHAPS, PEEL AWAY THE GETTILE FUNCTION ELSEWHERE?
@@ -14,9 +14,9 @@ export default class MapData {
         "forest": {
             0: {sprite: new Sprite("Images/Forest/practice_grass5.png")},            
             2: {sprite: new Sprite("Images/Forest/practice_grass4.png")},
-            3: {sprite: new Sprite("Images/Forest/practice_cypress1.png"), arrayType: treeObjectCharter, type: GameObject.tree},       
-            4: {sprite: new Sprite("Images/Forest/practice_bush1.png"), arrayType: bushObjectCharter, type: GameObject.bush},
-            5: {sprite: new Sprite("Images/Forest/practice_rock1.png"), arrayType: rockObjectCharter, type: GameObject.rock}, 
+            3: {sprite: new Sprite("Images/Forest/practice_cypress1.png"), arrayType: treeObjectArray, type: GameObject.tree},       
+            4: {sprite: new Sprite("Images/Forest/practice_bush1.png"), arrayType: bushObjectArray, type: GameObject.bush},
+            5: {sprite: new Sprite("Images/Forest/practice_rock1.png"), arrayType: rockObjectArray, type: GameObject.rock}, 
             6: {sprite: new Sprite("Images/Forest/practice_portal1.png"), arrayType: portalArray, type: GameObject.portal},
             7: {sprite: new Sprite("Images/Forest/practice_gate3.png"), arrayType: gateObjectArray, type: GameObject.gate}
 
@@ -24,9 +24,9 @@ export default class MapData {
         "swamp": {
             0: {sprite: new Sprite("Images/Swamp/practice_swampGrass1.png")},            
             2: {sprite: new Sprite("Images/Swamp/practice_swampGrass1.png")},
-            3: {sprite: new Sprite("Images/Swamp/practice_deadTree1.png"), arrayType: deadTreeObjectCharter, type: GameObject.deadTree},       
-            4: {sprite: new Sprite("Images/Forest/practice_bush1.png"), arrayType: bushObjectCharter, type: GameObject.bush},
-            5: {sprite: new Sprite("Images/Forest/practice_rock1.png"), arrayType: rockObjectCharter, type: GameObject.rock}, 
+            3: {sprite: new Sprite("Images/Swamp/practice_deadTree1.png"), arrayType: deadTreeObjectArray, type: GameObject.deadTree},       
+            4: {sprite: new Sprite("Images/Forest/practice_bush1.png"), arrayType: bushObjectArray, type: GameObject.bush},
+            5: {sprite: new Sprite("Images/Forest/practice_rock1.png"), arrayType: rockObjectArray, type: GameObject.rock}, 
             6: {sprite: new Sprite("Images/Forest/practice_portal1.png"), arrayType: portalArray, type: GameObject.portal},
             7: {sprite: new Sprite("Images/Forest/practice_gate3.png"), arrayType: gateObjectArray, type: GameObject.gate}
 
