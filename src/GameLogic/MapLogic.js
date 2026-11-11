@@ -45,9 +45,9 @@ export function mapChangeCondition(player, array) {
             player.position.y   < object.position.y + object.size.dh/1.5 
         ) {
             return true;
-        } else return false;
+        } 
 
-    }
+    } return false;
 }
 
 export function changeMap() {
