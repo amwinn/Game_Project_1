@@ -26,6 +26,7 @@ import Area from "../AbilityEntity/AreaOfEffect.js";
 //temp, will live in assetregistry unless the class ends up being useless
 import { loadEntityRenders } from "../AssetRegistry.js";
 import Player from "../Player.js";
+import { ENTITY_STATE } from "../../data/entity_data/entity_state.js";
 let playerSprites = loadEntityRenders(PLAYER_RENDER);
 let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
 let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
@@ -430,7 +431,7 @@ playerObjectCollision(player, gameObjectMasterArray) {
                 //     // player.position.y = player.previousPosition.y;
                 //     //this.camera.clampCamera(player); // if this isnt here, the camera moves past the player for just a split moment, comment this out to see if you dont believe your past self.
                 // }
-                if(!playerSpawned || nextMap === true) {
+                if(player.spawnState = ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
                     console.log("collision is detected and playerspawn is false");
                     objectArray.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
                     
@@ -755,6 +756,7 @@ entityCollisionResolution(entity1, entity2) {
         })
         this.playerEntityCollision(this.player, meleeEntityArray);
         this.playerEntityCollision(this.player, rangedEntityArray);
+        this.player.spawnState = ENTITY_STATE.SPAWNED;
         playerSpawned = true;
         //changePlayerSpawnState(true);
         //console.log(playerSpawned);
@@ -777,6 +779,7 @@ entityCollisionResolution(entity1, entity2) {
     // }
 
     changeMap() {
+        this.player.spawnState = ENTITY_STATE.UNSPAWNED;
         playerSpawned = false;
         this.cullObjects();
         if(this.tileMap.mapIndex + 1 >= this.mapData.mapDatabase.length) {
@@ -798,6 +801,7 @@ entityCollisionResolution(entity1, entity2) {
         console.log("camera clamped" + " Player spawned is " + playerSpawned);
         this.repositionPlayer();
         nextMap = false;
+        this.player.spawnState = ENTITY_STATE.SPAWNED;
         playerSpawned = true;
 
 
