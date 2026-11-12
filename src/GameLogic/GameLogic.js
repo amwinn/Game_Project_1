@@ -33,7 +33,7 @@ let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_
 //end temp
 
 let nextMap = false;
-let playerSpawned = false;
+//let playerSpawned = false;
 export const objectSpawnTracker = new Set();
 export default class GameLogic {
     constructor(mapData, camera, player) {
@@ -432,7 +432,7 @@ playerObjectCollision(player, gameObjectMasterArray) {
                 //     //this.camera.clampCamera(player); // if this isnt here, the camera moves past the player for just a split moment, comment this out to see if you dont believe your past self.
                 // }
                 if(player.spawnState = ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
-                    console.log("collision is detected and playerspawn is false");
+                    console.log("collision is detected and playerspawn is " + player.spawnState);
                     objectArray.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
                     
                     console.log("object spliced during player placement");
@@ -757,7 +757,7 @@ entityCollisionResolution(entity1, entity2) {
         this.playerEntityCollision(this.player, meleeEntityArray);
         this.playerEntityCollision(this.player, rangedEntityArray);
         this.player.spawnState = ENTITY_STATE.SPAWNED;
-        playerSpawned = true;
+        //playerSpawned = true;
         //changePlayerSpawnState(true);
         //console.log(playerSpawned);
         movementLogicUpdate(this.player);
@@ -780,7 +780,7 @@ entityCollisionResolution(entity1, entity2) {
 
     changeMap() {
         this.player.spawnState = ENTITY_STATE.UNSPAWNED;
-        playerSpawned = false;
+        //playerSpawned = false;
         this.cullObjects();
         if(this.tileMap.mapIndex + 1 >= this.mapData.mapDatabase.length) {
             this.tileMap.mapIndex = 0;
@@ -798,11 +798,11 @@ entityCollisionResolution(entity1, entity2) {
         this.camera.clampCamera(this.player);
         //this.createGameObjects();
         this.playerObjectCollision(this.player, gameObjectMasterArray);
-        console.log("camera clamped" + " Player spawned is " + playerSpawned);
+        console.log("camera clamped" + " Player spawned state is " + this.player.spawnState);
         this.repositionPlayer();
         nextMap = false;
         this.player.spawnState = ENTITY_STATE.SPAWNED;
-        playerSpawned = true;
+        //playerSpawned = true;
 
 
     }
