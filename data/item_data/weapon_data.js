@@ -17,6 +17,13 @@ export const gnarled_staff = {
     },
     effect: [], //this is essentially the modifications, to attributes, defenses, resources, abilities, etc.
 }
+//for effects; brainstorm formats and types:
+//type: "stat", sub_type: health, amount: 50
+//type: "stat", sub_type: stamina, amount: -25
+// need to figure out how to determine difference between temporary effects with duration such as buffs and debuffs, conditional effects (as long as item is equppied, as long as spell is learned, etc.)
+//can also have a descr key with value of what to show on the item art, such as
+//type: "stat", sub_type: health, amount: 50, descr: "+50 health"
+//type: "attribute", sub_type:"wisdom", amount: 4, descr: "+4 wisdom"
 
 
 
@@ -28,8 +35,7 @@ export const gnarled_staff = {
 
 
 
-
-
+// for reference only, trying to keep similar data structures where able
 export const frostbolt = {
     id:"frostbolt",
     damage_type: {
