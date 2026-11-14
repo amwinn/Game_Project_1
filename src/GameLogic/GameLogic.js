@@ -378,7 +378,7 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
                     //recently added && projectile.type !== Projectile.enemyProjectile to the below if statement because the enemies were spawning items but not destroying portal
                     if(objectArray === portalArray && projectile.type !== Projectile.entityProjectile) { 
                     //START TEST CODE
-                    test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("Images/draft_loot_bag1.png", this.tileMap.tsize/3, this.tileMap.tsize/3), object.position.x, object.position.y));
+                    test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("Images/draft_loot_bag1.png", tileMapConfig.tsize/3, tileMapConfig.tsize/3), object.position.x, object.position.y));
                     console.log(test_item_array)
                     //END TEST CODE
                 }
@@ -622,10 +622,10 @@ entityCollisionResolution(entity1, entity2) {
 
     createGameObjects() {
         //don't even bother trying to console dot log these hogs, they dont have any values b/c camera isnt connected yet, has to be connected inside of main.js unless we find a better way
-        let leftBounds = Math.floor(this.camera.x / this.tileMap.tsize);
-        let rightBounds = Math.floor((this.camera.x + this.camera.size.dw) / this.tileMap.tsize) + 1;
-        let topBounds = Math.floor(this.camera.y / this.tileMap.tsize);
-        let bottomBounds = Math.floor((this.camera.y + this.camera.size.dh) / this.tileMap.tsize) + 1;
+        let leftBounds = Math.floor(this.camera.x / tileMapConfig.tsize);
+        let rightBounds = Math.floor((this.camera.x + this.camera.size.dw) / tileMapConfig.tsize) + 1;
+        let topBounds = Math.floor(this.camera.y / tileMapConfig.tsize);
+        let bottomBounds = Math.floor((this.camera.y + this.camera.size.dh) / tileMapConfig.tsize) + 1;
 
 
         // let mapWidth = this.tileMap.cols * this.tileMap.tsize;
@@ -686,12 +686,12 @@ entityCollisionResolution(entity1, entity2) {
     //Repositions out of bounds player
     //Must be called in mapHandler for intial map, as well as in changeMap while playerSpawned is once again false
     repositionPlayer() {
-        if (this.player.position.x > this.tileMap.cols * this.tileMap.tsize && playerSpawned !== true) {
-            this.player.position.x = (this.tileMap.cols * this.tileMap.tsize) / 2;
+        if (this.player.position.x > tileMapConfig.cols * tileMapConfig.tsize && playerSpawned !== true) {
+            this.player.position.x = (tileMapConfig.cols * tileMapConfig.tsize) / 2;
             console.log("repositioned player")
         }
-        if (this.player.position.y > (this.tileMap.rows * this.tileMap.tsize) && playerSpawned !== true) {
-            this.player.position.y = (this.tileMap.rows * this.tileMap.tsize) / 2;
+        if (this.player.position.y > (tileMapConfig.rows * tileMapConfig.tsize) && playerSpawned !== true) {
+            this.player.position.y = (tileMapConfig.rows * tileMapConfig.tsize) / 2;
             console.log("repositioned player")
         };
     }
