@@ -23,6 +23,9 @@ import { testItemMap } from "../Main.js";
 import { applyEffects } from "../AbilityLogic/AbilityEffect.js";
 import Area from "../AbilityEntity/AreaOfEffect.js";
 
+import { tileMapConfig, tileMapData, getTile, getTileMap, getMapHeight, getMapWidth } from "./MapLogic.js";
+import { mapDatabase } from "../../data/map_data/map_data.js";
+
 //temp, will live in assetregistry unless the class ends up being useless
 import { loadEntityRenders } from "../AssetRegistry.js";
 import Player from "../Player.js";
@@ -41,8 +44,8 @@ export default class GameLogic {
         this.camera = camera;
         this.player = player;
         this.tileMap = this.mapData.tileMap;
-        this.mapWidth = this.mapData.tileMap.getMapWidth();
-        this.mapHeight = this.mapData.tileMap.getMapHeight();
+        this.mapWidth = getMapWidth();
+        this.mapHeight = getMapHeight();
         
     }
 
@@ -633,15 +636,15 @@ entityCollisionResolution(entity1, entity2) {
             for (let r = topBounds; r <= bottomBounds; r++) {
 
                 const tileID = `${c},${r}`; //note that this uses `, alternate tilda key, for template literal, to embed variable instead of stringifying c and r literally
-                const tile = this.tileMap.getTile(c, r);
+                const tile = getTile(r,c); //was this.tileMap.getTile(c,r); note the parameter differents, column row vs row column
 
-                let x = c * this.tileMap.tsize;
-                let y = r * this.tileMap.tsize;
+                let x = c * tileMapConfig.tsize;
+                let y = r * tileMapConfig.tsize;
 
                 let isTileValid = this.checkTileValidity(x, y, this.mapWidth, this.mapHeight); //works with this.mapWidth or mapWidth, not sure why
 
 
-                let selectedTileSpriteSheet = this.mapData.biomeTileSheets[this.mapData.mapDatabase[this.tileMap.mapIndex].biome];
+                let selectedTileSpriteSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
                 //let defaultTileSprite = this.selectedTileSpriteSheet[0];
                 let selectedTile = selectedTileSpriteSheet[tile];
 
@@ -651,11 +654,11 @@ entityCollisionResolution(entity1, entity2) {
                 //creates object dimensions for objects, note seperate dimensions for bush
                 if (selectedTile && selectedTile.type !== GameObject.bush) {
                     objectPosition = new Position(x, y);
-                    objectSize = new Size(this.tileMap.tsize, this.tileMap.tsize);
+                    objectSize = new Size(tileMapConfig.tsize, tileMapConfig.tsize);
                 }
                 if (selectedTile && selectedTile.type === GameObject.bush) {
-                    objectPosition = new Position(x + (this.tileMap.tsize / 4), y + this.tileMap.tsize / 5)
-                    objectSize = new Size(this.tileMap.tsize / 2, this.tileMap.tsize / 2)
+                    objectPosition = new Position(x + (tileMapConfig.tsize / 4), y + tileMapConfig.tsize / 5)
+                    objectSize = new Size(tileMapConfig.tsize / 2, tileMapConfig.tsize / 2)
                 }
 
                 if (selectedTile && selectedTile.arrayType && selectedTile.type) {
@@ -782,13 +785,13 @@ entityCollisionResolution(entity1, entity2) {
         this.player.spawnState = ENTITY_STATE.UNSPAWNED;
         //playerSpawned = false;
         this.cullObjects();
-        if(this.tileMap.mapIndex + 1 >= this.mapData.mapDatabase.length) {
-            this.tileMap.mapIndex = 0;
-            this.tileMap.tiles = this.mapData.mapDatabase[this.tileMap.mapIndex].tiles;
+        if(tileMapData.mapIndex + 1 >= mapDatabase.length) {
+            tileMapData.mapIndex = 0;
+            tileMapData.tiles = mapDatabase[tileMapData.mapIndex].tiles;
             //this.tileMap.mapIndex +=1; //was making it where we skip the first level when relooping
         } else {
-            this.tileMap.tiles = this.mapData.mapDatabase[this.tileMap.mapIndex + 1].tiles;
-            this.tileMap.mapIndex +=1;
+            tileMapData.tiles = mapDatabase[tileMapData.mapIndex + 1].tiles;
+            tileMapData.mapIndex +=1;
 
         }
         //IMPORTANT - if having sprite/image/undefined errors, this.createGameObjects(); will have to be placed AFTER player repositioning, and camera clamping
