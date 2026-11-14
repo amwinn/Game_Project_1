@@ -52,8 +52,8 @@ export default class RenderLogic{
 
 
     initializeProperties(){
-    this.mapWidth = this.tileMap.getMapWidth();
-    this.mapHeight = this.tileMap.getMapHeight();
+    this.mapWidth = getMapWidth();
+    this.mapHeight = getMapHeight();
 
     }
 
@@ -61,11 +61,11 @@ export default class RenderLogic{
 //Checks if user is zoomed out further than intended,and repositions player x,y if out of bounds
     updatePlayer() {
         
-        if (this.player.position.x > this.tileMap.cols * this.tileMap.tsize ) {
-            this.player.position.x = (this.tileMap.cols * this.tileMap.tsize) /2;
+        if (this.player.position.x > tileMapConfig.cols * tileMapConfig.tsize ) {
+            this.player.position.x = (tileMapConfig.cols * tileMapConfig.tsize) /2;
         }
-        if(this.player.position.y > (this.tileMap.rows * this.tileMap.tsize)) {
-            this.player.position.y = (this.tileMap.rows * this.tileMap.tsize) /2;
+        if(this.player.position.y > (tileMapConfig.rows * tileMapConfig.tsize)) {
+            this.player.position.y = (tileMapConfig.rows * tileMapConfig.tsize) /2;
         };
 
     
@@ -87,10 +87,10 @@ export default class RenderLogic{
 
         //let leftBounds = Math.floor(this.tileMap.cols / this.tileMap.tsize); //was originally this.camera.x instead of this.tilemap.cols //btw i dont know how but this fixed where the tilemap kept rendering the map infinitely to the left and right
         //leftBounds still causes the right side grass/paths to unrender( is out of view, have to start 100% zoom and zoom out to see it)
-        let leftBounds = Math.floor(this.camera.x / this.tileMap.tsize);//was start col
-        let rightBounds = Math.floor((this.camera.x + this.camera.size.dw) / this.tileMap.tsize) +1; // was originally this.camera.w instead of this.mapWidth //was endcol
-        let topBounds = Math.floor(this.camera.y / this.tileMap.tsize); //was originally this.camera.y instead of this.tilemap.rows //was startrow
-        let bottomBounds = Math.floor((this.camera.y + this.camera.size.dh) / this.tileMap.tsize) +1; //was originally this.camera.h instead of this.mapHeight //was endrow
+        let leftBounds = Math.floor(this.camera.x / tileMapConfig.tsize);//was start col
+        let rightBounds = Math.floor((this.camera.x + this.camera.size.dw) / tileMapConfig.tsize) +1; // was originally this.camera.w instead of this.mapWidth //was endcol
+        let topBounds = Math.floor(this.camera.y / tileMapConfig.tsize); //was originally this.camera.y instead of this.tilemap.rows //was startrow
+        let bottomBounds = Math.floor((this.camera.y + this.camera.size.dh) / tileMapConfig.tsize) +1; //was originally this.camera.h instead of this.mapHeight //was endrow
 
         //not used for a while, delete once sure
         // let maxCol = this.tileMap.cols;
