@@ -15,6 +15,10 @@ import { objectSpawnTracker } from "./GameLogic/GameLogic.js";
 
 import { test_item_array } from "./Main.js";
 
+import { tileMapConfig, tileMapData, getTile, getTileMap, getMapHeight, getMapWidth } from "./GameLogic/MapLogic.js";
+import { mapDatabase } from "../data/map_data/map_data.js";
+
+
 
 
 //You're going to be seeing some +22's in this file, and wonder why it's here; well, that's the only way i currently know that removes the grid lines from the map, this isnt a checkerboard its an rpg board
@@ -95,16 +99,16 @@ export default class RenderLogic{
             for(let r = topBounds; r <= bottomBounds ; r++) { 
                 //recently commented out as of march 8 2026
                 //const tileID = `${c},${r}`;
-                const tile = this.tileMap.getTile(c,r);
+                const tile = getTile(r,c);
 
-                let x = c *this.tileMap.tsize;
-                let y = r *this.tileMap.tsize;
+                let x = c * tileMapConfig.tsize;
+                let y = r * tileMapConfig.tsize;
                 
                 //recently commented out as of march 8 2026
                 //let tileValidity = this.checkTileValidity(x,y, this.mapWidth, this.mapHeight);
                 
                 
-                let selectedTileSheet = this.mapData.biomeTileSheets[this.mapData.mapDatabase[this.tileMap.mapIndex].biome];
+                let selectedTileSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
 
                 let defaultFloorSprite = selectedTileSheet[0];
 
@@ -113,13 +117,13 @@ export default class RenderLogic{
 
                 //renders non-object terrain tiles (mostly grass)
                 if(selectedTile && !selectedTile.arrayType && !selectedTile.type) { //was tile === 0 || tile === 2, decided to make it more abstract
-                    this.renderSprite(renderer, selectedTile.sprite, x, y, this.tileMap.tsize+22, this.tileMap.tsize+22)
+                    this.renderSprite(renderer, selectedTile.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22)
                 }
                 
 
                 //creates a background grass for object, the +22 modifiers to size fix the artifact lines, oddly enough they werent visible in fullscreen f11 mode
                 if(selectedTile && selectedTile.arrayType && selectedTile.type) { //was if(tile > 2)
-                    this.renderSprite(renderer, defaultFloorSprite.sprite, x, y, this.tileMap.tsize+22, this.tileMap.tsize+22); //just recently added this +22 to the dw and dh, else there were grid lines all over
+                    this.renderSprite(renderer, defaultFloorSprite.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22); //just recently added this +22 to the dw and dh, else there were grid lines all over
                 }
 
 
