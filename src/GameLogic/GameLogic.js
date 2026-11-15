@@ -82,8 +82,8 @@ updatePortalSpawner(array, deltaTime) {
         if(portal.spawnTimer >= portal.spawnTime) {
             const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y
             const magePosition  = new Position(portal.position.x, portal.position.y) //same
-            const meleeEnemySize = new Size(this.mapData.tileMap.tsize/2, this.mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
-            const rangedEnemySize = new Size(this.mapData.tileMap.tsize/2, this.mapData.tileMap.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
+            const meleeEnemySize = new Size(tileMapConfig.tsize/2, tileMapConfig.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
+            const rangedEnemySize = new Size(tileMapConfig.tsize/2, tileMapConfig.tsize/2); //eventually remove these and inside the spawnEntity function just call a new Size(creatureTypeData.creature_name.size.dw/dh)
             this.spawnEntity(meleeEntityArray, 50, CREATURE_TYPE.FOREST_CREATURE, Entity.melee, meleePosition, meleeEnemySize, {x: 1, y: 1}, 5, 7); //had to have both velocity values or else it wouldnt have worked
             this.spawnEntity(rangedEntityArray, 25, CREATURE_TYPE.GREATER_FOREST_CREATURE, Entity.mage, magePosition, rangedEnemySize, {x:1, y:1}, 5, 7); //maybe change cooldown number to random number, between 400-500?   
             portal.spawnTimer = 0;      
