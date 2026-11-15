@@ -43,7 +43,7 @@ export default class GameLogic {
         this.mapData = mapData;
         this.camera = camera;
         this.player = player;
-        this.tileMap = this.mapData.tileMap;
+        //this.tileMap = this.mapData.tileMap;
         this.mapWidth = getMapWidth();
         this.mapHeight = getMapHeight();
         

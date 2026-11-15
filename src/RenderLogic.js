@@ -39,7 +39,7 @@ let objectIndex;
 export default class RenderLogic{
     constructor(mapData, camera, player){
         this.mapData = mapData;
-        this.tileMap = this.mapData.tileMap;
+        //this.tileMap = this.mapData.tileMap;
         this.camera = camera;
         this.player = player;
         this.initializeProperties();
