@@ -61,8 +61,8 @@ export default class RenderLogic{
 //Checks if user is zoomed out further than intended,and repositions player x,y if out of bounds
     updatePlayer() {
         
-        if (this.player.position.x > tileMapConfig.cols * tileMapConfig.tsize ) {
-            this.player.position.x = (tileMapConfig.cols * tileMapConfig.tsize) /2;
+        if (this.player.position.x > tileMapConfig.columns * tileMapConfig.tsize ) {
+            this.player.position.x = (tileMapConfig.columns * tileMapConfig.tsize) /2;
         }
         if(this.player.position.y > (tileMapConfig.rows * tileMapConfig.tsize)) {
             this.player.position.y = (tileMapConfig.rows * tileMapConfig.tsize) /2;

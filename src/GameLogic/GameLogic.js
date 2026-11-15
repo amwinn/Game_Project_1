@@ -686,8 +686,8 @@ entityCollisionResolution(entity1, entity2) {
     //Repositions out of bounds player
     //Must be called in mapHandler for intial map, as well as in changeMap while playerSpawned is once again false
     repositionPlayer() {
-        if (this.player.position.x > tileMapConfig.cols * tileMapConfig.tsize && playerSpawned !== true) {
-            this.player.position.x = (tileMapConfig.cols * tileMapConfig.tsize) / 2;
+        if (this.player.position.x > tileMapConfig.columns * tileMapConfig.tsize && playerSpawned !== true) {
+            this.player.position.x = (tileMapConfig.columns * tileMapConfig.tsize) / 2;
             console.log("repositioned player")
         }
         if (this.player.position.y > (tileMapConfig.rows * tileMapConfig.tsize) && playerSpawned !== true) {
