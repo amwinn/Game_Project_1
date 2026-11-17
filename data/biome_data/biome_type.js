@@ -1,5 +1,5 @@
 //cant decide on having one single BIOME_TYPE or several FOREST_TYPE, SWAMP_TYPE etc.
-
+//going with single BIOME_TYPE, only need separate ones if the list grows unwieldy
 
 
 export const BIOME_TYPE = {
