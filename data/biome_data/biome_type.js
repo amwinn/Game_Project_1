@@ -3,9 +3,13 @@
 
 
 export const BIOME_TYPE = {
-    TREE_FOREST: "forest_tree",
-    TREE_SWAMP: "dead_tree",
-    ROCK_FOREST: "forest_rock",
+    BUSH_FOREST: "forest_bush",
+    GRASS_FOREST: "forest_grass",
+    GRASS_SWAMP: "swamp_grass",
     PORTAL_FOREST: "forest_portal",
-    SPAWNER_FOREST: "forest_spawner"
+    ROCK_FOREST: "forest_rock",
+    SPAWNER_FOREST: "forest_spawner",
+    TREE_FOREST: "forest_tree",
+    TREE_SWAMP: "dead_tree"
+
 }
