@@ -1,0 +1,1 @@
+import { BIOME_TYPE } from "./biome_type.js";
