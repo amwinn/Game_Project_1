@@ -6,6 +6,7 @@ export const BIOME_TYPE = {
     FOREST: "forest",
     SWAMP: "swamp",
 }
+
 export const GAMEOBJECT_TYPE = {
     BUSH: {
         BUSH_FOREST: "forest_bush",
