@@ -2,7 +2,10 @@
 //going with single BIOME_TYPE, only need separate ones if the list grows unwieldy
 //depending on
 
-
+export const BIOME_TYPE = {
+    FOREST: "forest",
+    SWAMP: "swamp",
+}
 export const GAMEOBJECT_TYPE = {
     BUSH: {
         BUSH_FOREST: "forest_bush",
