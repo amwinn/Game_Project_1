@@ -3,7 +3,7 @@
 //depending on
 
 
-export const BIOME_TYPE = {
+export const GAMEOBJECT_TYPE = {
     BUSH: {
         BUSH_FOREST: "forest_bush",
     },
