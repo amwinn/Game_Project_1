@@ -18,6 +18,8 @@ import { test_item_array } from "./Main.js";
 import { tileMapConfig, tileMapData, getTile, getTileMap, getMapHeight, getMapWidth } from "./GameLogic/MapLogic.js";
 import { mapDatabase } from "../data/map_data/map_data.js";
 
+import { BIOME_TYPE, GAMEOBJECT_TYPE, MESH_TYPE } from "../data/biome_data/biome_type.js";
+
 
 
 
