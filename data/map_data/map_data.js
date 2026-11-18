@@ -1,3 +1,5 @@
+import { BIOME_TYPE } from "../biome_data/biome_type.js";
+
 export const mapDatabase = [
     {
         tiles: [
@@ -15,7 +17,7 @@ export const mapDatabase = [
             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,3,3,3,3,3,3,3,
             3,3,3,3,3,3,3,3,3,3,3,3,3,3,5,0,0,2,0,3,3,3,3,3,3,3,
             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,],
-        biome: "forest",
+        biome: BIOME_TYPE.FOREST,
     },
     {
         tiles: [
@@ -34,7 +36,7 @@ export const mapDatabase = [
             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
         ],
-        biome: "swamp",
+        biome: BIOME_TYPE.SWAMP,
     },
     {
         tiles: [
@@ -53,7 +55,7 @@ export const mapDatabase = [
             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
         ],
-        biome: "forest",
+        biome: BIOME_TYPE.FOREST,
     }, 
     {
         tiles: [
@@ -72,6 +74,6 @@ export const mapDatabase = [
             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
         ],
-        biome: "swamp",
+        biome: BIOME_TYPE.SWAMP,
     }
 ];
