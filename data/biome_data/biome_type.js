@@ -7,14 +7,17 @@ export const BIOME_TYPE = {
     SWAMP: "swamp",
 }
 
-export const GAMEOBJECT_TYPE = {
-    BUSH: {
-        BUSH_FOREST: "forest_bush",
-    },
+export const MESH_TYPE = {
     GRASS: {
         GRASS_FOREST: "forest_grass",
         GRASS_SWAMP: "swamp_grass",
+    },
 
+}
+
+export const GAMEOBJECT_TYPE = {
+    BUSH: {
+        BUSH_FOREST: "forest_bush",
     },
     PORTAL: {
         PORTAL_FOREST: "forest_portal",

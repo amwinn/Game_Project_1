@@ -1,13 +1,12 @@
-import { GAMEOBJECT_TYPE } from "./biome_type.js";
+import { GAMEOBJECT_TYPE, MESH_TYPE } from "./biome_type.js";
 
 export const BIOME_RENDER = {
     BUSH: {
         [GAMEOBJECT_TYPE.BUSH.BUSH_FOREST]: "Images/Forest/practice_bush1.png",
     },
     GRASS: {
-        [GAMEOBJECT_TYPE.GRASS.GRASS_FOREST]: "Images/Forest/practice_grass5.png",
-        [GAMEOBJECT_TYPE.GRASS.GRASS_SWAMP]: "Images/Swamp/practice_swampGrass1.png",
-
+        [MESH_TYPE.GRASS.GRASS_FOREST]: "Images/Forest/practice_grass5.png",
+        [MESH_TYPE.GRASS.GRASS_SWAMP]: "Images/Swamp/practice_swampGrass1.png",
     },
     PORTAL: {
         [GAMEOBJECT_TYPE.PORTAL.PORTAL_FOREST]: "Images/Forest/practice_gate3.png",
