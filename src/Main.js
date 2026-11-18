@@ -18,6 +18,7 @@ import { weapon_data } from "../data/item_data/weapon_data.js";
 import { generateUID } from "./Utility.js";
 import { spellbolt } from "../data/ability_data/simple_magic.js";
 import { movementLogicUpdate } from "./GameLogic/MovementLogic.js";
+import { BIOME_CONFIG } from "../data/biome_data/biome_config.js";
 
 //******************************************************************************INITIAL GUIDANCE******************************************************************************
 //firstly, ctrl and - will zoom out on code and side bars, ctrl and + will zome in, we are one increment zoomed in, so to go default hit ctrl and -
@@ -132,6 +133,7 @@ function renderLoot(renderer) {
 
 let lastTime = null;
 function gameLoop(){
+    //console.log(BIOME_CONFIG)
     //temp test start
     audio.volume = .2;
     //audio.play();
