@@ -657,7 +657,7 @@ entityCollisionResolution(entity1, entity2) {
                     objectSize = new Size(tileMapConfig.tsize, tileMapConfig.tsize);
                 }
                 if (selectedTile && selectedTile.type === GameObject.bush) {
-                    objectPosition = new Position(x + (tileMapConfig.tsize / 4), y + tileMapConfig.tsize / 5)
+                    objectPosition = new Position(x + (tileMapConfig.tsize / 3.3), y + tileMapConfig.tsize / 3.5) //numbers were /4, /5
                     objectSize = new Size(tileMapConfig.tsize / 2, tileMapConfig.tsize / 2)
                 }
 
