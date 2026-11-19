@@ -114,7 +114,7 @@ export default class RenderLogic{
                 //let tileValidity = this.checkTileValidity(x,y, this.mapWidth, this.mapHeight);
                 
                 let testTileSheet = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
-                //console.log(testTileSheet)
+                let defaultTestTileSheet = testTileSheet[0];
                 let selectedTileSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
 
                 let defaultFloorSprite = selectedTileSheet[0];
@@ -129,6 +129,13 @@ export default class RenderLogic{
                         }
                     }
                 }
+                for(const grouping in GAMEOBJECT_TYPE) {
+                    for(const item in GAMEOBJECT_TYPE[grouping]) {
+                        if(GAMEOBJECT_TYPE[grouping][item] === testTileSheet[tile]) {
+                            this.renderSprite(renderer, gameObjectSprites.GRASS[defaultTestTileSheet], x, y, tileMapConfig.tsize+2, tileMapConfig.tsize+2)
+                        }
+                    }
+                }
                 //renders non-object terrain tiles (mostly grass)
                 if(selectedTile && !selectedTile.arrayType && !selectedTile.type) { //was tile === 0 || tile === 2, decided to make it more abstract
                     //this.renderSprite(renderer, selectedTile.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22)
@@ -137,7 +144,7 @@ export default class RenderLogic{
 
                 //creates a background grass for object, the +22 modifiers to size fix the artifact lines, oddly enough they werent visible in fullscreen f11 mode
                 if(selectedTile && selectedTile.arrayType && selectedTile.type) { //was if(tile > 2)
-                    this.renderSprite(renderer, defaultFloorSprite.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22); //just recently added this +22 to the dw and dh, else there were grid lines all over
+                    //this.renderSprite(renderer, defaultFloorSprite.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22); //just recently added this +22 to the dw and dh, else there were grid lines all over
                 }
 
 
