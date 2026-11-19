@@ -39,6 +39,16 @@ export default class AssetRegistry {
         //loadGameObjectRenders(gameObjectData)
 
     }
+    loadGameObjectRenders(data) {
+        const renderGroup = {};
+        for (const grouping in data) {
+            renderGroup[grouping] = {};
+            for(const obj in data[grouping]) {
+                renderGroup[grouping][obj] = new Sprite(data[grouping][obj], null, null);
+            }
+        }
+        return renderGroup;
+    }
 //pseudo code below
 //for entities, function called twice, loadEntityRenders(ENTITY_RENDERS[CREATURE_TYPE.FOREST_CREATURE]) and loadEntityRenders(ENTITY_RENDERS[CREATURE_TYPE.GREATER_FOREST_CREATURE])
 //for entities, key hierarchy is state, direction, item hierarchy is simply item of data[state][direction]
