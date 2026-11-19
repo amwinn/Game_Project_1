@@ -25,6 +25,17 @@ export function loadEntityRenders(data) {
     return renderGroup;
 }
 
+export function loadGameObjectRenders(data) {
+    const renderGroup = {};
+    for (const grouping in data) {
+        renderGroup[grouping] = {};
+        for(const obj in data[grouping]) {
+            renderGroup[grouping][obj] = new Sprite(data[grouping][obj], null, null);
+        }
+    }
+    return renderGroup;
+}
+
 export default class AssetRegistry {
     constructor() {
         this.registry = [];
