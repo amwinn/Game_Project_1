@@ -20,7 +20,7 @@ import { mapDatabase } from "../data/map_data/map_data.js";
 
 import { BIOME_TYPE, GAMEOBJECT_TYPE, MESH_TYPE } from "../data/biome_data/biome_type.js";
 import { BIOME_CONFIG } from "../data/biome_data/biome_config.js";
-import { loadGameObjectRenders } from "./AssetRegistry.js";
+import { loadGameObjectRenders, gameObjectSprites} from "./AssetRegistry.js";
 import { BIOME_RENDER } from "../data/biome_data/biome_render.js";
 import Item from "./Item.js";
 
@@ -89,7 +89,6 @@ export default class RenderLogic{
     }  
 //once object creation is moved maybe render map is just renderMesh type of situation
     renderMap(renderer){
-        let gameObjectSprites = loadGameObjectRenders(BIOME_RENDER);
 
         //let leftBounds = Math.floor(this.tileMap.cols / this.tileMap.tsize); //was originally this.camera.x instead of this.tilemap.cols //btw i dont know how but this fixed where the tilemap kept rendering the map infinitely to the left and right
         //leftBounds still causes the right side grass/paths to unrender( is out of view, have to start 100% zoom and zoom out to see it)
@@ -113,8 +112,8 @@ export default class RenderLogic{
                 //recently commented out as of march 8 2026
                 //let tileValidity = this.checkTileValidity(x,y, this.mapWidth, this.mapHeight);
                 
-                let testTileSheet = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
-                let defaultTestTileSheet = testTileSheet[0];
+                let biomeTileAssignments = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
+                let defaultMeshSprite = gameObjectSprites.GRASS[biomeTileAssignments[0]];
                 let selectedTileSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
 
                 let defaultFloorSprite = selectedTileSheet[0];
@@ -123,7 +122,7 @@ export default class RenderLogic{
                 let selectedTile = selectedTileSheet[tile];
                 for(const grouping in MESH_TYPE) {
                     for(const item in MESH_TYPE[grouping]) {
-                        if(MESH_TYPE[grouping][item] === testTileSheet[tile]) {
+                        if(MESH_TYPE[grouping][item] === biomeTileAssignments[tile]) {
                             //console.log(gameObjectSprites[grouping][MESH_TYPE[grouping][item]])
                             this.renderSprite(renderer, gameObjectSprites[grouping][MESH_TYPE[grouping][item]], x, y, tileMapConfig.tsize+2, tileMapConfig.tsize+2);
                         }
@@ -131,8 +130,9 @@ export default class RenderLogic{
                 }
                 for(const grouping in GAMEOBJECT_TYPE) {
                     for(const item in GAMEOBJECT_TYPE[grouping]) {
-                        if(GAMEOBJECT_TYPE[grouping][item] === testTileSheet[tile]) {
-                            this.renderSprite(renderer, gameObjectSprites.GRASS[defaultTestTileSheet], x, y, tileMapConfig.tsize+2, tileMapConfig.tsize+2)
+                        if(GAMEOBJECT_TYPE[grouping][item] === biomeTileAssignments[tile]) {
+                            //console.log(gameObjectSprites[grouping][GAMEOBJECT_TYPE[grouping][item]]) //not useful b/c its yielding the actual object, doesnt point to mesh
+                            this.renderSprite(renderer, defaultMeshSprite, x, y, tileMapConfig.tsize+2, tileMapConfig.tsize+2)
                         }
                     }
                 }
