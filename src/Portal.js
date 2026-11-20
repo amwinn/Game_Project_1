@@ -3,10 +3,10 @@ export const portalArray = [];
 
 export default class Portal extends GameObject {
 
-    constructor(type, position, size, spawnTime) {
+    constructor(type, position, size) { //was type, position, size, spawnTime
         super(type, position, size);
         this.spawnTimer = 0;
-        this.spawnTime = spawnTime;
+        this.spawnTime = 4; //was spawnTime, but removed the class arg
         this.health = 100;
     }
 
