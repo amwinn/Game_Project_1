@@ -2,11 +2,11 @@
 
 import { CREATURE_RENDER } from "../../data/entity_data/entity_render.js";
 import { PLAYER_RENDER } from "../../data/entity_data/entity_render.js";
-import { loadEntityRenders } from "../AssetRegistry.js";
+import { forest_creatureSprites, greater_forest_creatureSprites, playerSprites } from "../AssetRegistry.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
-let playerSprites = loadEntityRenders(PLAYER_RENDER);
-let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
-let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
+// let playerSprites = loadEntityRenders(PLAYER_RENDER);
+// let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
+// let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
 
 export function animationLogicUpdate(deltaTime, player, entityArraysObject) {
     playerSpriteManager(player, deltaTime);

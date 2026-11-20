@@ -1,4 +1,5 @@
-import { CREATURE_RENDER } from "../data/entity_data/entity_render.js";
+import { CREATURE_RENDER, PLAYER_RENDER } from "../data/entity_data/entity_render.js";
+import { BIOME_RENDER } from "../data/biome_data/biome_render.js";
 import { Sprite } from "./Utility.js";
 //import all sprite paths here perhaps?
 //can act sort of as a registry akin to the spell registry
@@ -35,6 +36,11 @@ export function loadGameObjectRenders(data) {
     }
     return renderGroup;
 }
+
+export const gameObjectSprites = loadGameObjectRenders(BIOME_RENDER);
+export const playerSprites = loadEntityRenders(PLAYER_RENDER);
+export const forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
+export const greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
 
 
 
