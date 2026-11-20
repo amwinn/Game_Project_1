@@ -649,12 +649,16 @@ entityCollisionResolution(entity1, entity2) {
                 let biomeTileAssignments = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
                 let selectedBiomeTile = biomeTileAssignments[tile];
 
-                let objectPosition;
-                let objectSize;
+                // let objectPosition;
+                // let objectSize;
 
                 for(const grouping in GAMEOBJECT_TYPE) {
                     for(const item in GAMEOBJECT_TYPE[grouping]) {
-                        if(GAMEOBJECT_TYPE[grouping][item] === biomeTileAssignments[tile]) {
+                        if(GAMEOBJECT_TYPE[grouping][item] === selectedBiomeTile) {
+                            if(objectSpawnTracker.has(tileID) || !isTileValid) {
+                                continue; //if use return, it will only load the first screen chunk of items
+                            } else {objectSpawnTracker.add(tileID);}
+
                             const gameObject = grouping === "SPAWNER" ? new Portal() : new GameObject(); //new GameObject();
                             gameObject.category = grouping;
                             gameObject.type = GAMEOBJECT_TYPE[grouping][item]; 
@@ -662,9 +666,7 @@ entityCollisionResolution(entity1, entity2) {
                             gameObject.size = new Size(tileMapConfig.tsize, tileMapConfig.tsize); 
                             gameObject.sprite = gameObjectSprites[gameObject.category][gameObject.type]; //was gameObjectSprite[grouping][GAMEOBJECT_TYPE[grouping][item]]
                             //console.log(gameObject.category);
-                            if(objectSpawnTracker.has(tileID) || !isTileValid) {
-                                continue; //if use return, it will only load the first screen chunk of items
-                            } else {objectSpawnTracker.add(tileID);}
+
                             switch(grouping) {
                                 case "BUSH" :
                                     
@@ -700,9 +702,9 @@ entityCollisionResolution(entity1, entity2) {
 
 
 
-                let selectedTileSpriteSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
+                //let selectedTileSpriteSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
                 //let defaultTileSprite = this.selectedTileSpriteSheet[0];
-                let selectedTile = selectedTileSpriteSheet[tile];
+                //let selectedTile = selectedTileSpriteSheet[tile];
 
                 // let objectPosition;
                 // let objectSize;
