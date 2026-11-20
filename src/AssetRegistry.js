@@ -36,60 +36,70 @@ export function loadGameObjectRenders(data) {
     return renderGroup;
 }
 
-export default class AssetRegistry {
-    constructor() {
-        this.registry = [];
-    }
-
-    //registerImageObject() something like this could automatically create an image/sprite() obejct?
-    //would need an array or object to store the images in
-
-//might not use the loadImageGroup, might instead keep the two separate, loadEntityRenders(), loadGameObjectRenders()
-    loadImageGroup(entityData, gameObjectData) {
-        loadEntityRenders(entityData)
-        //loadGameObjectRenders(gameObjectData)
-
-    }
-    loadGameObjectRenders(data) {
-        const renderGroup = {};
-        for (const grouping in data) {
-            renderGroup[grouping] = {};
-            for(const obj in data[grouping]) {
-                renderGroup[grouping][obj] = new Sprite(data[grouping][obj], null, null);
-            }
-        }
-        return renderGroup;
-    }
-//pseudo code below
-//for entities, function called twice, loadEntityRenders(ENTITY_RENDERS[CREATURE_TYPE.FOREST_CREATURE]) and loadEntityRenders(ENTITY_RENDERS[CREATURE_TYPE.GREATER_FOREST_CREATURE])
-//for entities, key hierarchy is state, direction, item hierarchy is simply item of data[state][direction]
-//for const state in data 
-//for const direction in data[state]
-//for const item of data[state][direction] new Sprite()
-    loadEntityRenders(data) {
-        const renderGroup = {};
-        for(const animationState in data) {
-            renderGroup[animationState] = {};
-            for(const direction in data[animationState]) {
-                renderGroup[animationState][direction] = [];
-                for(const imagePath of data[animationState][direction]) {
-                    renderGroup[animationState][direction].push(
-                        new Sprite(imagePath, null, null)
-                    );
-                }
-            }
-        }
-        return renderGroup;
-    }
-
-    unloadImageGroup(group) {
-        //destroy image objects when swapping map
-        //no need to actually utilize yet until many more images are added to the images folder - currently few enough to all be loaded at once 
-    }
 
 
 
-}
+
+
+
+
+
+
+
+// export default class AssetRegistry {
+//     constructor() {
+//         this.registry = [];
+//     }
+
+//     //registerImageObject() something like this could automatically create an image/sprite() obejct?
+//     //would need an array or object to store the images in
+
+// //might not use the loadImageGroup, might instead keep the two separate, loadEntityRenders(), loadGameObjectRenders()
+//     loadImageGroup(entityData, gameObjectData) {
+//         loadEntityRenders(entityData)
+//         //loadGameObjectRenders(gameObjectData)
+
+//     }
+//     loadGameObjectRenders(data) {
+//         const renderGroup = {};
+//         for (const grouping in data) {
+//             renderGroup[grouping] = {};
+//             for(const obj in data[grouping]) {
+//                 renderGroup[grouping][obj] = new Sprite(data[grouping][obj], null, null);
+//             }
+//         }
+//         return renderGroup;
+//     }
+// //pseudo code below
+// //for entities, function called twice, loadEntityRenders(ENTITY_RENDERS[CREATURE_TYPE.FOREST_CREATURE]) and loadEntityRenders(ENTITY_RENDERS[CREATURE_TYPE.GREATER_FOREST_CREATURE])
+// //for entities, key hierarchy is state, direction, item hierarchy is simply item of data[state][direction]
+// //for const state in data 
+// //for const direction in data[state]
+// //for const item of data[state][direction] new Sprite()
+//     loadEntityRenders(data) {
+//         const renderGroup = {};
+//         for(const animationState in data) {
+//             renderGroup[animationState] = {};
+//             for(const direction in data[animationState]) {
+//                 renderGroup[animationState][direction] = [];
+//                 for(const imagePath of data[animationState][direction]) {
+//                     renderGroup[animationState][direction].push(
+//                         new Sprite(imagePath, null, null)
+//                     );
+//                 }
+//             }
+//         }
+//         return renderGroup;
+//     }
+
+//     unloadImageGroup(group) {
+//         //destroy image objects when swapping map
+//         //no need to actually utilize yet until many more images are added to the images folder - currently few enough to all be loaded at once 
+//     }
+
+
+
+// }
 
 
 
