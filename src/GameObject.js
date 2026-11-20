@@ -5,6 +5,8 @@ export const bushObjectArray = [];
 export const gateObjectArray = [];
 export const deadTreeObjectArray = [];
 
+export const gameObjectArray = [];
+
 
 
 export default class GameObject {
