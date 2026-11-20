@@ -36,3 +36,6 @@ export const GAMEOBJECT_TYPE = {
 
 }
 
+
+//alternative way to do this is make GAMEOBJECT_TYPE simply be {ROCK: "rock"} etc., and then make a new TREE_TYPE, ROCK_TYPE, BUSH_TYPE, etc., with their respective sub types such as forest tree, dead tree, etc.
+
