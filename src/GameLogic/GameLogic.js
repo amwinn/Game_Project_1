@@ -25,6 +25,8 @@ import Area from "../AbilityEntity/AreaOfEffect.js";
 
 import { tileMapConfig, tileMapData, getTile, getTileMap, getMapHeight, getMapWidth } from "./MapLogic.js";
 import { mapDatabase } from "../../data/map_data/map_data.js";
+import { BIOME_TYPE, MESH_TYPE, GAMEOBJECT_TYPE } from "../../data/biome_data/biome_type.js";
+import { BIOME_CONFIG } from "../../data/biome_data/biome_config.js";
 
 //temp, will live in assetregistry unless the class ends up being useless
 import { loadEntityRenders } from "../AssetRegistry.js";
