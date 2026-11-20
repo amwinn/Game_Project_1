@@ -655,7 +655,7 @@ entityCollisionResolution(entity1, entity2) {
                 for(const grouping in GAMEOBJECT_TYPE) {
                     for(const item in GAMEOBJECT_TYPE[grouping]) {
                         if(GAMEOBJECT_TYPE[grouping][item] === biomeTileAssignments[tile]) {
-                            const gameObject = new GameObject();
+                            const gameObject = grouping === "SPAWNER" ? new Portal() : new GameObject(); //new GameObject();
                             gameObject.category = grouping;
                             gameObject.type = GAMEOBJECT_TYPE[grouping][item]; 
                             gameObject.position = new Position(x, y);
@@ -684,13 +684,7 @@ entityCollisionResolution(entity1, entity2) {
                                     //gameObjectArray.push(gameObject);
                                     break;
                                 case "SPAWNER":
-                                    const portal = new Portal;
-                                    portal.category = grouping;
-                                    portal.type = GAMEOBJECT_TYPE[grouping][item]; 
-                                    portal.position = new Position(x, y);
-                                    portal.size = new Size(tileMapConfig.tsize, tileMapConfig.tsize);
-                                    portal.sprite = gameObjectSprites[portal.category][portal.type];
-                                    portalArray.push(portal);
+                                    portalArray.push(gameObject);
 
                                     //gameObjectArray.push(gameObject);
                                     break;
