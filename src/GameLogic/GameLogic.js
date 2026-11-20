@@ -1,4 +1,4 @@
-import GameObject, {rockObjectArray, bushObjectArray, treeObjectArray, gateObjectArray, deadTreeObjectArray} from "../GameObject.js";
+import GameObject, {gameObjectArray, rockObjectArray, bushObjectArray, treeObjectArray, gateObjectArray, deadTreeObjectArray} from "../GameObject.js";
 import Portal, { portalArray } from "../Portal.js";
 import Entity, { entityArraysObject, meleeEntityArray, rangedEntityArray } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
@@ -29,13 +29,13 @@ import { BIOME_TYPE, MESH_TYPE, GAMEOBJECT_TYPE } from "../../data/biome_data/bi
 import { BIOME_CONFIG } from "../../data/biome_data/biome_config.js";
 
 //temp, will live in assetregistry unless the class ends up being useless
-import { loadEntityRenders } from "../AssetRegistry.js";
+import { gameObjectSprites} from "../AssetRegistry.js";
 import Player from "../Player.js";
 import { ENTITY_STATE } from "../../data/entity_data/entity_state.js";
 import MapData from "../MapDB.js";
-let playerSprites = loadEntityRenders(PLAYER_RENDER);
-let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
-let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
+// let playerSprites = loadEntityRenders(PLAYER_RENDER);
+// let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
+// let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
 //end temp
 
 let nextMap = false;
@@ -375,7 +375,7 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
             objectArray.forEach((object, objectIndex) => {
                 if(this.collisionCheck(projectile, object)){
                     //console.log("collision between " + (projectile?.type || "unknown") + " and " + (object?.type || "unknown"));
-                    if(this.behaviorAttributes[object.type].destructible && projectileArray != entityProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
+                    if(this.behaviorAttributes[object.category].destructible && projectileArray != entityProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
                         objectArray.splice(objectIndex, 1);
                     }
                     //recently added && projectile.type !== Projectile.enemyProjectile to the below if statement because the enemies were spawning items but not destroying portal
@@ -646,40 +646,99 @@ entityCollisionResolution(entity1, entity2) {
 
                 let isTileValid = this.checkTileValidity(x, y, this.mapWidth, this.mapHeight); //works with this.mapWidth or mapWidth, not sure why
 
-                let biomeList = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
-                let selectedTileSpriteSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
-                //let defaultTileSprite = this.selectedTileSpriteSheet[0];
-                let selectedTile = selectedTileSpriteSheet[tile];
+                let biomeTileAssignments = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
+                let selectedBiomeTile = biomeTileAssignments[tile];
 
                 let objectPosition;
                 let objectSize;
 
-                //creates object dimensions for objects, note seperate dimensions for bush
-                if (selectedTile && selectedTile.type !== GameObject.bush) {
-                    objectPosition = new Position(x, y);
-                    objectSize = new Size(tileMapConfig.tsize, tileMapConfig.tsize);
-                }
-                if (selectedTile && selectedTile.type === GameObject.bush) {
-                    objectPosition = new Position(x + (tileMapConfig.tsize / 3.3), y + tileMapConfig.tsize / 3.5) //numbers were /4, /5
-                    objectSize = new Size(tileMapConfig.tsize / 2, tileMapConfig.tsize / 2)
+                for(const grouping in GAMEOBJECT_TYPE) {
+                    for(const item in GAMEOBJECT_TYPE[grouping]) {
+                        if(GAMEOBJECT_TYPE[grouping][item] === biomeTileAssignments[tile]) {
+                            const gameObject = new GameObject();
+                            gameObject.category = grouping;
+                            gameObject.type = GAMEOBJECT_TYPE[grouping][item]; 
+                            gameObject.position = new Position(x, y);
+                            gameObject.size = new Size(tileMapConfig.tsize, tileMapConfig.tsize); 
+                            gameObject.sprite = gameObjectSprites[gameObject.category][gameObject.type]; //was gameObjectSprite[grouping][GAMEOBJECT_TYPE[grouping][item]]
+                            //console.log(gameObject.category);
+                            if(objectSpawnTracker.has(tileID) || !isTileValid) {
+                                continue; //if use return, it will only load the first screen chunk of items
+                            } else {objectSpawnTracker.add(tileID);}
+                            switch(grouping) {
+                                case "BUSH" :
+                                    
+                                    gameObject.position = new Position(x + (tileMapConfig.tsize / 3.3), y + tileMapConfig.tsize / 3.5);
+                                    gameObject.size = new Size(tileMapConfig.tsize /2, tileMapConfig.tsize /2);
+                                    bushObjectArray.push(gameObject);
+                                    //gameObjectArray.push(gameObject);
+                                    break;
+                                case "PORTAL":
+                                    gateObjectArray.push(gameObject);
+
+                                    //gameObjectArray.push(gameObject);
+                                    break;
+                                case "ROCK" :
+                                    rockObjectArray.push(gameObject);
+
+                                    //gameObjectArray.push(gameObject);
+                                    break;
+                                case "SPAWNER":
+                                    const portal = new Portal;
+                                    portal.category = grouping;
+                                    portal.type = GAMEOBJECT_TYPE[grouping][item]; 
+                                    portal.position = new Position(x, y);
+                                    portal.size = new Size(tileMapConfig.tsize, tileMapConfig.tsize);
+                                    portal.sprite = gameObjectSprites[portal.category][portal.type];
+                                    portalArray.push(portal);
+
+                                    //gameObjectArray.push(gameObject);
+                                    break;
+                                case "TREE":
+                                    treeObjectArray.push(gameObject);
+
+                                    //gameObjectArray.push(gameObject);
+                                    break;
+                            }
+                        }
+                    }
                 }
 
-                if (selectedTile && selectedTile.arrayType && selectedTile.type) {
-                    if (!objectSpawnTracker.has(tileID) && isTileValid && selectedTile.type !== GameObject.portal) {
-                        selectedTile.arrayType.push(new GameObject(selectedTile.type, objectPosition, objectSize))
-                        objectSpawnTracker.add(tileID);
-                    }
-                    if (!objectSpawnTracker.has(tileID) && isTileValid && selectedTile.type === GameObject.portal) {
-                        selectedTile.arrayType.push(new Portal(selectedTile.type, objectPosition, objectSize, 4))
-                        objectSpawnTracker.add(tileID);
-                    }
-                }
-                //Assigns sprite image to objects determined by tile number in MapDB's biomeTileSheet
-                if (selectedTile && selectedTile.arrayType && selectedTile.type) {
-                    selectedTile.arrayType.forEach((value, index) => {
-                        value.sprite = selectedTile.sprite;
-                    })
-                }
+
+
+                let selectedTileSpriteSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
+                //let defaultTileSprite = this.selectedTileSpriteSheet[0];
+                let selectedTile = selectedTileSpriteSheet[tile];
+
+                // let objectPosition;
+                // let objectSize;
+
+                //creates object dimensions for objects, note seperate dimensions for bush
+                // if (selectedTile && selectedTile.type !== GameObject.bush) {
+                //     objectPosition = new Position(x, y);
+                //     objectSize = new Size(tileMapConfig.tsize, tileMapConfig.tsize);
+                // }
+                // if (selectedTile && selectedTile.type === GameObject.bush) {
+                //     objectPosition = new Position(x + (tileMapConfig.tsize / 3.3), y + tileMapConfig.tsize / 3.5) //numbers were /4, /5
+                //     objectSize = new Size(tileMapConfig.tsize / 2, tileMapConfig.tsize / 2)
+                // }
+
+                // if (selectedTile && selectedTile.arrayType && selectedTile.type) {
+                //     if (!objectSpawnTracker.has(tileID) && isTileValid && selectedTile.type !== GameObject.portal) {
+                //         selectedTile.arrayType.push(new GameObject(selectedTile.type, objectPosition, objectSize))
+                //         objectSpawnTracker.add(tileID);
+                //     }
+                //     if (!objectSpawnTracker.has(tileID) && isTileValid && selectedTile.type === GameObject.portal) {
+                //         selectedTile.arrayType.push(new Portal(selectedTile.type, objectPosition, objectSize)) //was objectSize, 4, but removed the last class arg
+                //         objectSpawnTracker.add(tileID);
+                //     }
+                // }
+                // //Assigns sprite image to objects determined by tile number in MapDB's biomeTileSheet
+                // if (selectedTile && selectedTile.arrayType && selectedTile.type) {
+                //     selectedTile.arrayType.forEach((value, index) => {
+                //         value.sprite = selectedTile.sprite;
+                //     })
+                // }
 
             }
         }
