@@ -1,4 +1,5 @@
 import { Sprite } from "./Utility.js";
+import { GAMEOBJECT_TYPE } from "../data/biome_data/biome_type.js";
 export const rockObjectArray = []; 
 export const treeObjectArray = []; 
 export const bushObjectArray = [];
@@ -10,14 +11,15 @@ export const gameObjectArray = [];
 
 
 export default class GameObject {
-    static rock = "rock";
-    static tree = "tree";
-    static bush = "bush";
-    static gate = "gate";
-    static deadTree = "deadTree";
-    static portal = "portal"
+    static rock = "ROCK";
+    static tree = "TREE";
+    static bush = "BUSH";
+    static gate = "PORTAL";
+    //static deadTree = "TREE";
+    static portal = "SPAWNER"
 
     constructor(type, position, size) {
+        this.category = null;
         this.type = type;
         this.position = position;
         this.size = size;
