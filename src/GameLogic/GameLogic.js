@@ -32,6 +32,7 @@ import { BIOME_CONFIG } from "../../data/biome_data/biome_config.js";
 import { loadEntityRenders } from "../AssetRegistry.js";
 import Player from "../Player.js";
 import { ENTITY_STATE } from "../../data/entity_data/entity_state.js";
+import MapData from "../MapDB.js";
 let playerSprites = loadEntityRenders(PLAYER_RENDER);
 let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
 let greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
@@ -645,7 +646,7 @@ entityCollisionResolution(entity1, entity2) {
 
                 let isTileValid = this.checkTileValidity(x, y, this.mapWidth, this.mapHeight); //works with this.mapWidth or mapWidth, not sure why
 
-
+                let biomeList = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
                 let selectedTileSpriteSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
                 //let defaultTileSprite = this.selectedTileSpriteSheet[0];
                 let selectedTile = selectedTileSpriteSheet[tile];
