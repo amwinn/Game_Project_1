@@ -39,8 +39,8 @@ export function loadGameObjectRenders(data) {
 
 export const gameObjectSprites = loadGameObjectRenders(BIOME_RENDER);
 export const playerSprites = loadEntityRenders(PLAYER_RENDER);
-export const forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
-export const greater_forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
+export const forestCreatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
+export const greaterForestCreatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);
 
 
 

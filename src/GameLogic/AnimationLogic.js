@@ -2,7 +2,7 @@
 
 import { CREATURE_RENDER } from "../../data/entity_data/entity_render.js";
 import { PLAYER_RENDER } from "../../data/entity_data/entity_render.js";
-import { forest_creatureSprites, greater_forest_creatureSprites, playerSprites } from "../AssetRegistry.js";
+import { forestCreatureSprites, greaterForestCreatureSprites, playerSprites } from "../AssetRegistry.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
 // let playerSprites = loadEntityRenders(PLAYER_RENDER);
 // let forest_creatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
@@ -65,11 +65,11 @@ function playerSpriteManager(player, deltaTime) {
 function spriteManager_meleeForestSprite(array,player) {
     array.forEach((entity, index) => {
         if(entity.position.x > player.position.x ) {
-            entity.sprite = forest_creatureSprites.walk["left"][0];
+            entity.sprite = forestCreatureSprites.walk["left"][0];
         } else if (entity.position.x < player.position.x) {
-            entity.sprite = forest_creatureSprites.walk["right"][0];
+            entity.sprite = forestCreatureSprites.walk["right"][0];
         } else {
-            entity.sprite = forest_creatureSprites.idle[entity.direction][0];
+            entity.sprite = forestCreatureSprites.idle[entity.direction][0];
         }
     })
 }
@@ -78,11 +78,11 @@ function spriteManager_meleeForestSprite(array,player) {
 function spriteManager_mageForestSprite(array,player){
     array.forEach((entity, index) => {
         if(entity.position.x > player.position.x ) {
-            entity.sprite = greater_forest_creatureSprites.walk["left"][0];
+            entity.sprite = greaterForestCreatureSprites.walk["left"][0];
         } else if (entity.position.x < player.position.x) {
-            entity.sprite = greater_forest_creatureSprites.walk["right"][0];
+            entity.sprite = greaterForestCreatureSprites.walk["right"][0];
         } else {
-            entity.sprite = greater_forest_creatureSprites.idle[entity.direction][0];
+            entity.sprite = greaterForestCreatureSprites.idle[entity.direction][0];
         }
     })
 }
