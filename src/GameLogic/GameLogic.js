@@ -81,6 +81,7 @@ spawnEntity(array, maxEnemyCount, enemyType, enemyRole, position, size, velocity
 
 updatePortalSpawner(array, deltaTime) {
     for(const portal of array) {
+        if(portal.type !== GAMEOBJECT_TYPE.SPAWNER) {continue;}
         portal.updatePortal(deltaTime);
         if(portal.spawnTimer >= portal.spawnTime) {
             const meleePosition = new Position(portal.position.x, portal.position.y) //removed the -map.camera.x from the x and y
@@ -864,7 +865,7 @@ entityCollisionResolution(entity1, entity2) {
     }
 
     spawnLogicUpdate(deltaTime) {
-        this.updatePortalSpawner(spawnerArray, deltaTime);
+        this.updatePortalSpawner(gameObjectArray, deltaTime);
     }
 
     //tentatively moved to MovementLogic.js, along with all of the movement logic declarations
@@ -907,6 +908,7 @@ entityCollisionResolution(entity1, entity2) {
     }
 
         cullObjects() {
+            gameObjectArray.length =0;
             projectilesArray.length = 0;
             entityProjectilesArray.length = 0;
             treeObjectArray.length = 0;
