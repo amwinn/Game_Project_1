@@ -1,7 +1,7 @@
 import GameObject from "./GameObject.js";
-export const portalArray = [];
+export const spawnerArray = [];
 
-export default class Portal extends GameObject {
+export default class Spawner extends GameObject {
 
     constructor(type, position, size) { //was type, position, size, spawnTime
         super(type, position, size);

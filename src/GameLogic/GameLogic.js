@@ -1,5 +1,5 @@
 import GameObject, {gameObjectArray, rockObjectArray, bushObjectArray, treeObjectArray, gateObjectArray, deadTreeObjectArray} from "../GameObject.js";
-import Portal, { portalArray } from "../Portal.js";
+import Spawner, {spawnerArray} from "../Spawner.js";
 import Entity, { entityArraysObject, meleeEntityArray, rangedEntityArray } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
 //import { nextMap, changeNextMap } from "./Grid.js";
@@ -58,7 +58,7 @@ export default class GameLogic {
         [GameObject.bush]: {destructible: true},
         [GameObject.gate]: {destructible: false},
         [GameObject.deadTree]: {destructible: true},
-        [GameObject.portal]: {destructible: true},
+        [GameObject.spawner]: {destructible: true},
         [Entity.forest_creature]: {destructible: true},
         [Entity.greater_forest_creature]: {destructible: true},
         [Projectile.playerProjectile]: {destructible: true},
@@ -379,7 +379,7 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
                         objectArray.splice(objectIndex, 1);
                     }
                     //recently added && projectile.type !== Projectile.enemyProjectile to the below if statement because the enemies were spawning items but not destroying portal
-                    if(objectArray === portalArray && projectile.type !== Projectile.entityProjectile) { 
+                    if(objectArray === spawnerArray && projectile.type !== Projectile.entityProjectile) { 
                     //START TEST CODE
                     test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("Images/draft_loot_bag1.png", tileMapConfig.tsize/3, tileMapConfig.tsize/3), object.position.x, object.position.y));
                     console.log(test_item_array)
@@ -659,7 +659,7 @@ entityCollisionResolution(entity1, entity2) {
                                 continue; //if use return, it will only load the first screen chunk of items
                             } else {objectSpawnTracker.add(tileID);}
 
-                            const gameObject = grouping === "SPAWNER" ? new Portal() : new GameObject(); //new GameObject();
+                            const gameObject = grouping === "SPAWNER" ? new Spawner() : new GameObject(); //new GameObject();
                             gameObject.category = grouping;
                             gameObject.type = GAMEOBJECT_TYPE[grouping][item]; 
                             gameObject.position = new Position(x, y);
@@ -686,7 +686,7 @@ entityCollisionResolution(entity1, entity2) {
                                     //gameObjectArray.push(gameObject);
                                     break;
                                 case "SPAWNER":
-                                    portalArray.push(gameObject);
+                                    spawnerArray.push(gameObject);
 
                                     //gameObjectArray.push(gameObject);
                                     break;
@@ -826,7 +826,7 @@ entityCollisionResolution(entity1, entity2) {
     }
 
     spawnLogicUpdate(deltaTime) {
-        this.updatePortalSpawner(portalArray, deltaTime);
+        this.updatePortalSpawner(spawnerArray, deltaTime);
     }
 
     //tentatively moved to MovementLogic.js, along with all of the movement logic declarations
@@ -878,7 +878,7 @@ entityCollisionResolution(entity1, entity2) {
             deadTreeObjectArray.length = 0;
             meleeEntityArray.length = 0;
             rangedEntityArray.length = 0
-            portalArray.length = 0;
+            spawnerArray.length = 0;
             test_item_array.length= 0; //START TEST //END TEST
             objectSpawnTracker.clear();
         }

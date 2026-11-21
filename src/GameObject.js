@@ -16,7 +16,7 @@ export default class GameObject {
     static bush = "BUSH";
     static gate = "PORTAL";
     //static deadTree = "TREE";
-    static portal = "SPAWNER"
+    static spawner = "SPAWNER"
 
     constructor(type, position, size) {
         this.category = null;

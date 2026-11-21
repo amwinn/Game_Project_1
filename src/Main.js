@@ -4,8 +4,7 @@ import Entity, { meleeEntityArray, rangedEntityArray } from "./Entity.js";
 import Camera from "./Camera.js";
 import RenderLogic from "./RenderLogic.js";
 import { deadTreeObjectArray, gateObjectArray, rockObjectArray, treeObjectArray, bushObjectArray} from "./GameObject.js";
-import Portal from "./Portal.js";
-import { portalArray } from "./Portal.js";
+import { spawnerArray } from "./Spawner.js";
 import { Position, Size, Sprite } from "./Utility.js";
 import MapData from "./MapDB.js";
 import GameLogic, { objectSpawnTracker } from "./GameLogic/GameLogic.js";
@@ -58,7 +57,7 @@ export const gameObjectMasterArray = [
     treeObjectArray,
     gateObjectArray,
     deadTreeObjectArray,
-    portalArray
+    spawnerArray
 ];
 
 
