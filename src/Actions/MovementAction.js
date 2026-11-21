@@ -2,7 +2,8 @@ import Action from "./Action.js";
 import { Position } from "../Utility.js";
 import { withinBottomBounds, withinLeftBounds, withinRightBounds, withinTopBounds } from "../GameLogic/MovementLogic.js";
 import { gameObjectMasterArray } from "../Main.js";
-import { portalObjectArray } from "../GameObject.js";
+import { gameObjectArray, portalObjectArray } from "../GameObject.js";
+import { GAMEOBJECT_TYPE } from "../../data/biome_data/biome_type.js";
 
 export default class MovementAction extends Action {
 
@@ -43,6 +44,36 @@ export default class MovementAction extends Action {
         character.animationDirection = "right";
 
         //console.log(" is moving right");
+    }
+
+
+    newplayerObjectCollision(player, array) {
+        array.forEach((object, objectIndex) => {
+            if(
+                player.position.x  + player.size.dw/3  > object.position.x &&  
+                player.position.x   < object.position.x + object.size.dw /1.5 && 
+                player.position.y + player.size.dh/1.3 > object.position.y && 
+                player.position.y   < object.position.y + object.size.dh/1.5 &&
+                object.type !== GAMEOBJECT_TYPE.PORTAL
+            ) {
+                switch(player.direction) {
+
+                    case "up":
+                        player.position.y = player.previousPosition.y;
+                        break;
+                    case "down":
+                        player.position.y = player.previousPosition.y;
+                        break;
+                    case "left":
+                        player.position.x = player.previousPosition.x;
+                        break;
+                    case "right":
+                        player.position.x = player.previousPosition.x;
+                        break;
+
+                    }
+            }
+        })
     }
 
     playerObjectCollision(player, gameObjectMasterArray) {
@@ -124,18 +155,22 @@ export default class MovementAction extends Action {
         //MUST BE THIS.DIRECTION, NOT CHARACTER.DIRECTION, CHAR IS NOT INSTANCE OF CLASS, THIS. IS THE TEMPLATE FOR INSTANCE, THE PLACEHOLDER.
         if(this.direction === MovementAction.up && withinTopBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveUp(character, deltaTime);
+            this.newplayerObjectCollision(character, gameObjectArray);
             this.playerObjectCollision(character, gameObjectMasterArray);
         }
         else if(this.direction === MovementAction.down && withinBottomBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveDown(character, deltaTime);
+            this.newplayerObjectCollision(character, gameObjectArray);
             this.playerObjectCollision(character, gameObjectMasterArray);
         }
         else if(this.direction === MovementAction.left && withinLeftBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveLeft(character, deltaTime);
+            this.newplayerObjectCollision(character, gameObjectArray);
             this.playerObjectCollision(character, gameObjectMasterArray);
         }
         else if(this.direction === MovementAction.right && withinRightBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveRight(character, deltaTime);
+            this.newplayerObjectCollision(character, gameObjectArray);
             this.playerObjectCollision(character, gameObjectMasterArray);
         }
 

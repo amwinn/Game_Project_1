@@ -367,7 +367,21 @@ radialEntityCollision(radialArray, entityArray) {
 
     })
 }
-
+newprojectileObjectCollision(projectileArray, array) {
+    projectileArray.forEach((projectile, projectileIndex) => {
+        array.forEach((object, objectIndex) => {
+            if(this.collisionCheck(projectile, object)) {
+                if(this.behaviorAttributes[object.type].destructible) {
+                    array.splice(objectIndex, 1);
+                }
+                if(object.type === GAMEOBJECT_TYPE.SPAWNER) {
+                    test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("Images/draft_loot_bag1.png", tileMapConfig.tsize/3, tileMapConfig.tsize/3), object.position.x, object.position.y));
+                }
+                projectileArray.splice(projectileIndex, 1);
+            }
+        })
+    })
+}
 //WIP, LOOKS TO BE WORKING GOOD SO FAR
 projectileObjectCollision(projectileArray, gameObjectMasterArray) {
     gameObjectMasterArray.forEach((objectArray) => {
@@ -417,6 +431,27 @@ collisionCheck(entity1, entity2) {
     ) {
         return true;
     } else return false;
+}
+
+newplayerObjectCollision(player, array) {
+    array.forEach((object, objectIndex) => {
+        if(
+            player.position.x  + player.size.dw/3  > object.position.x &&  
+            player.position.x   < object.position.x + object.size.dw /1.5 && 
+            player.position.y + player.size.dh/1.3 > object.position.y && 
+            player.position.y   < object.position.y + object.size.dh/1.5 
+        ) {
+            if(player.spawnState = ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
+                console.log("collision is detected and playerspawn is " + player.spawnState);
+                array.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
+                console.log("object spliced during player placement");
+            } 
+            console.log(GAMEOBJECT_TYPE.PORTAL)
+            if(object.type === "portal") {
+                nextMap = true;
+            }  
+        }
+    })
 }
 
 
@@ -671,28 +706,28 @@ entityCollisionResolution(entity1, entity2) {
                                     
                                     gameObject.position = new Position(x + (tileMapConfig.tsize / 3.3), y + tileMapConfig.tsize / 3.5);
                                     gameObject.size = new Size(tileMapConfig.tsize /2, tileMapConfig.tsize /2);
-                                    bushObjectArray.push(gameObject);
-                                    //gameObjectArray.push(gameObject);
+                                    //bushObjectArray.push(gameObject);
+                                    gameObjectArray.push(gameObject);
                                     break;
                                 case GAMEOBJECT_TYPE.PORTAL:
-                                    portalObjectArray.push(gameObject);
+                                    //portalObjectArray.push(gameObject);
 
-                                    //gameObjectArray.push(gameObject);
+                                    gameObjectArray.push(gameObject);
                                     break;
                                 case GAMEOBJECT_TYPE.ROCK:
-                                    rockObjectArray.push(gameObject);
+                                    //rockObjectArray.push(gameObject);
 
-                                    //gameObjectArray.push(gameObject);
+                                    gameObjectArray.push(gameObject);
                                     break;
                                 case GAMEOBJECT_TYPE.SPAWNER:
-                                    spawnerArray.push(gameObject);
+                                    //spawnerArray.push(gameObject);
 
-                                    //gameObjectArray.push(gameObject);
+                                    gameObjectArray.push(gameObject);
                                     break;
                                 case GAMEOBJECT_TYPE.TREE:
-                                    treeObjectArray.push(gameObject);
+                                    //treeObjectArray.push(gameObject);
 
-                                    //gameObjectArray.push(gameObject);
+                                    gameObjectArray.push(gameObject);
                                     break;
                             }
                         }
@@ -782,10 +817,14 @@ entityCollisionResolution(entity1, entity2) {
         this.createGameObjects();
         this.repositionPlayer();
         this.camera.clampCamera(this.player); 
-        //still needs some refining, mostly the destroy on hit/splice stuff
+
+        this.newprojectileObjectCollision(projectilesArray, gameObjectArray);
+        this.newplayerObjectCollision(this.player, gameObjectArray);
+
         this.projectileObjectCollision(projectilesArray, gameObjectMasterArray);
-        this.projectileObjectCollision(projectilesArray, gameObjectMasterArray);
+        //this.projectileObjectCollision(projectilesArray, gameObjectMasterArray); //accidental duplicate, from when there was also an enemyProjectileArray perhaps
         this.playerObjectCollision(this.player, gameObjectMasterArray);
+
         this.projectilePlayerCollision(projectilesArray, this.player);
         //this.projectileEntityCollision(projectilesArray, projectilesArray);
         this.projectileEntityCollision(meleeEntityArray, projectilesArray);
