@@ -1,4 +1,4 @@
-import GameObject, {gameObjectArray, rockObjectArray, bushObjectArray, treeObjectArray, gateObjectArray, deadTreeObjectArray} from "../GameObject.js";
+import GameObject, {gameObjectArray, rockObjectArray, bushObjectArray, treeObjectArray, portalObjectArray, deadTreeObjectArray} from "../GameObject.js";
 import Spawner, {spawnerArray} from "../Spawner.js";
 import Entity, { entityArraysObject, meleeEntityArray, rangedEntityArray } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
@@ -56,7 +56,7 @@ export default class GameLogic {
         [GameObject.rock]: {destructible: true},
         [GameObject.tree]: {destructible: true},
         [GameObject.bush]: {destructible: true},
-        [GameObject.gate]: {destructible: false},
+        [GameObject.portal]: {destructible: false},
         [GameObject.deadTree]: {destructible: true},
         [GameObject.spawner]: {destructible: true},
         [Entity.forest_creature]: {destructible: true},
@@ -447,7 +447,7 @@ playerObjectCollision(player, gameObjectMasterArray) {
                 //     player.position.y = player.previousPosition.y;
                 // }
                 //console.log(mapChangeCondition(player, gateObjectArray));
-                if(objectArray === gateObjectArray) {
+                if(objectArray === portalObjectArray) {
                     //teleports player to next map/level
                     nextMap = true;
                     //changeNextMap(true); //function to change nextMap value as its read-only once imported
@@ -676,7 +676,7 @@ entityCollisionResolution(entity1, entity2) {
                                     //gameObjectArray.push(gameObject);
                                     break;
                                 case "PORTAL":
-                                    gateObjectArray.push(gameObject);
+                                    portalObjectArray.push(gameObject);
 
                                     //gameObjectArray.push(gameObject);
                                     break;
@@ -874,7 +874,7 @@ entityCollisionResolution(entity1, entity2) {
             treeObjectArray.length = 0;
             rockObjectArray.length = 0;
             bushObjectArray.length = 0;   
-            gateObjectArray.length = 0;
+            portalObjectArray.length = 0;
             deadTreeObjectArray.length = 0;
             meleeEntityArray.length = 0;
             rangedEntityArray.length = 0

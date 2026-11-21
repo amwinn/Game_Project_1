@@ -3,7 +3,7 @@ import { GAMEOBJECT_TYPE } from "../data/biome_data/biome_type.js";
 export const rockObjectArray = []; 
 export const treeObjectArray = []; 
 export const bushObjectArray = [];
-export const gateObjectArray = [];
+export const portalObjectArray = [];
 export const deadTreeObjectArray = [];
 
 export const gameObjectArray = [];
@@ -14,7 +14,7 @@ export default class GameObject {
     static rock = "ROCK";
     static tree = "TREE";
     static bush = "BUSH";
-    static gate = "PORTAL";
+    static portal = "PORTAL";
     //static deadTree = "TREE";
     static spawner = "SPAWNER"
 

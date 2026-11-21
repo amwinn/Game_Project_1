@@ -1,5 +1,5 @@
 import { Sprite } from "./Utility.js";
-import GameObject, {rockObjectArray, treeObjectArray, bushObjectArray, gateObjectArray, deadTreeObjectArray} from "./GameObject.js";
+import GameObject, {rockObjectArray, treeObjectArray, bushObjectArray, portalObjectArray, deadTreeObjectArray} from "./GameObject.js";
 import { spawnerArray } from "./Spawner.js";
 
 //ENTIRE CLASS NEEDS TO BE REFACTORED EVENTUALLY, MOST LIKELY WHEN PROC GEN IS INTRODUCED, TILEMAP NEEDS TO BE DATA PERHAPS, PEEL AWAY THE GETTILE FUNCTION ELSEWHERE?
@@ -18,7 +18,7 @@ export default class MapData {
             4: {sprite: new Sprite("Images/Forest/practice_bush1.png"), arrayType: bushObjectArray, type: GameObject.bush},
             5: {sprite: new Sprite("Images/Forest/practice_rock1.png"), arrayType: rockObjectArray, type: GameObject.rock}, 
             6: {sprite: new Sprite("Images/Forest/practice_portal1.png"), arrayType: spawnerArray, type: GameObject.spawner},
-            7: {sprite: new Sprite("Images/Forest/practice_gate3.png"), arrayType: gateObjectArray, type: GameObject.gate}
+            7: {sprite: new Sprite("Images/Forest/practice_gate3.png"), arrayType: portalObjectArray, type: GameObject.portal}
 
         },
         "swamp": {
@@ -28,7 +28,7 @@ export default class MapData {
             4: {sprite: new Sprite("Images/Forest/practice_bush1.png"), arrayType: bushObjectArray, type: GameObject.bush},
             5: {sprite: new Sprite("Images/Forest/practice_rock1.png"), arrayType: rockObjectArray, type: GameObject.rock}, 
             6: {sprite: new Sprite("Images/Forest/practice_portal1.png"), arrayType: spawnerArray, type: GameObject.spawner},
-            7: {sprite: new Sprite("Images/Forest/practice_gate3.png"), arrayType: gateObjectArray, type: GameObject.gate}
+            7: {sprite: new Sprite("Images/Forest/practice_gate3.png"), arrayType: portalObjectArray, type: GameObject.portal}
 
         }
     }

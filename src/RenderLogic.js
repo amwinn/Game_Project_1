@@ -1,4 +1,4 @@
-import GameObject, {rockObjectArray, treeObjectArray, bushObjectArray, gateObjectArray, deadTreeObjectArray} from "./GameObject.js";
+import GameObject, {rockObjectArray, treeObjectArray, bushObjectArray, portalObjectArray, deadTreeObjectArray} from "./GameObject.js";
 import { gameObjectMasterArray } from "./Main.js";
 import Camera from "./Camera.js";
 import Player from "./Player.js";
@@ -219,7 +219,7 @@ export default class RenderLogic{
         treeObjectArray.length = 0;
         rockObjectArray.length = 0;
         bushObjectArray.length = 0;   
-        gateObjectArray.length = 0;
+        portalObjectArray.length = 0;
         deadTreeObjectArray.length = 0;
         meleeEntityArray.length = 0;
         rangedEntityArray.length = 0
