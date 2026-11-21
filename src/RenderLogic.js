@@ -19,7 +19,7 @@ import { mapDatabase } from "../data/map_data/map_data.js";
 
 import { BIOME_TYPE, GAMEOBJECT_SUBTYPE, MESH_SUBTYPE, MESH_TYPE } from "../data/biome_data/biome_type.js";
 import { BIOME_CONFIG } from "../data/biome_data/biome_config.js";
-import { loadGameObjectRenders, gameObjectSprites} from "./AssetRegistry.js";
+import { loadBiomeRenders, biomeSprites} from "./AssetRegistry.js";
 import { BIOME_RENDER } from "../data/biome_data/biome_render.js";
 import Item from "./Item.js";
 
@@ -112,7 +112,7 @@ export default class RenderLogic{
                 //let tileValidity = this.checkTileValidity(x,y, this.mapWidth, this.mapHeight);
                 
                 let biomeTileAssignments = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
-                let defaultMeshSprite = gameObjectSprites[MESH_TYPE.GRASS][biomeTileAssignments[0]];
+                let defaultMeshSprite = biomeSprites[MESH_TYPE.GRASS][biomeTileAssignments[0]];
                 let selectedTileSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
 
                 let defaultFloorSprite = selectedTileSheet[0];
@@ -123,7 +123,7 @@ export default class RenderLogic{
                     for(const item in MESH_SUBTYPE[grouping]) {
                         if(MESH_SUBTYPE[grouping][item] === biomeTileAssignments[tile]) {
                             //console.log(gameObjectSprites[grouping][MESH_TYPE[grouping][item]])
-                            this.renderSprite(renderer, gameObjectSprites[grouping][MESH_SUBTYPE[grouping][item]], x, y, tileMapConfig.tsize+2, tileMapConfig.tsize+2);
+                            this.renderSprite(renderer, biomeSprites[grouping][MESH_SUBTYPE[grouping][item]], x, y, tileMapConfig.tsize+2, tileMapConfig.tsize+2);
                         }
                     }
                 }

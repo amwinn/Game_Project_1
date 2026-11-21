@@ -26,7 +26,7 @@ export function loadEntityRenders(data) {
     return renderGroup;
 }
 
-export function loadGameObjectRenders(data) {
+export function loadBiomeRenders(data) {
     const renderGroup = {};
     for (const grouping in data) {
         renderGroup[grouping] = {};
@@ -37,7 +37,7 @@ export function loadGameObjectRenders(data) {
     return renderGroup;
 }
 
-export const gameObjectSprites = loadGameObjectRenders(BIOME_RENDER);
+export const biomeSprites = loadBiomeRenders(BIOME_RENDER);
 export const playerSprites = loadEntityRenders(PLAYER_RENDER);
 export const forestCreatureSprites = loadEntityRenders(CREATURE_RENDER["forest_creature"]);
 export const greaterForestCreatureSprites = loadEntityRenders(CREATURE_RENDER["greater_forest_creature"]);

@@ -29,7 +29,7 @@ import { BIOME_TYPE, MESH_TYPE, GAMEOBJECT_TYPE, MESH_SUBTYPE, GAMEOBJECT_SUBTYP
 import { BIOME_CONFIG } from "../../data/biome_data/biome_config.js";
 
 //temp, will live in assetregistry unless the class ends up being useless
-import { gameObjectSprites} from "../AssetRegistry.js";
+import { biomeSprites} from "../AssetRegistry.js";
 import Player from "../Player.js";
 import { ENTITY_STATE } from "../../data/entity_data/entity_state.js";
 import MapData from "../MapDB.js";
@@ -663,7 +663,7 @@ entityCollisionResolution(entity1, entity2) {
                             gameObject.subType = GAMEOBJECT_SUBTYPE[grouping][item]; 
                             gameObject.position = new Position(x, y);
                             gameObject.size = new Size(tileMapConfig.tsize, tileMapConfig.tsize); 
-                            gameObject.sprite = gameObjectSprites[gameObject.type][gameObject.subType]; //was gameObjectSprite[grouping][GAMEOBJECT_TYPE[grouping][item]]
+                            gameObject.sprite = biomeSprites[gameObject.type][gameObject.subType]; //was gameObjectSprite[grouping][GAMEOBJECT_TYPE[grouping][item]]
                             //console.log(gameObject.category);
 
                             switch(grouping) {
