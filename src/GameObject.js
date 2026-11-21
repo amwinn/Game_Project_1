@@ -11,12 +11,12 @@ export const gameObjectArray = [];
 
 
 export default class GameObject {
-    static rock = "ROCK";
-    static tree = "TREE";
-    static bush = "BUSH";
-    static portal = "PORTAL";
+    static rock = "rock";
+    static tree = "tree";
+    static bush = "bush";
+    static portal = "portal";
     //static deadTree = "TREE";
-    static spawner = "SPAWNER"
+    static spawner = "spawner"
 
     constructor(type, position, size) {
         this.category = null;

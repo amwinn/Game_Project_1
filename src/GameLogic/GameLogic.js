@@ -25,7 +25,7 @@ import Area from "../AbilityEntity/AreaOfEffect.js";
 
 import { tileMapConfig, tileMapData, getTile, getTileMap, getMapHeight, getMapWidth } from "./MapLogic.js";
 import { mapDatabase } from "../../data/map_data/map_data.js";
-import { BIOME_TYPE, MESH_TYPE, GAMEOBJECT_SUBTYPE } from "../../data/biome_data/biome_type.js";
+import { BIOME_TYPE, MESH_TYPE, GAMEOBJECT_TYPE, MESH_SUBTYPE, GAMEOBJECT_SUBTYPE } from "../../data/biome_data/biome_type.js";
 import { BIOME_CONFIG } from "../../data/biome_data/biome_config.js";
 
 //temp, will live in assetregistry unless the class ends up being useless
@@ -53,12 +53,12 @@ export default class GameLogic {
     }
 
     behaviorAttributes = {
-        [GameObject.rock]: {destructible: true},
-        [GameObject.tree]: {destructible: true},
-        [GameObject.bush]: {destructible: true},
-        [GameObject.portal]: {destructible: false},
-        [GameObject.deadTree]: {destructible: true},
-        [GameObject.spawner]: {destructible: true},
+        [GAMEOBJECT_TYPE.ROCK]: {destructible: true},
+        [GAMEOBJECT_TYPE.TREE]: {destructible: true},
+        [GAMEOBJECT_TYPE.BUSH]: {destructible: true},
+        [GAMEOBJECT_TYPE.PORTAL]: {destructible: false},
+        //[GameObject.deadTree]: {destructible: true},
+        [GAMEOBJECT_TYPE.SPAWNER]: {destructible: true},
         [Entity.forest_creature]: {destructible: true},
         [Entity.greater_forest_creature]: {destructible: true},
         [Projectile.playerProjectile]: {destructible: true},
@@ -375,7 +375,7 @@ projectileObjectCollision(projectileArray, gameObjectMasterArray) {
             objectArray.forEach((object, objectIndex) => {
                 if(this.collisionCheck(projectile, object)){
                     //console.log("collision between " + (projectile?.type || "unknown") + " and " + (object?.type || "unknown"));
-                    if(this.behaviorAttributes[object.category].destructible && projectileArray != entityProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
+                    if(this.behaviorAttributes[object.type].destructible && projectileArray != entityProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
                         objectArray.splice(objectIndex, 1);
                     }
                     //recently added && projectile.type !== Projectile.enemyProjectile to the below if statement because the enemies were spawning items but not destroying portal
@@ -658,39 +658,38 @@ entityCollisionResolution(entity1, entity2) {
                             if(objectSpawnTracker.has(tileID) || !isTileValid) {
                                 continue; //if use return, it will only load the first screen chunk of items
                             } else {objectSpawnTracker.add(tileID);}
-
-                            const gameObject = grouping === "SPAWNER" ? new Spawner() : new GameObject(); //new GameObject();
-                            gameObject.category = grouping;
-                            gameObject.type = GAMEOBJECT_SUBTYPE[grouping][item]; 
+                            const gameObject = grouping === GAMEOBJECT_TYPE.SPAWNER ? new Spawner() : new GameObject(); 
+                            gameObject.type = grouping;
+                            gameObject.subType = GAMEOBJECT_SUBTYPE[grouping][item]; 
                             gameObject.position = new Position(x, y);
                             gameObject.size = new Size(tileMapConfig.tsize, tileMapConfig.tsize); 
-                            gameObject.sprite = gameObjectSprites[gameObject.category][gameObject.type]; //was gameObjectSprite[grouping][GAMEOBJECT_TYPE[grouping][item]]
+                            gameObject.sprite = gameObjectSprites[gameObject.type][gameObject.subType]; //was gameObjectSprite[grouping][GAMEOBJECT_TYPE[grouping][item]]
                             //console.log(gameObject.category);
 
                             switch(grouping) {
-                                case "BUSH" :
+                                case GAMEOBJECT_TYPE.BUSH:
                                     
                                     gameObject.position = new Position(x + (tileMapConfig.tsize / 3.3), y + tileMapConfig.tsize / 3.5);
                                     gameObject.size = new Size(tileMapConfig.tsize /2, tileMapConfig.tsize /2);
                                     bushObjectArray.push(gameObject);
                                     //gameObjectArray.push(gameObject);
                                     break;
-                                case "PORTAL":
+                                case GAMEOBJECT_TYPE.PORTAL:
                                     portalObjectArray.push(gameObject);
 
                                     //gameObjectArray.push(gameObject);
                                     break;
-                                case "ROCK" :
+                                case GAMEOBJECT_TYPE.ROCK:
                                     rockObjectArray.push(gameObject);
 
                                     //gameObjectArray.push(gameObject);
                                     break;
-                                case "SPAWNER":
+                                case GAMEOBJECT_TYPE.SPAWNER:
                                     spawnerArray.push(gameObject);
 
                                     //gameObjectArray.push(gameObject);
                                     break;
-                                case "TREE":
+                                case GAMEOBJECT_TYPE.TREE:
                                     treeObjectArray.push(gameObject);
 
                                     //gameObjectArray.push(gameObject);
