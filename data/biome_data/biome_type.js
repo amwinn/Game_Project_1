@@ -15,7 +15,7 @@ export const MESH_TYPE = {
 
 }
 
-export const GAMEOBJECT_TYPE = {
+export const GAMEOBJECT_SUBTYPE = {
     BUSH: {
         BUSH_FOREST: "forest_bush",
     },

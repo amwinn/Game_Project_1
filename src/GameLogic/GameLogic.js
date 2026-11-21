@@ -25,7 +25,7 @@ import Area from "../AbilityEntity/AreaOfEffect.js";
 
 import { tileMapConfig, tileMapData, getTile, getTileMap, getMapHeight, getMapWidth } from "./MapLogic.js";
 import { mapDatabase } from "../../data/map_data/map_data.js";
-import { BIOME_TYPE, MESH_TYPE, GAMEOBJECT_TYPE } from "../../data/biome_data/biome_type.js";
+import { BIOME_TYPE, MESH_TYPE, GAMEOBJECT_SUBTYPE } from "../../data/biome_data/biome_type.js";
 import { BIOME_CONFIG } from "../../data/biome_data/biome_config.js";
 
 //temp, will live in assetregistry unless the class ends up being useless
@@ -652,16 +652,16 @@ entityCollisionResolution(entity1, entity2) {
                 // let objectPosition;
                 // let objectSize;
 
-                for(const grouping in GAMEOBJECT_TYPE) {
-                    for(const item in GAMEOBJECT_TYPE[grouping]) {
-                        if(GAMEOBJECT_TYPE[grouping][item] === selectedBiomeTile) {
+                for(const grouping in GAMEOBJECT_SUBTYPE) {
+                    for(const item in GAMEOBJECT_SUBTYPE[grouping]) {
+                        if(GAMEOBJECT_SUBTYPE[grouping][item] === selectedBiomeTile) {
                             if(objectSpawnTracker.has(tileID) || !isTileValid) {
                                 continue; //if use return, it will only load the first screen chunk of items
                             } else {objectSpawnTracker.add(tileID);}
 
                             const gameObject = grouping === "SPAWNER" ? new Spawner() : new GameObject(); //new GameObject();
                             gameObject.category = grouping;
-                            gameObject.type = GAMEOBJECT_TYPE[grouping][item]; 
+                            gameObject.type = GAMEOBJECT_SUBTYPE[grouping][item]; 
                             gameObject.position = new Position(x, y);
                             gameObject.size = new Size(tileMapConfig.tsize, tileMapConfig.tsize); 
                             gameObject.sprite = gameObjectSprites[gameObject.category][gameObject.type]; //was gameObjectSprite[grouping][GAMEOBJECT_TYPE[grouping][item]]

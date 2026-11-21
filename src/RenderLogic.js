@@ -17,7 +17,7 @@ import { test_item_array } from "./Main.js";
 import { tileMapConfig, tileMapData, getTile, getTileMap, getMapHeight, getMapWidth } from "./GameLogic/MapLogic.js";
 import { mapDatabase } from "../data/map_data/map_data.js";
 
-import { BIOME_TYPE, GAMEOBJECT_TYPE, MESH_TYPE } from "../data/biome_data/biome_type.js";
+import { BIOME_TYPE, GAMEOBJECT_SUBTYPE, MESH_TYPE } from "../data/biome_data/biome_type.js";
 import { BIOME_CONFIG } from "../data/biome_data/biome_config.js";
 import { loadGameObjectRenders, gameObjectSprites} from "./AssetRegistry.js";
 import { BIOME_RENDER } from "../data/biome_data/biome_render.js";
@@ -127,9 +127,9 @@ export default class RenderLogic{
                         }
                     }
                 }
-                for(const grouping in GAMEOBJECT_TYPE) {
-                    for(const item in GAMEOBJECT_TYPE[grouping]) {
-                        if(GAMEOBJECT_TYPE[grouping][item] === biomeTileAssignments[tile]) {
+                for(const grouping in GAMEOBJECT_SUBTYPE) {
+                    for(const item in GAMEOBJECT_SUBTYPE[grouping]) {
+                        if(GAMEOBJECT_SUBTYPE[grouping][item] === biomeTileAssignments[tile]) {
                             //console.log(gameObjectSprites[grouping][GAMEOBJECT_TYPE[grouping][item]]) //not useful b/c its yielding the actual object, doesnt point to mesh
                             this.renderSprite(renderer, defaultMeshSprite, x, y, tileMapConfig.tsize+2, tileMapConfig.tsize+2)
                         }
