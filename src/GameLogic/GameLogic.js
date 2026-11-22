@@ -1,10 +1,10 @@
-import GameObject, {gameObjectArray, rockObjectArray, bushObjectArray, treeObjectArray, portalObjectArray, deadTreeObjectArray} from "../GameObject.js";
-import Spawner, {spawnerArray} from "../Spawner.js";
+import GameObject, {gameObjectArray} from "../GameObject.js";
+import Spawner from "../Spawner.js";
 import Entity, { entityArraysObject, meleeEntityArray, rangedEntityArray } from "../Entity.js";
 import { Size, Position, Sprite } from "../Utility.js";
 //import { nextMap, changeNextMap } from "./Grid.js";
 //import { playerSpawned, changePlayerSpawnState } from "./Grid.js";
-import { entityProjectilesArray, gameObjectMasterArray, radialArray } from "../Main.js";
+import { entityProjectilesArray, radialArray } from "../Main.js";
 import { projectilesArray } from "../Main.js";
 import { screenSize } from "../Main.js";
 import { activeMovementKeys } from "../Input/InputLogic.js";
@@ -42,8 +42,8 @@ let nextMap = false;
 //let playerSpawned = false;
 export const objectSpawnTracker = new Set();
 export default class GameLogic {
-    constructor(mapData, camera, player) {
-        this.mapData = mapData;
+    constructor(camera, player) {
+        //this.mapData = mapData;
         this.camera = camera;
         this.player = player;
         //this.tileMap = this.mapData.tileMap;
@@ -822,9 +822,9 @@ entityCollisionResolution(entity1, entity2) {
         this.newprojectileObjectCollision(projectilesArray, gameObjectArray);
         this.newplayerObjectCollision(this.player, gameObjectArray);
 
-        this.projectileObjectCollision(projectilesArray, gameObjectMasterArray);
+        //this.projectileObjectCollision(projectilesArray, gameObjectMasterArray);
         //this.projectileObjectCollision(projectilesArray, gameObjectMasterArray); //accidental duplicate, from when there was also an enemyProjectileArray perhaps
-        this.playerObjectCollision(this.player, gameObjectMasterArray);
+        //this.playerObjectCollision(this.player, gameObjectMasterArray);
 
         this.projectilePlayerCollision(projectilesArray, this.player);
         //this.projectileEntityCollision(projectilesArray, projectilesArray);
@@ -897,7 +897,8 @@ entityCollisionResolution(entity1, entity2) {
         this.player.position.y = screenSize.height/2;
         this.camera.clampCamera(this.player);
         //this.createGameObjects();
-        this.playerObjectCollision(this.player, gameObjectMasterArray);
+        this.newplayerObjectCollision(this.player, gameObjectArray);
+        //this.playerObjectCollision(this.player, gameObjectMasterArray);
         console.log("camera clamped" + " Player spawned state is " + this.player.spawnState);
         this.repositionPlayer();
         nextMap = false;
@@ -911,14 +912,14 @@ entityCollisionResolution(entity1, entity2) {
             gameObjectArray.length =0;
             projectilesArray.length = 0;
             entityProjectilesArray.length = 0;
-            treeObjectArray.length = 0;
-            rockObjectArray.length = 0;
-            bushObjectArray.length = 0;   
-            portalObjectArray.length = 0;
-            deadTreeObjectArray.length = 0;
+            //treeObjectArray.length = 0;
+            //rockObjectArray.length = 0;
+            //bushObjectArray.length = 0;   
+            //portalObjectArray.length = 0;
+            //deadTreeObjectArray.length = 0;
             meleeEntityArray.length = 0;
             rangedEntityArray.length = 0
-            spawnerArray.length = 0;
+            //spawnerArray.length = 0;
             test_item_array.length= 0; //START TEST //END TEST
             objectSpawnTracker.clear();
         }

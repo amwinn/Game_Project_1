@@ -1,10 +1,10 @@
 import { Sprite } from "./Utility.js";
 import { GAMEOBJECT_SUBTYPE } from "../data/biome_data/biome_type.js";
-export const rockObjectArray = []; 
-export const treeObjectArray = []; 
-export const bushObjectArray = [];
-export const portalObjectArray = [];
-export const deadTreeObjectArray = [];
+// export const rockObjectArray = []; 
+// export const treeObjectArray = []; 
+// export const bushObjectArray = [];
+// export const portalObjectArray = [];
+// export const deadTreeObjectArray = [];
 
 export const gameObjectArray = [];
 

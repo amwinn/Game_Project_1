@@ -3,8 +3,8 @@ import Projectile from "./AbilityEntity/Projectile.js";
 import Entity, { meleeEntityArray, rangedEntityArray } from "./Entity.js";
 import Camera from "./Camera.js";
 import RenderLogic from "./RenderLogic.js";
-import { deadTreeObjectArray, portalObjectArray, rockObjectArray, treeObjectArray, bushObjectArray} from "./GameObject.js";
-import { spawnerArray } from "./Spawner.js";
+// import { deadTreeObjectArray, portalObjectArray, rockObjectArray, treeObjectArray, bushObjectArray} from "./GameObject.js";
+// import { spawnerArray } from "./Spawner.js";
 import { Position, Size, Sprite } from "./Utility.js";
 import MapData from "./MapDB.js";
 import GameLogic, { objectSpawnTracker } from "./GameLogic/GameLogic.js";
@@ -14,6 +14,7 @@ import { castProjectile, castEntityProjectile } from "./AbilityLogic/AbilityLogi
 import { inputState } from "./Input/InputState.js";
 import { weapon_data } from "../data/item_data/weapon_data.js";
 
+import { tileMapConfig } from "./GameLogic/MapLogic.js";
 import { generateUID } from "./Utility.js";
 import { spellbolt } from "../data/ability_data/simple_magic.js";
 import { movementLogicUpdate } from "./GameLogic/MovementLogic.js";
@@ -47,18 +48,18 @@ gameMap.height = 4000//1792; //canvas size, not used atm
 const audio = new Audio("Audio/changeOfSpirit1.wav");
 //temp test end
 //DEPENDENCIES
-let mapData = new MapData();
+//let mapData = new MapData();
 let camera = new Camera(0,0, new Size(screenSize.width,screenSize.height));
 
 export const test_item_array = [];
-export const gameObjectMasterArray = [
-    rockObjectArray,
-    bushObjectArray,
-    treeObjectArray,
-    portalObjectArray,
-    deadTreeObjectArray,
-    spawnerArray
-];
+// export const gameObjectMasterArray = [
+//     rockObjectArray,
+//     bushObjectArray,
+//     treeObjectArray,
+//     portalObjectArray,
+//     deadTreeObjectArray,
+//     spawnerArray
+// ];
 
 
 export const testItemMap = new Map(weapon_data.map(item => [item.id, item]));
@@ -70,12 +71,12 @@ export const enemyMasterArray = [
 ];
 
 let playerPosition = new Position(screenSize.width/2, screenSize.height/2);
-let playerSize = new Size(mapData.tileMap.tsize/1.5, mapData.tileMap.tsize/1.5); //both were /1.5
+let playerSize = new Size(tileMapConfig.tsize/1.5, tileMapConfig.tsize/1.5); //both were /1.5
 let player = new Player(playerPosition, playerSize, 332);
 
 //DEPENDENTS
-const renderLogic = new RenderLogic(mapData, camera, player); //originally objectMap, changed to map, easier to type and more concise
-const gameLogic = new GameLogic(mapData, camera, player);//need to run main method in main loop
+const renderLogic = new RenderLogic(camera, player); //originally objectMap, changed to map, easier to type and more concise
+const gameLogic = new GameLogic(camera, player);//need to run main method in main loop
 const inputLogic = new InputLogic(gameLogic, camera, player);
 
 

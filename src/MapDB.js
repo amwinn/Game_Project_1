@@ -1,6 +1,6 @@
 import { Sprite } from "./Utility.js";
-import GameObject, {rockObjectArray, treeObjectArray, bushObjectArray, portalObjectArray, deadTreeObjectArray} from "./GameObject.js";
-import { spawnerArray } from "./Spawner.js";
+import GameObject from "./GameObject.js";
+// import { spawnerArray } from "./Spawner.js";
 
 //ENTIRE CLASS NEEDS TO BE REFACTORED EVENTUALLY, MOST LIKELY WHEN PROC GEN IS INTRODUCED, TILEMAP NEEDS TO BE DATA PERHAPS, PEEL AWAY THE GETTILE FUNCTION ELSEWHERE?
 

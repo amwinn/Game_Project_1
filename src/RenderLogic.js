@@ -1,12 +1,12 @@
-import GameObject, {rockObjectArray, treeObjectArray, bushObjectArray, portalObjectArray, deadTreeObjectArray, gameObjectArray} from "./GameObject.js";
-import { gameObjectMasterArray } from "./Main.js";
+// import GameObject, {rockObjectArray, treeObjectArray, bushObjectArray, portalObjectArray, deadTreeObjectArray, gameObjectArray} from "./GameObject.js";
+// import { gameObjectMasterArray } from "./Main.js";
 import Camera from "./Camera.js";
 import Player from "./Player.js";
-
+import { gameObjectArray } from "./GameObject.js";
 import { screenSize } from "./Main.js"; //this was preventing the game from loading because it was calling before the grid class in main
 import { meleeEntityArray, rangedEntityArray } from "./Entity.js";
 import { projectilesArray, entityProjectilesArray, radialArray } from "./Main.js";
-import { spawnerArray } from "./Spawner.js";
+// import { spawnerArray } from "./Spawner.js";
 //import { mapDatabase, biomeTileSheets } from "./MapDB.js";
 import { Position, Size, Sprite } from "./Utility.js";
 import MapData from "./MapDB.js";
@@ -42,8 +42,8 @@ export function changeNextMap(boolean) {
 //let objectSpawnTracker = new Set(); //fills with each grid cell to prevent duplicate object spawns
 let objectIndex;
 export default class RenderLogic{
-    constructor(mapData, camera, player){
-        this.mapData = mapData;
+    constructor(camera, player){
+        //this.mapData = mapData;
         //this.tileMap = this.mapData.tileMap;
         this.camera = camera;
         this.player = player;
@@ -113,12 +113,12 @@ export default class RenderLogic{
                 
                 let biomeTileAssignments = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
                 let defaultMeshSprite = biomeSprites[MESH_TYPE.GRASS][biomeTileAssignments[0]];
-                let selectedTileSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
+                //let selectedTileSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
 
-                let defaultFloorSprite = selectedTileSheet[0];
+                //let defaultFloorSprite = selectedTileSheet[0];
 
                 
-                let selectedTile = selectedTileSheet[tile];
+                //let selectedTile = selectedTileSheet[tile];
                 for(const grouping in MESH_SUBTYPE) {
                     for(const item in MESH_SUBTYPE[grouping]) {
                         if(MESH_SUBTYPE[grouping][item] === biomeTileAssignments[tile]) {
@@ -136,15 +136,15 @@ export default class RenderLogic{
                     }
                 }
                 //renders non-object terrain tiles (mostly grass)
-                if(selectedTile && !selectedTile.arrayType && !selectedTile.type) { //was tile === 0 || tile === 2, decided to make it more abstract
-                    //this.renderSprite(renderer, selectedTile.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22)
-                }
+                // if(selectedTile && !selectedTile.arrayType && !selectedTile.type) { //was tile === 0 || tile === 2, decided to make it more abstract
+                //     //this.renderSprite(renderer, selectedTile.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22)
+                // }
                 
 
-                //creates a background grass for object, the +22 modifiers to size fix the artifact lines, oddly enough they werent visible in fullscreen f11 mode
-                if(selectedTile && selectedTile.arrayType && selectedTile.type) { //was if(tile > 2)
-                    //this.renderSprite(renderer, defaultFloorSprite.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22); //just recently added this +22 to the dw and dh, else there were grid lines all over
-                }
+                // //creates a background grass for object, the +22 modifiers to size fix the artifact lines, oddly enough they werent visible in fullscreen f11 mode
+                // if(selectedTile && selectedTile.arrayType && selectedTile.type) { //was if(tile > 2)
+                //     //this.renderSprite(renderer, defaultFloorSprite.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22); //just recently added this +22 to the dw and dh, else there were grid lines all over
+                // }
 
 
             } 
@@ -223,14 +223,14 @@ export default class RenderLogic{
         gameObjectArray.length = 0;
         projectilesArray.length = 0;
         entityProjectilesArray.length = 0;
-        treeObjectArray.length = 0;
-        rockObjectArray.length = 0;
-        bushObjectArray.length = 0;   
-        portalObjectArray.length = 0;
-        deadTreeObjectArray.length = 0;
+        //treeObjectArray.length = 0;
+        //rockObjectArray.length = 0;
+        //bushObjectArray.length = 0;   
+        //portalObjectArray.length = 0;
+        //deadTreeObjectArray.length = 0;
         meleeEntityArray.length = 0;
         rangedEntityArray.length = 0
-        spawnerArray.length = 0;
+        //spawnerArray.length = 0;
         objectSpawnTracker.clear();
     }
 
