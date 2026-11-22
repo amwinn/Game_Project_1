@@ -47,7 +47,7 @@ export default class MovementAction extends Action {
     }
 
 
-    newplayerObjectCollision(player, array) {
+    playerObjectCollision(player, array) {
         array.forEach((object, objectIndex) => {
             if(
                 player.position.x  + player.size.dw/3  > object.position.x &&  
@@ -76,36 +76,36 @@ export default class MovementAction extends Action {
         })
     }
 
-    playerObjectCollision(player, gameObjectMasterArray) {
-        for(const array of gameObjectMasterArray) {
-            for(const object of array) {
-                if(
-                    player.position.x  + player.size.dw/3  > object.position.x &&  
-                    player.position.x   < object.position.x + object.size.dw /1.5 && 
-                    player.position.y + player.size.dh/1.3 > object.position.y && 
-                    player.position.y   < object.position.y + object.size.dh/1.5 &&
-                    array != portalObjectArray
-                ) { 
-                    switch(player.direction) {
-                        case "up":
-                            player.position.y = player.previousPosition.y;
-                            break;
-                        case "down":
-                        player.position.y = player.previousPosition.y;
-                            break;
-                        case "left":
-                        player.position.x = player.previousPosition.x;
-                            break;
-                        case "right":
-                        player.position.x = player.previousPosition.x;
-                            break;
+    // playerObjectCollision(player, gameObjectMasterArray) {
+    //     for(const array of gameObjectMasterArray) {
+    //         for(const object of array) {
+    //             if(
+    //                 player.position.x  + player.size.dw/3  > object.position.x &&  
+    //                 player.position.x   < object.position.x + object.size.dw /1.5 && 
+    //                 player.position.y + player.size.dh/1.3 > object.position.y && 
+    //                 player.position.y   < object.position.y + object.size.dh/1.5 &&
+    //                 array != portalObjectArray
+    //             ) { 
+    //                 switch(player.direction) {
+    //                     case "up":
+    //                         player.position.y = player.previousPosition.y;
+    //                         break;
+    //                     case "down":
+    //                     player.position.y = player.previousPosition.y;
+    //                         break;
+    //                     case "left":
+    //                     player.position.x = player.previousPosition.x;
+    //                         break;
+    //                     case "right":
+    //                     player.position.x = player.previousPosition.x;
+    //                         break;
 
-                    }
-                } 
+    //                 }
+    //             } 
 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     // playerObjectCollision(player, gameObjectMasterArray) {
     //     gameObjectMasterArray.forEach((objectArray) => {
@@ -155,22 +155,22 @@ export default class MovementAction extends Action {
         //MUST BE THIS.DIRECTION, NOT CHARACTER.DIRECTION, CHAR IS NOT INSTANCE OF CLASS, THIS. IS THE TEMPLATE FOR INSTANCE, THE PLACEHOLDER.
         if(this.direction === MovementAction.up && withinTopBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveUp(character, deltaTime);
-            this.newplayerObjectCollision(character, gameObjectArray);
+            this.playerObjectCollision(character, gameObjectArray);
             //this.playerObjectCollision(character, gameObjectMasterArray);
         }
         else if(this.direction === MovementAction.down && withinBottomBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveDown(character, deltaTime);
-            this.newplayerObjectCollision(character, gameObjectArray);
+            this.playerObjectCollision(character, gameObjectArray);
             //this.playerObjectCollision(character, gameObjectMasterArray);
         }
         else if(this.direction === MovementAction.left && withinLeftBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveLeft(character, deltaTime);
-            this.newplayerObjectCollision(character, gameObjectArray);
+            this.playerObjectCollision(character, gameObjectArray);
             //this.playerObjectCollision(character, gameObjectMasterArray);
         }
         else if(this.direction === MovementAction.right && withinRightBounds(character)) { //was gamelogic.withinXbounds(char, gamelogic.mapw, gamelogic.maph)
             this.moveRight(character, deltaTime);
-            this.newplayerObjectCollision(character, gameObjectArray);
+            this.playerObjectCollision(character, gameObjectArray);
             //this.playerObjectCollision(character, gameObjectMasterArray);
         }
 

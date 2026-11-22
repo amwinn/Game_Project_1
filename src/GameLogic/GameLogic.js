@@ -368,7 +368,7 @@ radialEntityCollision(radialArray, entityArray) {
 
     })
 }
-newprojectileObjectCollision(projectileArray, array) {
+projectileObjectCollision(projectileArray, array) {
     projectileArray.forEach((projectile, projectileIndex) => {
         array.forEach((object, objectIndex) => {
             if(this.collisionCheck(projectile, object)) {
@@ -384,28 +384,28 @@ newprojectileObjectCollision(projectileArray, array) {
     })
 }
 //WIP, LOOKS TO BE WORKING GOOD SO FAR
-projectileObjectCollision(projectileArray, gameObjectMasterArray) {
-    gameObjectMasterArray.forEach((objectArray) => {
-        projectileArray.forEach((projectile, projectileIndex) => {
-            objectArray.forEach((object, objectIndex) => {
-                if(this.collisionCheck(projectile, object)){
-                    //console.log("collision between " + (projectile?.type || "unknown") + " and " + (object?.type || "unknown"));
-                    if(this.behaviorAttributes[object.type].destructible && projectileArray != entityProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
-                        objectArray.splice(objectIndex, 1);
-                    }
-                    //recently added && projectile.type !== Projectile.enemyProjectile to the below if statement because the enemies were spawning items but not destroying portal
-                    if(objectArray === spawnerArray && projectile.type !== Projectile.entityProjectile) { 
-                    //START TEST CODE
-                    test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("Images/draft_loot_bag1.png", tileMapConfig.tsize/3, tileMapConfig.tsize/3), object.position.x, object.position.y));
-                    console.log(test_item_array)
-                    //END TEST CODE
-                }
-                    projectileArray.splice(projectileIndex, 1);
-                };
-            });
-        });
-    });
-}
+// projectileObjectCollision(projectileArray, gameObjectMasterArray) {
+//     gameObjectMasterArray.forEach((objectArray) => {
+//         projectileArray.forEach((projectile, projectileIndex) => {
+//             objectArray.forEach((object, objectIndex) => {
+//                 if(this.collisionCheck(projectile, object)){
+//                     //console.log("collision between " + (projectile?.type || "unknown") + " and " + (object?.type || "unknown"));
+//                     if(this.behaviorAttributes[object.type].destructible && projectileArray != entityProjectilesArray) { //had to add the "! = enemyProjectilesArray" or else their arrays would wipe the map clean quickly
+//                         objectArray.splice(objectIndex, 1);
+//                     }
+//                     //recently added && projectile.type !== Projectile.enemyProjectile to the below if statement because the enemies were spawning items but not destroying portal
+//                     if(objectArray === spawnerArray && projectile.type !== Projectile.entityProjectile) { 
+//                     //START TEST CODE
+//                     test_item_array.push(new Item(testItemMap.get(1), 100, new Sprite("Images/draft_loot_bag1.png", tileMapConfig.tsize/3, tileMapConfig.tsize/3), object.position.x, object.position.y));
+//                     console.log(test_item_array)
+//                     //END TEST CODE
+//                 }
+//                     projectileArray.splice(projectileIndex, 1);
+//                 };
+//             });
+//         });
+//     });
+// }
 
 projectileCollisionCheck(array1, array2) {
     array1.forEach((value,index1) => {
@@ -434,7 +434,7 @@ collisionCheck(entity1, entity2) {
     } else return false;
 }
 
-newplayerObjectCollision(player, array) {
+playerObjectCollision(player, array) {
     array.forEach((object, objectIndex) => {
         if(
             player.position.x  + player.size.dw/3  > object.position.x &&  
@@ -456,44 +456,44 @@ newplayerObjectCollision(player, array) {
 }
 
 
-playerObjectCollision(player, gameObjectMasterArray) {
-    gameObjectMasterArray.forEach((objectArray) => {
-        objectArray.forEach((object, objectIndex) => {
-            if(
-                player.position.x  + player.size.dw/3  > object.position.x &&  
-                player.position.x   < object.position.x + object.size.dw /1.5 && 
-                player.position.y + player.size.dh/1.3 > object.position.y && 
-                player.position.y   < object.position.y + object.size.dh/1.5 
-            ) {
+// playerObjectCollision(player, gameObjectMasterArray) {
+//     gameObjectMasterArray.forEach((objectArray) => {
+//         objectArray.forEach((object, objectIndex) => {
+//             if(
+//                 player.position.x  + player.size.dw/3  > object.position.x &&  
+//                 player.position.x   < object.position.x + object.size.dw /1.5 && 
+//                 player.position.y + player.size.dh/1.3 > object.position.y && 
+//                 player.position.y   < object.position.y + object.size.dh/1.5 
+//             ) {
 
     
-                //must be in if statement or else it will prevent the player from re-positioning during changeMap
-                // if(playerSpawned) {
-                //     // player.position.x = player.previousPosition.x;
-                //     // player.position.y = player.previousPosition.y;
-                //     //this.camera.clampCamera(player); // if this isnt here, the camera moves past the player for just a split moment, comment this out to see if you dont believe your past self.
-                // }
-                if(player.spawnState = ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
-                    console.log("collision is detected and playerspawn is " + player.spawnState);
-                    objectArray.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
+//                 //must be in if statement or else it will prevent the player from re-positioning during changeMap
+//                 // if(playerSpawned) {
+//                 //     // player.position.x = player.previousPosition.x;
+//                 //     // player.position.y = player.previousPosition.y;
+//                 //     //this.camera.clampCamera(player); // if this isnt here, the camera moves past the player for just a split moment, comment this out to see if you dont believe your past self.
+//                 // }
+//                 if(player.spawnState = ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
+//                     console.log("collision is detected and playerspawn is " + player.spawnState);
+//                     objectArray.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
                     
-                    console.log("object spliced during player placement");
-                } //else {dddd
-                //     player.position.x = player.previousPosition.x;
-                //     player.position.y = player.previousPosition.y;
-                // }
-                //console.log(mapChangeCondition(player, gateObjectArray));
-                if(objectArray === portalObjectArray) {
-                    //teleports player to next map/level
-                    nextMap = true;
-                    //changeNextMap(true); //function to change nextMap value as its read-only once imported
-                    //changePlayerSpawnState(false);
-                }  
-            } 
-        });
+//                     console.log("object spliced during player placement");
+//                 } //else {dddd
+//                 //     player.position.x = player.previousPosition.x;
+//                 //     player.position.y = player.previousPosition.y;
+//                 // }
+//                 //console.log(mapChangeCondition(player, gateObjectArray));
+//                 if(objectArray === portalObjectArray) {
+//                     //teleports player to next map/level
+//                     nextMap = true;
+//                     //changeNextMap(true); //function to change nextMap value as its read-only once imported
+//                     //changePlayerSpawnState(false);
+//                 }  
+//             } 
+//         });
 
-    });
-}
+//     });
+// }
 
 
 projectilePlayerCollision(array, player) { 
@@ -819,8 +819,8 @@ entityCollisionResolution(entity1, entity2) {
         this.repositionPlayer();
         this.camera.clampCamera(this.player); 
 
-        this.newprojectileObjectCollision(projectilesArray, gameObjectArray);
-        this.newplayerObjectCollision(this.player, gameObjectArray);
+        this.projectileObjectCollision(projectilesArray, gameObjectArray);
+        this.playerObjectCollision(this.player, gameObjectArray);
 
         //this.projectileObjectCollision(projectilesArray, gameObjectMasterArray);
         //this.projectileObjectCollision(projectilesArray, gameObjectMasterArray); //accidental duplicate, from when there was also an enemyProjectileArray perhaps
@@ -897,7 +897,7 @@ entityCollisionResolution(entity1, entity2) {
         this.player.position.y = screenSize.height/2;
         this.camera.clampCamera(this.player);
         //this.createGameObjects();
-        this.newplayerObjectCollision(this.player, gameObjectArray);
+        this.playerObjectCollision(this.player, gameObjectArray);
         //this.playerObjectCollision(this.player, gameObjectMasterArray);
         console.log("camera clamped" + " Player spawned state is " + this.player.spawnState);
         this.repositionPlayer();
