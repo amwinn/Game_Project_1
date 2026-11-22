@@ -152,15 +152,15 @@ export default class RenderLogic{
     }
 
 
-    renderObjects(renderer) {
-        gameObjectMasterArray.forEach((objectArray, objectArrayIndex) => {
-            objectArray.forEach((object, objectIndex) => {
-                this.renderSprite(renderer, object.sprite, object.position.x , object.position.y , object.size.dw, object.size.dh);
-            });
-        });
-    }
+    // renderObjects(renderer) {
+    //     gameObjectMasterArray.forEach((objectArray, objectArrayIndex) => {
+    //         objectArray.forEach((object, objectIndex) => {
+    //             this.renderSprite(renderer, object.sprite, object.position.x , object.position.y , object.size.dw, object.size.dh);
+    //         });
+    //     });
+    // }
 
-    newrenderObjects(renderer, array) {
+    renderObjects(renderer, array) {
         array.forEach((object, index) => {
             this.renderSprite(renderer, object.sprite, object.position.x, object.position.y, object.size.dw, object.size.dh);
         })
@@ -174,7 +174,7 @@ export default class RenderLogic{
             radial.renderAreaOfEffect(renderer, this.camera);
             
         })
-        this.newrenderObjects(renderer, gameObjectArray);
+        this.renderObjects(renderer, gameObjectArray);
         //this.renderObjects(renderer);
         this.renderPlayer(renderer, this.player, this.camera);
 
