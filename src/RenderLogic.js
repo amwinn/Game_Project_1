@@ -1,46 +1,20 @@
-// import GameObject, {rockObjectArray, treeObjectArray, bushObjectArray, portalObjectArray, deadTreeObjectArray, gameObjectArray} from "./GameObject.js";
-// import { gameObjectMasterArray } from "./Main.js";
-import Camera from "./Camera.js";
-import Player from "./Player.js";
-import { gameObjectArray } from "./GameObject.js";
-import { screenSize } from "./Main.js"; //this was preventing the game from loading because it was calling before the grid class in main
 import { meleeEntityArray, rangedEntityArray } from "./Entity.js";
-import { projectilesArray, entityProjectilesArray, radialArray } from "./Main.js";
-// import { spawnerArray } from "./Spawner.js";
-//import { mapDatabase, biomeTileSheets } from "./MapDB.js";
-import { Position, Size, Sprite } from "./Utility.js";
-import MapData from "./MapDB.js";
+import { gameObjectArray } from "./GameObject.js";
+import { entityProjectilesArray, projectilesArray, radialArray } from "./Main.js";
 import { objectSpawnTracker } from "./GameLogic/GameLogic.js";
-
 import { test_item_array } from "./Main.js";
-
-import { tileMapConfig, tileMapData, getTile, getTileMap, getMapHeight, getMapWidth } from "./GameLogic/MapLogic.js";
 import { mapDatabase } from "../data/map_data/map_data.js";
-
-import { BIOME_TYPE, GAMEOBJECT_SUBTYPE, MESH_SUBTYPE, MESH_TYPE } from "../data/biome_data/biome_type.js";
+import { getMapHeight, getMapWidth, getTile, tileMapConfig, tileMapData } from "./GameLogic/MapLogic.js";
 import { BIOME_CONFIG } from "../data/biome_data/biome_config.js";
-import { loadBiomeRenders, biomeSprites} from "./AssetRegistry.js";
-import { BIOME_RENDER } from "../data/biome_data/biome_render.js";
-import Item from "./Item.js";
+import { GAMEOBJECT_SUBTYPE, MESH_SUBTYPE, MESH_TYPE } from "../data/biome_data/biome_type.js";
+import { biomeSprites } from "./AssetRegistry.js";
 
 
 
 
 //You're going to be seeing some +22's in this file, and wonder why it's here; well, that's the only way i currently know that removes the grid lines from the map, this isnt a checkerboard its an rpg board
-export let playerSpawned = false;
-export function changePlayerSpawnState(boolean) {
-    playerSpawned = boolean;
-}
-//let collisionDetection = false;
-//eventually remove nextMap once it no longer servers a purpose, it has been replaced by a variable of the same name in gamelogic
-export let nextMap = false; //MUST BE LET not const, or else it will never be changeable from false
-//function that will allow me to change the value of nextMap once its imported (when variables are imported they are read only for some reason)
-export function changeNextMap(boolean) {
-    nextMap = boolean;
-}
-//moved objectSpawnTracker to GameLogic and exported it here, seems to work fine atm keep below code awhile longer just to be safe
-//let objectSpawnTracker = new Set(); //fills with each grid cell to prevent duplicate object spawns
-let objectIndex;
+
+
 export default class RenderLogic{
     constructor(camera, player){
         //this.mapData = mapData;
@@ -89,16 +63,12 @@ export default class RenderLogic{
 //once object creation is moved maybe render map is just renderMesh type of situation
     renderMap(renderer){
 
-        //let leftBounds = Math.floor(this.tileMap.cols / this.tileMap.tsize); //was originally this.camera.x instead of this.tilemap.cols //btw i dont know how but this fixed where the tilemap kept rendering the map infinitely to the left and right
-        //leftBounds still causes the right side grass/paths to unrender( is out of view, have to start 100% zoom and zoom out to see it)
         let leftBounds = Math.floor(this.camera.x / tileMapConfig.tsize);//was start col
         let rightBounds = Math.floor((this.camera.x + this.camera.size.dw) / tileMapConfig.tsize) +1; // was originally this.camera.w instead of this.mapWidth //was endcol
         let topBounds = Math.floor(this.camera.y / tileMapConfig.tsize); //was originally this.camera.y instead of this.tilemap.rows //was startrow
         let bottomBounds = Math.floor((this.camera.y + this.camera.size.dh) / tileMapConfig.tsize) +1; //was originally this.camera.h instead of this.mapHeight //was endrow
 
-        //not used for a while, delete once sure
-        // let maxCol = this.tileMap.cols;
-        // let maxRow = this.tileMap.rows;
+
         for(let c = leftBounds; c <= rightBounds ; c++) { 
             for(let r = topBounds; r <= bottomBounds ; r++) { 
                 //recently commented out as of march 8 2026
@@ -113,12 +83,7 @@ export default class RenderLogic{
                 
                 let biomeTileAssignments = BIOME_CONFIG[mapDatabase[tileMapData.mapIndex].biome];
                 let defaultMeshSprite = biomeSprites[MESH_TYPE.GRASS][biomeTileAssignments[0]];
-                //let selectedTileSheet = this.mapData.biomeTileSheets[mapDatabase[tileMapData.mapIndex].biome];
 
-                //let defaultFloorSprite = selectedTileSheet[0];
-
-                
-                //let selectedTile = selectedTileSheet[tile];
                 for(const grouping in MESH_SUBTYPE) {
                     for(const item in MESH_SUBTYPE[grouping]) {
                         if(MESH_SUBTYPE[grouping][item] === biomeTileAssignments[tile]) {
@@ -135,30 +100,10 @@ export default class RenderLogic{
                         }
                     }
                 }
-                //renders non-object terrain tiles (mostly grass)
-                // if(selectedTile && !selectedTile.arrayType && !selectedTile.type) { //was tile === 0 || tile === 2, decided to make it more abstract
-                //     //this.renderSprite(renderer, selectedTile.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22)
-                // }
-                
-
-                // //creates a background grass for object, the +22 modifiers to size fix the artifact lines, oddly enough they werent visible in fullscreen f11 mode
-                // if(selectedTile && selectedTile.arrayType && selectedTile.type) { //was if(tile > 2)
-                //     //this.renderSprite(renderer, defaultFloorSprite.sprite, x, y, tileMapConfig.tsize+22, tileMapConfig.tsize+22); //just recently added this +22 to the dw and dh, else there were grid lines all over
-                // }
-
-
             } 
         }  
     }
 
-
-    // renderObjects(renderer) {
-    //     gameObjectMasterArray.forEach((objectArray, objectArrayIndex) => {
-    //         objectArray.forEach((object, objectIndex) => {
-    //             this.renderSprite(renderer, object.sprite, object.position.x , object.position.y , object.size.dw, object.size.dh);
-    //         });
-    //     });
-    // }
 
     renderObjects(renderer, array) {
         array.forEach((object, index) => {

@@ -1,5 +1,4 @@
 import GameObject from "./GameObject.js";
-export const spawnerArray = [];
 
 export default class Spawner extends GameObject {
 
@@ -15,5 +14,3 @@ export default class Spawner extends GameObject {
     }
 
 }
-
-//once spawntimer/spawntime and health classes are made, maybe disassemble?
