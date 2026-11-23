@@ -168,17 +168,9 @@ export default class RenderLogic{
         gameObjectArray.length = 0;
         projectilesArray.length = 0;
         entityProjectilesArray.length = 0;
-        //treeObjectArray.length = 0;
-        //rockObjectArray.length = 0;
-        //bushObjectArray.length = 0;   
-        //portalObjectArray.length = 0;
-        //deadTreeObjectArray.length = 0;
         meleeEntityArray.length = 0;
         rangedEntityArray.length = 0
-        //spawnerArray.length = 0;
         objectSpawnTracker.clear();
     }
-
-
 
 }
