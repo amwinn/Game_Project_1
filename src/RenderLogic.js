@@ -164,13 +164,13 @@ export default class RenderLogic{
     }
     //END TEST CODE
 
-    cullObjects() {
-        gameObjectArray.length = 0;
-        projectilesArray.length = 0;
-        entityProjectilesArray.length = 0;
-        meleeEntityArray.length = 0;
-        rangedEntityArray.length = 0
-        objectSpawnTracker.clear();
-    }
+    // cullObjects() {
+    //     gameObjectArray.length = 0;
+    //     projectilesArray.length = 0;
+    //     entityProjectilesArray.length = 0;
+    //     meleeEntityArray.length = 0;
+    //     rangedEntityArray.length = 0
+    //     objectSpawnTracker.clear();
+    // }
 
 }
