@@ -1,24 +1,18 @@
-import Player from "./Player.js"; //gives error if i use capital P????
-import Projectile from "./AbilityEntity/Projectile.js";
-import Entity, { meleeEntityArray, rangedEntityArray } from "./Entity.js";
 import Camera from "./Camera.js";
+import { meleeEntityArray, rangedEntityArray } from "./Entity.js";
+import Player from "./Player.js"; //gives error if i use capital P????
 import RenderLogic from "./RenderLogic.js";
 // import { deadTreeObjectArray, portalObjectArray, rockObjectArray, treeObjectArray, bushObjectArray} from "./GameObject.js";
 // import { spawnerArray } from "./Spawner.js";
-import { Position, Size, Sprite } from "./Utility.js";
-import MapData from "./MapDB.js";
-import GameLogic, { objectSpawnTracker } from "./GameLogic/GameLogic.js";
-import InputLogic from "./Input/InputLogic.js";
 import { ability_repository } from "../data/ability_data/ability_repository.js";
-import { castProjectile, castEntityProjectile } from "./AbilityLogic/AbilityLogic.js";
-import { inputState } from "./Input/InputState.js";
 import { weapon_data } from "../data/item_data/weapon_data.js";
+import { castEntityProjectile } from "./AbilityLogic/AbilityLogic.js";
+import GameLogic from "./GameLogic/GameLogic.js";
+import InputLogic from "./Input/InputLogic.js";
+import { inputState } from "./Input/InputState.js";
+import { Position, Size } from "./Utility.js";
 
 import { tileMapConfig } from "./GameLogic/MapLogic.js";
-import { generateUID } from "./Utility.js";
-import { spellbolt } from "../data/ability_data/simple_magic.js";
-import { movementLogicUpdate } from "./GameLogic/MovementLogic.js";
-import { BIOME_CONFIG } from "../data/biome_data/biome_config.js";
 
 //******************************************************************************INITIAL GUIDANCE******************************************************************************
 //firstly, ctrl and - will zoom out on code and side bars, ctrl and + will zome in, we are one increment zoomed in, so to go default hit ctrl and -
