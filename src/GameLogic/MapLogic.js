@@ -1,3 +1,4 @@
+import { GAMEOBJECT_TYPE } from "../../data/biome_data/biome_type.js";
 import { mapDatabase } from "../../data/map_data/map_data.js";
 //needs a lot of work, has state, config, and execution all in the object, needs refactoring before it can be plugged in
 export const tileMap = {
@@ -39,6 +40,7 @@ export function getTileMap() {
 export function mapChangeCondition(player, array) {
     for(const object of array) {
         if(
+            object.type === GAMEOBJECT_TYPE.PORTAL &&
             player.position.x  + player.size.dw/3  > object.position.x &&  
             player.position.x   < object.position.x + object.size.dw /1.5 && 
             player.position.y + player.size.dh/1.3 > object.position.y && 
