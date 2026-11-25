@@ -117,13 +117,12 @@ function displayControls() {
     renderer.textAlign = "left" //resetting it for the displayVitals func
 }
 
-
-function renderLoot(renderer) {
-    test_item_array.forEach((item, i) => {
-       renderer.drawImage(item.sprite.image, item.x-camera.x, item.y-camera.x, 64, 64);
-       
-    });
-}
+//this was rendering a MOVING loot bag that was moving off map, crazy;; already had a render func for items in renderlogic.js
+// function renderLoot(renderer) {
+//     test_item_array.forEach((item, i) => {
+//        renderer.drawImage(item.sprite.image, item.x-camera.x, item.y-camera.x, 64, 64);
+//     });
+// }
 
 let lastTime = null;
 function gameLoop(){
@@ -148,7 +147,7 @@ function gameLoop(){
     inputState.cursor.world.x = inputState.cursor.screen.x + camera.x;
     inputState.cursor.world.y = inputState.cursor.screen.y + camera.y;
     //temp spot end
-    renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
+    //renderLoot(renderer); //temp spot while testing, move to renderLogic eventually
     renderLogic.renderHandler(renderer);
     displayVitals(player);
     displayControls();
