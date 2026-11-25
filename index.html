@@ -8,15 +8,29 @@
      <title>Game Project One</title>
      <link rel="icon" type="image/png" href="./Images/magic_bolt1.png" >
     <style>
+        #game {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
         #gameCanvas {
 
             /* background-color:rgb(202, 239, 138); */
             /* was darkolivegreen*/
             background-color:rgb(70, 113, 194);
+            display: block;
             /* background-image: url("Images/Forest/practice_grass5.png"); */
             /*background-color: bisque;*/
             /* background-color: darkslateblue; */
             /* position: absolute;           */
+        }
+        #gameUI {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            pointer-events: none; /*stops mouse events from hitting ui layer instead of dom, but e listeners are currently on document so may not be needed*/
         }
 
         body{
@@ -24,7 +38,7 @@
             margin: 0;
             height: 100vh;
             width: 100vw;
-            display:block; /*not sure if needed look into more */
+            /* display:block; not sure if needed look into more */
             /* this allows the canvas to resize for different screen sizes while removing the scrollbars */
         }
         
@@ -37,6 +51,7 @@
 
     </div>
     <!-- <canvas id="gameCanvas"></canvas> -->
+     <script src="src/Main.js" type="module"></script>
 </body>
-<script src="src/Main.js" type="module"></script>
+<!-- <script src="src/Main.js" type="module"></script> -->
 </html>
