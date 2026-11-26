@@ -119,6 +119,7 @@ export default class RenderLogic{
             radial.renderAreaOfEffect(renderer, this.camera);
             
         })
+        //this.renderPlayer(renderer, this.player, this.camera);
         this.renderObjects(renderer, gameObjectArray);
         //this.renderObjects(renderer);
         this.renderPlayer(renderer, this.player, this.camera);
