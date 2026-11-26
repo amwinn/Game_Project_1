@@ -50,11 +50,11 @@ export default class MovementAction extends Action {
     playerObjectCollision(player, array) {
         array.forEach((object, objectIndex) => {
             if(
+                object.type !== GAMEOBJECT_TYPE.PORTAL &&
                 player.position.x  + player.size.dw/3  > object.position.x &&  
-                player.position.x   < object.position.x + object.size.dw /1.5 && 
+                player.position.x   < object.position.x + object.size.dw/1.5 && 
                 player.position.y + player.size.dh/1.3 > object.position.y && 
-                player.position.y   < object.position.y + object.size.dh/1.5 &&
-                object.type !== GAMEOBJECT_TYPE.PORTAL
+                player.position.y   < object.position.y + object.size.dh/1.5 
             ) {
                 switch(player.direction) {
 
