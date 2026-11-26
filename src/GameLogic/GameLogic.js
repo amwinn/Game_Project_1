@@ -586,9 +586,10 @@ entityCollisionResolution(entity1, entity2) {
         this.player.position.x = screenSize.width/2;
         this.player.position.y = screenSize.height/2;
         this.camera.clampCamera(this.player);
-        this.playerObjectCollision(this.player, gameObjectArray);
+        //this.playerObjectCollision(this.player, gameObjectArray);
         console.log("camera clamped" + " Player spawned state is " + this.player.spawnState);
         this.repositionPlayer();
+        this.playerObjectCollision(this.player, gameObjectArray);
         nextMap = false;
         this.player.spawnState = ENTITY_STATE.SPAWNED;
 
