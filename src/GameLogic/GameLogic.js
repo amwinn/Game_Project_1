@@ -240,7 +240,7 @@ collisionCheck(entity1, entity2) {
     if(
         entity1.position.x + entity1.size.dw > entity2.position.x  &&
         entity1.position.x  < entity2.position.x + entity2.size.dw &&
-        entity1.position.y + entity1.size.dw > entity2.position.y &&
+        entity1.position.y + entity1.size.dh > entity2.position.y &&
         entity1.position.y  < entity2.position.y + entity2.size.dh
     ) {
         return true;
@@ -255,7 +255,7 @@ playerObjectCollision(player, array) {
             player.position.y + player.size.dh/1.3 > object.position.y && 
             player.position.y   < object.position.y + object.size.dh/1.5 
         ) {
-            if(player.spawnState = ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
+            if(player.spawnState === ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
                 console.log("collision is detected and playerspawn is " + player.spawnState);
                 array.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
                 console.log("object spliced during player placement");
