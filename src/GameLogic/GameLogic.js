@@ -248,14 +248,19 @@ collisionCheck(entity1, entity2) {
 }
 
 playerSpawnCollisionCheck(player, array) {
+    console.log("checking spawn point for objects")
+    console.log(player.spawnState)
     for(let i = array.length-1; i >=0; i--) {
         const object = array[i];
         if(
-            player.position.x  + player.size.dw/3  > object.position.x &&  
-            player.position.x   < object.position.x + object.size.dw /1.5 && 
-            player.position.y + player.size.dh/1.3 > object.position.y && 
-            player.position.y   < object.position.y + object.size.dh/1.5 
+            player.spawnState === ENTITY_STATE.UNSPAWNED &&
+            object.type !== GAMEOBJECT_TYPE.PORTAL &&
+            player.position.x + player.size.dw  >= object.position.x &&  
+            player.position.x   <= object.position.x + object.size.dw && 
+            player.position.y + player.size.dh >= object.position.y && 
+            player.position.y   <= object.position.y + object.size.dh
         ) {
+            console.log("collision found")
             if(player.spawnState === ENTITY_STATE.UNSPAWNED || nextMap === true) {
                 console.log("collision is detected and playerspawn is " + player.spawnState);
                 array.splice(i, 1);
@@ -265,22 +270,24 @@ playerSpawnCollisionCheck(player, array) {
     }
 }
 
-playerObjectCollision(player, array) {
+playerPortalCheck(player, array) {
     array.forEach((object, objectIndex) => {
         if(
-            player.position.x  + player.size.dw/3  > object.position.x &&  
-            player.position.x   < object.position.x + object.size.dw /1.5 && 
-            player.position.y + player.size.dh/1.3 > object.position.y && 
-            player.position.y   < object.position.y + object.size.dh/1.5 
+            object.type === GAMEOBJECT_TYPE.PORTAL &&
+            player.position.x  + player.size.dw/3  >= object.position.x &&  
+            player.position.x   <= object.position.x + object.size.dw /1.5 && 
+            player.position.y + player.size.dh/1.3 >= object.position.y && 
+            player.position.y   <= object.position.y + object.size.dh/1.5 
         ) {
+            nextMap = true;
             // if(player.spawnState === ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
             //     console.log("collision is detected and playerspawn is " + player.spawnState);
             //     array.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
             //     console.log("object spliced during player placement");
             // } 
-            if(object.type === GAMEOBJECT_TYPE.PORTAL) {
-                nextMap = true;
-            }  
+            // if(object.type === GAMEOBJECT_TYPE.PORTAL) {
+            //     nextMap = true;
+            // }  
         }
     })
 }
@@ -502,11 +509,11 @@ entityCollisionResolution(entity1, entity2) {
     //Necessary because if the user ctrl + zooms out too far, the player could spawn outside the bounds of the map
     //Must be called in mapHandler for intial map, as well as in changeMap while playerSpawned is once again false
     repositionPlayer() {
-        if (this.player.position.x > tileMapConfig.columns * tileMapConfig.tsize && playerSpawned !== true) {
+        if (this.player.position.x > tileMapConfig.columns * tileMapConfig.tsize && this.player.spawnState === ENTITY_STATE.UNSPAWNED) {
             this.player.position.x = (tileMapConfig.columns * tileMapConfig.tsize) / 2;
             console.log("repositioned player")
         }
-        if (this.player.position.y > (tileMapConfig.rows * tileMapConfig.tsize) && playerSpawned !== true) {
+        if (this.player.position.y > (tileMapConfig.rows * tileMapConfig.tsize) && this.player.spawnState === ENTITY_STATE.UNSPAWNED) {
             this.player.position.y = (tileMapConfig.rows * tileMapConfig.tsize) / 2;
             console.log("repositioned player")
         };
@@ -525,6 +532,15 @@ entityCollisionResolution(entity1, entity2) {
     //Eventually refactor the code to be in seperate update functions, for collision, map, player position etc.
     mapHandler(deltaTime) {
         if(nextMap === true) {this.changeMap();}
+        if(this.player.spawnState === ENTITY_STATE.UNSPAWNED) {
+            this.player.spawnPlayer();
+            //this.camera.clampCamera(this.player);
+        }
+        this.camera.clampCamera(this.player);
+        this.createGameObjects();
+        this.playerSpawnCollisionCheck(this.player, gameObjectArray);
+        //this.camera.clampCamera(this.player); 
+        this.player.spawnState = ENTITY_STATE.SPAWNED;
         //movementLogicUpdate(this.player); //was from this file in the movement logic section
         animationLogicUpdate(deltaTime, this.player, entityArraysObject); //was from this fiel in the movement logic section
         this.radialEntityCollision(radialArray, meleeEntityArray);
@@ -536,12 +552,14 @@ entityCollisionResolution(entity1, entity2) {
         // if(nextMap === true) {
         //     this.changeMap();
         // }
-        this.createGameObjects();
-        this.repositionPlayer();
-        this.camera.clampCamera(this.player); 
+        // this.createGameObjects();
+        // this.playerSpawnCollisionCheck(this.player, gameObjectArray);
+        //this.repositionPlayer();
+        // this.camera.clampCamera(this.player); 
+        // this.player.spawnState = ENTITY_STATE.SPAWNED;
 
         this.projectileObjectCollision(projectilesArray, gameObjectArray);
-        this.playerObjectCollision(this.player, gameObjectArray);
+        this.playerPortalCheck(this.player, gameObjectArray);
 
         this.projectilePlayerCollision(projectilesArray, this.player);
         this.projectileEntityCollision(meleeEntityArray, projectilesArray);
@@ -569,9 +587,10 @@ entityCollisionResolution(entity1, entity2) {
         })
         this.playerEntityCollision(this.player, meleeEntityArray);
         this.playerEntityCollision(this.player, rangedEntityArray);
-        this.playerSpawnCollisionCheck(this.player, gameObjectArray);
-        this.player.spawnState = ENTITY_STATE.SPAWNED;
+        //this.playerSpawnCollisionCheck(this.player, gameObjectArray);
+        //this.player.spawnState = ENTITY_STATE.SPAWNED;
         movementLogicUpdate(this.player);
+        //this.camera.clampCamera(this.player);
 
     }
 
@@ -592,6 +611,8 @@ entityCollisionResolution(entity1, entity2) {
     changeMap() {
         this.player.spawnState = ENTITY_STATE.UNSPAWNED;
         this.cullObjects();
+
+        // this.cullObjects();
         if(tileMapData.mapIndex + 1 >= mapDatabase.length) {
             tileMapData.mapIndex = 0;
             tileMapData.tiles = mapDatabase[tileMapData.mapIndex].tiles;
@@ -600,20 +621,23 @@ entityCollisionResolution(entity1, entity2) {
             tileMapData.mapIndex +=1;
 
         }
-        //IMPORTANT - if having sprite/image/undefined errors, this.createGameObjects(); will have to be placed AFTER player repositioning, and camera clamping
-        this.createGameObjects();
-        this.player.position.x = screenSize.width/2;
-        this.player.position.y = screenSize.height/2;
+        this.player.spawnPlayer();
         this.camera.clampCamera(this.player);
-        //this.playerObjectCollision(this.player, gameObjectArray);
         console.log("camera clamped" + " Player spawned state is " + this.player.spawnState);
         this.repositionPlayer();
-        this.playerObjectCollision(this.player, gameObjectArray);
+        //IMPORTANT - if having sprite/image/undefined errors, this.createGameObjects(); will have to be placed AFTER player repositioning, and camera clamping
+        this.createGameObjects();
+        // this.player.position.x = screenSize.width/2;
+        // this.player.position.y = screenSize.height/2;
+        //this.playerSpawnCollisionCheck(this.player, gameObjectArray);
+        //this.camera.clampCamera(this.player);
+        //this.playerObjectCollision(this.player, gameObjectArray);
+
+        //this.repositionPlayer();
+        //this.playerPortalCheck(this.player, gameObjectArray);
         this.playerSpawnCollisionCheck(this.player, gameObjectArray);
         nextMap = false;
         this.player.spawnState = ENTITY_STATE.SPAWNED;
-
-
     }
 
         cullObjects() {
