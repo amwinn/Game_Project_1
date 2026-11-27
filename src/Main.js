@@ -177,14 +177,14 @@ function gameLoop(){
     })
 
     projectilesArray.forEach((projectile, projectileIndex) => {
-        projectile.updateProjectile(renderer, renderLogic.camera);
+        projectile.updateProjectile(renderer, renderLogic.camera, deltaTime);
         projectile.projectileBounds(projectile, renderLogic.mapWidth, renderLogic.mapHeight, projectileIndex, projectilesArray);
     })   
 
-    entityProjectilesArray.forEach((enemyProjectile, enemyProjectileIndex) => {
-        enemyProjectile.updateProjectile(renderer, renderLogic.camera);
-        enemyProjectile.projectileBounds(enemyProjectile, renderLogic.mapWidth, renderLogic.mapHeight, enemyProjectileIndex, entityProjectilesArray);
-    })
+    // entityProjectilesArray.forEach((enemyProjectile, enemyProjectileIndex) => {
+    //     enemyProjectile.updateProjectile(renderer, renderLogic.camera);
+    //     enemyProjectile.projectileBounds(enemyProjectile, renderLogic.mapWidth, renderLogic.mapHeight, enemyProjectileIndex, entityProjectilesArray);
+    // })
     player.update(player, deltaTime);
     requestAnimationFrame(gameLoop);
 
