@@ -38,8 +38,8 @@ export default class GameLogic {
         [GAMEOBJECT_TYPE.PORTAL]: {destructible: false},
         //[GameObject.deadTree]: {destructible: true},
         [GAMEOBJECT_TYPE.SPAWNER]: {destructible: true},
-        [Entity.forest_creature]: {destructible: true},
-        [Entity.greater_forest_creature]: {destructible: true},
+        [CREATURE_TYPE.FOREST_CREATURE]: {destructible: true},
+        [CREATURE_TYPE.GREATER_FOREST_CREATURE]: {destructible: true},
         [Projectile.playerProjectile]: {destructible: true},
         [Projectile.entityProjectile]: {destructible: true},
         [Area.radial]: {destructable: false}
