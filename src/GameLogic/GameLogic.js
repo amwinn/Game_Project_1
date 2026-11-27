@@ -248,8 +248,6 @@ collisionCheck(entity1, entity2) {
 }
 
 playerSpawnCollisionCheck(player, array) {
-    console.log("checking spawn point for objects")
-    console.log(player.spawnState)
     for(let i = array.length-1; i >=0; i--) {
         const object = array[i];
         if(
@@ -260,7 +258,6 @@ playerSpawnCollisionCheck(player, array) {
             player.position.y + player.size.dh >= object.position.y && 
             player.position.y   <= object.position.y + object.size.dh
         ) {
-            console.log("collision found")
             if(player.spawnState === ENTITY_STATE.UNSPAWNED || nextMap === true) {
                 console.log("collision is detected and playerspawn is " + player.spawnState);
                 array.splice(i, 1);
@@ -537,6 +534,7 @@ entityCollisionResolution(entity1, entity2) {
             //this.camera.clampCamera(this.player);
         }
         this.camera.clampCamera(this.player);
+        this.repositionPlayer();
         this.createGameObjects();
         this.playerSpawnCollisionCheck(this.player, gameObjectArray);
         //this.camera.clampCamera(this.player); 
@@ -564,27 +562,44 @@ entityCollisionResolution(entity1, entity2) {
         this.projectilePlayerCollision(projectilesArray, this.player);
         this.projectileEntityCollision(meleeEntityArray, projectilesArray);
         this.projectileEntityCollision(rangedEntityArray, projectilesArray);
-        radialArray.forEach((radial, index) => {
+        for(let i = radialArray.length -1; i >= 0; i--) {
+            const radial = radialArray[i];
             radial.updateForm(radial, radial.ability,this.player)//atm is just a clamp-to-player
             radial.animateBehavior(radial, radial.ability, this.player, deltaTime);
             radial.updateBehavior(radial, radial.ability, this.player, deltaTime);
             if(radial.delete ===true) {
-                radialArray.splice(index, 1);
-                //index--;
+                radialArray.splice(i, 1);
             }
-        })
-        projectilesArray.forEach((projectile, index) => {
+        }
+        // radialArray.forEach((radial, index) => {
+        //     radial.updateForm(radial, radial.ability,this.player)//atm is just a clamp-to-player
+        //     radial.animateBehavior(radial, radial.ability, this.player, deltaTime);
+        //     radial.updateBehavior(radial, radial.ability, this.player, deltaTime);
+        //     if(radial.delete ===true) {
+        //         radialArray.splice(index, 1);
+        //         //index--;
+        //     }
+        // })
+        for(let i = projectilesArray.length-1; i >= 0; i--) {
+            const projectile = projectilesArray[i];
             if(projectile.setToSplice === true) {
-                projectilesArray.splice(index, 1);
-                //index --;
+                projectilesArray.splice(i, 1);
             }
-        })
-        entityProjectilesArray.forEach((projectile, index) => {
-            if(projectile.setToSplice === true) {
-                entityProjectilesArray.splice(index, 1);
-                //index--;
-            }
-        })
+        }
+        // projectilesArray.forEach((projectile, index) => {
+        //     if(projectile.setToSplice === true) {
+        //         projectilesArray.splice(index, 1);
+        //         //index --;
+        //     }
+        // })
+
+        // entityProjectilesArray.forEach((projectile, index) => {
+        //     console.log(entityProjectilesArray.length)
+        //     if(projectile.setToSplice === true) {
+        //         entityProjectilesArray.splice(index, 1);
+        //         //index--;
+        //     }
+        // })
         this.playerEntityCollision(this.player, meleeEntityArray);
         this.playerEntityCollision(this.player, rangedEntityArray);
         //this.playerSpawnCollisionCheck(this.player, gameObjectArray);
@@ -621,12 +636,14 @@ entityCollisionResolution(entity1, entity2) {
             tileMapData.mapIndex +=1;
 
         }
-        this.player.spawnPlayer();
-        this.camera.clampCamera(this.player);
-        console.log("camera clamped" + " Player spawned state is " + this.player.spawnState);
-        this.repositionPlayer();
+        //this.player.spawnPlayer();
+        //this.camera.clampCamera(this.player);
+        //console.log("camera clamped" + " Player spawned state is " + this.player.spawnState);
+        //this.repositionPlayer();
         //IMPORTANT - if having sprite/image/undefined errors, this.createGameObjects(); will have to be placed AFTER player repositioning, and camera clamping
-        this.createGameObjects();
+
+        //this.createGameObjects();
+
         // this.player.position.x = screenSize.width/2;
         // this.player.position.y = screenSize.height/2;
         //this.playerSpawnCollisionCheck(this.player, gameObjectArray);
@@ -635,9 +652,9 @@ entityCollisionResolution(entity1, entity2) {
 
         //this.repositionPlayer();
         //this.playerPortalCheck(this.player, gameObjectArray);
-        this.playerSpawnCollisionCheck(this.player, gameObjectArray);
+        //this.playerSpawnCollisionCheck(this.player, gameObjectArray);
         nextMap = false;
-        this.player.spawnState = ENTITY_STATE.SPAWNED;
+        //this.player.spawnState = ENTITY_STATE.SPAWNED;
     }
 
         cullObjects() {
