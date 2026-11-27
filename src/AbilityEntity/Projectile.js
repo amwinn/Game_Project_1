@@ -49,10 +49,10 @@ export default class Projectile {
     //     this.position.y = this.position.y += this.velocity.y;
     // }
 
-    updateProjectile(renderer, camera){
-        this.renderProjectile(renderer, camera);
-        this.position.x = this.position.x + this.velocity.x;
-        this.position.y = this.position.y + this.velocity.y;
+    updateProjectile(renderer, camera, deltaTime){
+        this.renderProjectile(renderer, camera, deltaTime);
+        this.position.x = this.position.x + this.velocity.x *150 * deltaTime;
+        this.position.y = this.position.y + this.velocity.y *150 * deltaTime;
     }
 
     // castEntityProjectile(array, enemy, target, ability) {
