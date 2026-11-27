@@ -74,6 +74,26 @@ updatePortalSpawner(array, deltaTime) {
     }
 }
 
+playerSpawnCollisionCheck(player, array) {
+    for(let i = array.length-1; i >=0; i--) {
+        const object = array[i];
+        if(
+            player.spawnState === ENTITY_STATE.UNSPAWNED &&
+            object.type !== GAMEOBJECT_TYPE.PORTAL &&
+            player.position.x + player.size.dw  >= object.position.x &&  
+            player.position.x   <= object.position.x + object.size.dw && 
+            player.position.y + player.size.dh >= object.position.y && 
+            player.position.y   <= object.position.y + object.size.dh
+        ) {
+            if(player.spawnState === ENTITY_STATE.UNSPAWNED || nextMap === true) {
+                console.log("collision is detected and playerspawn is " + player.spawnState);
+                array.splice(i, 1);
+                console.log("object spliced during player placement");
+            }
+        }
+    }
+}
+
 
 /*
 ..................................................................................................................................
@@ -247,25 +267,7 @@ collisionCheck(entity1, entity2) {
     } else return false;
 }
 
-playerSpawnCollisionCheck(player, array) {
-    for(let i = array.length-1; i >=0; i--) {
-        const object = array[i];
-        if(
-            player.spawnState === ENTITY_STATE.UNSPAWNED &&
-            object.type !== GAMEOBJECT_TYPE.PORTAL &&
-            player.position.x + player.size.dw  >= object.position.x &&  
-            player.position.x   <= object.position.x + object.size.dw && 
-            player.position.y + player.size.dh >= object.position.y && 
-            player.position.y   <= object.position.y + object.size.dh
-        ) {
-            if(player.spawnState === ENTITY_STATE.UNSPAWNED || nextMap === true) {
-                console.log("collision is detected and playerspawn is " + player.spawnState);
-                array.splice(i, 1);
-                console.log("object spliced during player placement");
-            }
-        }
-    }
-}
+
 
 playerPortalCheck(player, array) {
     array.forEach((object, objectIndex) => {
