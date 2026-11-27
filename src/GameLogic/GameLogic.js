@@ -548,6 +548,8 @@ entityCollisionResolution(entity1, entity2) {
         this.entityCollisionCheck(meleeEntityArray, meleeEntityArray);
         this.entityCollisionCheck(meleeEntityArray, rangedEntityArray);
         this.entityCollisionCheck(rangedEntityArray, rangedEntityArray);
+        this.playerEntityCollision(this.player, meleeEntityArray);
+        this.playerEntityCollision(this.player, rangedEntityArray);
         this.projectileCollisionCheck(projectilesArray, projectilesArray);
         // if(nextMap === true) {
         //     this.changeMap();
@@ -602,8 +604,7 @@ entityCollisionResolution(entity1, entity2) {
         //         //index--;
         //     }
         // })
-        this.playerEntityCollision(this.player, meleeEntityArray);
-        this.playerEntityCollision(this.player, rangedEntityArray);
+        //there were two lines of player entity collision checks here, moved them up
         //this.playerSpawnCollisionCheck(this.player, gameObjectArray);
         //this.player.spawnState = ENTITY_STATE.SPAWNED;
         movementLogicUpdate(this.player);
