@@ -247,6 +247,24 @@ collisionCheck(entity1, entity2) {
     } else return false;
 }
 
+playerSpawnCollisionCheck(player, array) {
+    for(let i = array.length-1; i >=0; i--) {
+        const object = array[i];
+        if(
+            player.position.x  + player.size.dw/3  > object.position.x &&  
+            player.position.x   < object.position.x + object.size.dw /1.5 && 
+            player.position.y + player.size.dh/1.3 > object.position.y && 
+            player.position.y   < object.position.y + object.size.dh/1.5 
+        ) {
+            if(player.spawnState === ENTITY_STATE.UNSPAWNED || nextMap === true) {
+                console.log("collision is detected and playerspawn is " + player.spawnState);
+                array.splice(i, 1);
+                console.log("object spliced during player placement");
+            }
+        }
+    }
+}
+
 playerObjectCollision(player, array) {
     array.forEach((object, objectIndex) => {
         if(
@@ -255,13 +273,12 @@ playerObjectCollision(player, array) {
             player.position.y + player.size.dh/1.3 > object.position.y && 
             player.position.y   < object.position.y + object.size.dh/1.5 
         ) {
-            if(player.spawnState === ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
-                console.log("collision is detected and playerspawn is " + player.spawnState);
-                array.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
-                console.log("object spliced during player placement");
-            } 
-            console.log(GAMEOBJECT_TYPE.PORTAL)
-            if(object.type === "portal") {
+            // if(player.spawnState === ENTITY_STATE.UNSPAWNED || nextMap === true) { //was !playerSpawned
+            //     console.log("collision is detected and playerspawn is " + player.spawnState);
+            //     array.splice(objectIndex, 1); //splices any object that is in collision range of the player's dynamic spawn location
+            //     console.log("object spliced during player placement");
+            // } 
+            if(object.type === GAMEOBJECT_TYPE.PORTAL) {
                 nextMap = true;
             }  
         }
@@ -507,6 +524,7 @@ entityCollisionResolution(entity1, entity2) {
 
     //Eventually refactor the code to be in seperate update functions, for collision, map, player position etc.
     mapHandler(deltaTime) {
+        if(nextMap === true) {this.changeMap();}
         //movementLogicUpdate(this.player); //was from this file in the movement logic section
         animationLogicUpdate(deltaTime, this.player, entityArraysObject); //was from this fiel in the movement logic section
         this.radialEntityCollision(radialArray, meleeEntityArray);
@@ -515,9 +533,9 @@ entityCollisionResolution(entity1, entity2) {
         this.entityCollisionCheck(meleeEntityArray, rangedEntityArray);
         this.entityCollisionCheck(rangedEntityArray, rangedEntityArray);
         this.projectileCollisionCheck(projectilesArray, projectilesArray);
-        if(nextMap === true) {
-            this.changeMap();
-        }
+        // if(nextMap === true) {
+        //     this.changeMap();
+        // }
         this.createGameObjects();
         this.repositionPlayer();
         this.camera.clampCamera(this.player); 
@@ -551,6 +569,7 @@ entityCollisionResolution(entity1, entity2) {
         })
         this.playerEntityCollision(this.player, meleeEntityArray);
         this.playerEntityCollision(this.player, rangedEntityArray);
+        this.playerSpawnCollisionCheck(this.player, gameObjectArray);
         this.player.spawnState = ENTITY_STATE.SPAWNED;
         movementLogicUpdate(this.player);
 
@@ -590,6 +609,7 @@ entityCollisionResolution(entity1, entity2) {
         console.log("camera clamped" + " Player spawned state is " + this.player.spawnState);
         this.repositionPlayer();
         this.playerObjectCollision(this.player, gameObjectArray);
+        this.playerSpawnCollisionCheck(this.player, gameObjectArray);
         nextMap = false;
         this.player.spawnState = ENTITY_STATE.SPAWNED;
 
