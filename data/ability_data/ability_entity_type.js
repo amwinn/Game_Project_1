@@ -8,3 +8,5 @@ export const ABILITY_ENTITY_TYPE = {
 
 //might only want projectile and aoe in here, modifier conditional/active could be placed elsewhere, same for effect over time, although effect over time
 //already inherits a type/subtype from the spell data
+
+//for aoe, probably only need an aoe type, not an aoe_radial, aoe_conal etc.
