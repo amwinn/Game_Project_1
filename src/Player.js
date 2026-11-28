@@ -6,6 +6,8 @@ import { PLAYER_TYPE } from "../data/entity_data/entity_type.js";
 import { ENTITY_STATE } from "../data/entity_data/entity_state.js";
 import { updateModifiers } from "./AbilityLogic/ModifierLogic.js";
 import { screenSize } from "./Main.js";
+import Container from "./GameLogic/Container.js"
+import GameLogic from "./GameLogic/GameLogic.js";
 
 export default class Player{
     constructor(position, size, velocity) {
@@ -40,6 +42,7 @@ export default class Player{
         this.stats.stamina.current = this.stats.stamina.default;
         this.stats.mana.current = this.stats.mana.default;
         this.defenses = this.config.defenses;
+        this.backpack = new Container();
         
         //maybe use dot notation for default? not sure, either works.
         //this.sprite = new Sprite(spriteData_player.walk[this.direction[this.animationIndex]]);
