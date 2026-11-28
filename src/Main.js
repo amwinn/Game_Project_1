@@ -31,6 +31,7 @@ document.body.style.cursor = "crosshair";
 //Canvas / Context
 const gameMap = document.getElementById("gameCanvas");
 const renderer = gameMap.getContext("2d");
+const gameUI = document.getElementById("gameUI");
 
 //Screensize
 export const screenSize = {width: window.innerWidth, height: window.innerHeight};
