@@ -3,6 +3,7 @@ import { Position, Size, Sprite } from "../Utility.js";
 import Projectile from "../AbilityEntity/Projectile.js";
 import Area from "../AbilityEntity/AreaOfEffect.js";
 import { radialArray } from "../Main.js";
+import { ABILITY_ENTITY_TYPE } from "../../data/ability_data/ability_entity_type.js"
 
 export function castAbility(ability, source, dataSet){
     let form = ability.form.type;
@@ -37,7 +38,7 @@ export function castProjectile(ability, source, dataSet) {
     //const angle = Math.atan2(y, x); // removed (y + camera.y, x + camera.x) and moved to const x and y values above; revert if any bug appears
     //const velocity = {x: Math.cos(angle)*5, y: Math.sin(angle)*5};
     const position = new Position(source.position.x + source.size.dw /2, source.position.y + source.size.dh /2); //was +32, +50
-    dataSet.projectilesArray.push(new Projectile(Projectile.playerProjectile, ability, source, position, velocity, new Sprite(ability.form.data_config.sprite, size.dw, size.dh) ));
+    dataSet.projectilesArray.push(new Projectile(ABILITY_ENTITY_TYPE.PROJECTILE, ability, source, position, velocity, new Sprite(ability.form.data_config.sprite, size.dw, size.dh) ));
     //perhaps move the below somewhere else, or make an "applyCost()" function akin to the applyEffects(), especially if introducing passives that reduce cost etc.
     ability.resource.forEach((resource,index) => {
         source[resource.type] -= resource.amount;
@@ -52,7 +53,7 @@ export function castEntityProjectile(dataSet, source, target, ability) {
     const angle = Math.atan2(((target.position.y + target.size.dh/5) - source.position.y), ((target.position.x + target.size.dw/5) - source.position.x)); //dw/5 and dh/5 can be adjusted as needed
     const position = new Position(source.position.x+source.size.dw/2, source.position.y+source.size.dh/2);
     const sprite = new Sprite("Images/Abilities/simple_magic/spellbolt_test.png", size.dw, size.dh)
-    dataSet.projectilesArray.push(new Projectile(Projectile.entityProjectile, ability, source, position, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
+    dataSet.projectilesArray.push(new Projectile(ABILITY_ENTITY_TYPE.PROJECTILE, ability, source, position, {x: Math.cos(angle), y:Math.sin(angle)}, sprite));
 }
 
 function castRadial(ability, source, dataSet) {
