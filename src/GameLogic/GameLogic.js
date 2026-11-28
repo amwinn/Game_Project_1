@@ -18,6 +18,7 @@ import { entityProjectilesArray, projectilesArray, radialArray, screenSize, test
 import { animationLogicUpdate } from "./AnimationLogic.js";
 import { getMapHeight, getMapWidth, getTile, tileMapConfig, tileMapData } from "./MapLogic.js";
 import { movementLogicUpdate } from "./MovementLogic.js";
+import { ABILITY_ENTITY_TYPE } from "../../data/ability_data/ability_entity_type.js";
 
 
 let nextMap = false;
@@ -40,8 +41,8 @@ export default class GameLogic {
         [GAMEOBJECT_TYPE.SPAWNER]: {destructible: true},
         [CREATURE_TYPE.FOREST_CREATURE]: {destructible: true},
         [CREATURE_TYPE.GREATER_FOREST_CREATURE]: {destructible: true},
-        [Projectile.playerProjectile]: {destructible: true},
-        [Projectile.entityProjectile]: {destructible: true},
+        [ABILITY_ENTITY_TYPE.PROJECTILE]: {destructible: true},
+        // [Projectile.entityProjectile]: {destructible: true},
         [Area.radial]: {destructable: false}
     };
 /*
@@ -199,7 +200,7 @@ checkCollision_circleSquare(circle, square) {
 //below needs some work, assumes that the circle will be the spell and the square is relegated to target only
 //change this.player to circle.owner once relevant code has been implemented
 resolveColliding_circleSquare(circle, square) {
-    if(square.type && this.behaviorAttributes[square.type].destructible && circle.type !=="entityProjectile") {
+    if(square.type && this.behaviorAttributes[square.type].destructible) { //&& circle.type !== "entityProjectile"
         if(circle.ability) {
             applyEffects(circle.ability.effect, circle, circle.ability, circle.source, square);
 
@@ -327,7 +328,7 @@ projectileEntityCollision(entityArray, projectileArray) {
                 //     //entityArray.splice(entityIndex, 1);
                 // }
 
-                if(entity.type === "entityProjectile" || entity.type ==="playerProjectile") {
+                if(entity.type === ABILITY_ENTITY_TYPE.PROJECTILE) { //entity.type === "entityProjectile" || entity.type ==="playerProjectile"
                     entity.setToSplice=true;
                 }
             }
@@ -663,7 +664,7 @@ entityCollisionResolution(entity1, entity2) {
         cullObjects() {
             gameObjectArray.length =0;
             projectilesArray.length = 0;
-            entityProjectilesArray.length = 0;
+            // entityProjectilesArray.length = 0;
             meleeEntityArray.length = 0;
             rangedEntityArray.length = 0
             test_item_array.length= 0; //START TEST //END TEST
